@@ -1,10 +1,8 @@
 import { createBrowserRouter, RouterProvider, Route, Outlet, Navigate } from 'react-router-dom'
 import Sidebar from './components/sidebar/Sidebar';
 import Topbar from './components/topbar/Topbar';
-import Login from './pages/login/Login';
-import './app.css'
+import './App.css'
 import Rightbar from './pages/rightbar/Rightbar';
-import User from './pages/user/User';
 
 function App() {
 
@@ -27,6 +25,10 @@ function App() {
       path: '/',
       element: <Layout/>,
       children: [
+        {
+          path: '/',
+          element: <Rightbar/>
+      },
     ]
     },
   ])
