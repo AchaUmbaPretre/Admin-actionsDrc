@@ -1,3 +1,31 @@
 .featedInfo{
-    
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+    .feated-title{
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+    .feated-rows{
+        display: flex;
+        gap: 20px;
+
+        .feated-row{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            .feated-top{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+    }
 }
