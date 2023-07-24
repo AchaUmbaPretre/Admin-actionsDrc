@@ -1,8 +1,13 @@
+import FeatedInfo from '../../components/featedInfo/FeatedInfo'
 import './rightbar.scss'
 
 const Rightbar = () => {
   return (
-    <div>Rightbar</div>
+    <>
+      <div className="rightbar">
+        <FeatedInfo/>
+      </div>
+    </>
   )
 }
 
