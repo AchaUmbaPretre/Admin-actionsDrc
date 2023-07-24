@@ -1,0 +1,23 @@
+.sidebar{
+    flex: 2;
+    height: calc(100vh - 50px);
+    background: rgba(196, 24, 24, 0.014);
+    top:50px;
+    position: sticky;
+    .sidebar-wrapper{
+        padding: 20px;
+        color: #555;
+        .sidebar-ul{
+            padding: 5px;
+            .sidenav-li{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 5px;
+                cursor: pointer;
+                border-radius: 10px;
+                font-size: 13px;
+            }
+        }
+    }
+}
