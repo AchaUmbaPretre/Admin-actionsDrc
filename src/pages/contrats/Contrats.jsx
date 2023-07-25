@@ -8,6 +8,62 @@ import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { DataGrid } from '@mui/x-data-grid';
 import { useState } from 'react';
 import { contrats } from '../../data';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Button from '@mui/material/Button';
+import { TextField } from '@mui/material';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import SendIcon from '@mui/icons-material/Send';
+import { useTheme } from '@mui/material/styles';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 800,
+    bgcolor: 'background.paper',
+    border: '1px solid #FFF',
+    boxShadow: 24,
+    p: 4,
+    borderRadius: 2,
+  }
+
+  const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const names = [
+  'CDI',
+  'CDD',
+  'Intérim'
+];
+
+function getStyles(name, personName, theme) {
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
 
 const Contrats = () => {
 
@@ -22,9 +78,22 @@ const Contrats = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const theme = useTheme();
+    const [personName, setPersonName] = useState([]);
+  
+    const handleChange = (event) => {
+      const {
+        target: { value },
+      } = event;
+      setPersonName(
+        // On autofill we get a stringified value.
+        typeof value === 'string' ? value.split(',') : value,
+      );
+    };
+
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'type_de_contrat', headerName: 'Type de contrat', width: 120 },
+        { field: 'type_de_contrat', headerName: 'Type de contrat', width: 110 },
         {
           field: 'duree_du_contrat',
           headerName: 'durée du contrat',
@@ -83,6 +152,79 @@ const Contrats = () => {
                     </div>
                 </div>
                 <button className="contrats-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</button>
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    slots={{ backdrop: Backdrop }}
+                    slotProps={{
+                    backdrop: {
+                        timeout: 500,
+                    },
+                    }} 
+                >
+                    <Fade in={open}>
+                        <Box sx={style}>
+                            <Box component="form" sx={{'& > :not(style)': { m: 1, width: '43ch' },}} noValidate autoComplete="off">
+                            <FormControl sx={{ m: 1, width: 300 }}>
+                                    <InputLabel id="demo-multiple-name-label">Name</InputLabel>
+                                    <Select
+                                    labelId="demo-multiple-name-label"
+                                    id="demo-multiple-name"
+                                    multiple
+                                    value={personName}
+                                    onChange={handleChange}
+                                    input={<OutlinedInput label="Name" />}
+                                    MenuProps={MenuProps}
+                                    >
+                                    {names.map((name) => (
+                                        <MenuItem
+                                        key={name}
+                                        value={name}
+                                        style={getStyles(name, personName, theme)}
+                                        >
+                                        {name}
+                                        </MenuItem>
+                                    ))}
+                                    </Select>
+                                </FormControl>
+                                <TextField id="filled-basic" label="Prenom" variant="filled" />
+                                <TextField id="filled-basic" label="Date" variant="filled" />
+                                <TextField id="filled-basic" label="Adresse" variant="filled" />
+                                <TextField id="filled-basic" label="Email" variant="filled" />
+                                <TextField id="filled-basic" label="Id unique" variant="filled" />
+                                <TextField id="filled-basic" label="Type de pièce" variant="filled" />
+                                <TextField id="filled-number" label="Number" type="number" InputLabelProps={{shrink: true,}} variant="filled"/>
+                                <TextField id="filled-basic" label="Competence" variant="filled" />
+                                <TextField id="filled-basic" label="Certificat" variant="filled" />
+                                <TextField id="filled-basic" label="Status" variant="filled" />
+                                <FormControl>
+                                    <FormLabel id="demo-row-radio-buttons-group-label">Genre</FormLabel>
+                                    <RadioGroup
+                                        row
+                                        aria-labelledby="demo-row-radio-buttons-group-label"
+                                        name="row-radio-buttons-group"
+                                        defaultValue="homme"
+                                    >
+                                        <FormControlLabel value="homme" control={<Radio />} label="Homme" />
+                                        <FormControlLabel value="femme" control={<Radio />} label="Femme" />
+                                        <FormControlLabel
+                                        value="disabled"
+                                        disabled
+                                        control={<Radio />}
+                                        label="autre"
+                                        />
+                                    </RadioGroup>
+                                </FormControl>
+                                <Button variant="contained" endIcon={<SendIcon />}>
+                                    Envoyer
+                                </Button>
+                            </Box>
+                        </Box>
+                    </Fade>
+                </Modal>
             </div>
             <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="contratTable" />
         </div>
