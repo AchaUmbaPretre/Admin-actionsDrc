@@ -1,6 +1,9 @@
 import './featedList.scss'
 import {data} from '../../data'
 import { useState } from 'react'
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import InfoIcon from '@mui/icons-material/Info';
 
 const FeatedList = () => {
     const [list, setList] = useState(data)
@@ -28,7 +31,11 @@ const FeatedList = () => {
                     <td>{item.adresse}</td>
                     <td>{item.fonction}</td>
                     <td>{item.etat}</td>
-                    <td>{item.action}</td> 
+                    <td className='item-action'>
+                        <DeleteOutlineIcon/>
+                        <VisibilityIcon/>
+                        <InfoIcon/>
+                    </td> 
                 </tr> 
                 )}
             </table>

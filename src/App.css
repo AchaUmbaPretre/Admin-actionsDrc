@@ -23,4 +23,7 @@ li{
 .appOutlet{
     background: #f2f2f2;
     flex: 8;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
 }

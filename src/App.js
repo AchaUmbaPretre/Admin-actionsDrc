@@ -3,6 +3,7 @@ import Sidebar from './components/sidebar/Sidebar';
 import Topbar from './components/topbar/Topbar';
 import './App.css'
 import Rightbar from './pages/rightbar/Rightbar';
+import Personnel from './pages/personnel/Personnel';
 
 function App() {
 
@@ -28,7 +29,11 @@ function App() {
         {
           path: '/',
           element: <Rightbar/>
-      },
+        },
+        {
+          path: '/personnel',
+          element: <Personnel/>
+        }
     ]
     },
   ])
