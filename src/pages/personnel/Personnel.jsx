@@ -4,6 +4,8 @@ import './personnel.scss'
 import { DeleteOutline} from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import PeopleIcon from '@mui/icons-material/People';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useState } from 'react';
 import { rows } from '../../data';
 
@@ -42,7 +44,7 @@ const Personnel = () => {
             return(
               <>
                 <div className="table-icons-row">
-                    <Link to={`/users/${params.row.id}`}><ModeEditOutlineIcon/></Link>
+                    <Link to={`/users/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
                     <VisibilityIcon className='userEye'/>
                     <DeleteOutline className="userListDelete" onClick={()=>{HandleDelete(params.row.id)}} />
                 </div>
@@ -56,6 +58,18 @@ const Personnel = () => {
   return (
     <>
         <div className="personnel">
+            <div className="personnel-rows">
+                <div className="personnel-top">
+                    <PeopleIcon/>
+                    <div className="personnel-info">
+                        <h2 className="personnel-title">Employé</h2>
+                        <span className="personnel-span">Liste des employés</span>
+                    </div>
+                </div>
+                <div className="personnel-bottom">
+                    <button className="personnel-btn"><PersonAddAlt1Icon/></button>
+                </div>
+            </div>
             <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="userTable" />
         </div>
     </>
