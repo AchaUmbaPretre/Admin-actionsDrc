@@ -4,6 +4,7 @@ import Topbar from './components/topbar/Topbar';
 import './App.css'
 import Rightbar from './pages/rightbar/Rightbar';
 import Personnel from './pages/personnel/Personnel';
+import Contrats from './pages/contrats/Contrats';
 
 function App() {
 
@@ -33,6 +34,10 @@ function App() {
         {
           path: '/personnel',
           element: <Personnel/>
+        },
+        {
+          path: '/contrats',
+          element: <Contrats/>
         }
     ]
     },

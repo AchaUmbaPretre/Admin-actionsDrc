@@ -1,14 +1,13 @@
-.personnel{
+.contrats{
     -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
     width: 100%;
     position: relative;
-    overflow-x: scroll;
     display: flex;
     flex-direction: column;
     gap: 20px;
     border-radius: 5px;
-    .personnel-rows{
+    .contrats-wrapper{
         background: #fff;
         -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
         box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
@@ -17,11 +16,11 @@
         justify-content: space-between;
         padding: 20px;
         border-radius: 5px;
-        .personnel-top{
+        .contrats-top{
             display: flex;
             align-items: center;
-            gap: 10px;
-            .personnel-icon{
+            gap: 20px;
+            .contrats-icon{
                 font-size: 3rem;
                 background: #fff;
                 padding: 10px;
@@ -29,17 +28,17 @@
                 -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
                 box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
             }
-            .personnel-info{
-                .personnel-title{
+            .contrats-info{
+                .contrats-title{
                     font-size: 1rem;
                 }
-                .personnel-span{
+                .contrats-span{
                     font-size: .7rem;
                     font-weight: 300;
                 }
             }
         }
-        .personnel-btn{
+        .contrats-btn{
             display: flex;
             align-items: center;
             gap: 5px;
@@ -53,38 +52,5 @@
             -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
             box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
         }
-    }
-    .table-icons-row{
-        display: flex;
-        gap: 10px;
-        .userListBtn{
-            border: none;
-            color: #3bb077;
-            cursor: pointer;
-            &:hover{
-                transform: scale(1.1);
-            }
-        }
-        .userEye{
-            color: rgba(21, 50, 136, 0.801);
-            cursor: pointer;
-            &:hover{
-                transform: scale(1.1);
-            }
-        }
-        .userListDelete{
-            color: red;
-            cursor: pointer;
-            &:hover{
-                transform: scale(1.1);
-            }
-        }
-    }
-    .userTable{
-        background: #fff;
-        padding: 10px;
-        border-radius: 5px;
-        -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
-        box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
     }
 }
