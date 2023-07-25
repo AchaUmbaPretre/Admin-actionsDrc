@@ -15,6 +15,7 @@ const Sidebar = () => {
             <ul className="sidebar-ul">
               <li className="sidenav-li"><HomeIcon className='sidebar-icon'/><Link>Accueil</Link></li>
               <li className="sidenav-li"><PersonOutlineIcon className='sidebar-icon'/><Link to={"/personnel"}>Personnel</Link></li>
+              <li className="sidenav-li"><PersonOutlineIcon className='sidebar-icon'/><Link to={"/contrats"}>Contrats</Link></li>
               <li className="sidenav-li"><ShowChartIcon className='sidebar-icon'/><Link>Affectation</Link></li>
               <li className="sidenav-li"><ChecklistRtlIcon className='sidebar-icon'/><Link>Presence</Link></li>
               <li className="sidenav-li"><FactCheckIcon className='sidebar-icon'/><Link>Facturation</Link></li>
