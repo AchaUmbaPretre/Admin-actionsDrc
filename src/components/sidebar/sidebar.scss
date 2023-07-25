@@ -1,12 +1,11 @@
 .sidebar{
     flex: 2;
     height: calc(100vh - 50px);
-    background: #fff;
-    top:50px;
+    background: #253053;
     position: sticky;
     .sidebar-wrapper{
         padding: 20px;
-        color: #555;
+        color: #d6d3d3;
         .sidebar-ul{
             display: flex;
             flex-direction: column;
@@ -20,7 +19,8 @@
                 cursor: pointer;
                 border-radius: 10px;
                 a{
-                    font-size: 1.1rem;
+                    font-size: 1rem;
+                    color: #d6d3d3;
                 }
             }
         }
