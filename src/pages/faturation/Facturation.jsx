@@ -23,26 +23,26 @@ const Facturation = () => {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'employee_id', headerName: 'employees', width: 120 },
+    { field: 'client_id', headerName: "clients", width: 120 },
 
     {
-      field: 'start_date',
-      headerName: 'Date de début',
+      field: 'invoice_date',
+      headerName: 'Date de la facture',
       width: 130 
     },
     {
-        field: 'end_date',
-        headerName: 'Date de fin',
+        field: 'due_date',
+        headerName: "Date d'échéance de la facture",
         width: 150 
     },
     {
-        field: 'leave_type',
-        headerName: "Type de congé",
+        field: 'total_amount',
+        headerName: "Montant total",
         width: 140 
     },
     {
       field: 'status',
-      headerName: 'Statut de la demande',
+      headerName: 'Statut de la facture',
       width: 140 
     },
     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
