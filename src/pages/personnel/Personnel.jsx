@@ -21,6 +21,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import SendIcon from '@mui/icons-material/Send';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import moment from 'moment/moment';
 
 const style = {
     position: 'absolute',
@@ -37,7 +41,13 @@ const style = {
 
 const Personnel = () => {
     const [data, setData] = useState(rows);
+    const [name,setName] = useState({});
+    const [date, setDate] = useState()
 
+    const handChange = (e) =>{
+        setName(prev=>({...prev, [e.target.name]: e.target.value}))
+    }
+    
     const HandleDelete = (id) =>{
       const dataFilter = data.filter(item=> item.id !== id)
       setData(dataFilter)
@@ -112,17 +122,19 @@ const Personnel = () => {
                     <Fade in={open}>
                         <Box sx={style}>
                             <Box component="form" sx={{'& > :not(style)': { m: 1, width: '43ch' },}} noValidate autoComplete="off">
-                                <TextField id="filled-basic" label="Nom" variant="filled" />
-                                <TextField id="filled-basic" label="Prenom" variant="filled" />
-                                <TextField id="filled-basic" label="Date" variant="filled" />
-                                <TextField id="filled-basic" label="Adresse" variant="filled" />
-                                <TextField id="filled-basic" label="Email" variant="filled" />
-                                <TextField id="filled-basic" label="Id unique" variant="filled" />
-                                <TextField id="filled-basic" label="Type de pièce" variant="filled" />
-                                <TextField id="filled-number" label="Number" type="number" InputLabelProps={{shrink: true,}} variant="filled"/>
-                                <TextField id="filled-basic" label="Competence" variant="filled" />
-                                <TextField id="filled-basic" label="Certificat" variant="filled" />
-                                <TextField id="filled-basic" label="Status" variant="filled" />
+                                <TextField id="filled-basic" name='first_name' onChange={handChange} label="Nom" variant="filled" />
+                                <TextField id="filled-basic" name="last_name" onChange={handChange} label="Prenom" variant="filled" />
+                                <LocalizationProvider dateAdapter={AdapterDayjs} >
+                                    <DatePicker name="date_of_birth" onChange={(value)=>{setDate(moment(value).format("DD-MM-YYYY"))}} />
+                                </LocalizationProvider>
+                                <TextField id="filled-basic" name='address' onChange={handChange} label="Adresse" variant="filled" />
+                                <TextField id="filled-basic" name='email' onChange={handChange} label="Email" variant="filled" />
+                                <TextField id="filled-basic" name='identification_number' onChange={handChange} label="Numero de piéce" variant="filled" />
+                                <TextField id="filled-basic" name='	identification_type' onChange={handChange} label="Type de pièce" variant="filled" />
+                                <TextField id="filled-number" name='phone_number' onChange={handChange} label="Numero de telephone" type="number" InputLabelProps={{shrink: true,}} variant="filled"/>
+                                <TextField id="filled-basic" name='skills' onChange={handChange} label="Competence" variant="filled" />
+                                <TextField id="filled-basic" name='certifications' onChange={handChange} label="Certificat" variant="filled" />
+                                <TextField id="filled-basic" name='employment_status' onChange={handChange} label="Status" variant="filled" />
                                 <FormControl>
                                     <FormLabel id="demo-row-radio-buttons-group-label">Genre</FormLabel>
                                     <RadioGroup

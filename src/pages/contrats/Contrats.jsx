@@ -14,17 +14,13 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import { TextField } from '@mui/material';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import SendIcon from '@mui/icons-material/Send';
 import { useTheme } from '@mui/material/styles';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers-pro';
+import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import moment from 'moment';
 
 const style = {
     position: 'absolute',
@@ -68,11 +64,18 @@ function getStyles(name, personName, theme) {
 const Contrats = () => {
 
     const [data, setData] = useState(contrats);
-
+    const [time, setTime] = useState();
+    const [dataa, setDataa] = useState();
+    const [date, setDate] = useState()
     const HandleDelete = (id) =>{
         const dataFilter = data.filter(item=> item.id !== id)
         setData(dataFilter)
       }
+
+    const handChange = (e) =>{
+        setDataa(prev=>({...prev, [e.target.name]: e.target.value}))
+    }
+    console.log(dataa)
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -81,7 +84,7 @@ const Contrats = () => {
     const theme = useTheme();
     const [personName, setPersonName] = useState([]);
   
-    const handleChange = (event) => {
+/*     const handleChange = (event) => {
       const {
         target: { value },
       } = event;
@@ -89,42 +92,39 @@ const Contrats = () => {
         // On autofill we get a stringified value.
         typeof value === 'string' ? value.split(',') : value,
       );
-    };
+    }; */
+    const handleChange = () =>{
 
+    }
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'type_de_contrat', headerName: 'Type de contrat', width: 110 },
+        { field: 'contract_type', headerName: 'Type de contrat', width: 120 },
+
         {
-          field: 'duree_du_contrat',
-          headerName: 'durée du contrat',
-          type: 'number',
-          width: 120,
-        },
-        {
-          field: 'date_du_debut',
+          field: 'start_date',
           headerName: 'Date du debut',
-          width: 110 
+          width: 120 
         },
         {
-            field: 'date_de_la_fin',
+            field: 'end_date',
             headerName: 'Date de la fin',
-            width: 110 
+            width: 120 
         },
         {
-            field: 'salaire',
+            field: 'hourly_rate',
             headerName: 'Salaire',
             type: 'number',
-            width: 80 
-        },
-        {
-            field: 'heure_du_travail',
-            headerName: 'Heure du travail',
             width: 100 
         },
         {
-            field: 'avantage_social',
-            headerName: 'Avantage social',
-            width: 130 
+          field: 'benefits',
+          headerName: 'Avantages sociaux',
+          width: 140 
+        },
+        {
+          field: 'contract_status',
+          headerName: 'Statut du contrat',
+          width: 140 
         },
         {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
             return(
@@ -167,57 +167,26 @@ const Contrats = () => {
                 >
                     <Fade in={open}>
                         <Box sx={style}>
-                            <Box component="form" sx={{'& > :not(style)': { m: 1, width: '43ch' },}} noValidate autoComplete="off">
-                            <FormControl sx={{ m: 1, width: 300 }}>
-                                    <InputLabel id="demo-multiple-name-label">Name</InputLabel>
-                                    <Select
-                                    labelId="demo-multiple-name-label"
-                                    id="demo-multiple-name"
-                                    multiple
-                                    value={personName}
-                                    onChange={handleChange}
-                                    input={<OutlinedInput label="Name" />}
-                                    MenuProps={MenuProps}
-                                    >
-                                    {names.map((name) => (
-                                        <MenuItem
-                                        key={name}
-                                        value={name}
-                                        style={getStyles(name, personName, theme)}
-                                        >
-                                        {name}
-                                        </MenuItem>
-                                    ))}
-                                    </Select>
-                                </FormControl>
-                                <TextField id="filled-basic" label="Prenom" variant="filled" />
-                                <TextField id="filled-basic" label="Date" variant="filled" />
-                                <TextField id="filled-basic" label="Adresse" variant="filled" />
-                                <TextField id="filled-basic" label="Email" variant="filled" />
-                                <TextField id="filled-basic" label="Id unique" variant="filled" />
-                                <TextField id="filled-basic" label="Type de pièce" variant="filled" />
-                                <TextField id="filled-number" label="Number" type="number" InputLabelProps={{shrink: true,}} variant="filled"/>
-                                <TextField id="filled-basic" label="Competence" variant="filled" />
-                                <TextField id="filled-basic" label="Certificat" variant="filled" />
-                                <TextField id="filled-basic" label="Status" variant="filled" />
-                                <FormControl>
-                                    <FormLabel id="demo-row-radio-buttons-group-label">Genre</FormLabel>
-                                    <RadioGroup
-                                        row
-                                        aria-labelledby="demo-row-radio-buttons-group-label"
-                                        name="row-radio-buttons-group"
-                                        defaultValue="homme"
-                                    >
-                                        <FormControlLabel value="homme" control={<Radio />} label="Homme" />
-                                        <FormControlLabel value="femme" control={<Radio />} label="Femme" />
-                                        <FormControlLabel
-                                        value="disabled"
-                                        disabled
-                                        control={<Radio />}
-                                        label="autre"
-                                        />
-                                    </RadioGroup>
-                                </FormControl>
+                            <Box component="form" sx={{'& > :not(style)': { m: 1, width: '43ch' }, display:'flex', flexWrap:'wrap'}} noValidate autoComplete="off">
+                                <TextField id="filled-basic" name='contract_type' onChange={handleChange} label="Type de contrat" variant="filled" />
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DemoContainer components={['DateRangePicker']}>
+                                      <DatePicker name="date_of_birth" label="Date de début" onChange={(value)=>{setDate(moment(value).format("DD-MM-YYYY"))}}/>
+                                    </DemoContainer>
+                                </LocalizationProvider>
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DemoContainer components={['DateRangePicker']}>
+                                      <DatePicker name="date_of_birth" label="Date de la fin" onChange={(value)=>{setDate(moment(value).format("DD-MM-YYYY"))}}/>
+                                    </DemoContainer>
+                                </LocalizationProvider>
+                                <TextField id="filled-basic" name='hourly_rate' onChange={handleChange} label="durée du contrat" variant="filled" />
+                                <TextField id="filled-basic" name='benefits' onChange={handleChange} label="Avantages sociaux du contrat" variant="filled" />
+                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                    <DemoContainer components={['TimePicker']}>
+                                        <TimePicker label="Heure du travail" onChange={(value)=>{setTime(moment(value))}} />
+                                    </DemoContainer>
+                                </LocalizationProvider>
+                                <TextField id="filled-basic" onChange={handleChange} label="Status du contrat" variant="filled" />
                                 <Button variant="contained" endIcon={<SendIcon />}>
                                     Envoyer
                                 </Button>

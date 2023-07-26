@@ -5,6 +5,10 @@ import './App.css'
 import Rightbar from './pages/rightbar/Rightbar';
 import Personnel from './pages/personnel/Personnel';
 import Contrats from './pages/contrats/Contrats';
+import Presence from './pages/presence/Presence';
+import Facturation from './pages/faturation/Facturation';
+import ListeConge from './pages/listeConge/ListeConge';
+import Affectation from './pages/affectation/Affectation';
 
 function App() {
 
@@ -38,6 +42,22 @@ function App() {
         {
           path: '/contrats',
           element: <Contrats/>
+        },
+        {
+          path: '/affectation',
+          element: <Affectation/>
+        },
+        {
+          path: '/presence',
+          element: <Presence/>
+        },
+        {
+          path: '/facturation',
+          element: <Facturation/>
+        },
+        {
+          path: '/listeConge',
+          element: <ListeConge/>
         }
     ]
     },

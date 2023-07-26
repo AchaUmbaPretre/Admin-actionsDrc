@@ -65,28 +65,67 @@ export const rows = [
   ];
 
 export const contrats = [
-    { id: 1, nom: 'Snow', type_de_contrat: 'CDI', duree_du_contrat: '1an',
-    date_du_debut: '01/10/2020', date_de_la_fin:'01/10/2022', 
-    salaire:300, heure_du_travail:'08h11', avantage_social: "malade"
+    { id: 1, contract_type: 'CDI', start_date: '01/10/2020', end_date: '01/10/2022',
+    hourly_rate: '400', benefits:'soin medicaux', 
+    contract_status: "actif"
     },
-    { id: 2, nom: 'Snow', type_de_contrat: 'CDI', duree_du_contrat: '1an',
-    date_du_debut: '01/10/2020', date_de_la_fin:'01/10/2022', 
-    salaire:300, heure_du_travail:'08h11', avantage_social: "malade"
+    { id: 2, contract_type: 'CDI', start_date: '01/10/2020', end_date: '01/10/2022',
+    hourly_rate: '400', benefits:'soin medicaux', 
+    contract_status: "actif"
     },
-    { id: 3, nom: 'Snow', type_de_contrat: 'CDI', duree_du_contrat: '1an',
-    date_du_debut: '01/10/2020', date_de_la_fin:'01/10/2022', 
-    salaire:300, heure_du_travail:'08h11', avantage_social: "malade"
+    { id: 3, contract_type: 'CDI', start_date: '01/10/2020', end_date: '01/10/2022',
+    hourly_rate: '400', benefits:'soin medicaux', 
+    contract_status: "actif"
     },
-    { id: 4, nom: 'Snow', type_de_contrat: 'CDI', duree_du_contrat: '1an',
-    date_du_debut: '01/10/2020', date_de_la_fin:'01/10/2022', 
-    salaire:300, heure_du_travail:'08h11', avantage_social: "malade"
+    { id: 4, contract_type: 'CDI', start_date: '01/10/2020', end_date: '01/10/2022',
+    hourly_rate: '400', benefits:'soin medicaux', 
+    contract_status: "actif"
     },
-    { id: 5, nom: 'Snow', type_de_contrat: 'CDI', duree_du_contrat: '1an',
-    date_du_debut: '01/10/2020', date_de_la_fin:'01/10/2022', 
-    salaire:300, heure_du_travail:'08h11', avantage_social: "malade"
+    { id: 5, contract_type: 'CDI', start_date: '01/10/2020', end_date: '01/10/2022',
+    hourly_rate: '400', benefits:'soin medicaux', 
+    contract_status: "actif"
     },
-    { id: 6, nom: 'Snow', type_de_contrat: 'CDI', duree_du_contrat: '1an',
-    date_du_debut: '01/10/2020', date_de_la_fin:'01/10/2022', 
-    salaire:300, heure_du_travail:'08h11', avantage_social: "malade"
+    { id: 6, contract_type: 'CDI', start_date: '01/10/2020', end_date: '01/10/2022',
+    hourly_rate: '400', benefits:'soin medicaux', 
+    contract_status: "actif"
+    },
+]
+
+export const presents = [
+    {
+        id:1, employee_id: 1, client_id: 121, date:'01/10/2020', check_in_time:"01/10/2020",check_out_time:"01/10/2022"
+    },
+    {
+        id:2, employee_id: 1, client_id: 121, date:'01/10/2020', check_in_time:"01/10/2020",check_out_time:"01/10/2022"
+    },
+    {
+        id:3, employee_id: 1, client_id: 121, date:'01/10/2020', check_in_time:"01/10/2020",check_out_time:"01/10/2022"
+    },
+    {
+        id:4, employee_id: 1, client_id: 121, date:'01/10/2020', check_in_time:"01/10/2020",check_out_time:"01/10/2022"
+    },
+    {
+        id:5, employee_id: 1, client_id: 121, date:'01/10/2020', check_in_time:"01/10/2020",check_out_time:"01/10/2022"
+    },
+    {
+        id:6, employee_id: 1, client_id: 121, date:'01/10/2020', check_in_time:"01/10/2020",check_out_time:"01/10/2022"
+    },
+]
+
+export const listeData = [
+    {
+        id:1, employee_id:2, start_date: '01/10/2020', end_date: "01/10/2020",leave_type: "maladie", status: 'en attente,'
+    },
+    {
+        id:2, employee_id:2, start_date: '01/10/2020', end_date: "01/10/2020",leave_type: "maladie", status: 'en attente,'
+    },
+    {
+        id:3, employee_id:2, start_date: '01/10/2020', end_date: "01/10/2020",leave_type: "maladie", status: 'en attente,'
+    },
+    {
+        id:4, employee_id:2, start_date: '01/10/2020', end_date: "01/10/2020",leave_type: "maladie", status: 'en attente,'
+    },
+    {
+        id:5, employee_id:2, start_date: '01/10/2020', end_date: "01/10/2020",leave_type: "maladie", status: 'en attente,'
     },
 ]
