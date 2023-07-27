@@ -10,6 +10,7 @@ import Facturation from './pages/faturation/Facturation';
 import ListeConge from './pages/listeConge/ListeConge';
 import Affectation from './pages/affectation/Affectation';
 import Views from './pages/views/Views';
+import Edit from './pages/personnel/edit/Edit';
 
 function App() {
 
@@ -43,6 +44,10 @@ function App() {
         {
           path: '/views/:id',
           element: <Views/>
+        },
+        {
+          path: '/edit/:id',
+          element: <Edit/>
         },
         {
           path: '/contrats',
