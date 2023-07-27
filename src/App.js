@@ -9,6 +9,7 @@ import Presence from './pages/presence/Presence';
 import Facturation from './pages/faturation/Facturation';
 import ListeConge from './pages/listeConge/ListeConge';
 import Affectation from './pages/affectation/Affectation';
+import Views from './pages/views/Views';
 
 function App() {
 
@@ -38,6 +39,10 @@ function App() {
         {
           path: '/personnel',
           element: <Personnel/>
+        },
+        {
+          path: '/views/:id',
+          element: <Views/>
         },
         {
           path: '/contrats',

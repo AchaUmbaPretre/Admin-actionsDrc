@@ -25,6 +25,9 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import moment from 'moment/moment';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 
 const style = {
     position: 'absolute',
@@ -40,42 +43,86 @@ const style = {
   }
 
 const Personnel = () => {
-    const [data, setData] = useState(rows);
-    const [name,setName] = useState({});
-    const [date, setDate] = useState()
+    const [data, setData] = useState({});
+    const [name,setName] = useState();
+    const [date, setDate] = useState();
+
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const navigate = useNavigate();
 
     const handChange = (e) =>{
         setName(prev=>({...prev, [e.target.name]: e.target.value}))
     }
+
     
-    const HandleDelete = (id) =>{
+/*     const HandleDelete = (id) =>{
       const dataFilter = data.filter(item=> item.id !== id)
       setData(dataFilter)
+    } */
+
+    useEffect(()=>{
+
+        const fetchData = async ()=> {
+            try{
+                const res = await axios.get("http://localhost:8080/api/admin");
+                setData(res.data)
+        
+              }catch(error){
+                console.log(error)
+              };
+        }
+        fetchData()
+     }, [])
+
+    const handleClick = async(e) =>{
+        e.preventDefault();
+
+        try{
+            await axios.post(`http://localhost:8080/api/admin/employe`,{...name,date_of_birth: date})
+            navigate("/personnel")
+        }
+        catch(error){
+            console.log(error)
+        }
     }
 
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleDelete = async (id) => {
+        try {
+          await axios.delete(`http://localhost:8080/api/admin/employe/${id}`);
+          window.location.reload()
+        } catch (err) {
+          console.log(err);
+        }
+      };
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'nom', headerName: 'Nom', width: 110 },
-        { field: 'prenom', headerName: 'Prenom', width: 110 },
+        { field: 'first_name', headerName: 'Nom', width: 110 },
+        { field: 'last_name', headerName: 'Prenom', width: 100 },
         {
-          field: 'age',
-          headerName: 'Age',
+          field: 'phone_number',
+          headerName: 'Telephone',
           type: 'number',
           width: 100,
         },
         {
-            field: 'genre',
-            headerName: 'Genre',
-            width: 90,
-        },
-        { field: 'adresse', headerName: 'Adresse', width: 120 },
-        { field: 'telephone', headerName: 'Telephone', width: 120 },
+            field: 'email',
+            headerName: 'Email',
+            type: 'number',
+            width: 120,
+          },
         {
-          field: 'competence',
+            field: 'date_of_birth',
+            headerName: 'Date de naissance',
+            width: 110,
+        },
+        { field: 'gender', headerName: 'Genre', width: 50 },
+        { field: 'phone_number', headerName: 'Telephone', width: 100 },
+        {
+          field: 'skills',
           headerName: 'Competence',
           width: 120,
         },
@@ -84,8 +131,8 @@ const Personnel = () => {
               <>
                 <div className="table-icons-row">
                     <Link to={`/users/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
-                    <VisibilityIcon className='userEye'/>
-                    <DeleteOutline className="userListDelete" onClick={()=>{HandleDelete(params.row.id)}} />
+                    <VisibilityIcon className='userEye' onClick={() => navigate(`/views/${params.row.id}`)} />
+                    <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
                 </div>
               </>
     
@@ -130,7 +177,7 @@ const Personnel = () => {
                                 <TextField id="filled-basic" name='address' onChange={handChange} label="Adresse" variant="filled" />
                                 <TextField id="filled-basic" name='email' onChange={handChange} label="Email" variant="filled" />
                                 <TextField id="filled-basic" name='identification_number' onChange={handChange} label="Numero de piéce" variant="filled" />
-                                <TextField id="filled-basic" name='	identification_type' onChange={handChange} label="Type de pièce" variant="filled" />
+                                <TextField id="filled-basic" name='identification_type' onChange={handChange} label="Type de pièce" variant="filled" />
                                 <TextField id="filled-number" name='phone_number' onChange={handChange} label="Numero de telephone" type="number" InputLabelProps={{shrink: true,}} variant="filled"/>
                                 <TextField id="filled-basic" name='skills' onChange={handChange} label="Competence" variant="filled" />
                                 <TextField id="filled-basic" name='certifications' onChange={handChange} label="Certificat" variant="filled" />
@@ -140,8 +187,9 @@ const Personnel = () => {
                                     <RadioGroup
                                         row
                                         aria-labelledby="demo-row-radio-buttons-group-label"
-                                        name="row-radio-buttons-group"
-                                        defaultValue="homme"
+                                        name="gender"
+                                        defaultValue="disabledS"
+                                        onChange={handChange}
                                     >
                                         <FormControlLabel value="homme" control={<Radio />} label="Homme" />
                                         <FormControlLabel value="femme" control={<Radio />} label="Femme" />
@@ -153,7 +201,7 @@ const Personnel = () => {
                                         />
                                     </RadioGroup>
                                 </FormControl>
-                                <Button variant="contained" endIcon={<SendIcon />}>
+                                <Button variant="contained" endIcon={<SendIcon />} onClick={handleClick}>
                                     Envoyer
                                 </Button>
                             </Box>
