@@ -22,9 +22,13 @@ const Login = () => {
                     </div>
                     <div className="login-rows">
                         <Link className="login-mssg">Mot de passe oublié ?</Link>
-                        <button className="btn-form"><LoginIcon/>S'identifier</button>
+                        <button className="btn-form"><LoginIcon className='form-icon'/>S'identifier</button>
                     </div>
                 </form>
+                <div className="form-bottom">
+                    <span>Nouveau sur actionsdrc ?</span>
+                    <Link className="form-news" to={'/register'}>Créez votre compte maintenant !</Link>
+                </div>
             </div>
         </div>
 

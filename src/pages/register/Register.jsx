@@ -26,7 +26,7 @@ const Register = () => {
                     </div>
                     <div className="login-rows">
                         <Link className="login-mssg">Mot de passe oublié ?</Link>
-                        <button className="btn-form"><CheckCircleOutlineIcon/>S'inscrire</button>
+                        <button className="btn-form"><CheckCircleOutlineIcon className='form-icon'/>S'inscrire</button>
                     </div>
                 </form>
             </div>
