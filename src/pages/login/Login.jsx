@@ -1,8 +1,34 @@
 import './login.scss'
 import LoginIcon from '@mui/icons-material/Login';
-import { Link } from 'react-router-dom';
 import actions from './../../assets/actionssarl.PNG'
+import React, { useContext, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../context/authContext'
+
 const Login = () => {
+    const [inputs, setInputs] = useState({});
+    const navigate = useNavigate();
+    const { Login } = useContext(AuthContext);
+    const [error, setError] = useState(null);
+
+    console.log(inputs)
+    const handChange = (e) =>{
+        setInputs(prev=>({ ...prev, [e.target.name]: e.target.value }))
+    }
+
+    const handSubmit = async(e) =>{
+        e.preventDefault();
+        try{
+           await Login(inputs);
+    
+          navigate('/')
+          
+        }catch(error){
+          setError(error.response.data)
+          
+        } 
+      }
+
   return (
     <>
         <div className="login">
@@ -14,15 +40,15 @@ const Login = () => {
                 <form action="" className="login-form">
                     <div className="login-controle">
                         <label htmlFor="" className="login-label">Votre e-mail <span>*</span></label>
-                        <input type="text" className="login-input" placeholder='Email..' />
+                        <input type="text" name="email" className="login-input" placeholder='Email..' />
                     </div>
                     <div className="login-controle">
                         <label htmlFor="" className="login-label">Mot de passe <span>*</span></label>
-                        <input type="text" className="login-input" placeholder='mot de passe..' />
+                        <input type="text" name="password" className="login-input" placeholder='mot de passe..' />
                     </div>
                     <div className="login-rows">
                         <Link className="login-mssg">Mot de passe oublié ?</Link>
-                        <button className="btn-form"><LoginIcon className='form-icon'/>S'identifier</button>
+                        <button className="btn-form" onClick={handSubmit}><LoginIcon className='form-icon'/>S'identifier</button>
                     </div>
                 </form>
                 <div className="form-bottom">
