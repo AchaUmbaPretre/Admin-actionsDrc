@@ -11,6 +11,8 @@ import ListeConge from './pages/listeConge/ListeConge';
 import Affectation from './pages/affectation/Affectation';
 import Views from './pages/views/Views';
 import Edit from './pages/personnel/edit/Edit';
+import Login from './pages/login/Login';
+import Register from './pages/register/Register';
 
 function App() {
 
@@ -70,6 +72,14 @@ function App() {
           element: <ListeConge/>
         }
     ]
+    },
+    {
+      path: '/login',
+      element: <Login/>
+    },
+    {
+      path: '/register',
+      element: <Register/>
     },
   ])
 

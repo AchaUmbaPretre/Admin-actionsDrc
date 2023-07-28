@@ -1,0 +1,87 @@
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #f2f2f2;
+    .login-wrapper{
+        -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+        background: #fff;
+        padding: 30px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+        gap: 20px;
+        .login-entete{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 20px;
+            .login-img{
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+            }
+            .login-h2{
+                text-align: center;
+                color: rgb(49, 76, 158);
+                font-weight: 400;
+                font-size: 1.8rem;
+            }
+        }
+        .login-form{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            .login-controle{
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                .login-label{
+                    font-size: .9rem;
+                    span{
+                        color: red;
+                    }
+                }
+                .login-input{
+                    border: 1px solid #e9e9e9;
+                    background: #faf9f9;
+                    padding: 10px;
+                    border-radius: 5px;
+                    outline: none;
+                    &:focus{
+                        border: 1px solid royalblue;
+                    }
+                }
+            }
+            .login-rows{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                .login-mssg{
+                    font-size: .9rem;
+                    color: royalblue;
+                }
+                .btn-form{
+                    border: none;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 5px;
+                    padding: 10px;
+                    color: #fff;
+                    background: royalblue;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: .5s;
+                    &:hover{
+                        background: rgb(69, 93, 163);
+                    }
+                }
+            }
+        }
+    }
+}
