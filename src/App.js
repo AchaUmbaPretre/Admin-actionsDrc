@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider, Route, Outlet, Navigate } from 'react-router-dom'
+import React, { useContext} from 'react'
 import Sidebar from './components/sidebar/Sidebar';
 import Topbar from './components/topbar/Topbar';
 import './App.css'
@@ -13,8 +14,10 @@ import Views from './pages/views/Views';
 import Edit from './pages/personnel/edit/Edit';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
+import { AuthContext } from './context/authContext';
 
 function App() {
+  const {currentUser} = useContext(AuthContext)
 
   const Layout = () =>{
     return(
@@ -30,10 +33,19 @@ function App() {
     )
   }
 
+  const SecuriteRoute = ({children}) =>{
+    if(currentUser){
+      return(
+        <Navigate to="/login" />
+      )
+    }
+    return children;
+}
+
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Layout/>,
+      element: (<SecuriteRoute><Layout/></SecuriteRoute>),
       children: [
         {
           path: '/',
