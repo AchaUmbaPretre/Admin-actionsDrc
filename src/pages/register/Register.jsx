@@ -4,11 +4,29 @@ import actions from './../../assets/actionssarl.PNG'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { useNavigate } from 'react-router'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { useState } from 'react';
 
 const Register = () => {
+    const navigate = useNavigate();
+    const [inputs, setInputs] = useState({});
+    const [error, setError] = useState(null);
+
+    const handChange = e =>{
+      setInputs(prev=>({...prev, [e.target.name]: e.target.value}))
+    }
+
+    const handSubmit = async (e) =>{
+        e.preventDefault();
+        try{
+          await axios.post("http://localhost:8080/api/auth/register", inputs)
+          navigate('/login')
+          
+        }catch(error){
+          setError(error.response.data)
+          
+        } 
     
-    
+      }
   return (
     <>
          <div className="register">
@@ -32,7 +50,7 @@ const Register = () => {
                     </div>
                     <div className="login-rows">
                         <Link className="login-mssg" to ='/register'>Mot de passe oublié ?</Link>
-                        <button className="btn-form" ><CheckCircleOutlineIcon className='form-icon'/>S'inscrire</button>
+                        <button className="btn-form" onClick={handSubmit} ><CheckCircleOutlineIcon className='form-icon'/>S'inscrire</button>
                     </div>
                 </form>
             </div>
