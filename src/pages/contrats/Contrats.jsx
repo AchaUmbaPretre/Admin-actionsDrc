@@ -7,7 +7,6 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { DataGrid } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
-import { contrats } from '../../data';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -43,11 +42,6 @@ const Contrats = () => {
     const [date, setDate] = useState('');
     const [datefin, setDateFin] = useState('');
     const [inputs, setInputs] = useState({});
-
-    const HandleDelete = (id) =>{
-        const dataFilter = data.filter(item=> item.id !== id)
-        setData(dataFilter)
-      }
 
     const handleChange = (e) =>{
         setInputs(prev=>({...prev, [e.target.name]: e.target.value}))
@@ -90,9 +84,9 @@ const Contrats = () => {
             return(
               <>
                 <div className="table-icons-row">
-                    <Link to={`/users/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
+                    <Link to={`/editContrat/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
                     <VisibilityIcon className='userEye'/>
-                    <DeleteOutline className="userListDelete" onClick={()=>{HandleDelete(params.row.id)}} />
+                    <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
                 </div>
               </>
     
@@ -119,7 +113,7 @@ const Contrats = () => {
 
       try{
           await axios.post(`http://localhost:8080/api/admin/contrat`,{...inputs, 	start_date: date, end_date:datefin})
-          navigate("/personnel")
+          navigate("/contrats")
       }
       catch(error){
           console.log(error)
@@ -128,13 +122,12 @@ const Contrats = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/admin/employe/${id}`);
+      await axios.delete(`http://localhost:8080/api/admin/contrat/${id}`);
       window.location.reload()
     } catch (err) {
       console.log(err);
     }
   };
-
 
   return (
     <>
@@ -177,7 +170,7 @@ const Contrats = () => {
                                 </LocalizationProvider>
                                 <TextField id="filled-number" name='hourly_rate' onChange={handleChange} label="Salaire" type='number' InputLabelProps={{shrink: true,}} variant="filled" />
                                 <TextField id="filled-basic" name='benefits' onChange={handleChange} label="Avantages sociaux du contrat" variant="filled" />
-                                <TextField id="filled-basic" onChange={handleChange} label="Status du contrat" variant="filled" />
+                                <TextField id="filled-basic" name='contract_status' onChange={handleChange} label="Status du contrat" variant="filled" />
                                 <Button variant="contained" onClick={handleClick} endIcon={<SendIcon />}>
                                     Envoyer
                                 </Button>

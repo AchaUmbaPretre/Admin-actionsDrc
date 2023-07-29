@@ -87,16 +87,17 @@
             }
         }
         .form-bottom{
-            background: #faf9f9;
+            background: rgba(110, 138, 224, 0.034);
             padding: 20px 30px;
             display: flex;
             flex-direction: column;
             gap: 10px;
             span{
-                font-size: 1rem;
+                font-size: .890rem;
             }
             .form-news{
-                color: royalblue;
+                color: rgb(66, 111, 236);
+                font-size: .8rem;
             }
         }
     }

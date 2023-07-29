@@ -15,6 +15,7 @@ import Edit from './pages/personnel/edit/Edit';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import { AuthContext } from './context/authContext';
+import EditContrat from './pages/contrats/edit/EditContrat';
 
 function App() {
   const {currentUser} = useContext(AuthContext)
@@ -34,7 +35,7 @@ function App() {
   }
 
   const SecuriteRoute = ({children}) =>{
-    if(currentUser){
+    if(!currentUser){
       return(
         <Navigate to="/login" />
       )
@@ -82,6 +83,10 @@ function App() {
         {
           path: '/listeConge',
           element: <ListeConge/>
+        },
+        {
+          path: '/editContrat/:id',
+          element: <EditContrat/>
         }
     ]
     },

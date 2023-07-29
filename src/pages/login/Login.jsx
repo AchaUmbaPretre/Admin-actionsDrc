@@ -12,7 +12,7 @@ const Login = () => {
     const [error, setError] = useState(null);
 
     console.log(inputs)
-    const handChange = (e) =>{
+    const handleChange = (e) =>{
         setInputs(prev=>({ ...prev, [e.target.name]: e.target.value }))
     }
 
@@ -39,12 +39,12 @@ const Login = () => {
                 </div>
                 <form action="" className="login-form">
                     <div className="login-controle">
-                        <label htmlFor="" className="login-label">Votre e-mail <span>*</span></label>
-                        <input type="text" name="email" className="login-input" placeholder='Email..' />
+                        <label htmlFor="" className="login-label">Votre email <span>*</span></label>
+                        <input type="text" name="email" className="login-input" onChange={handleChange} placeholder='Email..' />
                     </div>
                     <div className="login-controle">
                         <label htmlFor="" className="login-label">Mot de passe <span>*</span></label>
-                        <input type="text" name="password" className="login-input" placeholder='mot de passe..' />
+                        <input type="password" name="password" className="login-input" onChange={handleChange} placeholder='mot de passe..' />
                     </div>
                     <div className="login-rows">
                         <Link className="login-mssg">Mot de passe oublié ?</Link>
