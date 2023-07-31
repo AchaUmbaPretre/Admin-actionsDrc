@@ -197,7 +197,9 @@ const Contrats = () => {
                         <span className="contrats-prix">Validité : </span>
                         <span className="contrats-prix">1 mois</span>
                       </div>
+                      
                   </div>
+                  <button className="btn-contrat">Envoyer</button>
               </div>
             </div>
         </div>
