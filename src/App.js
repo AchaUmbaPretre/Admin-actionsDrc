@@ -16,6 +16,7 @@ import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import { AuthContext } from './context/authContext';
 import EditContrat from './pages/contrats/edit/EditContrat';
+import Formulaire from './pages/personnel/formulaire/Formulaire';
 
 function App() {
   const {currentUser} = useContext(AuthContext)
@@ -87,6 +88,9 @@ function App() {
         {
           path: '/editContrat/:id',
           element: <EditContrat/>
+        },        {
+          path: '/formulaire',
+          element: <Formulaire/>
         }
     ]
     },

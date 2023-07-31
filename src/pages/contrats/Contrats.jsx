@@ -179,7 +179,27 @@ const Contrats = () => {
                     </Fade>
                 </Modal>
             </div>
-            <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="contratTable" />
+            <div className="contrats-left">
+              <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="contratTable" />
+              <div className="contrats-right">
+                  <div className="contrats-right-wrapper">
+                      <div className="contrats-right-rows">
+                        <span className="contrats-prix">Prix : </span>
+                        <span className="contrats-prix">100$</span>
+                      </div>
+
+                      <div className="contrats-right-rows">
+                        <span className="contrats-prix">Salaire : </span>
+                        <span className="contrats-prix">80$</span>
+                      </div>
+
+                      <div className="contrats-right-rows">
+                        <span className="contrats-prix">Validité : </span>
+                        <span className="contrats-prix">1 mois</span>
+                      </div>
+                  </div>
+              </div>
+            </div>
         </div>
     </>
   )

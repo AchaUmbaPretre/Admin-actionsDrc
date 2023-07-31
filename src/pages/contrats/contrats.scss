@@ -80,11 +80,29 @@
             }
         }
     }
-    .contratTable{
-        background: #fff;
-        padding: 10px;
-        border-radius: 5px;
-        -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
-        box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+    .contrats-left{
+        display: flex;
+        gap: 20px;
+        .contratTable{
+            flex: 6;
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+        }
+        .contrats-right{
+            flex: 2;
+            padding: 20px;
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+
+            .contrats-right-wrapper{
+
+            }
+        }
     }
 }

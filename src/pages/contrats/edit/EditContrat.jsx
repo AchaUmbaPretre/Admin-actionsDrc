@@ -53,33 +53,33 @@ const handleChange = (e) => {
                 <form action="" className="formulaire-edit">
                     <div className="edit-rows">
                         <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Type du contrat*</label>
+                            <label htmlFor="" className="label-edit">Type du contrat <span>*</span></label>
                             <input type="text" value={contract_type} name='contract_type'  className="input-form" onChange={handleChange} />
                         </div>
                         <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Date de début*</label>
+                            <label htmlFor="" className="label-edit">Date de début <span>*</span></label>
                             <input type="date" value={start_date} name="start_date" className="input-form" onChange={handleChange} />
                         </div>
                     </div>
 
                     <div className="edit-rows">
                         <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Date de la fin*</label>
+                            <label htmlFor="" className="label-edit">Date de la fin <span>*</span></label>
                             <input type="date" data-format="MM /jj/aaaa" value={end_date}  name='end_date' className="input-form" onChange={handleChange} />
                         </div>
                         <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Salaire*</label>
+                            <label htmlFor="" className="label-edit">Salaire <span>*</span></label>
                             <input type="number" value={hourly_rate}  name='hourly_rate' className="input-form" onChange={handleChange} />
                         </div>
                     </div>
 
                     <div className="edit-rows">
                         <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Avantages sociaux du contrat*</label>
+                            <label htmlFor="" className="label-edit">Avantages sociaux du contrat <span>*</span></label>
                             <input type="text" value={benefits}  name='benefits' className="input-form" onChange={handleChange} />
                         </div>
                         <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Status du contrat*</label>
+                            <label htmlFor="" className="label-edit">Status du contrat <span>*</span></label>
                             <input type="text" value={contract_status}  name='contract_status' className="input-form" onChange={handleChange} />
                         </div>
                     </div>
