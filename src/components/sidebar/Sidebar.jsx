@@ -19,7 +19,7 @@ const Sidebar = () => {
               <li className="sidenav-li"><PersonOutlineIcon className='sidebar-icon'/><Link to={"/personnel"}>Personnel</Link></li>
               <li className="sidenav-li"><FlakyIcon className='sidebar-icon'/><Link to={"/contrats"}>Contrats</Link></li>
               <li className="sidenav-li"><ShowChartIcon className='sidebar-icon'/><Link to={"/affectation"}>Affectation</Link></li>
-              <li className="sidenav-li"><GroupsIcon className='sidebar-icon'/><Link to={"/affectation"}>Client</Link></li>
+              <li className="sidenav-li"><GroupsIcon className='sidebar-icon'/><Link to={"/client"}>Client</Link></li>
               <li className="sidenav-li"><ChecklistRtlIcon className='sidebar-icon'/><Link to={"/presence"}>Presence</Link></li>
               <li className="sidenav-li"><FactCheckIcon className='sidebar-icon'/><Link to={"/facturation"}>Facturation</Link></li>
               <li className="sidenav-li"><FormatListNumberedIcon className='sidebar-icon'/><Link to={"/listeConge"}>Liste de congé</Link></li>

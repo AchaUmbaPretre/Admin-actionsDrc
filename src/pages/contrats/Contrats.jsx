@@ -140,6 +140,15 @@ const Contrats = () => {
                         <span className="contrats-span">Liste des contrats</span>
                     </div>
                 </div>
+                <div className="contract">
+                      <select name="" id="" className='contract-select'>
+                        <option value="dog">Cuisinier</option>
+                        <option value="cat">Nounou à domicile</option>
+                        <option value="hamster">Chauffeur</option>
+                        <option value="hamster">Femme de ménage</option>
+                        <option value="hamster">Puéricultrice</option>
+                      </select>
+                </div>
                 <button className="contrats-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</button>
                 <Modal
                     aria-labelledby="transition-modal-title"
@@ -197,7 +206,7 @@ const Contrats = () => {
                         <span className="contrats-prix">Validité : </span>
                         <span className="contrats-prix">1 mois</span>
                       </div>
-                      
+
                   </div>
                   <button className="btn-contrat">Envoyer</button>
               </div>

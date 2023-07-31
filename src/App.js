@@ -17,6 +17,7 @@ import Register from './pages/register/Register';
 import { AuthContext } from './context/authContext';
 import EditContrat from './pages/contrats/edit/EditContrat';
 import Formulaire from './pages/personnel/formulaire/Formulaire';
+import ClientTab from './pages/clientTab/ClientTab';
 
 function App() {
   const {currentUser} = useContext(AuthContext)
@@ -68,6 +69,10 @@ function App() {
         {
           path: '/contrats',
           element: <Contrats/>
+        },
+        {
+          path: '/client',
+          element: <ClientTab/>
         },
         {
           path: '/affectation',
