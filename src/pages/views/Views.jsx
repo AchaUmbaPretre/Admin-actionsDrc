@@ -30,7 +30,7 @@ const Views = () => {
                     <span className="views-bar"></span>
                 </div>
                 <div className="views-rows-items">
-                    <img src={userImg} alt="" className="views-photo" />
+                    <img src={data.source ? `../upload/${data.source}` : userImg } alt="" className="views-photo" />
                     <div className="views-container">
                         <div className="views-rows">
                             <div className="views-left">
