@@ -25,9 +25,10 @@
                .form-img-row{
                 display: flex;
                 gap: 5px;
-                padding: 5px 0;
+                padding: 6px 0;
                 .form-title-img{
                     color: #555;
+                    font-size: .9rem;
                 }
                }
                .img-file{
@@ -52,11 +53,11 @@
                     .form-row{
                         display: flex;
                         flex-direction: column;
-                        gap: 10px;
+                        gap: 5px;
                         width: 100%;
                         .label-form{
                             width: 100%;
-                            font-size: .9rem;
+                            font-size: .8rem;
                             color: #555;
                             display: flex;
                             align-items: center;
@@ -65,7 +66,7 @@
                                 font-size: 1.1rem;
                             }
                         }
-                        .input-form{
+                        .input-form,.form-select{
                             border: 1px solid #d1d0d0;
                             width: 100%;
                             padding: 8px;
@@ -100,6 +101,9 @@
                 transition: .5s;
                 &:hover{
                     background: rgba(54, 85, 179, 0.979);
+                }
+                .form-icon{
+                    font-size: 1rem;
                 }
             }
         }

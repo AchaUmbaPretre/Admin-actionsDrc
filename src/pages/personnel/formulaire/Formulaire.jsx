@@ -83,11 +83,16 @@ const Formulaire = () => {
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Numero du pièce <span>*</span></label>
-                                <input type="text" name='identification_number' className="input-form" onChange={handleChange} />
+                                <input type="number" name='identification_number' className="input-form" onChange={handleChange} />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Type du pièce <span>*</span></label>
-                                <input type="text"  name='identification_type' className="input-form" onChange={handleChange} />
+                                <select id="pet-select" className='form-select'>
+                                    <option value="carte d'identité">Carte d'identité</option>
+                                    <option value="passeport">passeport</option>
+                                    <option value="carte d'identité">Carte d'identité</option>
+                                    <option value="permis de conduire">Permis de conduire,</option>
+                                </select>
                             </div>
                         </div>
 
@@ -107,8 +112,11 @@ const Formulaire = () => {
                                 <input type="text" name='address' className="input-form" onChange={handleChange} />
                             </div>
                             <div className="form-row">
-                                <label htmlFor="" className="label-form">Status <span>*</span></label>
-                                <input type="text" className="input-form" onChange={handleChange} />
+                                <label htmlFor="pet-select" className="label-form">Status <span>*</span></label>
+                                <select id="pet-select" className='form-select'>
+                                    <option value="interne">Interne</option>
+                                    <option value="externe">Externe</option>
+                                </select>
                             </div>
                         </div>
                         <div className="form-rows">
@@ -126,7 +134,7 @@ const Formulaire = () => {
                                 </div>
                             </div>
                         </div>
-                        <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon /></button>
+                        <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>
                     </form>
                 </div>
             </div>
