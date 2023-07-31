@@ -88,10 +88,7 @@ function App() {
         {
           path: '/editContrat/:id',
           element: <EditContrat/>
-        },        {
-          path: '/formulaire',
-          element: <Formulaire/>
-        }
+        },
     ]
     },
     {

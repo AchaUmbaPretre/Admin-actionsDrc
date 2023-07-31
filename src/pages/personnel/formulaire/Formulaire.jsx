@@ -24,6 +24,14 @@ const Formulaire = () => {
     const handleChange = (e) => {
         setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
       };
+
+      const capture = () => {
+        const imageSrc = webcamRef.current.getScreenshot();
+        console.log(imageSrc);
+      };
+
+      console.log(photo)
+
       const handlePhotoSubmit = () => {
         if (source === 'import') {
           const formData = new FormData();
@@ -32,17 +40,36 @@ const Formulaire = () => {
           const photoSrc = webcamRef.current.getScreenshot();
         }
       }
-    
-      const handleClick = () =>{
-
+      const upload = async ()=>{
+        try{
+          const formData = new FormData();
+          formData.append('file', photo)
+          const res = await axios.post("http://localhost:8080/api/upload", formData)
+          return res.data
+        }
+        catch(error){
+          console.log(error)
+        }
       }
+    const handleClick = async(e) =>{
+        e.preventDefault();
+        const imgUrl = await upload();
+
+        try{
+            await axios.post(`http://localhost:8080/api/admin/employe`,{...data, source: imgUrl })
+            navigate("/personnel")
+        }
+        catch(error){
+            console.log(error)
+        }
+    }
 
   return (
     <>
         <div className="formulaire-person">
             <div className="formulaire-wrapper">
                 <div className="formulaire-left">
-                    <img src={userImg} alt="" className="form-img" />
+                    {photo ? <img src={URL.createObjectURL(photo)} className="form-img2"/> : <img src={userImg} alt="" className="form-img" /> }
                     <div className="form-img-rows">
                         <div className="form-img-row">
                             <input type="radio" name="source" value="import" checked={source === 'import'} onChange={handleSourceChange} className='radio-img' />
@@ -53,7 +80,8 @@ const Formulaire = () => {
                             <span className="form-title-img">Prendre une photo avec la webcam</span>
                         </div>
                         {source === 'import' && <input type="file" name="photo" onChange={handleFileChange} />}
-                        {source === 'webcam' && <Webcam audio={false} ref={webcamRef} />}
+                        {source === 'webcam' && <Webcam audio={false} ref={webcamRef} className='pop-img' />}
+                        <button onClick={capture}>Capture photo</button>
                     </div>
                 </div>
                 <div className="formulaire-right">
@@ -61,37 +89,37 @@ const Formulaire = () => {
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Nom <span>*</span></label>
-                                <input type="text"  name='first_name'  className="input-form" onChange={handleChange} />
+                                <input type="text"  name='first_name'  className="input-form" onChange={handleChange} placeholder='Entrez votre nom..' />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Prenom <span>*</span></label>
-                                <input type="text" name="last_name" className="input-form" onChange={handleChange} />
+                                <input type="text" name="last_name" className="input-form" onChange={handleChange} placeholder='Entrez votre postnom..' />
                             </div>
                         </div>
 
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Email <span>*</span></label>
-                                <input type="text"  name='email' className="input-form" onChange={handleChange} />
+                                <input type="text"  name='email' className="input-form" onChange={handleChange} placeholder='Entrez votre adresse email..' />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Adresse <span>*</span></label>
-                                <input type="text"  name='address' className="input-form" onChange={handleChange} />
+                                <input type="text"  name='address' className="input-form" onChange={handleChange} placeholder='Entrez votre adresse..' />
                             </div>
                         </div>
 
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Numero du pièce <span>*</span></label>
-                                <input type="number" name='identification_number' className="input-form" onChange={handleChange} />
+                                <input type="number" name='identification_number' className="input-form" onChange={handleChange} placeholder='Entrez votre numero du pièce..' />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Type du pièce <span>*</span></label>
-                                <select id="pet-select" className='form-select'>
+                                <select id="pet-select" name="identification_type" className='form-select' onChange={handleChange}>
                                     <option value="carte d'identité">Carte d'identité</option>
                                     <option value="passeport">passeport</option>
                                     <option value="carte d'identité">Carte d'identité</option>
-                                    <option value="permis de conduire">Permis de conduire,</option>
+                                    <option value="permis de conduire">Permis de conduire</option>
                                 </select>
                             </div>
                         </div>
@@ -99,21 +127,21 @@ const Formulaire = () => {
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Competence <span>*</span></label>
-                                <input type="text" name='skills' className="input-form" onChange={handleChange} />
+                                <input type="text" name='skills' className="input-form" onChange={handleChange} placeholder="Entrez tes compténces.."  />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Niveau d'étude <span>*</span></label>
-                                <input type="text" name='certifications' className="input-form" onChange={handleChange} />
+                                <input type="text" name='certifications' className="input-form" onChange={handleChange} placeholder="Entrez votre niveau d'étude.." />
                             </div>
                         </div>
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Telephone <span>*</span></label>
-                                <input type="text" name='address' className="input-form" onChange={handleChange} />
+                                <input type="number" name='phone_number' className="input-form" onChange={handleChange} placeholder="Entrez votre numero de tel.."  />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="pet-select" className="label-form">Status <span>*</span></label>
-                                <select id="pet-select" className='form-select'>
+                                <select id="pet-select" className='form-select' name="employment_status" onChange={handleChange}>
                                     <option value="interne">Interne</option>
                                     <option value="externe">Externe</option>
                                 </select>
@@ -127,7 +155,7 @@ const Formulaire = () => {
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Genre <span>*</span></label>
                                 <div className="form-radio">
-                                    <input type="radio" id="Choice1" onChange={handleChange} name="gender" value="homme" />
+                                    <input type="radio" id="Choice1" onChange={handleChange} name="gender" checked value="homme" />
                                     <label for="Choice1">Homme</label>
                                     <input type="radio" id="Choice2" onChange={handleChange} name="gender" value="femme" />
                                     <label for="Choice2">Femme</label>

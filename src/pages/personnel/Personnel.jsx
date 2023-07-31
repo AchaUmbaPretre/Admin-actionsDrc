@@ -27,18 +27,20 @@ import moment from 'moment/moment';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
+import Formulaire from './formulaire/Formulaire';
 
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 800,
+    width: 1000,
     bgcolor: 'background.paper',
     border: '1px solid #FFF',
     boxShadow: 24,
     p: 4,
     borderRadius: 2,
+    outline: 'none'
   }
 
 const Personnel = () => {
@@ -75,18 +77,6 @@ const Personnel = () => {
         }
         fetchData()
      }, [])
-
-    const handleClick = async(e) =>{
-        e.preventDefault();
-
-        try{
-            await axios.post(`http://localhost:8080/api/admin/employe`,{...name,date_of_birth: date})
-            navigate("/personnel")
-        }
-        catch(error){
-            console.log(error)
-        }
-    }
 
     const handleDelete = async (id) => {
         try {
@@ -167,42 +157,8 @@ const Personnel = () => {
                 >
                     <Fade in={open}>
                         <Box sx={style}>
-                            <Box component="form" sx={{'& > :not(style)': { m: 1, width: '43ch' },}} noValidate autoComplete="off">
-                                <TextField id="filled-basic" name='first_name' onChange={handChange} label="Nom" variant="filled" />
-                                <TextField id="filled-basic" name="last_name" onChange={handChange} label="Prenom" variant="filled" />
-                                <LocalizationProvider dateAdapter={AdapterDayjs} >
-                                    <DatePicker name="date_of_birth" onChange={(value)=>{setDate(moment(value).format("DD-MM-YYYY"))}} />
-                                </LocalizationProvider>
-                                <TextField id="filled-basic" name='address' onChange={handChange} label="Adresse" variant="filled" />
-                                <TextField id="filled-basic" name='email' onChange={handChange} label="Email" variant="filled" />
-                                <TextField id="filled-basic" name='identification_number' onChange={handChange} label="Numero de piéce" variant="filled" />
-                                <TextField id="filled-basic" name='identification_type' onChange={handChange} label="Type de pièce" variant="filled" />
-                                <TextField id="filled-number" name='phone_number' onChange={handChange} label="Numero de telephone" type="number" InputLabelProps={{shrink: true,}} variant="filled"/>
-                                <TextField id="filled-basic" name='skills' onChange={handChange} label="Competence" variant="filled" />
-                                <TextField id="filled-basic" name='certifications' onChange={handChange} label="Certificat" variant="filled" />
-                                <TextField id="filled-basic" name='employment_status' onChange={handChange} label="Status" variant="filled" />
-                                <FormControl>
-                                    <FormLabel id="demo-row-radio-buttons-group-label">Genre</FormLabel>
-                                    <RadioGroup
-                                        row
-                                        aria-labelledby="demo-row-radio-buttons-group-label"
-                                        name="gender"
-                                        defaultValue="disabledS"
-                                        onChange={handChange}
-                                    >
-                                        <FormControlLabel value="homme" control={<Radio />} label="Homme" />
-                                        <FormControlLabel value="femme" control={<Radio />} label="Femme" />
-                                        <FormControlLabel
-                                        value="disabled"
-                                        disabled
-                                        control={<Radio />}
-                                        label="autre"
-                                        />
-                                    </RadioGroup>
-                                </FormControl>
-                                <Button variant="contained" endIcon={<SendIcon />} onClick={handleClick}>
-                                    Envoyer
-                                </Button>
+                            <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
+                                <Formulaire/>
                             </Box>
                         </Box>
                     </Fade>
