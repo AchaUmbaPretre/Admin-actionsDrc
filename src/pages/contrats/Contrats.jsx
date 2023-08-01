@@ -49,8 +49,12 @@ const Contrats = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const handleClick = () =>{
+
+    }
   
-    const columns = [
+/*     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
         { field: 'contract_type', headerName: 'Type de contrat', width: 120 },
 
@@ -92,9 +96,39 @@ const Contrats = () => {
     
             )
         }},
+      ]; */
+
+      const columns = [
+        { field: 'id', headerName: 'ID', width: 70 },
+        { field: 'first_name', headerName: 'Nom', width: 110 },
+        { field: 'last_name', headerName: 'Prenom', width: 100 },
+        {
+          field: 'phone_number',
+          headerName: 'Telephone',
+          type: 'number',
+          width: 100,
+        },
+        {
+            field: 'email',
+            headerName: 'Email',
+            type: 'number',
+            width: 120,
+          },
+        {
+            field: 'date_of_birth',
+            headerName: 'Date de naissance',
+            width: 110,
+        },
+        { field: 'gender', headerName: 'Genre', width: 50 },
+        { field: 'phone_number', headerName: 'Telephone', width: 100 },
+        {
+          field: 'skills',
+          headerName: 'Competence',
+          width: 120,
+        },
       ];
 
-      useEffect(()=>{
+/*       useEffect(()=>{
 
         const fetchData = async ()=> {
             try{
@@ -107,24 +141,26 @@ const Contrats = () => {
         }
         fetchData()
      }, [])
+ */
 
-     useEffect(()=>{
+   
+   useEffect(()=>{
 
-      const fetchData = async ()=> {
-          try{
-              const res = await axios.get("http://localhost:8080/api/admin/contrat");
-              setData(res.data)
-      
-            }catch(error){
-              console.log(error)
-            };
-      }
-      fetchData()
-   }, [])
+    const fetchData = async ()=> {
+        try{
+            const res = await axios.get("http://localhost:8080/api/admin");
+            setData(res.data)
+    
+          }catch(error){
+            console.log(error)
+          };
+    }
+    fetchData()
+ }, [])
 
      
 
-     const handleClick = async(e) =>{
+/*      const handleClick = async(e) =>{
       e.preventDefault();
 
       try{
@@ -143,7 +179,7 @@ const Contrats = () => {
     } catch (err) {
       console.log(err);
     }
-  };
+  }; */
 
   return (
     <>
@@ -224,7 +260,7 @@ const Contrats = () => {
                       </div>
 
                   </div>
-                  <button className="btn-contrat">Envoyer</button>
+                  <button className="btn-contrat" onClick ={handleClick}>Envoyer</button>
               </div>
             </div>
         </div>
