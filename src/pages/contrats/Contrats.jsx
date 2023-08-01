@@ -108,6 +108,22 @@ const Contrats = () => {
         fetchData()
      }, [])
 
+     useEffect(()=>{
+
+      const fetchData = async ()=> {
+          try{
+              const res = await axios.get("http://localhost:8080/api/admin/contrat");
+              setData(res.data)
+      
+            }catch(error){
+              console.log(error)
+            };
+      }
+      fetchData()
+   }, [])
+
+     
+
      const handleClick = async(e) =>{
       e.preventDefault();
 

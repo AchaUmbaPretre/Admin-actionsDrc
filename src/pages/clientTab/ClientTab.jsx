@@ -7,15 +7,30 @@ import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import { DeleteOutline} from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import ClientForm from './form/ClientForm';
+import axios from 'axios';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 1000,
+  bgcolor: 'background.paper',
+  border: '1px solid #FFF',
+  boxShadow: 24,
+  p: 4,
+  borderRadius: 2,
+  outline: 'none'
+}
 
 const ClientTab = () => {
 
-
-  const HandleDelete = (id) =>{
-    const dataFilter = data.filter(item=> item.id !== id)
-    setData(dataFilter)
-  }
   const [data, setData] = useState({});
 
   const [open, setOpen] = useState(false);
@@ -57,13 +72,39 @@ const ClientTab = () => {
             <div className="table-icons-row">
                 <Link to={`/users/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
                 <VisibilityIcon className='userEye'/>
-                <DeleteOutline className="userListDelete" onClick={()=>{HandleDelete(params.row.id)}} />
+                <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
             </div>
           </>
 
         )
     }},
   ];
+
+  useEffect(()=>{
+    
+    const fetchData = async ()=> {
+      try{
+          const res = await axios.get("http://localhost:8080/api/admin/client");
+          setData(res.data)
+  
+        }catch(error){
+          console.log(error)
+        };
+  }
+  fetchData()
+  }, [])
+
+  
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/api/admin/client/${id}`);
+      window.location.reload()
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
         <div className="clientTab">
@@ -75,8 +116,28 @@ const ClientTab = () => {
                 <span className="contrats-span">Liste des clients</span>
               </div>
             </div>
-            <button className="contrats-btn" onClick={''}><PersonAddAlt1Icon/>Ajouter</button>
-            
+            <button className="contrats-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</button>
+            <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    slots={{ backdrop: Backdrop }}
+                    slotProps={{
+                    backdrop: {
+                        timeout: 500,
+                    },
+                    }} 
+                >
+                    <Fade in={open}>
+                        <Box sx={style}>
+                            <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
+                              <ClientForm/>
+                            </Box>
+                        </Box>
+                    </Fade>
+            </Modal>
           </div>
           <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
         </div>

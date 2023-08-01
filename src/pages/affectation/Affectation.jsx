@@ -15,7 +15,7 @@ const Affectation = () => {
     const dataFilter = data.filter(item=> item.id !== id)
     setData(dataFilter)
   }
-  const [data, setData] = useState(listeData);
+  const [data, setData] = useState({});
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);

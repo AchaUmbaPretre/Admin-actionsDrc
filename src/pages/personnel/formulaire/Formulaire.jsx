@@ -81,7 +81,6 @@ const Formulaire = () => {
                         </div>
                         {source === 'import' && <input type="file" name="photo" onChange={handleFileChange} />}
                         {source === 'webcam' && <Webcam audio={false} ref={webcamRef} className='pop-img' />}
-                        <button onClick={capture}>Capture photo</button>
                     </div>
                 </div>
                 <div className="formulaire-right">
