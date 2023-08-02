@@ -22,30 +22,20 @@ const Affectation = () => {
   const handleClose = () => setOpen(false);
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'employee_id', headerName: 'employees', width: 120 },
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'employee_id', headerName: 'employees', width: 200 },
 
     {
-      field: 'start_date',
-      headerName: 'Date de début',
-      width: 130 
+      field: 'fonction_id',
+      headerName: 'Fonction_id',
+      width: 200 
     },
     {
-        field: 'end_date',
-        headerName: 'Date de fin',
-        width: 150 
+        field: 'payement_id',
+        headerName: 'Payement_id',
+        width: 200 
     },
-    {
-        field: 'leave_type',
-        headerName: "Type de congé",
-        width: 140 
-    },
-    {
-      field: 'status',
-      headerName: 'Statut de la demande',
-      width: 140 
-    },
-    {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
+    {field: 'action', HeaderName: 'Action', width: 200, renderCell: (params) =>{
         return(
           <>
             <div className="table-icons-row">

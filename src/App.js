@@ -18,6 +18,8 @@ import { AuthContext } from './context/authContext';
 import EditContrat from './pages/contrats/edit/EditContrat';
 import ClientTab from './pages/clientTab/ClientTab';
 import ClientForm from './pages/clientTab/form/ClientForm';
+import AddContrat from './pages/contrats/addContrat/AddContrat';
+import PageContrat from './pages/contrats/pageContrat/PageContrat';
 
 function App() {
   const {currentUser} = useContext(AuthContext)
@@ -97,6 +99,14 @@ function App() {
         {
           path: '/clientForm',
           element: <ClientForm/>
+        },
+        {
+          path: 'contrats/addContrat/:id',
+          element: <AddContrat/>
+        },
+        {
+          path: '/pageContrat/:id',
+          element: <PageContrat/>
         },
     ]
     },
