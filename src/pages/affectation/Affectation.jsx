@@ -12,11 +12,6 @@ import axios from 'axios';
 
 const Affectation = () => {
 
-  const HandleDelete = (id) =>{
-    const dataFilter = data.filter(item=> item.id !== id)
-    setData(dataFilter)
-  }
-
   const [data, setData] = useState({});
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -25,7 +20,6 @@ const Affectation = () => {
   const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
     { field: 'first_name', headerName: "Nom", width: 150 },
-
     {
       field: 'last_name',
       headerName: "Post-nom",
@@ -51,7 +45,7 @@ const Affectation = () => {
           <>
             <div className="table-icons-row">
                 <VisibilityIcon className='userEye'/>
-                <DeleteOutline className="userListDelete" onClick={()=>{HandleDelete(params.row.id)}} />
+                <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
             </div>
           </>
 
@@ -85,6 +79,15 @@ const Affectation = () => {
     }
     fetchDatas()
   }, [])
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/api/admin/employe/${id}`);
+      window.location.reload()
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
 
