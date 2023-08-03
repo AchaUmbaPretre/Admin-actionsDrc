@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
 import userImg from '../../../assets/user.png'
 import axios from 'axios';
-import moment from 'moment';
 import Webcam from 'react-webcam';
 
 const Edit = () => {

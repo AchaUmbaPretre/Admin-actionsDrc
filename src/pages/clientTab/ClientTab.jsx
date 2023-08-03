@@ -14,7 +14,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import ClientForm from './form/ClientForm';
 import axios from 'axios';
-
+import {useNavigate} from 'react-router-dom'
 const style = {
   position: 'absolute',
   top: '50%',
@@ -30,7 +30,7 @@ const style = {
 }
 
 const ClientTab = () => {
-
+  const navigate = useNavigate();
   const [data, setData] = useState({});
 
   const [open, setOpen] = useState(false);
@@ -71,7 +71,7 @@ const ClientTab = () => {
           <>
             <div className="table-icons-row">
                 <Link to={`/users/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
-                <VisibilityIcon className='userEye'/>
+                <VisibilityIcon className='userEye' onClick={() => navigate(`/viewsClient/${params.row.id}`)}/>
                 <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
             </div>
           </>

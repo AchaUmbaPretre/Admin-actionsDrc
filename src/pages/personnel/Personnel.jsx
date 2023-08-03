@@ -47,11 +47,6 @@ const Personnel = () => {
         setName(prev=>({...prev, [e.target.name]: e.target.value}))
     }
 
-    
-/*     const HandleDelete = (id) =>{
-      const dataFilter = data.filter(item=> item.id !== id)
-      setData(dataFilter)
-    } */
 
     useEffect(()=>{
 

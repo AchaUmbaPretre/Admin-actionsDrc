@@ -15,6 +15,7 @@ const AddContrat = () => {
     const dataFilter = data.filter(item => item.id !== id)
     setData(dataFilter)
   }
+  const [selectData, setSelectData] = useState();
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -63,14 +64,43 @@ const AddContrat = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+
     const selectedItems = data.filter((item) => selected.includes(item.id));
     const selectedIds = selectedItems.map((item) => item.id);
     const newSelectedx = selectedItems.map((item) => ({ agent: item.id, fonction: selects.fonction, contrat: id }));
     setSelectedx(selectedx.concat(newSelectedx));
     setSelectedData([...selectedData, ...selectedItems]);
-    console.log(newSelectedx);
+
+  /* 
+      selectedx.map((item) =>
+
+      axios.post(`http://localhost:8080/api/admin/affectation`, item)
+    );
+    }
+    catch(error){
+        console.log(error)
+    }*/
+    selectedx.map((dd) => {
+        axios.post('http://localhost:8080/api/admin/affectations', 
+        {
+          'fonction_id' : dd.fonction,
+          'emploie_id' : dd.agent,
+          'salaire_id' : dd.contrat,
+          'contrat_id' : 100
+        }).then((response) => {
+           alert('ok')
+        }).catch((error) => {
+          alert(error)
+        })
+    })
+
+    alert(selectedx)
+  
   }
+
+
     useEffect(() => {
 
     const fetchData = async () => {
@@ -84,6 +114,21 @@ const AddContrat = () => {
     }
     fetchData()
   }, [])
+
+
+  useEffect(()=>{
+
+    const fetchDatas = async ()=> {
+        try{
+            const res = await axios.get("http://localhost:8080/api/admin/fonction");
+            setSelectData(res.data)
+    
+          }catch(error){
+            console.log(error)
+          };
+    }
+    fetchDatas()
+ }, [])
 
   return (
     <>
@@ -106,11 +151,11 @@ const AddContrat = () => {
           <div className="add-row2">
             <div className="add-row-top">
               <label htmlFor="" className="add-label">Fonction</label>
+              
               <select id="pet-select" name="fonction" onChange={handleChange} className='form-select'>
-                <option value="Informaticien">Informaticien</option>
-                <option value="chauffeur">Chauffeur</option>
-                <option value="nounou">Nounou</option>
-                <option value="cuisinier">Cuisinier</option>
+              { selectData?.map(item =>( 
+                <option value={item.id}>{item.nom}</option>
+                ))}
               </select>
             </div>
             <div className="add-row-bottom">

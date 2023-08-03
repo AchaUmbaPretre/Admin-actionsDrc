@@ -5,9 +5,10 @@ import { DeleteOutline} from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import { useState } from 'react';
-import {listeData} from './../../data'
+import { useEffect, useState } from 'react';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 const Affectation = () => {
 
@@ -15,15 +16,15 @@ const Affectation = () => {
     const dataFilter = data.filter(item=> item.id !== id)
     setData(dataFilter)
   }
-  const [data, setData] = useState({});
 
+  const [data, setData] = useState({});
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
-    { field: 'employee_id', headerName: 'employees', width: 200 },
+    { field: 'emploie_id', headerName: 'employees', width: 200 },
 
     {
       field: 'fonction_id',
@@ -31,15 +32,19 @@ const Affectation = () => {
       width: 200 
     },
     {
-        field: 'payement_id',
-        headerName: 'Payement_id',
+      field: 'contrat_id',
+      headerName: 'Contrat_id',
+      width: 200 
+    },
+    {
+        field: 'salaire_id',
+        headerName: 'Salaire_id',
         width: 200 
     },
     {field: 'action', HeaderName: 'Action', width: 200, renderCell: (params) =>{
         return(
           <>
             <div className="table-icons-row">
-                <Link to={`/users/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
                 <VisibilityIcon className='userEye'/>
                 <DeleteOutline className="userListDelete" onClick={()=>{HandleDelete(params.row.id)}} />
             </div>
@@ -48,10 +53,23 @@ const Affectation = () => {
         )
     }},
   ];
+  useEffect(() => {
 
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("http://localhost:8080/api/admin/affectation");
+        setData(res.data)
+
+      } catch (error) {
+        console.log(error)
+      };
+    }
+    fetchData()
+  }, [])
 
   return (
     <>
+
       <div className="listeConge">
         <div className="liste-wrapper">
           <div className="contrats-top">
