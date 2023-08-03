@@ -24,17 +24,27 @@ const Affectation = () => {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
-    { field: 'emploie_id', headerName: 'employees', width: 200 },
+    { field: 'first_name', headerName: "Nom", width: 150 },
 
     {
-      field: 'fonction_id',
-      headerName: 'Fonction_id',
-      width: 200 
+      field: 'last_name',
+      headerName: "Post-nom",
+      width: 150 
     },
     {
-      field: 'contrat_id',
-      headerName: 'Contrat_id',
-      width: 200 
+      field: 'skills',
+      headerName: 'Competence',
+      width: 150 
+    },
+    {
+      field: 'salaire',
+      headerName: 'Salaire',
+      width: 150 
+    },
+    {
+      field: 'end_date',
+      headerName: 'Date de la fin',
+      width: 150 
     },
     {field: 'action', HeaderName: 'Action', width: 200, renderCell: (params) =>{
         return(
@@ -48,7 +58,7 @@ const Affectation = () => {
         )
     }},
   ];
-  useEffect(() => {
+/*   useEffect(() => {
 
     const fetchData = async () => {
       try {
@@ -60,8 +70,21 @@ const Affectation = () => {
       };
     }
     fetchData()
-  }, [])
+  }, []) */
 
+  useEffect(() => {
+
+    const fetchDatas = async () => {
+      try {
+        const res = await axios.get("http://localhost:8080/api/admin/allaffectation");
+        setData(res.data)
+
+      } catch (error) {
+        console.log(error)
+      };
+    }
+    fetchDatas()
+  }, [])
   return (
     <>
 
