@@ -73,31 +73,19 @@ const AddContrat = () => {
     setSelectedx(selectedx.concat(newSelectedx));
     setSelectedData([...selectedData, ...selectedItems]);
 
-  /* 
-      selectedx.map((item) =>
-
-      axios.post(`http://localhost:8080/api/admin/affectation`, item)
-    );
-    }
-    catch(error){
-        console.log(error)
-    }*/
+  
     selectedx.map((dd) => {
         axios.post('http://localhost:8080/api/admin/affectations', 
         {
-          'fonction_id' : dd.fonction,
-          'emploie_id' : dd.agent,
-          'salaire_id' : dd.contrat,
-          'contrat_id' : 100
+          fonction_id : dd.fonction,
+          emploie_id : dd.agent,
+          contrat_id : dd.contrat
         }).then((response) => {
            alert('ok')
         }).catch((error) => {
           alert(error)
         })
     })
-
-    alert(selectedx)
-  
   }
 
 
@@ -132,7 +120,6 @@ const AddContrat = () => {
 
   return (
     <>
-    <div>{JSON.stringify(selectedx)}</div>
       <div className="facturation">
         <div className="facturation-wrapper">
           <div className="contrats-top">

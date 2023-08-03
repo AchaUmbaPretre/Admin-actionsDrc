@@ -2,14 +2,12 @@ import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
+import './contratForm.scss'
 
 const ContratForm = () => {
 
 const [data, setData] = useState({});
-const location = useLocation();
 const navigate = useNavigate();
-const id = location.pathname.split("/")[2];
-
 
 const handleChange = (e) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -19,7 +17,7 @@ const handleChange = (e) => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:8080/api/admin/contrat/${id}`, data);
+      await axios.post(`http://localhost:8080/api/admin/contrat`, data);
       navigate("/");
     } catch (err) {
 
@@ -27,19 +25,22 @@ const handleChange = (e) => {
     }
   }
 
-
   return (
     <>
-        <div className="edit">
-            <div className="edit-wrapper">
+        <div className="contratForm">
+            <div className="contrat-wrapper">
                 <div className="edit-title">
-                    <h2 className="edit-h2">Editer contrat</h2>
+                    <h2 className="edit-h2">Contrat</h2>
                 </div>
                 <form action="" className="formulaire-edit">
                     <div className="edit-rows">
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Type du contrat <span>*</span></label>
-                            <input type="text"  name='contract_type'  className="input-form" onChange={handleChange} />
+                            <select id="pet-select" name="contract_type" className="input-form" onChange={handleChange}>
+                                <option value="CDI">CDI</option>
+                                <option value="CDD">CDD</option>
+                                <option value="Intérim">intérim</option>
+                            </select>
                         </div>
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Date de début <span>*</span></label>
@@ -65,14 +66,14 @@ const handleChange = (e) => {
                         </div>
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Status du contrat <span>*</span></label>
-                            <select id="pet-select" name="identification_type" className="input-form" onChange={handleChange}>
+                            <select id="pet-select" name="contract_status" className="input-form" onChange={handleChange}>
                                     <option value="actif">actif</option>
                                     <option value="terminé">terminé</option>
                                     <option value="résilié">résilié</option>
                             </select>
                         </div>
                     </div>
-                    <button className="edit-btn" onClick={handleClick}>Edit</button>
+                    <button className="edit-btn" onClick={handleClick}>Envoyer</button>
                 </form>
             </div>
         </div>

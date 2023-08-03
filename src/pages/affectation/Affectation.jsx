@@ -36,11 +36,6 @@ const Affectation = () => {
       headerName: 'Contrat_id',
       width: 200 
     },
-    {
-        field: 'salaire_id',
-        headerName: 'Salaire_id',
-        width: 200 
-    },
     {field: 'action', HeaderName: 'Action', width: 200, renderCell: (params) =>{
         return(
           <>

@@ -103,42 +103,5 @@
             -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
             box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
         }
-        .contrats-right{
-            flex: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 20px;
-            background: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
-            box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
-
-            .contrats-right-wrapper{
-                padding: 10px 20px;
-                .contrats-right-rows{
-                    padding: 10px 0;
-                    border-bottom: 1px solid #a1a1a1ce;
-                    .contrats-prix{
-                        font-size: 1.2rem;
-                        color: #555;
-                    }
-                }
-            }
-            .btn-contrat{
-                margin: 10px 20px;
-                border: none;
-                padding: 10px 15px;
-                border-radius: 5px;
-                color: #fff;
-                background: royalblue;
-                cursor: pointer;
-                transition: .5s;
-                &:hover{
-                    background: rgb(19, 19, 78);
-                }
-            }
-        }
     }
 }

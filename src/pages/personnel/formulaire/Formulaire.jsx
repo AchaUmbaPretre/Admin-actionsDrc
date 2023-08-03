@@ -115,9 +115,8 @@ const Formulaire = () => {
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Type du pièce <span>*</span></label>
                                 <select id="pet-select" name="identification_type" className='form-select' onChange={handleChange}>
-                                    <option value="carte d'identité">Carte d'identité</option>
+                                    <option value="carte d'identité" defaultValue={"carte d'identité"}>Carte d'identité</option>
                                     <option value="passeport">passeport</option>
-                                    <option value="carte d'identité">Carte d'identité</option>
                                     <option value="permis de conduire">Permis de conduire</option>
                                 </select>
                             </div>
@@ -130,7 +129,13 @@ const Formulaire = () => {
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Niveau d'étude <span>*</span></label>
-                                <input type="text" name='certifications' className="input-form" onChange={handleChange} placeholder="Entrez votre niveau d'étude.." />
+                                <select id="pet-select" name="identification_type" className='form-select' onChange={handleChange}>
+                                    <option value="licence">Licence</option>
+                                    <option value="graduat">Graduat</option>
+                                    <option value="humanité">Humanité</option>
+                                    <option value="secondaire">Secondaire</option>
+                                    <option value="primaire">Primaire</option>
+                                </select>
                             </div>
                         </div>
                         <div className="form-rows">

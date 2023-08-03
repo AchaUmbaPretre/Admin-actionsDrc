@@ -8,12 +8,6 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
-import { Checkbox, TextField } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers-pro';
-import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
 import moment from 'moment';
 import axios from 'axios';
 import { DeleteOutline} from '@mui/icons-material';
@@ -170,7 +164,7 @@ const Contrats = () => {
                 >
                     <Fade in={open}>
                         <Box sx={style}>
-                            <Box component="form" sx={{'& > :not(style)': { m: 1, width: '43ch' }, display:'flex', flexWrap:'wrap'}} noValidate autoComplete="off">
+                            <Box component="form" sx={{'& > :not(style)': { m: 1, width: '250ch' }, display:'flex', flexWrap:'wrap'}} noValidate autoComplete="off">
                               <ContratForm/>
                             </Box>
                         </Box>
@@ -181,26 +175,6 @@ const Contrats = () => {
               <DataGrid rows={data} columns={columns}  pageSize={10}  checkboxSelection
                 selectionModel={selected}
                 onSelectionModelChange={handleSelectionChange} className="contratTable" />
-              <div className="contrats-right">
-                  <div className="contrats-right-wrapper">
-                      <div className="contrats-right-rows">
-                        <span className="contrats-prix">Prix : </span>
-                        <span className="contrats-prix">100$</span>
-                      </div>
-
-                      <div className="contrats-right-rows">
-                        <span className="contrats-prix">Salaire : </span>
-                        <span className="contrats-prix">80$</span>
-                      </div>
-
-                      <div className="contrats-right-rows">
-                        <span className="contrats-prix">Validité : </span>
-                        <span className="contrats-prix">1 mois</span>
-                      </div>
-
-                  </div>
-                  <button className="btn-contrat" onClick ={handleClick}>Envoyer</button>
-              </div>
             </div>
         </div>
     </>

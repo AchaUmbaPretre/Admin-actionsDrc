@@ -2,6 +2,7 @@ import axios from 'axios';
 import '../form/clientForm.scss'
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import './clientView.scss'
 
 const ClientView = () => {
     const [data, setData] = useState({});
