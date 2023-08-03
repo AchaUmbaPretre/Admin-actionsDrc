@@ -70,7 +70,7 @@ const ClientTab = () => {
         return(
           <>
             <div className="table-icons-row">
-                <Link to={`/users/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
+                <Link to={`/clientUpdate/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
                 <VisibilityIcon className='userEye' onClick={() => navigate(`/viewsClient/${params.row.id}`)}/>
                 <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
             </div>

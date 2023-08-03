@@ -1,5 +1,5 @@
 import axios from 'axios';
-import './clientView.scss'
+import '../form/clientForm.scss'
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -20,7 +20,6 @@ const ClientView = () => {
         }
         fetchData()
     }, []);
-    console.log(data)
   return (
     <>
         <div className="clientView">
