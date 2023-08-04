@@ -11,14 +11,14 @@ const [data, setData] = useState({});
 const navigate = useNavigate();
 const [options, setOptions] = useState([]);
 const [optionsClient, setOptionsClient] = useState([]);
-const [selected, setSelected] = useState();
-const [selecteds, setSelecteds] = useState();
+const [selected, setSelected] = useState(null);
+const [selecteds, setSelecteds] = useState(null);
 const [duration, setDuration] = useState([]);
 const [salaires, setSalaires] = useState([]);
+const [dateEntrant, setDateEntrant] = useState([]);
+const [dateSortant, setDateSortant] = useState([])
 
-const handleChange = (e) => {
-    setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+console.log()
 
 const handleChange1 = (e)=> {
     setSelected(e.value);
@@ -47,7 +47,7 @@ const Clientautocomplete = () =>{
 }
 
 const handleChange3 = (e)=> {
-  setSelecteds(e.value);
+  setSalaires(e.value);
 }
 const Salaireautocomplete = () =>{
   const options2 = salaires.map((opts)=> ({
@@ -56,6 +56,31 @@ const Salaireautocomplete = () =>{
   }));
   return (
       <Select options = {options2} onChange={handleChange3}/>
+  )
+}
+const handleChange4 = (e)=> {
+  setDateEntrant(e.value);
+}
+const DurationAutocomplete = () =>{
+  const options2 = duration.map((opts)=> ({
+      label : opts.start_date,
+      value : opts.id
+  }));
+  return (
+      <Select options = {options2} onChange={handleChange4}/>
+  )
+}
+
+const handleChange5 = (e)=> {
+  setDateSortant(e.value);
+}
+const DurationAutocomplete2 = () =>{
+  const options2 = duration.map((opts)=> ({
+      label : opts.end_date,
+      value : opts.id
+  }));
+  return (
+      <Select options = {options2} onChange={handleChange5}/>
   )
 }
 
@@ -159,19 +184,15 @@ const Salaireautocomplete = () =>{
                     <div className="edit-rows">
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Date entrant<span>*</span></label>
-                            <input type="date" data-format="MM /jj/aaaa"  name='date' className="input-form" onChange={handleChange} />
+                            <DurationAutocomplete/>
                         </div>
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Date sortant<span>*</span></label>
-                            <input type="number" name='duree' className="input-form" onChange={handleChange} />
+                            <DurationAutocomplete2 />
                         </div>
                     </div>
 
                     <div className="edit-rows">
-                        <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Durée <span>*</span></label>
-                            <input type="number" name='duree' className="input-form" onChange={handleChange} />
-                        </div>
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Montant <span>*</span></label>
                             <Salaireautocomplete/>
