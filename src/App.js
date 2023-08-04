@@ -22,6 +22,8 @@ import AddContrat from './pages/contrats/addContrat/AddContrat';
 import PageContrat from './pages/contrats/pageContrat/PageContrat';
 import ClientView from './pages/clientTab/clientView/ClientView';
 import EditeClient from './pages/clientTab/editClient/EditeClient';
+import Mission from './pages/mission/Mission';
+import MissionForm from './pages/mission/form/MissionForm';
 
 function App() {
   const {currentUser} = useContext(AuthContext)
@@ -117,6 +119,14 @@ function App() {
         {
           path: '/pageContrat/:id',
           element: <PageContrat/>
+        },
+        {
+          path: '/mission',
+          element: <Mission/>
+        },
+        {
+          path: '/missionForm',
+          element: <MissionForm/>
         },
     ]
     },
