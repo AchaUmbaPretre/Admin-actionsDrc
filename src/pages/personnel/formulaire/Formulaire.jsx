@@ -5,6 +5,11 @@ import SendIcon from '@mui/icons-material/Send';
 import userImg from './../../../assets/user.png'
 import Webcam from 'react-webcam';
 import axios from 'axios';
+import moment from 'moment';
+import 'moment/locale/fr';
+
+moment.locale('fr');
+
 
 const Formulaire = () => {
 
@@ -153,7 +158,7 @@ const Formulaire = () => {
                         </div>
                         <div className="form-rows">
                             <div className="form-row">
-                                <label htmlFor="" className="label-form">Date <span>*</span></label>
+                                <label htmlFor="" className="label-form">Date de naissace <span>*</span></label>
                                 <input type="date" name="date_of_birth" className="input-form" onChange={handleChange} />
                             </div>
                             <div className="form-row">

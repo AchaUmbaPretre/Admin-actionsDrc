@@ -83,8 +83,8 @@ const Mission = () => {
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'agent', headerName: 'Agent', width: 130 },
-        { field: 'client', headerName: 'Client', width: 130 },
+        { field: 'agent_id', headerName: 'Agent', width: 130 },
+        { field: 'client_id', headerName: 'Client', width: 130 },
         {
           field: 'date',
           headerName: 'Date',
@@ -104,6 +104,7 @@ const Mission = () => {
                     <VisibilityIcon className='userEye' onClick={() => navigate(`/views/${params.row.id}`)} />
                     <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
                 </div>
+                
               </>
     
             )

@@ -34,7 +34,7 @@
             -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
             box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
             padding: 30px;
-            gap: 20px;
+            gap: 40px;
             border-radius: 5px;
             margin: 0 auto;
             .views-photo{
@@ -45,24 +45,26 @@
             .views-container{
                 flex: 5;
                 margin: 0 auto;
+                padding: 10px 0;
                 .views-rows{
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    gap: 20px;
+                    gap: 40px;
+                    border-bottom: 1px solid #e0dcdc;
                     .views-left{
                         flex: 1;
                         display: flex;
                         align-items: center;
-                        gap: 10px;
+                        gap: 20px;
                         .view-label{
                             font-weight: 600;
                             padding: 10px 0;
-                            font-size: 1rem;
+                            font-size: .9rem;
                             color: #555;
                         }
                         .view-result{
-                            font-size: 1.1rem;
+                            font-size: .9rem;
                             color: #555;
                         }
                     }
@@ -74,11 +76,11 @@
                         .view-label{
                             font-weight: 600;
                             padding: 10px 0;
-                            font-size: 1rem;
+                            font-size: .9rem;
                             color: #555;
                         }
                         .view-result{
-                            font-size: 1.1rem;
+                            font-size: .9rem;
                             color: #555;
                         }
                     }

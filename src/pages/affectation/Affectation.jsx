@@ -44,7 +44,6 @@ const Affectation = () => {
         return(
           <>
             <div className="table-icons-row">
-                <VisibilityIcon className='userEye'/>
                 <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
             </div>
           </>
@@ -100,7 +99,6 @@ const Affectation = () => {
                   <span className="contrats-span">Liste des agents affectés</span>
               </div>
           </div>
-          <button className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</button>
         </div>
         <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
       </div>

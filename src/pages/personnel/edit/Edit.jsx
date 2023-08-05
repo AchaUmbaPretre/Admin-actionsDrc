@@ -63,7 +63,7 @@ const handleChange = (e) => {
 
     try {
       await axios.put(`http://localhost:8080/api/admin/employe/${id}`, data);
-      navigate("/");
+      navigate("/personnel");
     } catch (err) {
 
       console.log(err);
@@ -73,7 +73,7 @@ const handleChange = (e) => {
 
   return (
     <>
-                <div className="edit-person">
+        <div className="edit-person">
             <div className="formulaire-wrapper">
                 <div className="formulaire-left">
                     {source? <img src={`../upload/${source}`} className="form-img2"/> : <img src={userImg} alt="" className="form-img" /> }
@@ -174,7 +174,6 @@ const handleChange = (e) => {
                 </div>
             </div>
         </div>
-
     </>
   )
 }

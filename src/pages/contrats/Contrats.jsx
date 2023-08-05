@@ -90,7 +90,6 @@ const Contrats = () => {
               <>
                 <div className="table-icons-row">
                     <Link to={`/editContrat/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
-                    <VisibilityIcon className='userEye'/>
                     <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
                     <Link to={`addContrat/${params.row.id}`}><AddCircleOutlineIcon className="userListDelete"  /></Link>
                 </div>

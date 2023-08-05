@@ -8,6 +8,7 @@ const ContratForm = () => {
 
 const [data, setData] = useState({});
 const navigate = useNavigate();
+const [selectedAv, setSelectedAv] = useState([]);
 
 const handleChange = (e) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -18,12 +19,26 @@ const handleChange = (e) => {
 
     try {
       await axios.post(`http://localhost:8080/api/admin/contrat`, data);
-      navigate("/");
+      navigate("/contrats");
     } catch (err) {
 
       console.log(err);
     }
   }
+  useEffect(()=>{
+
+    const fetchData = async ()=> {
+        try{
+            const res = await axios.get("http://localhost:8080/api/admin/avantages");
+            setSelectedAv(res.data)
+    
+          }catch(error){
+            console.log(error)
+          };
+    }
+    fetchData()
+ }, [])
+
 
   return (
     <>
@@ -62,7 +77,11 @@ const handleChange = (e) => {
                     <div className="edit-rows">
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Avantages sociaux du contrat <span>*</span></label>
-                            <input type="text"  name='benefits' className="input-form" onChange={handleChange} />
+                            <select id="pet-select" name="duree" onChange={handleChange} className="input-form">
+                              {selectedAv?.map(item =>( 
+                                <option value={item.id}>{item.avantage_1}</option>
+                              ))}
+                            </select>
                         </div>
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Status du contrat <span>*</span></label>

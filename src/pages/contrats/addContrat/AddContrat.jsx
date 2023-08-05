@@ -7,7 +7,6 @@ import './addContrat.scss'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { Checkbox } from '@mui/material';
-
 const AddContrat = () => {
 
   const navigate = useNavigate();
@@ -81,7 +80,7 @@ const AddContrat = () => {
           emploie_id : dd.agent,
           contrat_id : dd.contrat
         }).then((response) => {
-           alert('ok')
+           navigate('/contrats')
         }).catch((error) => {
           alert(error)
         })

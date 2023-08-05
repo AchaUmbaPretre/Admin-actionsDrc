@@ -11,19 +11,17 @@ const [data, setData] = useState({});
 const navigate = useNavigate();
 const [options, setOptions] = useState([]);
 const [optionsClient, setOptionsClient] = useState([]);
-const [selected, setSelected] = useState(null);
-const [selecteds, setSelecteds] = useState(null);
+const [selected, setSelected] = useState("");
+const [selecteds, setSelecteds] = useState("");
 const [duration, setDuration] = useState([]);
 const [salaires, setSalaires] = useState([]);
-const [dateEntrant, setDateEntrant] = useState([]);
-const [dateSortant, setDateSortant] = useState([])
+const [dateEntrant, setDateEntrant] = useState('');
+const [dateSortant, setDateSortant] = useState('')
 
-console.log()
-
-const handleChange1 = (e)=> {
-    setSelected(e.value);
+const handleChange = (e) => {
+  setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 }
-const Optionsautocomplete = () =>{
+/* const Optionsautocomplete = () =>{
     const optionss = options.map((opt)=> ({
         label : opt.first_name,
         value : opt.id
@@ -32,9 +30,11 @@ const Optionsautocomplete = () =>{
         <Select options = {optionss} onChange={handleChange1}/>
     )
 }
-const handleChange2 = (e)=> {
-    setSelecteds(e.value);
+const handleChange1 = (e)=> {
+  setSelected(e.value);
+  console.log(selected)
 }
+
 
 const Clientautocomplete = () =>{
     const optionsV = optionsClient.map((opt)=> ({
@@ -45,10 +45,12 @@ const Clientautocomplete = () =>{
         <Select options = {optionsV} onChange={handleChange2}/>
     )
 }
-
-const handleChange3 = (e)=> {
-  setSalaires(e.value);
+const handleChange2 = (e)=> {
+  setSelecteds(e.value);
+  console.log(selecteds)
 }
+
+
 const Salaireautocomplete = () =>{
   const options2 = salaires.map((opts)=> ({
       label : opts.salaire,
@@ -58,9 +60,15 @@ const Salaireautocomplete = () =>{
       <Select options = {options2} onChange={handleChange3}/>
   )
 }
-const handleChange4 = (e)=> {
-  setDateEntrant(e.value);
+const handleChange3 = (e)=> {
+  setSalaires(e.value);
+  console.log(salaires)
 }
+
+
+useEffect(() => {
+  console.log(dateEntrant);
+}, [dateEntrant]);
 const DurationAutocomplete = () =>{
   const options2 = duration.map((opts)=> ({
       label : opts.start_date,
@@ -70,19 +78,10 @@ const DurationAutocomplete = () =>{
       <Select options = {options2} onChange={handleChange4}/>
   )
 }
+const handleChange4 = (e)=> {
+  setDateEntrant(e.value);
+} */
 
-const handleChange5 = (e)=> {
-  setDateSortant(e.value);
-}
-const DurationAutocomplete2 = () =>{
-  const options2 = duration.map((opts)=> ({
-      label : opts.end_date,
-      value : opts.id
-  }));
-  return (
-      <Select options = {options2} onChange={handleChange5}/>
-  )
-}
 
   useEffect(()=>{
 
@@ -114,23 +113,14 @@ const DurationAutocomplete2 = () =>{
 
   const handleClick = async (e) => {
     e.preventDefault();
-
+  console.log(selected)
     try {
-      await axios.post(`http://localhost:8080/api/admin/missions`,{...data,
-
-      agent_id: selected,
-      client_id	: selecteds,
-      date : "",
-      duree : "",
-      montant: ""
-        
-    });
-      navigate("/");
+      await axios.post(`http://localhost:8080/api/admin/missions`,data);
+      navigate("/mission");
     } catch (err) {
-
       console.log(err);
     }
-  }
+  };
 
   useEffect(()=>{
     
@@ -150,7 +140,7 @@ const DurationAutocomplete2 = () =>{
 
     const fetchDatas = async ()=> {
         try{
-            const res = await axios.get("http://localhost:8080/api/admin/fonction");
+            const res = await axios.get("http://localhost:8080/api/admin/salaireMission");
             setSalaires(res.data)
     
           }catch(error){
@@ -160,7 +150,7 @@ const DurationAutocomplete2 = () =>{
     fetchDatas()
  }, [])
 
-
+console.log(data)
 
   return (
     <>
@@ -173,29 +163,45 @@ const DurationAutocomplete2 = () =>{
                     <div className="edit-rows">
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Agent <span>*</span></label>
-                            <Optionsautocomplete />
+                            <select id="pet-select" name="agent_id" onChange={handleChange} className="input-form">
+                            { options?.map(item =>( 
+                              <option value={item.id}>{item.first_name}</option>
+                              ))}
+                            </select>
                         </div>
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Client <span>*</span></label>
-                            <Clientautocomplete/>
+                            <select id="pet-select" name="client_id"  onChange={handleChange}  className="input-form">
+                            { optionsClient?.map(item =>( 
+                              <option value={item.id}>{item.company_name}</option>
+                              ))}
+                            </select>
                         </div>
                     </div>
 
                     <div className="edit-rows">
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Date entrant<span>*</span></label>
-                            <DurationAutocomplete/>
+                              <select id="pet-select" name="date" onChange={handleChange} className="input-form">
+                                {duration?.map(item =>( 
+                                  <option value={item.id}>{item.end_date}</option>
+                                ))}
+                              </select>
                         </div>
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Date sortant<span>*</span></label>
-                            <DurationAutocomplete2 />
+                            <select id="pet-select" name="duree" onChange={handleChange} className="input-form">
+                              {duration?.map(item =>( 
+                                <option value={item.id}>{item.start_date}</option>
+                              ))}
+                            </select>
                         </div>
                     </div>
 
                     <div className="edit-rows">
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Montant <span>*</span></label>
-                            <Salaireautocomplete/>
+                            <input type="number" name='montant' className="input-form" onChange={handleChange}/>
                         </div>
                     </div>
                     <button className="edit-btn" onClick={handleClick}>Envoyer</button>
