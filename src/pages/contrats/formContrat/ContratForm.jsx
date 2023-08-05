@@ -9,6 +9,8 @@ const ContratForm = () => {
 const [data, setData] = useState({});
 const navigate = useNavigate();
 const [selectedAv, setSelectedAv] = useState([]);
+const [statusContrat, setStatusContrat] = useState([]);
+const [typeContrat, setTypeContrat] = useState([]);
 
 const handleChange = (e) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -39,7 +41,49 @@ const handleChange = (e) => {
     fetchData()
  }, [])
 
+ useEffect(()=>{
 
+  const fetchData = async ()=> {
+      try{
+          const res = await axios.get("http://localhost:8080/api/admin/avantages");
+          setSelectedAv(res.data)
+  
+        }catch(error){
+          console.log(error)
+        };
+  }
+  fetchData()
+}, [])
+
+useEffect(()=>{
+
+  const fetchData = async ()=> {
+      try{
+          const res = await axios.get("http://localhost:8080/api/admin/contratType");
+          setTypeContrat(res.data)
+  
+        }catch(error){
+          console.log(error)
+        };
+  }
+  fetchData()
+}, [])
+
+useEffect(()=>{
+
+  const fetchData = async ()=> {
+      try{
+          const res = await axios.get("http://localhost:8080/api/admin/statusContrat");
+          setStatusContrat(res.data)
+  
+        }catch(error){
+          console.log(error)
+        };
+  }
+  fetchData()
+}, [])
+
+console.log(typeContrat)
   return (
     <>
         <div className="contratForm">
@@ -52,9 +96,9 @@ const handleChange = (e) => {
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Type du contrat <span>*</span></label>
                             <select id="pet-select" name="contract_type" className="input-form" onChange={handleChange}>
-                                <option value="CDI">CDI</option>
-                                <option value="CDD">CDD</option>
-                                <option value="Intérim">intérim</option>
+                            {typeContrat?.map(item =>( 
+                                <option value={item.id}>{item.nom}</option>
+                              ))}
                             </select>
                         </div>
                         <div className="edit-row">
@@ -77,7 +121,7 @@ const handleChange = (e) => {
                     <div className="edit-rows">
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Avantages sociaux du contrat <span>*</span></label>
-                            <select id="pet-select" name="duree" onChange={handleChange} className="input-form">
+                            <select id="pet-select" name="benefits"  onChange={handleChange} className="input-form">
                               {selectedAv?.map(item =>( 
                                 <option value={item.id}>{item.avantage_1}</option>
                               ))}
@@ -86,10 +130,16 @@ const handleChange = (e) => {
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Status du contrat <span>*</span></label>
                             <select id="pet-select" name="contract_status" className="input-form" onChange={handleChange}>
-                                    <option value="actif">actif</option>
-                                    <option value="terminé">terminé</option>
-                                    <option value="résilié">résilié</option>
+                            {statusContrat?.map(item =>( 
+                                <option value={item.id}>{item.nomContrat}</option>
+                              ))}
                             </select>
+                        </div>
+                    </div>
+                    <div className="edit-rows">
+                        <div className="edit-row">
+                            <label htmlFor="" className="label-edit">Date de l'engagement <span>*</span></label>
+                            <input type="date" data-format="MM /jj/aaaa"  name='date_engagement' className="input-form" onChange={handleChange} />
                         </div>
                     </div>
                     <button className="edit-btn" onClick={handleClick}>Envoyer</button>
