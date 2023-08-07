@@ -8,6 +8,7 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useEffect, useState } from 'react';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import { useLocation } from 'react-router-dom';
+import Swal from 'sweetalert2'
 import axios from 'axios';
 
 const Affectation = () => {
@@ -79,14 +80,37 @@ const Affectation = () => {
     fetchDatas()
   }, [])
 
-  const handleDelete = async (id) => {
+/*   const handleDelete = async (id) => {
+    
     try {
       await axios.delete(`http://localhost:8080/api/admin/employe/${id}`);
-      window.location.reload()
+      window.location.reload();
+      
     } catch (err) {
       console.log(err);
     }
-  };
+  }; */
+  const handleDelete = async (id) => {
+  try {
+    const result = await Swal.fire({
+      title: 'Es-tu sûr?',
+      text: "Vous ne pourrez pas revenir en arrière !",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, supprimez-le!'
+    });
+
+    if (result.isConfirmed) {
+      await axios.delete(`http://localhost:8080/api/admin/deleteAff/${id}`);
+      window.location.reload();
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
   return (
     <>
 

@@ -83,7 +83,7 @@ useEffect(()=>{
   fetchData()
 }, [])
 
-console.log(typeContrat)
+console.log(data)
   return (
     <>
         <div className="contratForm">
@@ -97,7 +97,7 @@ console.log(typeContrat)
                             <label htmlFor="" className="label-edit">Type du contrat <span>*</span></label>
                             <select id="pet-select" name="contract_type" className="input-form" onChange={handleChange}>
                             {typeContrat?.map(item =>( 
-                                <option value={item.id}>{item.nom}</option>
+                                <option value={item.nom}>{item.nom}</option>
                               ))}
                             </select>
                         </div>
@@ -121,9 +121,9 @@ console.log(typeContrat)
                     <div className="edit-rows">
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Avantages sociaux du contrat <span>*</span></label>
-                            <select id="pet-select" name="benefits"  onChange={handleChange} className="input-form">
+                            <select id="pet-select" name="benefits" onChange={handleChange} className="input-form">
                               {selectedAv?.map(item =>( 
-                                <option value={item.id}>{item.avantage_1}</option>
+                                <option value={item.avantage_1}>{item.avantage_1}</option>
                               ))}
                             </select>
                         </div>
@@ -131,7 +131,7 @@ console.log(typeContrat)
                             <label htmlFor="" className="label-edit">Status du contrat <span>*</span></label>
                             <select id="pet-select" name="contract_status" className="input-form" onChange={handleChange}>
                             {statusContrat?.map(item =>( 
-                                <option value={item.id}>{item.nomContrat}</option>
+                                <option value={item.nomContrat}>{item.nomContrat}</option>
                               ))}
                             </select>
                         </div>
