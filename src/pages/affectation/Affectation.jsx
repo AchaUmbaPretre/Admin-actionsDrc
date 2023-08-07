@@ -1,13 +1,8 @@
 import './affectation.scss'
 import { DataGrid } from '@mui/x-data-grid'
-import { Link } from 'react-router-dom';
 import { DeleteOutline} from '@mui/icons-material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useEffect, useState } from 'react';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
-import { useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import axios from 'axios';
 
