@@ -24,6 +24,9 @@ import ClientView from './pages/clientTab/clientView/ClientView';
 import EditeClient from './pages/clientTab/editClient/EditeClient';
 import Mission from './pages/mission/Mission';
 import MissionForm from './pages/mission/form/MissionForm';
+import Horaires from './pages/horaire/form/Horaires';
+import HoraireAll from './pages/horaire/HoraireAll';
+import Formulaire from './pages/personnel/formulaire/Formulaire';
 
 function App() {
   const {currentUser} = useContext(AuthContext)
@@ -127,6 +130,22 @@ function App() {
         {
           path: '/missionForm',
           element: <MissionForm/>
+        },
+        {
+          path: '/horaires',
+          element: <Horaires/>
+        },
+        {
+          path: '/horaireAll',
+          element: <HoraireAll/>
+        },
+        {
+          path: '/horaires',
+          element: <Horaires/>
+        },
+        {
+          path: '/formulaire',
+          element: <Formulaire/>
         },
     ]
     },

@@ -8,14 +8,33 @@ import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useState } from 'react';
 import {presents} from './../../data'
+import axios from 'axios';
 
 const Presence = () => {
-  const [data, setData] = useState(presents);
+  const [data, setData] = useState([]);
+  const [employeeId, setEmployeeId] = useState('');
+  const [checkInTime, setCheckInTime] = useState('');
+  const [checkOutTime, setCheckOutTime] = useState('');
 
   const HandleDelete = (id) =>{
     const dataFilter = data.filter(item=> item.id !== id)
     setData(dataFilter)
   }
+  const handleAttendanceSubmit = (e) => {
+    e.preventDefault();
+
+    axios.post('http://localhost:3000/api/admin/presences', {
+      employee_id : employeeId,
+      check_in_time: { day: 'lundi', time: checkInTime },
+      check_out_time: { day: 'lundi', time: checkOutTime },
+    })
+      .then(response => {
+        console.log('Participation enregistrée avec succès');
+      })
+      .catch(error => {
+        console.error("Erreur lors de l'enregistrement des présences : ", error);
+      });
+  };
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);

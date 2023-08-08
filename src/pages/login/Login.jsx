@@ -4,6 +4,7 @@ import actions from './../../assets/actionssarl.PNG'
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/authContext'
+import Swal from 'sweetalert2';
 
 const Login = () => {
     const [inputs, setInputs] = useState({});
@@ -16,7 +17,33 @@ const Login = () => {
         setInputs(prev=>({ ...prev, [e.target.name]: e.target.value }))
     }
 
-    const handSubmit = async(e) =>{
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+    
+        try {
+          await Login(inputs);
+    
+          Swal.fire({
+            title: 'Success',
+            text: 'Logged in successfully!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
+          
+          navigate('/');
+        } catch (error) {
+          Swal.fire({
+            title: 'Error',
+            text: error.response.data,
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+          
+          setError(error.response.data);
+        }
+      };
+
+/*     const handSubmit = async(e) =>{
         e.preventDefault();
         try{
            await Login(inputs);
@@ -27,7 +54,7 @@ const Login = () => {
           setError(error.response.data)
           
         } 
-      }
+      } */
 
   return (
     <>
@@ -48,7 +75,7 @@ const Login = () => {
                     </div>
                     <div className="login-rows">
                         <Link className="login-mssg">Mot de passe oublié ?</Link>
-                        <button className="btn-form" onClick={handSubmit}><LoginIcon className='form-icon'/>S'identifier</button>
+                        <button className="btn-form" onClick={handleSubmit}><LoginIcon className='form-icon'/>S'identifier</button>
                     </div>
                 </form>
                 <div className="form-bottom">

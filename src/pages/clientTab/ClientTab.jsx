@@ -15,6 +15,8 @@ import Fade from '@mui/material/Fade';
 import ClientForm from './form/ClientForm';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom'
+import Swal from 'sweetalert2'
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -96,14 +98,35 @@ const ClientTab = () => {
 
   
 
-  const handleDelete = async (id) => {
+/*   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:8080/api/admin/client/${id}`);
       window.location.reload()
     } catch (err) {
       console.log(err);
     }
+  }; */
+  const handleDelete = async (id) => {
+    try {
+      const result = await Swal.fire({
+        title: 'Es-tu sûr?',
+        text: "Vous ne pourrez pas revenir en arrière !",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui, supprimez-le!'
+      });
+  
+      if (result.isConfirmed) {
+        await axios.delete(`http://localhost:8080/api/admin/client/${id}`);
+        window.location.reload();
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
+
 
   return (
     <>

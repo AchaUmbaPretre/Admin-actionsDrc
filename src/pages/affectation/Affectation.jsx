@@ -74,17 +74,7 @@ const Affectation = () => {
     }
     fetchDatas()
   }, [])
-
-/*   const handleDelete = async (id) => {
-    
-    try {
-      await axios.delete(`http://localhost:8080/api/admin/employe/${id}`);
-      window.location.reload();
-      
-    } catch (err) {
-      console.log(err);
-    }
-  }; */
+  
   const handleDelete = async (id) => {
   try {
     const result = await Swal.fire({

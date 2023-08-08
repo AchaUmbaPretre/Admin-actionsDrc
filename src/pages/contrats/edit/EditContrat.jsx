@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './editContrat.scss'
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import moment from 'moment';
 
 const EditContrat = () => {
@@ -30,17 +31,43 @@ const handleChange = (e) => {
     fetchData()
 }, [id]);
     console.log(data)
+/*   const handleClick = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.put(`http://localhost:8080/api/admin/contrat/${id}`, data);
+      navigate("/contrats");
+    } catch (err) {
+
+      console.log(err);
+    }
+  } */
+
   const handleClick = async (e) => {
     e.preventDefault();
 
     try {
       await axios.put(`http://localhost:8080/api/admin/contrat/${id}`, data);
-      navigate("/");
+
+      Swal.fire({
+        title: 'Success',
+        text: 'Contract updated successfully!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+
+      navigate('/contrats');
     } catch (err) {
+      Swal.fire({
+        title: 'Error',
+        text: err.message,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
 
       console.log(err);
     }
-  }
+  };
 
 
   return (

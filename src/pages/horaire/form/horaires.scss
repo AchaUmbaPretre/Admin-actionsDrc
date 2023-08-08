@@ -1,0 +1,46 @@
+.facturation-wrapper{
+    background: #fff;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 5px;
+    .contrats-top{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .contrats-icon{
+            font-size: 3rem;
+            background: #fff;
+            padding: 10px;
+            color: royalblue;
+                -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+        }
+        .contrats-info{
+            .contrats-title{
+                font-size: 1rem;
+            }
+            .contrats-span{
+                font-size: .7rem;
+                font-weight: 300;
+            }
+        }
+    }
+    .personnel-btn{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        border: none;
+        padding: 6px 10px;
+        border-radius: 5px;
+        border: 1px solid royalblue;
+        background: #fff;
+        cursor: pointer;
+        color: royalblue;
+        -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+        box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+    }
+}

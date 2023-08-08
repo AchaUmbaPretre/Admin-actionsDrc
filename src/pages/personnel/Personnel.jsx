@@ -138,8 +138,8 @@ const Personnel = () => {
                         <span className="personnel-span">Liste des employés</span>
                     </div>
                 </div>
-                <button className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</button>
-                <Modal
+                <Link className="personnel-btn" to='/formulaire'><PersonAddAlt1Icon/>Ajouter</Link>
+{/*                 <Modal
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"
                     open={open}
@@ -159,7 +159,7 @@ const Personnel = () => {
                             </Box>
                         </Box>
                     </Fade>
-                </Modal>
+                </Modal> */}
             </div>
             <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="userTable" />
         </div>

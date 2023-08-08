@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import ContratForm from './formContrat/ContratForm';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import Swal from 'sweetalert2';
 
 const style = {
     position: 'absolute',
@@ -134,12 +135,33 @@ const Contrats = () => {
 
   const handleDelete = async (id) => {
     try {
+      const result = await Swal.fire({
+        title: 'Es-tu sûr?',
+        text: "Vous ne pourrez pas revenir en arrière !",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui, supprimez-le!'
+      });
+  
+      if (result.isConfirmed) {
+        await axios.delete(`http://localhost:8080/api/admin/contrat/${id}`);
+        window.location.reload();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+/*   const handleDelete = async (id) => {
+    try {
       await axios.delete(`http://localhost:8080/api/admin/contrat/${id}`);
       window.location.reload()
     } catch (err) {
       console.log(err);
     }
-  };
+  }; */
   return (
     <>
         <div className="contrats">

@@ -7,6 +7,7 @@ import Webcam from 'react-webcam';
 import axios from 'axios';
 import moment from 'moment';
 import 'moment/locale/fr';
+import Swal from 'sweetalert2';
 
 moment.locale('fr');
 
@@ -56,7 +57,7 @@ const Formulaire = () => {
           console.log(error)
         }
       }
-    const handleClick = async(e) =>{
+/*    const handleClick = async(e) =>{
         e.preventDefault();
         const imgUrl = await upload();
 
@@ -67,7 +68,35 @@ const Formulaire = () => {
         catch(error){
             console.log(error)
         }
-    }
+    } */
+    console.log(data)
+ 
+    const handleClick = async (e) => {
+        e.preventDefault();
+        const imgUrl = await upload();
+      
+        try {
+          await axios.post(`http://localhost:8080/api/admin/employe`, { ...data, source: imgUrl });
+      
+          await Swal.fire({
+            title: 'Success',
+            text: 'Employé créé avec succès!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
+      
+          navigate('/personnel');
+        } catch (error) {
+          await Swal.fire({
+            title: 'Error',
+            text: error.message,
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+      
+          console.log(error);
+        }
+      }
 
   return (
     <>
@@ -108,18 +137,18 @@ const Formulaire = () => {
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Adresse <span>*</span></label>
-                                <input type="text"  name='address' className="input-form" onChange={handleChange} placeholder='Entrez votre adresse..' />
+                                <input type="text"  name='address' required className="input-form" onChange={handleChange} placeholder='Entrez votre adresse..' />
                             </div>
                         </div>
 
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Numero du pièce <span>*</span></label>
-                                <input type="number" name='identification_number' className="input-form" onChange={handleChange} placeholder='Entrez votre numero du pièce..' />
+                                <input type="number" name='identification_number' required className="input-form" onChange={handleChange} placeholder='Entrez votre numero du pièce..' />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Type du pièce <span>*</span></label>
-                                <select id="pet-select" name="identification_type" className='form-select' onChange={handleChange}>
+                                <select id="pet-select" name="identification_type" required className='form-select' onChange={handleChange}>
                                     <option value="carte d'identité" defaultValue={"carte d'identité"}>Carte d'identité</option>
                                     <option value="passeport">passeport</option>
                                     <option value="permis de conduire">Permis de conduire</option>
@@ -130,11 +159,11 @@ const Formulaire = () => {
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Competence <span>*</span></label>
-                                <input type="text" name='skills' className="input-form" onChange={handleChange} placeholder="Entrez tes compténces.."  />
+                                <input type="text" name='skills' required className="input-form" onChange={handleChange} placeholder="Entrez tes compténces.."  />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Niveau d'étude <span>*</span></label>
-                                <select id="pet-select" name="identification_type" className='form-select' onChange={handleChange}>
+                                <select id="pet-select" name="certifications" required className='form-select' onChange={handleChange}>
                                     <option value="licence">Licence</option>
                                     <option value="graduat">Graduat</option>
                                     <option value="humanité">Humanité</option>
@@ -146,11 +175,11 @@ const Formulaire = () => {
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Telephone <span>*</span></label>
-                                <input type="number" name='phone_number' className="input-form" onChange={handleChange} placeholder="Entrez votre numero de tel.."  />
+                                <input type="number" name='phone_number' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero de tel.."  />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="pet-select" className="label-form">Status <span>*</span></label>
-                                <select id="pet-select" className='form-select' name="employment_status" onChange={handleChange}>
+                                <select id="pet-select" className='form-select' required name="employment_status" onChange={handleChange}>
                                     <option value="interne">Interne</option>
                                     <option value="externe">Externe</option>
                                 </select>
@@ -159,15 +188,17 @@ const Formulaire = () => {
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Date de naissace <span>*</span></label>
-                                <input type="date" name="date_of_birth" className="input-form" onChange={handleChange} />
+                                <input type="date" name="date_of_birth" required className="input-form" onChange={handleChange} />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Genre <span>*</span></label>
                                 <div className="form-radio">
-                                    <input type="radio" id="Choice1" onChange={handleChange} name="gender" checked value="homme" />
+                                    <input type="radio" id="Choice1" onChange={handleChange} name="gender" value="homme" />
                                     <label for="Choice1">Homme</label>
                                     <input type="radio" id="Choice2" onChange={handleChange} name="gender" value="femme" />
                                     <label for="Choice2">Femme</label>
+                                    <input type="radio" id="Choice3" onChange={handleChange} checked name="gender" value="autres" />
+                                    <label for="Choice3">autres</label>
                                 </div>
                             </div>
                         </div>

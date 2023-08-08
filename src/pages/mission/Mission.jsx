@@ -7,13 +7,9 @@ import PeopleIcon from '@mui/icons-material/People';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useState } from 'react';
 import * as React from 'react';
-import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
-import moment from 'moment/moment';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 import { useEffect } from 'react';
 
 const style = {
@@ -60,22 +56,22 @@ const Mission = () => {
         fetchData()
      }, [])
 
-     const handleClick = async(e) =>{
-      e.preventDefault();
-
-      try{
-          await axios.post(`http://localhost:8080/api/admin/missions`,data)
-          navigate("/contrats")
-      }
-      catch(error){
-          console.log(error)
-      }
-  }
-
-    const handleDelete = async (id) => {
+      const handleDelete = async (id) => {
         try {
-          await axios.delete(`http://localhost:8080/api/admin/mission/${id}`);
-          window.location.reload()
+          const result = await Swal.fire({
+            title: 'Es-tu sûr?',
+            text: "Vous ne pourrez pas revenir en arrière !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui, supprimez-le!'
+          });
+      
+          if (result.isConfirmed) {
+            await axios.delete(`http://localhost:8080/api/admin/mission/${id}`);
+            window.location.reload();
+          }
         } catch (err) {
           console.log(err);
         }

@@ -7,6 +7,7 @@ import './addContrat.scss'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { Checkbox } from '@mui/material';
+import Swal from 'sweetalert2';
 const AddContrat = () => {
 
   const navigate = useNavigate();
@@ -63,7 +64,47 @@ const AddContrat = () => {
     }
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const selectedItems = data.filter((item) => selected.includes(item.id));
+    const selectedIds = selectedItems.map((item) => item.id);
+    const newSelectedx = selectedItems.map((item) => ({
+      agent: item.id,
+      fonction: selects.fonction,
+      contrat: id
+    }));
+    setSelectedx(selectedx.concat(newSelectedx));
+    setSelectedData([...selectedData, ...selectedItems]);
+
+    selectedx.map((dd) => {
+      axios
+        .post('http://localhost:8080/api/admin/affectations', {
+          fonction_id: dd.fonction,
+          emploie_id: dd.agent,
+          contrat_id: dd.contrat
+        })
+        .then((response) => {
+          Swal.fire({
+            title: 'Success',
+            text: 'Affectation réussie!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
+          navigate('/contrats');
+        })
+        .catch((error) => {
+          Swal.fire({
+            title: 'Error',
+            text: error.message,
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+        });
+    });
+  };
+
+/*   const handleSubmit = async(e) => {
     e.preventDefault();
 
     const selectedItems = data.filter((item) => selected.includes(item.id));
@@ -85,7 +126,7 @@ const AddContrat = () => {
           alert(error)
         })
     })
-  }
+  } */
 
 
     useEffect(() => {

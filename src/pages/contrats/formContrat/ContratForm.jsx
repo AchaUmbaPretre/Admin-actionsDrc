@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 import './contratForm.scss'
 
 const ContratForm = () => {
@@ -16,7 +17,7 @@ const handleChange = (e) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleClick = async (e) => {
+/*   const handleClick = async (e) => {
     e.preventDefault();
 
     try {
@@ -26,7 +27,34 @@ const handleChange = (e) => {
 
       console.log(err);
     }
-  }
+  } */
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.post(`http://localhost:8080/api/admin/contrat`, data);
+
+      Swal.fire({
+        title: 'Success',
+        text: 'Contract created successfully!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+
+      navigate('/contrats');
+    } catch (err) {
+      Swal.fire({
+        title: 'Error',
+        text: err.message,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+
+      console.log(err);
+    }
+  };
+
   useEffect(()=>{
 
     const fetchData = async ()=> {

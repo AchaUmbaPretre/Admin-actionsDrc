@@ -4,6 +4,7 @@ import actions from './../../assets/actionssarl.PNG'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { useNavigate } from 'react-router'
 import axios from 'axios'
+import Swal from 'sweetalert2';
 import { useState } from 'react';
 
 const Register = () => {
@@ -15,7 +16,33 @@ const Register = () => {
       setInputs(prev=>({...prev, [e.target.name]: e.target.value}))
     }
 
-    const handSubmit = async (e) =>{
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+  
+      try {
+        await axios.post("http://localhost:8080/api/auth/register", inputs);
+  
+        Swal.fire({
+          title: 'Success',
+          text: 'Registration successful!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+        
+        navigate('/login');
+      } catch (error) {
+        Swal.fire({
+          title: 'Error',
+          text: error.response.data,
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+        
+        setError(error.response.data);
+      }
+    }
+
+/*     const handSubmit = async (e) =>{
         e.preventDefault();
         try{
           await axios.post("http://localhost:8080/api/auth/register", inputs);
@@ -26,7 +53,7 @@ const Register = () => {
           
         } 
     
-      }
+      } */
   return (
     <>
          <div className="register">
@@ -50,7 +77,7 @@ const Register = () => {
                     </div>
                     <div className="login-rows">
                         <Link className="login-mssg" to ='/register'>Mot de passe oublié ?</Link>
-                        <button className="btn-form" onClick={handSubmit} ><CheckCircleOutlineIcon className='form-icon'/>S'inscrire</button>
+                        <button className="btn-form" onClick={handleSubmit} ><CheckCircleOutlineIcon className='form-icon'/>S'inscrire</button>
                     </div>
                 </form>
             </div>

@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
 import userImg from '../../../assets/user.png'
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import Webcam from 'react-webcam';
 
 const Edit = () => {
@@ -58,14 +59,25 @@ const handleChange = (e) => {
     fetchData()
 }, [id]);
 
-  const handleClick = async (e) => {
+const handleClick = async (e) => {
     e.preventDefault();
 
     try {
       await axios.put(`http://localhost:8080/api/admin/employe/${id}`, data);
-      navigate("/personnel");
+      Swal.fire({
+        title: 'Success',
+        text: 'Employé mis à jour avec succès!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+      navigate('/personnel');
     } catch (err) {
-
+      Swal.fire({
+        title: 'Error',
+        text: err.message,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
       console.log(err);
     }
   }

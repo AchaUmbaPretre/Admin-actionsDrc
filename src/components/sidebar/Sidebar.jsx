@@ -23,10 +23,10 @@ const Sidebar = () => {
               <li className="sidenav-li"><ShowChartIcon className='sidebar-icon'/><Link to={"/affectation"}>Affectation</Link></li>
               <li className="sidenav-li"><AssignmentIndIcon className='sidebar-icon'/><Link to={"/mission"}>Mission</Link></li>
               <li className="sidenav-li"><GroupsIcon className='sidebar-icon'/><Link to={"/client"}>Client</Link></li>
-              <li className="sidenav-li"><AccessTimeIcon className='sidebar-icon'/><Link to={"/presence"}>Horaires de travail</Link></li>
+              <li className="sidenav-li"><AccessTimeIcon className='sidebar-icon'/><Link to={"/horaireAll"}>Horaires de travail</Link></li>
               <li className="sidenav-li"><ChecklistRtlIcon className='sidebar-icon'/><Link to={"/presence"}>Presence</Link></li>
               <li className="sidenav-li"><FactCheckIcon className='sidebar-icon'/><Link to={"/facturation"}>Facturation</Link></li>
-              <li className="sidenav-li"><FormatListNumberedIcon className='sidebar-icon'/><Link to={"/listeConge"}>Liste de congé</Link></li>
+{/*               <li className="sidenav-li"><FormatListNumberedIcon className='sidebar-icon'/><Link to={"/listeConge"}>Liste de congé</Link></li> */}
             </ul>
           </div>
         </div>

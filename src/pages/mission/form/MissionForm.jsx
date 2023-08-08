@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import moment from 'moment';
 import Select from 'react-select';
 import './missionForm.scss'
+import Swal from 'sweetalert2';
 
 const MissionForm = () => {
 
@@ -111,13 +111,37 @@ const handleChange4 = (e)=> {
   fetchData()
   }, [])
 
-  const handleClick = async (e) => {
+/*   const handleClick = async (e) => {
     e.preventDefault();
   console.log(selected)
     try {
       await axios.post(`http://localhost:8080/api/admin/missions`,data);
       navigate("/mission");
     } catch (err) {
+      console.log(err);
+    }
+  }; */
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    console.log(selected);
+
+    try {
+      await axios.post(`http://localhost:8080/api/admin/missions`, data);
+      Swal.fire({
+        title: 'Success',
+        text: 'Mission créée avec succès!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+      navigate('/mission');
+    } catch (err) {
+      Swal.fire({
+        title: 'Error',
+        text: err.message,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
       console.log(err);
     }
   };
@@ -182,23 +206,19 @@ console.log(data)
                     <div className="edit-rows">
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Date entrant<span>*</span></label>
-                              <select id="pet-select" name="date" onChange={handleChange} className="input-form">
-                                {duration?.map(item =>( 
-                                  <option value={item.id}>{item.end_date}</option>
-                                ))}
-                              </select>
+                              <input type="date" name='date' onChange={handleChange} className="input-form"/>
                         </div>
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Date sortant<span>*</span></label>
-                            <select id="pet-select" name="duree" onChange={handleChange} className="input-form">
-                              {duration?.map(item =>( 
-                                <option value={item.id}>{item.start_date}</option>
-                              ))}
-                            </select>
+                            <input type="date" name="duree" onChange={handleChange} className="input-form"/>
                         </div>
                     </div>
 
                     <div className="edit-rows">
+                        <div className="edit-row">
+                            <label htmlFor="" className="label-edit">Montant <span>*</span></label>
+                            <input type="number" name='montant' className="input-form" onChange={handleChange}/>
+                        </div>
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Montant <span>*</span></label>
                             <input type="number" name='montant' className="input-form" onChange={handleChange}/>
