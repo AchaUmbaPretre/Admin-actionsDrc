@@ -84,12 +84,12 @@ const Mission = () => {
         {
           field: 'date',
           headerName: 'Date',
-          width: 120,
+          width: 130,
         },
         {
             field: 'duree',
             headerName: 'Durée',
-            width: 120,
+            width: 130,
         },
         { field: 'montant', headerName: 'Montant', width: 130 },
         {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{

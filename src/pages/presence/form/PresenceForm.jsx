@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import './horaires.scss'
 import Swal from 'sweetalert2';
 import SendIcon from '@mui/icons-material/Send';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -9,20 +8,17 @@ import axios from 'axios';
 
 const PresenceForm = () => {
 
-    const [employeeId, setEmployeeId] = useState('');
-    const [clientId, setClientId] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-    const [weekday, setWeekday] = useState('');
-    const [startTime, setStartTime] = useState('');
-    const [endTime, setEndTime] = useState('');
-    const navigate = useNavigate();
-    const [selected, setSelected] = useState([]);
-    const [clientEtat, setClientEtat] = useState([]);
-    const handleWeekdayChange = (event) => {
-        setWeekday(event.target.value);
-      };
-console.log(employeeId,clientId, startDate,endDate,weekday,startTime,endTime)
+  const [data, setData] = useState([]);
+  const [employeeId, setEmployeeId] = useState('');
+  const [clientEtat, setClientEtat] = useState([]);
+  const [clientId, setClientId] = useState([]);
+  const [checkInTime, setCheckInTime] = useState('');
+  const [checkOutTime, setCheckOutTime] = useState('');
+  const [date, setDate] = useState(null);
+  const [selected, setSelected] = useState([]);
+
+console.log(employeeId,clientId,checkInTime,checkOutTime,date)
+  const navigate = useNavigate();
 
       useEffect(() => {
 
@@ -56,19 +52,17 @@ console.log(employeeId,clientId, startDate,endDate,weekday,startTime,endTime)
         e.preventDefault();
     
         try {
-          await axios.post(`http://localhost:8080/api/admin//horairesPost`, {
+          await axios.post(`http://localhost:8080/api/admin/presences`, {
             employee_id : employeeId,
             client_id : clientId,
-            start_date : startDate,
-            end_date : endDate,
-            weekday : weekday,
-            start_time : startTime,
-            end_time : endTime 
+            date : date,
+            check_in_time: { day: 'lundi', time: checkInTime },
+            check_out_time: { day: 'lundi', time: checkOutTime },
            });
     
           Swal.fire({
             title: 'Success',
-            text: 'Employé créé avec succès!',
+            text: 'La presence est enregistrée avec succès!',
             icon: 'success',
             confirmButtonText: 'OK'
           });
@@ -77,7 +71,7 @@ console.log(employeeId,clientId, startDate,endDate,weekday,startTime,endTime)
         } catch (error) {
           Swal.fire({
             title: 'Error',
-            text: error.message,
+            text: error,
             icon: 'error',
             confirmButtonText: 'OK'
           });
@@ -94,7 +88,8 @@ console.log(employeeId,clientId, startDate,endDate,weekday,startTime,endTime)
                 <div className="form-rows">
                     <div className="form-row">
                       <label htmlFor="" className="label-form">Employe(é) <span>*</span></label>
-                      <select id="pet-select" name="fonction" onChange={(e)=>setEmployeeId(e.target.value)} required className="input-form">
+                      <select id="pet-select" name="employee_id" onChange={(e)=>setEmployeeId(e.target.value)} required className="input-form">
+                      <option value={''}>selectionez l'emploie</option>
                       { selected?.map(item =>( 
                         <option value={item.id}>{item.first_name}</option>
                         ))}
@@ -102,7 +97,8 @@ console.log(employeeId,clientId, startDate,endDate,weekday,startTime,endTime)
                     </div>
                     <div className="form-row">
                       <label htmlFor="" className="label-form">Client <span>*</span></label>
-                      <select id="pet-select" name="fonction" onChange={(e)=>setClientId(e.target.value)} required className="input-form">
+                      <select id="pet-select" name="client_id " onChange={(e)=>setClientId(e.target.value)} required className="input-form">
+                      <option value={''}>selectionez le client..</option>
                       { clientEtat?.map(item =>( 
                         <option value={item.id}>{item.company_name}</option>
                         ))}
@@ -112,40 +108,21 @@ console.log(employeeId,clientId, startDate,endDate,weekday,startTime,endTime)
 
                 <div className="form-rows">
                     <div className="form-row">
-                        <label htmlFor="" className="label-form">Date de debut<span>*</span></label>
-                        <input type="date"  name='phone_number' className="input-form" required  onChange={(e)=>setStartDate(e.target.value)} />
-                    </div>
-                    <div className="form-row">
-                        <label htmlFor="" className="label-form">Date de la fin<span>*</span></label>
-                        <input type="date"  name='contact_name' className="input-form" required onChange={(e)=>setEndDate(e.target.value)} />
+                        <label htmlFor="" className="label-form">Date de presence<span>*</span></label>
+                        <input type="date"  name='phone_number' className="input-form" required  onChange={(e)=>setDate(e.target.value)} />
                     </div>
                 </div>
 
                 <div className="form-rows">
-                    <div className="form-row">
-                        <label htmlFor="" className="label-form">Week-end<span>*</span></label>
-                        <select value={weekday} onChange={handleWeekdayChange} required className="input-form">
-                            <option value="">Sélectionnez un jour de la semaine</option>
-                            <option value="Lundi">Lundi</option>
-                            <option value="Mardi">Mardi</option>
-                            <option value="Mercredi">Mercredi</option>
-                            <option value="Jeudi">Jeudi</option>
-                            <option value="Vendredi">Vendredi</option>
-                            <option value="Samedi">Samedi</option>
-                            <option value="Dimanche">Dimanche</option>
-                        </select>
-                    </div>
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Heure d'arrivée<span>*</span></label>
-                    <input type="time"  className="input-form" required onChange={(e)=>setStartTime(e.target.value)} />
+                    <input type="time"  className="input-form" required onChange={(e)=>setCheckInTime(e.target.value)} />
                   </div>
-                </div>
 
-                <div className="form-rows">
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Heure de départ<span>*</span></label>
-                    <input type="time" className="input-form" required onChange={(e)=>setEndTime(e.target.value)} />
-                </div>
+                    <input type="time" className="input-form" required onChange={(e)=>setCheckOutTime(e.target.value)} />
+                  </div>
                 </div>
                         
                 <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>

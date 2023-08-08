@@ -6,9 +6,28 @@ import { DeleteOutline} from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
 import {presents} from './../../data'
 import axios from 'axios';
+import PresenceForm from './form/PresenceForm';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 800,
+  bgcolor: 'background.paper',
+  border: '1px solid #FFF',
+  boxShadow: 24,
+  p: 4,
+  borderRadius: 2,
+  outline: 'none'
+}
 
 const Presence = () => {
   const [data, setData] = useState([]);
@@ -20,25 +39,24 @@ const Presence = () => {
     const dataFilter = data.filter(item=> item.id !== id)
     setData(dataFilter)
   }
-  const handleAttendanceSubmit = (e) => {
-    e.preventDefault();
-
-    axios.post('http://localhost:3000/api/admin/presences', {
-      employee_id : employeeId,
-      check_in_time: { day: 'lundi', time: checkInTime },
-      check_out_time: { day: 'lundi', time: checkOutTime },
-    })
-      .then(response => {
-        console.log('Participation enregistrée avec succès');
-      })
-      .catch(error => {
-        console.error("Erreur lors de l'enregistrement des présences : ", error);
-      });
-  };
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  useEffect(()=>{
+
+    const fetchData = async ()=> {
+        try{
+            const res = await axios.get("http://localhost:8080/api/admin/presence");
+            setData(res.data)
+    
+          }catch(error){
+            console.log(error)
+          };
+    }
+    fetchData()
+ }, [])
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -90,6 +108,27 @@ const Presence = () => {
               </div>
           </div>
           <button className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</button>
+          <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    slots={{ backdrop: Backdrop }}
+                    slotProps={{
+                    backdrop: {
+                        timeout: 500,
+                    },
+                    }} 
+                >
+                    <Fade in={open}>
+                        <Box sx={style}>
+                            <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
+                              <PresenceForm/>
+                            </Box>
+                        </Box>
+                    </Fade>
+          </Modal>
         </div>
         <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
       </div>
