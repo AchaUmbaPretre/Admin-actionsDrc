@@ -6,7 +6,6 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useState } from 'react';
-import {listeData} from './../../data'
 import './facturation.scss'
 
 const Facturation = () => {
@@ -15,11 +14,32 @@ const Facturation = () => {
     const dataFilter = data.filter(item=> item.id !== id)
     setData(dataFilter)
   }
-  const [data, setData] = useState(listeData);
+  const [data, setData] = useState([]);
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleDelete = async (id) => {
+    try {
+      const result = await Swal.fire({
+        title: 'Es-tu sûr?',
+        text: "Vous ne pourrez pas revenir en arrière !",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui, supprimez-le!'
+      });
+  
+      if (result.isConfirmed) {
+        await axios.delete(`http://localhost:8080/api/admin/facture/${id}`);
+        window.location.reload();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -51,7 +71,7 @@ const Facturation = () => {
             <div className="table-icons-row">
                 <Link to={`/users/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
                 <VisibilityIcon className='userEye'/>
-                <DeleteOutline className="userListDelete" onClick={()=>{HandleDelete(params.row.id)}} />
+                <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
             </div>
           </>
 
