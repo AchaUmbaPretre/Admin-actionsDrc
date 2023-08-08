@@ -7,13 +7,25 @@ import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useState } from 'react';
 import './facturation.scss'
+import Swal from 'sweetalert2';
+import axios from 'axios';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 800,
+  bgcolor: 'background.paper',
+  border: '1px solid #FFF',
+  boxShadow: 24,
+  p: 4,
+  borderRadius: 2,
+  outline: 'none'
+}
 
 const Facturation = () => {
 
-  const HandleDelete = (id) =>{
-    const dataFilter = data.filter(item=> item.id !== id)
-    setData(dataFilter)
-  }
   const [data, setData] = useState([]);
 
   const [open, setOpen] = useState(false);
