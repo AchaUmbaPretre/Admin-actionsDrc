@@ -11,6 +11,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { useEffect } from 'react';
+import { format } from 'date-fns';
 
 const style = {
     position: 'absolute',
@@ -36,11 +37,6 @@ const Mission = () => {
     const handleClose = () => setOpen(false);
 
     const navigate = useNavigate();
-
-    const handChange = (e) =>{
-        setName(prev=>({...prev, [e.target.name]: e.target.value}))
-    }
-
 
     useEffect(()=>{
 
@@ -82,9 +78,14 @@ const Mission = () => {
         { field: 'agent_id', headerName: 'Agent', width: 130 },
         { field: 'client_id', headerName: 'Client', width: 130 },
         {
-          field: 'date',
-          headerName: 'Date',
+          field: 'dateEntrant',
+          headerName: 'Date de debut',
           width: 130,
+        },
+        {
+          field: 'dateSortant',
+          headerName: 'Date de fin',
+          width: 150,
         },
         {
             field: 'duree',

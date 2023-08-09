@@ -13,21 +13,23 @@ const FactureForm = () => {
   const [invoiceDate, setInvoiceDate] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [totalAmount, setTotalAmount] = useState('');
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState([]);
   const [optionsClient, setOptionsClient] = useState([]);
   const [optionsStatus, setOptionsStatus] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOptionClient, SetSelectedOptionClient] = useState(null);
 
   const handleSelectChange = (selectedOption) => {
     setSelectedOption(selectedOption);
     setClientId(selectedOption.value);
   };
 
-  const handleSelectChanges = (selectedOption) => {
-    setStatus(selectedOption.value);
+  const handleSelectChanges = (selectedOptionClient) => {
+    SetSelectedOptionClient(selectedOptionClient);
+    setStatus(selectedOptionClient.value);
   };
 
-
+console.log(status, clientId)
   useEffect(()=>{
     
     const fetchData = async ()=> {
@@ -69,7 +71,7 @@ const FactureForm = () => {
         status: status,
       });
 
-      const invoiceId = response.data.id;
+      const invoiceId = response.data.invoice_id;
       Swal.fire({
         icon: 'success',
         title: 'Facture créée avec succès',
@@ -132,13 +134,9 @@ const FactureForm = () => {
 
                 <div className="form-rows">
                     <div className="form-row">
-                        <label htmlFor="" className="label-form">Date d'échéance de la facture<span>*</span></label>
-                        <input type="date"  name='phone_number' className="input-form" onChange={(e)=>setDueDate(e.target.value)}/>
-                    </div>
-                    <div className="form-row">
                         <label htmlFor="" className="label-form">Statut de la facture<span>*</span></label>
                         <Select
-                        value={selectedOption}
+                        value={selectedOptionClient}
                         onChange={handleSelectChanges}
                         options={optionsStatus.map((item) => ({
                           value: item.id,
