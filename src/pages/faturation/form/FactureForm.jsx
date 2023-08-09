@@ -1,9 +1,10 @@
-import './clientForm.scss'
 import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Select from 'react-select';
+
 
 const FactureForm = () => {
   const navigate = useNavigate();
@@ -13,7 +14,48 @@ const FactureForm = () => {
   const [dueDate, setDueDate] = useState('');
   const [totalAmount, setTotalAmount] = useState('');
   const [status, setStatus] = useState('');
+  const [optionsClient, setOptionsClient] = useState([]);
+  const [optionsStatus, setOptionsStatus] = useState([]);
+  const [selectedOption, setSelectedOption] = useState(null);
 
+  const handleSelectChange = (selectedOption) => {
+    setSelectedOption(selectedOption);
+    setClientId(selectedOption.value);
+  };
+
+  const handleSelectChanges = (selectedOption) => {
+    setStatus(selectedOption.value);
+  };
+
+
+  useEffect(()=>{
+    
+    const fetchData = async ()=> {
+      try{
+          const res = await axios.get("http://localhost:8080/api/admin/client");
+          setOptionsClient(res.data)
+  
+        }catch(error){
+          console.log(error)
+        };
+  }
+  fetchData()
+  }, [])
+
+  useEffect(()=>{
+    
+    const fetchData = async ()=> {
+      try{
+          const res = await axios.get("http://localhost:8080/api/admin/status");
+          setOptionsStatus(res.data)
+  
+        }catch(error){
+          console.log(error)
+        };
+  }
+  fetchData()
+  }, [])
+  
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -60,7 +102,16 @@ const FactureForm = () => {
                 <div className="form-rows">
                     <div className="form-row">
                       <label htmlFor="" className="label-form">Client <span>*</span></label>
-                      <input type="text"  name='company_name'  className="input-form" />
+                      <Select
+                      value={selectedOption}
+                      onChange={handleSelectChange}
+                      options={optionsClient.map((item) => ({
+                        value: item.id,
+                        label: item.company_name
+                      }))}
+                      placeholder="Selectionnez un client..."
+                      className=""
+                    />
                     </div>
                     <div className="form-row">
                       <label htmlFor="" className="label-form">Date de la facture <span>*</span></label>
@@ -86,11 +137,16 @@ const FactureForm = () => {
                     </div>
                     <div className="form-row">
                         <label htmlFor="" className="label-form">Statut de la facture<span>*</span></label>
-                        <select id="pet-select" name="status" required className='input-form' onChange={(e)=>setStatus(e.target.value)}>
-                            <option disabled>selectionnez le status..</option>
-                            <option value="en attente">en attente</option>
-                            <option value="payée">payée</option>
-                        </select>
+                        <Select
+                        value={selectedOption}
+                        onChange={handleSelectChanges}
+                        options={optionsStatus.map((item) => ({
+                          value: item.id,
+                          label: item.status
+                        }))}
+                        placeholder="Selectionnez un status..."
+                        className=""
+                      />
                     </div>
                 </div>
                         
