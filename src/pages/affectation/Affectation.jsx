@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import Swal from 'sweetalert2'
 import axios from 'axios';
+import { format } from 'date-fns';
 
 const Affectation = () => {
 
@@ -34,7 +35,9 @@ const Affectation = () => {
     {
       field: 'end_date',
       headerName: 'Date de la fin',
-      width: 150 
+      width: 150,
+      valueGetter: (params) =>
+      format(new Date(params.row.end_date), 'yyyy-MM-dd'),
     },
     {field: 'action', HeaderName: 'Action', width: 200, renderCell: (params) =>{
         return(

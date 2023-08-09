@@ -14,6 +14,7 @@ import './facturation.scss'
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import FactureForm from './form/FactureForm';
+import { format } from 'date-fns';
 
 const style = {
   position: 'absolute',
@@ -80,12 +81,16 @@ const Facturation = () => {
     {
       field: 'invoice_date',
       headerName: 'Date de la facture',
-      width: 130 
+      width: 130,
+      valueGetter: (params) =>
+      format(new Date(params.row.invoice_date), 'yyyy-MM-dd'),
     },
     {
         field: 'due_date',
         headerName: "Date d'échéance de la facture",
-        width: 150 
+        width: 130,
+        valueGetter: (params) =>
+        format(new Date(params.row.due_date), 'yyyy-MM-dd'),
     },
     {
         field: 'total_amount',

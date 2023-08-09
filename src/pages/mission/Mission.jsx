@@ -79,13 +79,17 @@ const Mission = () => {
         { field: 'client_id', headerName: 'Client', width: 130 },
         {
           field: 'dateEntrant',
-          headerName: 'Date de debut',
+          headerName: 'Date de début',
           width: 130,
+          valueGetter: (params) =>
+            format(new Date(params.row.dateEntrant), 'yyyy-MM-dd'),
         },
         {
           field: 'dateSortant',
           headerName: 'Date de fin',
           width: 150,
+          valueGetter: (params) =>
+            format(new Date(params.row.dateSortant), 'yyyy-MM-dd'),
         },
         {
             field: 'duree',

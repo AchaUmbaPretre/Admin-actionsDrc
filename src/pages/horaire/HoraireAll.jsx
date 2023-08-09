@@ -14,6 +14,8 @@ import './horaireAll.scss'
 import Horaires from './form/Horaires';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { format } from 'date-fns';
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -48,12 +50,17 @@ const HoraireAll = () => {
     {
         field: 'start_date',
         headerName: "Date de debut",
-        width: 120 
+        width: 120,
+        valueGetter: (params) =>
+        format(new Date(params.row.start_date), 'yyyy-MM-dd'),
+        
     },
     {
         field: 'end_date',
         headerName: "Date de la fin",
-        width: 120 
+        width: 120,
+        valueGetter: (params) =>
+        format(new Date(params.row.end_date), 'yyyy-MM-dd'),
     },
     {
       field: 'weekday',
@@ -62,12 +69,12 @@ const HoraireAll = () => {
     },
     {
         field: 'start_time',
-        headerName: "Date d'arrivée",
+        headerName: "Heure d'arrivée",
         width: 120 
       },
       {
         field: 'end_time',
-        headerName: 'Date de sortie',
+        headerName: 'Heure de sortie',
         width: 120 
       },
     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{

@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import moment from 'moment';
 
 const MissionForm = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   const navigate = useNavigate();
   const [options, setOptions] = useState([]);
   const [optionsClient, setOptionsClient] = useState([]);

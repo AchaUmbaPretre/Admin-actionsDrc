@@ -16,6 +16,7 @@ import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import ContratForm from './formContrat/ContratForm';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Swal from 'sweetalert2';
+import { format } from 'date-fns';
 
 const style = {
     position: 'absolute',
@@ -63,17 +64,23 @@ const Contrats = () => {
         {
           field: 'start_date',
           headerName: 'Date du debut',
-          width: 110 
+          width: 110,
+          valueGetter: (params) =>
+          format(new Date(params.row.start_date), 'yyyy-MM-dd'),
         },
         {
             field: 'end_date',
             headerName: 'Date de la fin',
-            width: 110 
+            width: 110,
+            valueGetter: (params) =>
+            format(new Date(params.row.end_date), 'yyyy-MM-dd'),
         },
         {
           field: 'date_engagement',
           headerName: "Date de l'engagement",
-          width: 110 
+          width: 110,
+          valueGetter: (params) =>
+            format(new Date(params.row.date_engagement), 'yyyy-MM-dd'),
       },
         {
             field: 'hourly_rate',

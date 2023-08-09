@@ -1,8 +1,8 @@
-import { createBrowserRouter, RouterProvider, Route, Outlet, Navigate } from 'react-router-dom'
-import React, { useContext} from 'react'
+import { createBrowserRouter, RouterProvider, Route, Outlet, Navigate } from 'react-router-dom';
+import React, { useContext, useState, useEffect } from 'react';
 import Sidebar from './components/sidebar/Sidebar';
 import Topbar from './components/topbar/Topbar';
-import './App.css'
+import './App.css';
 import Rightbar from './pages/rightbar/Rightbar';
 import Personnel from './pages/personnel/Personnel';
 import Contrats from './pages/contrats/Contrats';
@@ -29,142 +29,149 @@ import HoraireAll from './pages/horaire/HoraireAll';
 import Formulaire from './pages/personnel/formulaire/Formulaire';
 
 function App() {
-  const {currentUser} = useContext(AuthContext)
+  const { currentUser } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
 
-  const Layout = () =>{
-    return(
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false); // Marquer le chargement comme terminé après un délai de 2 secondes
+    }, 2000);
+  }, []);
+
+  const Layout = () => {
+    return (
       <div>
-        <Topbar/>
+        <Topbar />
         <div className="appContainer">
-          <Sidebar/>
+          <Sidebar />
           <div className="appOutlet">
             <Outlet />
           </div>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
-  const SecuriteRoute = ({children}) =>{
-    if(!currentUser){
-      return(
-        <Navigate to="/login" />
-      )
+  const SecuriteRoute = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to="/login" />;
     }
     return children;
-}
+  };
 
   const router = createBrowserRouter([
     {
       path: '/',
-      element: (<SecuriteRoute><Layout/></SecuriteRoute>),
+      element: <SecuriteRoute><Layout /></SecuriteRoute>,
       children: [
         {
           path: '/',
-          element: <Rightbar/>
+          element: <Rightbar />
         },
         {
           path: '/personnel',
-          element: <Personnel/>
+          element: <Personnel />
         },
         {
           path: '/views/:id',
-          element: <Views/>
+          element: <Views />
         },
         {
           path: '/edit/:id',
-          element: <Edit/>
+          element: <Edit />
         },
         {
           path: '/contrats',
-          element: <Contrats/>
+          element: <Contrats />
         },
         {
           path: '/client',
-          element: <ClientTab/>
+          element: <ClientTab />
         },
         {
           path: '/affectation',
-          element: <Affectation/>
+          element: <Affectation />
         },
         {
           path: '/presence',
-          element: <Presence/>
+          element: <Presence />
         },
         {
           path: '/facturation',
-          element: <Facturation/>
+          element: <Facturation />
         },
         {
           path: '/listeConge',
-          element: <ListeConge/>
+          element: <ListeConge />
         },
         {
           path: '/editContrat/:id',
-          element: <EditContrat/>
+          element: <EditContrat />
         },
         {
           path: '/clientForm',
-          element: <ClientForm/>
+          element: <ClientForm />
         },
         {
           path: '/viewsClient/:id',
-          element: <ClientView/>
+          element: <ClientView />
         },
         {
           path: '/clientUpdate/:id',
-          element: <EditeClient/>
+          element: <EditeClient />
         },
         {
           path: '/contrats/addContrat/:id',
-          element: <AddContrat/>
+          element: <AddContrat />
         },
         {
           path: '/pageContrat/:id',
-          element: <PageContrat/>
+          element: <PageContrat />
         },
         {
           path: '/mission',
-          element: <Mission/>
+          element: <Mission />
         },
         {
           path: '/missionForm',
-          element: <MissionForm/>
+          element: <MissionForm />
         },
         {
           path: '/horaires',
-          element: <Horaires/>
+          element: <Horaires />
         },
         {
           path: '/horaireAll',
-          element: <HoraireAll/>
+          element: <HoraireAll />
         },
         {
           path: '/horaires',
-          element: <Horaires/>
+          element: <Horaires />
         },
         {
           path: '/formulaire',
-          element: <Formulaire/>
-        },
-    ]
+          element: <Formulaire />
+        }
+      ]
     },
     {
       path: '/login',
-      element: <Login/>
+      element: <Login />
     },
     {
       path: '/register',
-      element: <Register/>
-    },
-  ])
+      element: <Register />
+    }
+  ]);
 
   return (
- 
-      <div>
+    <div>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
         <RouterProvider router={router} />
-      </div>
-
+      )}
+    </div>
   );
 }
 

@@ -14,6 +14,7 @@ import Fade from '@mui/material/Fade';
 import {presents} from './../../data'
 import axios from 'axios';
 import PresenceForm from './form/PresenceForm';
+import { format } from 'date-fns';
 
 const style = {
   position: 'absolute',
@@ -70,7 +71,9 @@ const Presence = () => {
     {
         field: 'date',
         headerName: 'Date de la présence',
-        width: 150 
+        width: 150,
+        valueGetter: (params) =>
+        format(new Date(params.row.date), 'yyyy-MM-dd'),
     },
     {
         field: 'check_in_time',

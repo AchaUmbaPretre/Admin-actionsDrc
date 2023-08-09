@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 import Formulaire from './formulaire/Formulaire';
 import Swal from 'sweetalert2'
+import { format } from 'date-fns';
 
 const style = {
     position: 'absolute',
@@ -104,6 +105,8 @@ const Personnel = () => {
             field: 'date_of_birth',
             headerName: 'Date de naissance',
             width: 110,
+            valueGetter: (params) =>
+            format(new Date(params.row.date_of_birth), 'yyyy-MM-dd'),
         },
         { field: 'gender', headerName: 'Genre', width: 50 },
         { field: 'phone_number', headerName: 'Telephone', width: 100 },
