@@ -27,6 +27,7 @@ import MissionForm from './pages/mission/form/MissionForm';
 import Horaires from './pages/horaire/form/Horaires';
 import HoraireAll from './pages/horaire/HoraireAll';
 import Formulaire from './pages/personnel/formulaire/Formulaire';
+import { FadeLoader } from 'react-spinners';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -167,7 +168,9 @@ function App() {
   return (
     <div>
       {loading ? (
-        <div>Loading...</div>
+      <div className="spinnerContainer">
+        <FadeLoader color="rgba(54, 215, 183, 1)" loading={loading} height={15} radius={2} margin={2} />
+      </div>
       ) : (
         <RouterProvider router={router} />
       )}
