@@ -19,6 +19,8 @@ import { useEffect } from 'react';
 import Formulaire from './formulaire/Formulaire';
 import Swal from 'sweetalert2'
 import { format } from 'date-fns';
+import { FadeLoader } from 'react-spinners';
+
 
 const style = {
     position: 'absolute',
@@ -38,7 +40,9 @@ const Personnel = () => {
     const [data, setData] = useState({});
     const [name,setName] = useState();
     const [date, setDate] = useState();
-
+    const [loading, setLoading] = useState(true);
+    const [showSpinner, setShowSpinner] = useState(true);
+    const spinnerDuration = 2000;
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -56,6 +60,10 @@ const Personnel = () => {
             try{
                 const res = await axios.get("http://localhost:8080/api/admin");
                 setData(res.data)
+                setLoading(false);
+                setTimeout(() => {
+                  setShowSpinner(false);
+                }, spinnerDuration);
         
               }catch(error){
                 console.log(error)
@@ -142,29 +150,14 @@ const Personnel = () => {
                     </div>
                 </div>
                 <Link className="personnel-btn" to='/formulaire'><PersonAddAlt1Icon/>Ajouter</Link>
-{/*                 <Modal
-                    aria-labelledby="transition-modal-title"
-                    aria-describedby="transition-modal-description"
-                    open={open}
-                    onClose={handleClose}
-                    closeAfterTransition
-                    slots={{ backdrop: Backdrop }}
-                    slotProps={{
-                    backdrop: {
-                        timeout: 500,
-                    },
-                    }} 
-                >
-                    <Fade in={open}>
-                        <Box sx={style}>
-                            <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
-                                <Formulaire/>
-                            </Box>
-                        </Box>
-                    </Fade>
-                </Modal> */}
             </div>
-            <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="userTable" />
+                {loading ? (
+          <div className="spinner-container">
+            <FadeLoader color={'#36D7B7'} loading={loading} />
+          </div>
+        ) : (
+          <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="userTable" />
+        )}
         </div>
     </>
   )

@@ -17,6 +17,7 @@ import ContratForm from './formContrat/ContratForm';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Swal from 'sweetalert2';
 import { format } from 'date-fns';
+import { FadeLoader } from 'react-spinners';
 
 const style = {
     position: 'absolute',
@@ -40,7 +41,7 @@ const Contrats = () => {
     const [datefin, setDateFin] = useState('');
     const [inputs, setInputs] = useState({});
     const [selected, setSelected] = useState([]);
-
+    const [loading, setLoading] = useState(true);
 
     const handleSelectionChange = (newSelection) => {
       setSelected(newSelection.selectionModel);
@@ -118,7 +119,7 @@ const Contrats = () => {
             try{
                 const res = await axios.get("http://localhost:8080/api/admin/contrat");
                 setData(res.data)
-        
+                setLoading(false);
               }catch(error){
                 console.log(error)
               };
@@ -171,7 +172,12 @@ const Contrats = () => {
   }; */
   return (
     <>
-        <div className="contrats">
+        {loading ? (
+          <div className="spinner-container">
+            <FadeLoader color={'#36D7B7'} loading={loading} />
+          </div>
+            ) : (
+              <div className="contrats">
             <div className="contrats-wrapper">
                 <div className="contrats-top">
                     <FlakyIcon className='contrats-icon'/>
@@ -209,6 +215,7 @@ const Contrats = () => {
                 onSelectionModelChange={handleSelectionChange} className="contratTable" />
             </div>
         </div>
+            )}
     </>
   )
 }
