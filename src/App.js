@@ -34,6 +34,7 @@ import PresenceView from './pages/presence/view/PresenceView';
 import FactureView from './pages/faturation/view/FactureView';
 import MissionEdit from './pages/mission/edite/MissionEdit';
 import FatureEdit from './pages/faturation/edit/FatureEdit';
+import Payement from './pages/payement/Payement';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -178,6 +179,10 @@ function App() {
         {
           path: '/formulaire',
           element: <Formulaire />
+        },
+        {
+          path: '/payement',
+          element: <Payement />
         }
       ]
     },
