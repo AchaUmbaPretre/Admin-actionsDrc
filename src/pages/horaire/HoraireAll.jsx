@@ -1,5 +1,5 @@
 import { DataGrid } from '@mui/x-data-grid'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { DeleteOutline} from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
@@ -15,6 +15,7 @@ import Horaires from './form/Horaires';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { format } from 'date-fns';
+import { FadeLoader } from 'react-spinners';
 
 const style = {
     position: 'absolute',
@@ -33,18 +34,19 @@ const style = {
 const HoraireAll = () => {
 
   const [data, setData] = useState({});
-
+  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 60 },
-    { field: 'employee_id', headerName: "Employée", width: 120 },
+    { field: 'first_name', headerName: "Employé(e)", width: 120 },
 
     {
-      field: 'client_id',
-      headerName: 'Client',
+      field: 'company_name',
+      headerName: 'Client(e)',
       width: 120 
     },
     {
@@ -63,7 +65,7 @@ const HoraireAll = () => {
         format(new Date(params.row.end_date), 'yyyy-MM-dd'),
     },
     {
-      field: 'weekday',
+      field: 'days',
       headerName: 'Week-end',
       width: 120 
     },
@@ -82,7 +84,7 @@ const HoraireAll = () => {
           <>
             <div className="table-icons-row">
                 <Link to={`/users/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
-                <VisibilityIcon className='userEye'/>
+                <VisibilityIcon className='userEye' onClick={() => navigate(`/horairesView/${params.row.id}`)}/>
                 <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
             </div>
           </>
@@ -91,19 +93,36 @@ const HoraireAll = () => {
     }},
   ];
 
-  useEffect(()=>{
+/*   useEffect(()=>{
 
     const fetchData = async ()=> {
         try{
             const res = await axios.get("http://localhost:8080/api/admin/horaire");
             setData(res.data)
+            setLoading(false);
     
           }catch(error){
             console.log(error)
           };
     }
     fetchData()
- }, [])
+ }, []) */
+
+ useEffect(()=>{
+
+  const fetchData = async ()=> {
+      try{
+          const res = await axios.get("http://localhost:8080/api/admin/horaires");
+          setData(res.data)
+          setLoading(false);
+  
+        }catch(error){
+          console.log(error)
+        };
+  }
+  fetchData()
+}, [])
+
 
  const handleDelete = async (id) => {
   try {
@@ -161,7 +180,13 @@ const HoraireAll = () => {
                     </Fade>
                 </Modal>
         </div>
+        {loading ? (
+        <div className="spinner-container">
+            <FadeLoader color={'#36D7B7'} loading={loading} />
+        </div>
+        ) : (
         <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
+        )}
       </div>
     </>
   )

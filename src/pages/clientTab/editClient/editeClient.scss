@@ -22,6 +22,10 @@
             flex-direction: column;
             gap: 10px;
             width: 100%;
+            .title-h1{
+                padding: 20px 0;
+                color: #555;
+            }
             .form-rows{
                 display: flex;
                 align-items: center;

@@ -48,7 +48,6 @@ const Contrats = () => {
     };
     
 
-    console.log(selected)
     const handleChange = (e) =>{
         setInputs(prev=>({...prev, [e.target.name]: e.target.value}))
     }
@@ -172,11 +171,6 @@ const Contrats = () => {
   }; */
   return (
     <>
-        {loading ? (
-          <div className="spinner-container">
-            <FadeLoader color={'#36D7B7'} loading={loading} />
-          </div>
-            ) : (
               <div className="contrats">
             <div className="contrats-wrapper">
                 <div className="contrats-top">
@@ -209,13 +203,19 @@ const Contrats = () => {
                     </Fade>
                 </Modal>
             </div>
+          {loading ? (
+          <div className="spinner-container">
+            <FadeLoader color={'#36D7B7'} loading={loading} />
+          </div>
+            ) : (
             <div className="contrats-left">
               <DataGrid rows={data} columns={columns}  pageSize={10}  checkboxSelection
                 selectionModel={selected}
                 onSelectionModelChange={handleSelectionChange} className="contratTable" />
             </div>
-        </div>
             )}
+        </div>
+            
     </>
   )
 }

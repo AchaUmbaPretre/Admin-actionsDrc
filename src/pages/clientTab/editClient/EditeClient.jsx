@@ -45,6 +45,7 @@ useEffect(()=>{
         <div className="clientForm">
             <div className="clientForm-wrapper">
               <form action="" className="form-center">
+              <h1 className="title-h1">Edite</h1>
                 <div className="form-rows">
                     <div className="form-row">
                       <label htmlFor="" className="label-form">Nom de compagnie <span>*</span></label>
@@ -57,14 +58,14 @@ useEffect(()=>{
                 </div>
 
                 <div className="form-rows">
-                            <div className="form-row">
-                                <label htmlFor="" className="label-form">Tel entreprise<span>*</span></label>
-                                <input type="number"  name='phone_number' value={phone_number} className="input-form" onChange={handleChange} />
-                            </div>
-                            <div className="form-row">
-                                <label htmlFor="" className="label-form">Nom du contact principal<span>*</span></label>
-                                <input type="text"  name='contact_name' value={contact_name} className="input-form" onChange={handleChange} />
-                            </div>
+                  <div className="form-row">
+                    <label htmlFor="" className="label-form">Tel entreprise<span>*</span></label>
+                      <input type="number"  name='phone_number' value={phone_number} className="input-form" onChange={handleChange} />
+                    </div>
+                    <div className="form-row">
+                      <label htmlFor="" className="label-form">Nom du contact principal<span>*</span></label>
+                      <input type="text"  name='contact_name' value={contact_name} className="input-form" onChange={handleChange} />
+                    </div>
                 </div>
 
                 <div className="form-rows">

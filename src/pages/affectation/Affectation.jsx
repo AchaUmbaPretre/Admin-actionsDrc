@@ -6,6 +6,7 @@ import ShowChartIcon from '@mui/icons-material/ShowChart';
 import Swal from 'sweetalert2'
 import axios from 'axios';
 import { format } from 'date-fns';
+import { FadeLoader } from 'react-spinners';
 
 const Affectation = () => {
 
@@ -13,6 +14,7 @@ const Affectation = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+   const [loading, setLoading] = useState(true);
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
@@ -70,6 +72,7 @@ const Affectation = () => {
       try {
         const res = await axios.get("http://localhost:8080/api/admin/allaffectation");
         setData(res.data)
+        setLoading(false);
 
       } catch (error) {
         console.log(error)
@@ -112,7 +115,13 @@ const Affectation = () => {
               </div>
           </div>
         </div>
+          {loading ? (
+        <div className="spinner-container">
+            <FadeLoader color={'#36D7B7'} loading={loading} />
+        </div>
+        ) : (
         <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
+        )}
       </div>
     </>
   )

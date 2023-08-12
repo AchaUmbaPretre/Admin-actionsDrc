@@ -5,6 +5,7 @@ export const data = [
         prenom: "Acha",
         sexe: "m",
         adresse: "debonhomme",
+        telephone: "+243824562776",
         fonction: 'developpeur',
         etat : "celibataire",
         action: 'actions'
@@ -15,6 +16,7 @@ export const data = [
         prenom: "Acha",
         sexe: "m",
         adresse: "debonhomme",
+        telephone: "+243824562776",
         fonction: 'developpeur',
         etat : "celibataire",
         action: 'actions'
@@ -25,6 +27,7 @@ export const data = [
         prenom: "Acha",
         sexe: "m",
         adresse: "debonhomme",
+        telephone: "+243824562776",
         fonction: 'developpeur',
         etat : "celibataire",
         action: 'actions'
@@ -35,6 +38,7 @@ export const data = [
         prenom: "Acha",
         sexe: "m",
         adresse: "debonhomme",
+        telephone: "+243824562776",
         fonction: 'developpeur',
         etat : "celibataire",
         action: 'actions'

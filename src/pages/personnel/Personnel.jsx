@@ -46,12 +46,7 @@ const Personnel = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
     const navigate = useNavigate();
-
-    const handChange = (e) =>{
-        setName(prev=>({...prev, [e.target.name]: e.target.value}))
-    }
 
 
     useEffect(()=>{

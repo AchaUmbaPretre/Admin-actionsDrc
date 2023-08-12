@@ -28,6 +28,11 @@ import Horaires from './pages/horaire/form/Horaires';
 import HoraireAll from './pages/horaire/HoraireAll';
 import Formulaire from './pages/personnel/formulaire/Formulaire';
 import { FadeLoader } from 'react-spinners';
+import MissionView from './pages/mission/views/MissionView';
+import HoraireView from './pages/horaire/view/HoraireView';
+import PresenceView from './pages/presence/view/PresenceView';
+import FactureView from './pages/faturation/view/FactureView';
+import MissionEdit from './pages/mission/edite/MissionEdit';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -35,17 +40,17 @@ function App() {
 
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false); // Marquer le chargement comme terminé après un délai de 2 secondes
+      setLoading(false);
     }, 2000);
   }, []);
 
   const Layout = () => {
     return (
       <div>
-        <Topbar />
         <div className="appContainer">
           <Sidebar />
           <div className="appOutlet">
+          <Topbar />
             <Outlet />
           </div>
         </div>
@@ -98,8 +103,16 @@ function App() {
           element: <Presence />
         },
         {
+          path: '/presenceView/:id',
+          element: <PresenceView />
+        },
+        {
           path: '/facturation',
           element: <Facturation />
+        },
+        {
+          path: '/facturationView/:id',
+          element: <FactureView />
         },
         {
           path: '/listeConge',
@@ -138,6 +151,14 @@ function App() {
           element: <MissionForm />
         },
         {
+          path: '/missionView/:id',
+          element: <MissionView />
+        },
+        {
+          path: '/missionEdite/:id',
+          element: <MissionEdit />
+        },
+        {
           path: '/horaires',
           element: <Horaires />
         },
@@ -146,8 +167,8 @@ function App() {
           element: <HoraireAll />
         },
         {
-          path: '/horaires',
-          element: <Horaires />
+          path: '/horairesView/:id',
+          element: <HoraireView />
         },
         {
           path: '/formulaire',

@@ -1,5 +1,5 @@
 import { DataGrid } from '@mui/x-data-grid'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './presence.scss'
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import { DeleteOutline} from '@mui/icons-material';
@@ -15,6 +15,7 @@ import {presents} from './../../data'
 import axios from 'axios';
 import PresenceForm from './form/PresenceForm';
 import { format } from 'date-fns';
+import { FadeLoader } from 'react-spinners';
 
 const style = {
   position: 'absolute',
@@ -32,9 +33,11 @@ const style = {
 
 const Presence = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [employeeId, setEmployeeId] = useState('');
   const [checkInTime, setCheckInTime] = useState('');
   const [checkOutTime, setCheckOutTime] = useState('');
+  const navigate = useNavigate();
 
   const HandleDelete = (id) =>{
     const dataFilter = data.filter(item=> item.id !== id)
@@ -45,27 +48,43 @@ const Presence = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  useEffect(()=>{
+/*   useEffect(()=>{
 
     const fetchData = async ()=> {
         try{
             const res = await axios.get("http://localhost:8080/api/admin/presence");
             setData(res.data)
+            setLoading(false);
     
           }catch(error){
             console.log(error)
           };
     }
     fetchData()
- }, [])
+ }, []) */
+
+ useEffect(()=>{
+
+  const fetchData = async ()=> {
+      try{
+          const res = await axios.get("http://localhost:8080/api/admin/presenceAll");
+          setData(res.data)
+          setLoading(false);
+  
+        }catch(error){
+          console.log(error)
+        };
+  }
+  fetchData()
+}, [])
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'employee_id', headerName: 'employees', width: 120 },
+    { field: 'first_name', headerName: 'employé(e)', width: 120 },
 
     {
-      field: 'client_id',
-      headerName: 'Clients',
+      field: 'company_name',
+      headerName: 'Client',
       width: 130 
     },
     {
@@ -90,7 +109,7 @@ const Presence = () => {
           <>
             <div className="table-icons-row">
                 <Link to={`/users/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
-                <VisibilityIcon className='userEye'/>
+                <VisibilityIcon className='userEye' onClick={() => navigate(`/presenceView/${params.row.id}`)}/>
                 <DeleteOutline className="userListDelete" onClick={()=>{HandleDelete(params.row.id)}} />
             </div>
           </>
@@ -133,7 +152,13 @@ const Presence = () => {
                     </Fade>
           </Modal>
         </div>
+        {loading ? (
+        <div className="spinner-container">
+            <FadeLoader color={'#36D7B7'} loading={loading} />
+        </div>
+        ) : (
         <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
+        )}
       </div>
 
     </>

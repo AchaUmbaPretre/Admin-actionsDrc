@@ -1,5 +1,6 @@
 import FeatedInfo from '../../components/featedInfo/FeatedInfo'
 import FeatedList from '../../components/featedList/FeatedList'
+import FeatedView from '../../components/featedView/FeatedView'
 import './rightbar.scss'
 
 const Rightbar = () => {
@@ -7,7 +8,9 @@ const Rightbar = () => {
     <>
       <div className="rightbar">
         <FeatedInfo/>
-        <FeatedList/>
+        <div className="right-wrapper">
+          <FeatedList/>
+        </div>
       </div>
     </>
   )

@@ -16,6 +16,7 @@ import ClientForm from './form/ClientForm';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { FadeLoader } from 'react-spinners';
 
 const style = {
   position: 'absolute',
@@ -33,7 +34,7 @@ const style = {
 const ClientTab = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({});
-
+  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -87,6 +88,7 @@ const ClientTab = () => {
       try{
           const res = await axios.get("http://localhost:8080/api/admin/client");
           setData(res.data)
+          setLoading(false);
   
         }catch(error){
           console.log(error)
@@ -161,7 +163,13 @@ const ClientTab = () => {
                     </Fade>
             </Modal>
           </div>
+          {loading ? (
+          <div className="spinner-container">
+              <FadeLoader color={'#36D7B7'} loading={loading} />
+          </div>
+          ) : (
           <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
+          )}
         </div>
 
     </>

@@ -1,6 +1,6 @@
-.featedList{
+.featedView{
     position: relative;
-    flex: 4;
+    flex: 2;
     width: 100%;
     background: #fff;
     padding: 20px;
@@ -16,34 +16,16 @@
         padding-bottom: 5px;
         display: flex;
         align-items: center;
-        background: rgba(6, 102, 247, 0.514);
-        height: 40px;
-        width: max-content;
-        padding: 0 10px;
-        color: #fff;
-        border-radius: 20% 30%;
-        cursor: pointer;
-        -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
-        box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
         .icon-title{
             padding-right: 5px;
-            color: #fff;
+            color: #555;
             font-size: 1.7rem;
         }
     }
-    hr{
-        height: 1px;
-        border: none;
-        background: #5555553f;
-    }
-    .feated-container{
+    .feated-wrapper{
         border-radius: 10px;
         .userEye{
-            color: green;
-            cursor: pointer;
-            &:hover{
-                transform: scale(1.1);
-            }
+            color: red;
         }
         table{
             border-collapse :collapse;
@@ -77,13 +59,14 @@
                     gap: 10px;
                     .icon-oeil{
                         color: rgb(21, 92, 21);
+                        cursor: pointer;
                     }
                     .icon-info{
                         color: rgb(100, 100, 233);
+                        cursor: pointer;
                     }
                 }
             }
         }
-
     }
 }

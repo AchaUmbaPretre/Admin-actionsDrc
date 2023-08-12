@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { useEffect } from 'react';
 import { format } from 'date-fns';
+import { FadeLoader } from 'react-spinners';
 
 const style = {
     position: 'absolute',
@@ -31,26 +32,42 @@ const Mission = () => {
     const [data, setData] = useState({});
     const [name,setName] = useState();
     const [date, setDate] = useState();
-
+    const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     const navigate = useNavigate();
 
-    useEffect(()=>{
+/*     useEffect(()=>{
 
         const fetchData = async ()=> {
             try{
                 const res = await axios.get("http://localhost:8080/api/admin/mission");
                 setData(res.data)
+                setLoading(false);
         
               }catch(error){
                 console.log(error)
               };
         }
         fetchData()
-     }, [])
+     }, []) */
+
+     useEffect(()=>{
+
+      const fetchData = async ()=> {
+          try{
+              const res = await axios.get("http://localhost:8080/api/admin/allmission");
+              setData(res.data)
+              setLoading(false);
+      
+            }catch(error){
+              console.log(error)
+            };
+      }
+      fetchData()
+   }, [])
 
       const handleDelete = async (id) => {
         try {
@@ -75,8 +92,8 @@ const Mission = () => {
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'agent_id', headerName: 'Agent', width: 130 },
-        { field: 'client_id', headerName: 'Client', width: 130 },
+        { field: 'first_name', headerName: 'Agent', width: 130 },
+        { field: 'company_name', headerName: 'Client', width: 130 },
         {
           field: 'dateEntrant',
           headerName: 'Date de début',
@@ -101,8 +118,8 @@ const Mission = () => {
             return(
               <>
                 <div className="table-icons-row">
-                    <Link to={`/edit/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
-                    <VisibilityIcon className='userEye' onClick={() => navigate(`/views/${params.row.id}`)} />
+                    <Link to={`/missionEdite/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
+                    <VisibilityIcon className='userEye' onClick={() => navigate(`/missionView/${params.row.id}`)} />
                     <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
                 </div>
                 
@@ -125,7 +142,13 @@ const Mission = () => {
                 </div>
                 <button className="personnel-btn" onClick={()=>(navigate('/missionForm'))}><PersonAddAlt1Icon/>Ajouter</button>
             </div>
+            {loading ? (
+          <div className="spinner-container">
+            <FadeLoader color={'#36D7B7'} loading={loading} />
+          </div>
+          ) : (
             <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="userTable" />
+            )}
         </div>
     </>
   )

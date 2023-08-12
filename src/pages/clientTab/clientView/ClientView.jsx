@@ -3,6 +3,7 @@ import '../form/clientForm.scss'
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './clientView.scss'
+import { CodeOffOutlined, ContactPage, EmailOutlined, LoginOutlined, MapsHomeWorkOutlined, PasswordOutlined, Person2Outlined, PhoneAndroidOutlined } from '@mui/icons-material';
 
 const ClientView = () => {
     const [data, setData] = useState({});
@@ -28,36 +29,36 @@ const ClientView = () => {
                 <h2 className="client-title">INFORMATION DU CLIENT</h2>
                 <div className="client-rows">
                     <div className="client-row">
-                        <span className="client-nom">Nom de compagnie :</span>
+                        <span className="client-nom"><Person2Outlined/> Nom de compagnie :</span>
                         <span className="client-nom">{data.company_name}</span>
                     </div>
                     <div className="client-row">
-                        <span className="client-nom">Adresse :</span>
+                        <span className="client-nom"><MapsHomeWorkOutlined/>  Adresse :</span>
                         <span className="client-nom">{data.address}</span>
                     </div>
 
                     <div className="client-row">
-                        <span className="client-nom">Tel de compagnie :</span>
+                        <span className="client-nom"><PhoneAndroidOutlined/> Tel de compagnie :</span>
                         <span className="client-nom">{data.phone_number}</span>
                     </div>
 
                     <div className="client-row">
-                        <span className="client-nom">Tel du contact principal :</span>
+                        <span className="client-nom"><PhoneAndroidOutlined/> Tel du contact principal :</span>
                         <span className="client-nom">{data.contact_name}</span>
                     </div>
 
                     <div className="client-row">
-                        <span className="client-nom">Email :</span>
+                        <span className="client-nom"><EmailOutlined/> Email :</span>
                         <span className="client-nom">{data.contact_email}</span>
                     </div>
 
                     <div className="client-row">
-                        <span className="client-nom">Rccm :</span>
+                        <span className="client-nom"><PasswordOutlined/>  Rccm :</span>
                         <span className="client-nom">{data.rccm}</span>
                     </div>
 
                     <div className="client-row">
-                        <span className="client-nom">Id nate :</span>
+                        <span className="client-nom"><PasswordOutlined/>  Id nate :</span>
                         <span className="client-nom">{data.idnate}</span>
                     </div>
                 </div>

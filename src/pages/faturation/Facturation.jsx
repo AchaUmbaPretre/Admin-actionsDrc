@@ -1,6 +1,5 @@
 import { DataGrid } from '@mui/x-data-grid'
-import { Link } from 'react-router-dom';
-import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
+import { Link, useNavigate } from 'react-router-dom';
 import { DeleteOutline} from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
@@ -15,6 +14,8 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import FactureForm from './form/FactureForm';
 import { format } from 'date-fns';
+import { FadeLoader } from 'react-spinners';
+import FactCheckIcon from '@mui/icons-material/FactCheck';
 
 const style = {
   position: 'absolute',
@@ -34,24 +35,39 @@ const Facturation = () => {
 
   const [data, setData] = useState([]);
   const [optionsClient, setOptionsClient] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
 
-  useEffect(()=>{
+/*   useEffect(()=>{
 
     const fetchData = async ()=> {
         try{
             const res = await axios.get("http://localhost:8080/api/admin/facture");
             setData(res.data)
-    
+            setLoading(false)
           }catch(error){
             console.log(error)
           };
     }
     fetchData()
- }, [])
+ }, []) */
+
+ useEffect(()=>{
+
+  const fetchData = async ()=> {
+      try{
+          const res = await axios.get("http://localhost:8080/api/admin/factureAll");
+          setData(res.data)
+          setLoading(false)
+        }catch(error){
+          console.log(error)
+        };
+  }
+  fetchData()
+}, [])
 
   const handleDelete = async (id) => {
     try {
@@ -76,19 +92,19 @@ const Facturation = () => {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'client_id', headerName: "client", width: 120 },
+    { field: 'company_name', headerName: "client", width: 140 },
 
     {
       field: 'invoice_date',
       headerName: 'Date de la facture',
-      width: 130,
+      width: 140,
       valueGetter: (params) =>
       format(new Date(params.row.invoice_date), 'yyyy-MM-dd'),
     },
     {
         field: 'due_date',
         headerName: "Date d'échéance de la facture",
-        width: 130,
+        width: 160,
         valueGetter: (params) =>
         format(new Date(params.row.due_date), 'yyyy-MM-dd'),
     },
@@ -107,7 +123,7 @@ const Facturation = () => {
           <>
             <div className="table-icons-row">
                 <Link to={`/users/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
-                <VisibilityIcon className='userEye'/>
+                <VisibilityIcon className='userEye' onClick={() => navigate(`/facturationView/${params.row.id}`)}/>
                 <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
             </div>
           </>
@@ -122,7 +138,7 @@ const Facturation = () => {
       <div className="facturation">
         <div className="facturation-wrapper">
           <div className="contrats-top">
-              <ChecklistRtlIcon className='contrats-icon'/>
+              <FactCheckIcon className='contrats-icon'/>
               <div className="contrats-info">
                   <h2 className="contrats-title">Facturation</h2>
                   <span className="contrats-span">Liste des facturation</span>
@@ -151,7 +167,13 @@ const Facturation = () => {
                     </Fade>
             </Modal>
         </div>
+        {loading ? (
+        <div className="spinner-container">
+            <FadeLoader color={'#36D7B7'} loading={loading} />
+        </div>
+        ) : (
         <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
+        )}
       </div>
     </>
   )

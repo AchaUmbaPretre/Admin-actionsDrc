@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import './horaires.scss'
 import Swal from 'sweetalert2';
 import SendIcon from '@mui/icons-material/Send';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
 import axios from 'axios';
+import moment from 'moment';
 
 const Horaires = () => {
 
@@ -19,11 +19,21 @@ const Horaires = () => {
     const navigate = useNavigate();
     const [selected, setSelected] = useState([]);
     const [clientEtat, setClientEtat] = useState([]);
-    const handleWeekdayChange = (event) => {
-        setWeekday(event.target.value);
-      };
-console.log(employeeId,clientId, startDate,endDate,weekday,startTime,endTime)
+    const [missionWeek, setMissionWeek] = useState([]);
+    const [data, setData] = useState([]);
 
+      const handleChange = (selectedOption, name) =>{
+        setData((prev) => ({ ...prev, [name]: selectedOption.value }));
+      }
+      const handleDateChange = (selectedDate, name) => {
+        const formattedDate = moment(selectedDate).format('YYYY-MM-DD');
+        setData((prev) => ({ ...prev, [name]: formattedDate }));
+      };
+      const handleTimeChange = (selectedTime, name) => {;
+        setData((prev) => ({ ...prev, [name]: selectedTime }));
+      };
+
+      console.log(data)
       useEffect(() => {
 
         const fetchData = async () => {
@@ -52,19 +62,25 @@ console.log(employeeId,clientId, startDate,endDate,weekday,startTime,endTime)
       fetchData()
       }, [])
 
+      useEffect(()=>{
+    
+        const fetchData = async ()=> {
+          try{
+              const res = await axios.get("http://localhost:8080/api/admin/missionWeek");
+              setMissionWeek(res.data)
+      
+            }catch(error){
+              console.log(error)
+            };
+      }
+      fetchData()
+      }, [])
+
       const handleClick = async (e) => {
         e.preventDefault();
     
         try {
-          await axios.post(`http://localhost:8080/api/admin//horairesPost`, {
-            employee_id : employeeId,
-            client_id : clientId,
-            start_date : startDate,
-            end_date : endDate,
-            weekday : weekday,
-            start_time : startTime,
-            end_time : endTime 
-           });
+          await axios.post(`http://localhost:8080/api/admin//horairesPost`,data);
     
           Swal.fire({
             title: 'Success',
@@ -94,57 +110,61 @@ console.log(employeeId,clientId, startDate,endDate,weekday,startTime,endTime)
                 <div className="form-rows">
                     <div className="form-row">
                       <label htmlFor="" className="label-form">Employe(é) <span>*</span></label>
-                      <select id="pet-select" name="fonction" onChange={(e)=>setEmployeeId(e.target.value)} className="input-form">
-                      { selected?.map(item =>( 
-                        <option value={item.id}>{item.first_name}</option>
-                        ))}
-                      </select>
+                      <Select
+                        name="agent_id"
+                        onChange={(selectedOption) => handleChange(selectedOption, "employee_id")}
+                        options={selected.map((item) => ({
+                          value: item.id,
+                          label: item.first_name
+                        }))}
+                    />
                     </div>
                     <div className="form-row">
                       <label htmlFor="" className="label-form">Client <span>*</span></label>
-                      <select id="pet-select" name="fonction" onChange={(e)=>setClientId(e.target.value)} className="input-form">
-                      { clientEtat?.map(item =>( 
-                        <option value={item.id}>{item.company_name}</option>
-                        ))}
-                      </select>
+                      <Select
+                        name="client_id"
+                        onChange={(selectedOption) => handleChange(selectedOption, "client_id")}
+                        options={clientEtat.map((item) => ({
+                          value: item.id,
+                          label: item.company_name
+                        }))}
+                      />
                     </div>
                 </div>
 
                 <div className="form-rows">
                     <div className="form-row">
                         <label htmlFor="" className="label-form">Date de debut<span>*</span></label>
-                        <input type="date"  name='phone_number' className="input-form"  onChange={(e)=>setStartDate(e.target.value)} />
+                        <input type="date"  name='start_date' className="input-form"  onChange={(e) => handleDateChange(e.target.value, "start_date")} />
                     </div>
                     <div className="form-row">
                         <label htmlFor="" className="label-form">Date de la fin<span>*</span></label>
-                        <input type="date"  name='contact_name' className="input-form" onChange={(e)=>setEndDate(e.target.value)} />
+                        <input type="date"  name='end_date' className="input-form" onChange={(e) => handleDateChange(e.target.value, "end_date")} />
                     </div>
                 </div>
 
                 <div className="form-rows">
                     <div className="form-row">
                         <label htmlFor="" className="label-form">Week-end<span>*</span></label>
-                        <select value={weekday} onChange={handleWeekdayChange} className="input-form">
-                            <option value="">Sélectionnez un jour de la semaine</option>
-                            <option value="Lundi">Lundi</option>
-                            <option value="Mardi">Mardi</option>
-                            <option value="Mercredi">Mercredi</option>
-                            <option value="Jeudi">Jeudi</option>
-                            <option value="Vendredi">Vendredi</option>
-                            <option value="Samedi">Samedi</option>
-                            <option value="Dimanche">Dimanche</option>
-                        </select>
+                        <Select
+                          name="client_id"
+                          onChange={(selectedOption) => handleChange(selectedOption, "weekday")}
+                          options={missionWeek.map((item) => ({
+                            value: item.id,
+                            label: item.days
+                          }))}
+                      />
                     </div>
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Heure d'arrivée<span>*</span></label>
-                    <input type="time"  className="input-form" onChange={(e)=>setStartTime(e.target.value)} />
+                    <input type="time" name='start_time'  className="input-form" onChange={(e) => handleTimeChange(e.target.value, "start_time")} />
                   </div>
                 </div>
 
                 <div className="form-rows">
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Heure de départ<span>*</span></label>
-                    <input type="time" className="input-form" onChange={(e)=>setEndTime(e.target.value)} />
+                    <input type="time" name='end_time' className="input-form" onChange={(e) => handleTimeChange(e.target.value, "end_time")} />
                 </div>
                 </div>
                         

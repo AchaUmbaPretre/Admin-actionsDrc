@@ -47,6 +47,10 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { AuthContext } from '../../context/authContext';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -91,6 +95,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Topbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const navigate = useNavigate();
+  const [error,setError] = useState('');
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -98,18 +104,42 @@ export default function Topbar() {
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  const { Logout } = React.useContext(AuthContext);
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
 
+  const handleMenu = async() => {
+    try {
+      await Logout();
+
+      Swal.fire({
+        title: 'Success',
+
+        text: "L'application a été déconnectéé avec succès",
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+      
+      navigate('/');
+      setAnchorEl(null);
+      handleMobileMenuClose();
+    } catch (error) {
+      Swal.fire({
+        title: 'Error',
+        text: error.response.data,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      
+      setError(error.response.data);
+    }
+  } 
+
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
   };
 
   const menuId = 'primary-search-account-menu';
@@ -130,7 +160,7 @@ export default function Topbar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenu}>Déconnexion</MenuItem>
     </Menu>
   );
 
@@ -187,7 +217,7 @@ export default function Topbar() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 2 }}>
       <AppBar position="fixed">
         <Toolbar>
           <IconButton
@@ -225,10 +255,10 @@ export default function Topbar() {
             </IconButton>
             <IconButton
               size="large"
-              aria-label="show 17 new notifications"
+              aria-label="show 2 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={2} color="error">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
@@ -242,18 +272,6 @@ export default function Topbar() {
               color="inherit"
             >
               <AccountCircle />
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
             </IconButton>
           </Box>
         </Toolbar>
