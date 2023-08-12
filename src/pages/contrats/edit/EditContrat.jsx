@@ -30,7 +30,7 @@ const handleChange = (e) => {
     }
     fetchData()
 }, [id]);
-    console.log(data)
+    
 /*   const handleClick = async (e) => {
     e.preventDefault();
 

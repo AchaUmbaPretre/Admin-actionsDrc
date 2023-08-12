@@ -44,6 +44,7 @@ console.log(status, clientId)
   fetchData()
   }, [])
 
+
   useEffect(()=>{
     
     const fetchData = async ()=> {
@@ -117,7 +118,7 @@ console.log(status, clientId)
                     </div>
                     <div className="form-row">
                       <label htmlFor="" className="label-form">Date de la facture <span>*</span></label>
-                      <input type="date" name="address" className="input-form" onChange={(e)=>setInvoiceDate(e.target.value)}  />
+                      <input type="date" name="" className="input-form" onChange={(e)=>setInvoiceDate(e.target.value)}  />
                     </div>
                 </div>
 

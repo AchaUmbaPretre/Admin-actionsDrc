@@ -122,7 +122,7 @@ const Facturation = () => {
         return(
           <>
             <div className="table-icons-row">
-                <Link to={`/users/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
+                <Link to={`/facturationPut/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
                 <VisibilityIcon className='userEye' onClick={() => navigate(`/facturationView/${params.row.id}`)}/>
                 <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
             </div>

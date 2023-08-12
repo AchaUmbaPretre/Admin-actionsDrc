@@ -33,6 +33,7 @@ import HoraireView from './pages/horaire/view/HoraireView';
 import PresenceView from './pages/presence/view/PresenceView';
 import FactureView from './pages/faturation/view/FactureView';
 import MissionEdit from './pages/mission/edite/MissionEdit';
+import FatureEdit from './pages/faturation/edit/FatureEdit';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -113,6 +114,10 @@ function App() {
         {
           path: '/facturationView/:id',
           element: <FactureView />
+        },
+        {
+          path: '/facturationPut/:id',
+          element: <FatureEdit />
         },
         {
           path: '/listeConge',

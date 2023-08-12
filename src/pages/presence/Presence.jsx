@@ -80,12 +80,12 @@ const Presence = () => {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'first_name', headerName: 'employé(e)', width: 120 },
+    { field: 'first_name', headerName: 'employé(e)', width: 150 },
 
     {
       field: 'company_name',
       headerName: 'Client',
-      width: 130 
+      width: 150 
     },
     {
         field: 'date',
@@ -97,18 +97,17 @@ const Presence = () => {
     {
         field: 'check_in_time',
         headerName: "Heure d'arrivée",
-        width: 140 
+        width: 150 
     },
     {
       field: 'check_out_time',
       headerName: 'Heure de départ',
-      width: 140 
+      width: 150 
     },
     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
         return(
           <>
             <div className="table-icons-row">
-                <Link to={`/users/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
                 <VisibilityIcon className='userEye' onClick={() => navigate(`/presenceView/${params.row.id}`)}/>
                 <DeleteOutline className="userListDelete" onClick={()=>{HandleDelete(params.row.id)}} />
             </div>
