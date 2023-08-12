@@ -77,6 +77,8 @@ console.log(status, clientId)
         icon: 'success',
         title: 'Facture créée avec succès',
         text: `ID de la facture : ${invoiceId}`,
+      }).then(() => {
+        Swal.close(); 
       });
 
       setClientId('');
