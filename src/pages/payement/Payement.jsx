@@ -17,6 +17,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
+import PayeForm from './form/PayeForm';
 
 const style = {
     position: 'absolute',
@@ -50,25 +51,27 @@ const Payement = () => {
 
   
      const columns = [
-        { field: 'id', headerName: 'ID', width: 50 },
-        { field: 'invoice_id', headerName: 'ID_facture', width: 160 },
+        { field: 'id', headerName: 'ID', width: 100 },
+        { field: 'invoice_id', headerName: 'ID_facture', width: 180 },
 
         {
           field: 'payment_date',
           headerName: 'Date de payement',
-          width: 160,
+          width: 180,
+          valueGetter: (params) =>
+          format(new Date(params.row.payment_date), 'yyyy-MM-dd'),
         },
         {
             field: 'amount',
             headerName: 'Montant',
-            width: 160,
+            width: 180,
         },
         {
           field: 'payment_method',
           headerName: "Methode de payement",
-          width: 160,
+          width: 180,
       },
-        {field: 'action', HeaderName: 'Action', width: 180, renderCell: (params) =>{
+        {field: 'action', HeaderName: 'Action', width: 190, renderCell: (params) =>{
             return(
               <>
                 <div className="table-icons-row">
@@ -161,7 +164,7 @@ const Payement = () => {
                     <Fade in={open}>
                         <Box sx={style}>
                             <Box component="form" sx={{'& > :not(style)': { m: 1, width: '250ch' }, display:'flex', flexWrap:'wrap'}} noValidate autoComplete="off">
-                              
+                              <PayeForm/>
                             </Box>
                         </Box>
                     </Fade>
