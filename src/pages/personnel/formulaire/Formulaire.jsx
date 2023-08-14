@@ -57,18 +57,6 @@ const Formulaire = () => {
           console.log(error)
         }
       }
-/*    const handleClick = async(e) =>{
-        e.preventDefault();
-        const imgUrl = await upload();
-
-        try{
-            await axios.post(`http://localhost:8080/api/admin/employe`,{...data, source: imgUrl })
-            navigate("/personnel")
-        }
-        catch(error){
-            console.log(error)
-        }
-    } */
     console.log(data)
  
     const handleClick = async (e) => {

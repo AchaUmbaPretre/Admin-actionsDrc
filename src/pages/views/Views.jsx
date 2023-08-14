@@ -3,6 +3,8 @@ import './views.scss'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios';
 import userImg from './../../assets/user.png'
+import moment from 'moment';
+
 const Views = () => {
     const [data, setData] = useState({});
     const {pathname} = useLocation();
@@ -20,6 +22,8 @@ const Views = () => {
         }
         fetchData()
     }, []);
+
+    const formattedDateOfBirth = moment(data.date_of_birth).format('DD/MM/YYYY');
 
   return (
     <>
@@ -46,7 +50,7 @@ const Views = () => {
                         <div className="views-rows">
                             <div className="views-left">
                                 <span className="view-label">Date de naissance : </span>
-                                <span className="view-result">{data.date_of_birth}</span>
+                                <span className="view-result">{formattedDateOfBirth}</span>
                             </div>
                             <div className="views-right">
                                 <span className="view-label">Genre : </span>

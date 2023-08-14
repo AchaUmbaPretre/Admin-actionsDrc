@@ -97,6 +97,13 @@
                 transform: scale(1.1);
             }
         }
+        .userListAjout{
+            color: royalblue;
+            cursor: pointer;
+            &:hover{
+                transform: scale(1.1);
+            }
+        }
     }
     .contrats-left{
         display: flex;

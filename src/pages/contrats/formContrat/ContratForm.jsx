@@ -124,6 +124,7 @@ console.log(data)
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Type du contrat <span>*</span></label>
                             <select id="pet-select" name="contract_type" className="input-form" onChange={handleChange}>
+                            <option >selectionnez le type du contrat</option>
                             {typeContrat?.map(item =>( 
                                 <option value={item.nom}>{item.nom}</option>
                               ))}
@@ -150,6 +151,7 @@ console.log(data)
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Avantages sociaux du contrat <span>*</span></label>
                             <select id="pet-select" name="benefits" onChange={handleChange} className="input-form">
+                            <option >selectionnez l'avantage</option>
                               {selectedAv?.map(item =>( 
                                 <option value={item.avantage_1}>{item.avantage_1}</option>
                               ))}
@@ -158,6 +160,7 @@ console.log(data)
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Status du contrat <span>*</span></label>
                             <select id="pet-select" name="contract_status" className="input-form" onChange={handleChange}>
+                            <option >selectionnez le status du contrat</option>
                             {statusContrat?.map(item =>( 
                                 <option value={item.nomContrat}>{item.nomContrat}</option>
                               ))}
