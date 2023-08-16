@@ -39,7 +39,9 @@
                 flex: 2;
                 height: 250px;
                 width: 250px;
+                object-fit: cover;
             }
+
             .views-container{
                 flex: 5;
                 margin: 0 auto;
@@ -63,10 +65,17 @@
                             padding: 10px 0;
                             font-size: .9rem;
                             color: #555;
+                            display: flex;
+                            align-items: center;
+                            .icon-person{
+                                margin-right: 10px;
+                            }
                         }
                         .view-result{
                             font-size: .9rem;
                             color: #555;
+                            display: flex;
+                            align-items: center;
                         }
                     }
                     .views-right{
@@ -79,6 +88,11 @@
                             padding: 10px 0;
                             font-size: .9rem;
                             color: #555;
+                            display: flex;
+                            align-items: center;
+                            .icon-person{
+                                margin-right: 10px;
+                            }
                         }
                         .view-result{
                             font-size: .9rem;

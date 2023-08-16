@@ -16,17 +16,17 @@
                 display: flex;
                 align-items: center;
                 gap: 10px;
-                padding: 5px;
+                padding: 5px 10px;
                 cursor: pointer;
                 border-radius: 10px;
                 a{
                     font-size: 1rem;
                     color: #d6d3d3;
-                    &:hover{
-                        color: #807c7c;
-                    }
                 }
             }
+            .sidenav-li.active {
+                background: #3e4b77;
+              }
         }
     }
 }

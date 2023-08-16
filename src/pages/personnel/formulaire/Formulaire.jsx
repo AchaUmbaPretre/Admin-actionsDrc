@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './formulaire.scss'
 import { useNavigate } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
@@ -8,6 +8,7 @@ import axios from 'axios';
 import moment from 'moment';
 import 'moment/locale/fr';
 import Swal from 'sweetalert2';
+import Select from 'react-select';
 
 moment.locale('fr');
 
@@ -19,6 +20,10 @@ const Formulaire = () => {
     const [source, setSource] = useState('import');
     const [message, setMessage] = useState(null);
     const [photo, setPhoto] = useState(null);
+    const [competenceOption, setCompetenceOption] = useState([]);
+    const [type, setType] = useState([]);
+    const [niveau, setNiveau] = useState([]);
+    const [statusE, setStatusE] = useState([]);
     const webcamRef = useRef(null);
   
     const handleFileChange = (event) => {
@@ -27,10 +32,14 @@ const Formulaire = () => {
     const handleSourceChange = (event) => {
         setSource(event.target.value);
       };
-    const handleChange = (e) => {
+      const handleSelectChange = (selectedOption, fieldName) => {
+        setData((prev) => ({ ...prev, [fieldName]: selectedOption.value }));
+      };
+      
+      const handleChange = (e) => {
         setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
       };
-
+        console.log(data)
       const capture = () => {
         const imageSrc = webcamRef.current.getScreenshot();
         console.log(imageSrc);
@@ -86,6 +95,55 @@ const Formulaire = () => {
         }
       }
 
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const res = await axios.get("http://localhost:8080/api/admin/competence");
+            setCompetenceOption(res.data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
+
+      
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const res = await axios.get("http://localhost:8080/api/admin/niveau");
+            setNiveau(res.data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const res = await axios.get("http://localhost:8080/api/admin/typepiece");
+            setType(res.data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const res = await axios.get("http://localhost:8080/api/admin/status");
+            setStatusE(res.data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
+
   return (
     <>
         <div className="formulaire-person">
@@ -136,28 +194,39 @@ const Formulaire = () => {
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Type du pièce <span>*</span></label>
-                                <select id="pet-select" name="identification_type" required className='form-select' onChange={handleChange}>
-                                    <option value="carte d'identité" defaultValue={"carte d'identité"}>Carte d'identité</option>
-                                    <option value="passeport">passeport</option>
-                                    <option value="permis de conduire">Permis de conduire</option>
-                                </select>
+                                <Select
+                                    name="identification_type"
+                                    onChange={(selectedOption) => handleSelectChange(selectedOption, "identification_type")}
+                                    options={type.map((item) => ({
+                                        value: item.id,
+                                        label: item.nom_type
+                                    }))}
+                                />
                             </div>
                         </div>
 
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Competence <span>*</span></label>
-                                <input type="text" name='skills' required className="input-form" onChange={handleChange} placeholder="Entrez tes compténces.."  />
+                                <Select
+                                    name="skills"
+                                    onChange={(selectedOption) => handleSelectChange(selectedOption, "skills")}
+                                    options={competenceOption.map((item) => ({
+                                        value: item.id,
+                                        label: item.nom
+                                    }))}
+                                />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Niveau d'étude <span>*</span></label>
-                                <select id="pet-select" name="certifications" required className='form-select' onChange={handleChange}>
-                                    <option value="licence">Licence</option>
-                                    <option value="graduat">Graduat</option>
-                                    <option value="humanité">Humanité</option>
-                                    <option value="secondaire">Secondaire</option>
-                                    <option value="primaire">Primaire</option>
-                                </select>
+                                <Select
+                                    name="certifications"
+                                    onChange={(selectedOption) => handleSelectChange(selectedOption, "certifications")}
+                                    options={niveau.map((item) => ({
+                                        value: item.id,
+                                        label: item.titre
+                                    }))}
+                                />
                             </div>
                         </div>
                         <div className="form-rows">
@@ -167,10 +236,14 @@ const Formulaire = () => {
                             </div>
                             <div className="form-row">
                                 <label htmlFor="pet-select" className="label-form">Status <span>*</span></label>
-                                <select id="pet-select" className='form-select' required name="employment_status" onChange={handleChange}>
-                                    <option value="interne">Interne</option>
-                                    <option value="externe">Externe</option>
-                                </select>
+                                <Select
+                                    name="employment_status"
+                                    onChange={(selectedOption) => handleSelectChange(selectedOption, "employment_status")}
+                                    options={statusE.map((item) => ({
+                                        value: item.id,
+                                        label: item.nom_status
+                                    }))}
+                                />
                             </div>
                         </div>
                         <div className="form-rows">

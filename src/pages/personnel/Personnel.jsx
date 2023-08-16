@@ -20,6 +20,7 @@ import Formulaire from './formulaire/Formulaire';
 import Swal from 'sweetalert2'
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
+import userImg from './../../../src/assets/user.png'
 
 
 const style = {
@@ -89,9 +90,21 @@ const Personnel = () => {
 };
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'first_name', headerName: 'Nom', width: 110 },
-        { field: 'last_name', headerName: 'Prenom', width: 100 },
+        { field: 'id', headerName: 'ID', width: 60 },
+        { field: 'first_name', headerName: 'Nom', width: 100, renderCell: (params) =>{
+          return <div className="userList">
+                    <img src={params.row.source ? `../upload/${params.row.source}`: userImg} alt="" className="userImg" />
+                    {console.log(params.row.source)}
+                    {params.row.first_name}
+                 </div>
+        }},
+        {
+          field: 'last_name',
+          headerName: 'Postnom',
+          type: 'number',
+          width: 100,
+        },
+        
         {
           field: 'phone_number',
           headerName: 'Telephone',
@@ -102,7 +115,7 @@ const Personnel = () => {
             field: 'email',
             headerName: 'Email',
             type: 'number',
-            width: 120,
+            width: 110,
           },
         {
             field: 'date_of_birth',
@@ -112,13 +125,13 @@ const Personnel = () => {
             format(new Date(params.row.date_of_birth), 'yyyy-MM-dd'),
         },
         { field: 'gender', headerName: 'Genre', width: 50 },
-        { field: 'phone_number', headerName: 'Telephone', width: 100 },
+        { field: 'address', headerName: 'Adresse', width: 110 },
         {
           field: 'skills',
           headerName: 'Competence',
           width: 120,
         },
-        {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
+        {field: 'action', HeaderName: 'Action', width: 120, renderCell: (params) =>{
             return(
               <>
                 <div className="table-icons-row">

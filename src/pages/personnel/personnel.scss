@@ -54,6 +54,17 @@
             box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
         }
     }
+    .userList{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        object-fit: cover;
+        .userImg{
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+    }
     .table-icons-row{
         display: flex;
         gap: 10px;
