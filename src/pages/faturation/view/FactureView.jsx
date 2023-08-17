@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import '../../clientTab/clientView/clientView.scss'
 import { CalendarMonth, Person2Outlined, Person3Outlined } from '@mui/icons-material';
 import config from '../../../config'
+import moment from 'moment';
 
 const FactureView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -24,6 +25,9 @@ const FactureView = () => {
         fetchData()
     }, [id]);
 
+    const formattedDate = moment(data?.due_date).format('DD/MM/YYYY');
+    const formattedDateVoice = moment(data?.invoice_date).format('DD/MM/YYYY');
+
   return (
     <>
         <div className="clientView">
@@ -36,12 +40,12 @@ const FactureView = () => {
                     </div>
                     <div className="client-row">
                         <span className="client-nom"><Person3Outlined/>  Date de la facture :</span>
-                        <span className="client-nom">{data?.invoice_date}</span>
+                        <span className="client-nom">{formattedDateVoice}</span>
                     </div>
 
                     <div className="client-row">
                         <span className="client-nom"><CalendarMonth/>  Date d'échéance :</span>
-                        <span className="client-nom">{data?.due_date}</span>
+                        <span className="client-nom">{formattedDate}</span>
                     </div>
 
                     <div className="client-row">

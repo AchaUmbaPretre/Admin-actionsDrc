@@ -15,6 +15,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
+import config from '../../config'
 
 const style = {
     position: 'absolute',
@@ -31,7 +32,7 @@ const style = {
   }
 
 const HoraireAll = () => {
-
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
