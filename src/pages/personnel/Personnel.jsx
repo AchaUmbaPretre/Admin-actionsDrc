@@ -8,53 +8,30 @@ import PeopleIcon from '@mui/icons-material/People';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useState } from 'react';
 import * as React from 'react';
-import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
-import moment from 'moment/moment';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
-import Formulaire from './formulaire/Formulaire';
 import Swal from 'sweetalert2'
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import userImg from './../../../src/assets/user.png'
-
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 1000,
-    bgcolor: 'background.paper',
-    border: '1px solid #FFF',
-    boxShadow: 24,
-    p: 4,
-    borderRadius: 2,
-    outline: 'none'
-  }
+import config from '../../config'
 
 const Personnel = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
+
     const [data, setData] = useState({});
-    const [name,setName] = useState();
-    const [date, setDate] = useState();
     const [loading, setLoading] = useState(true);
     const [showSpinner, setShowSpinner] = useState(true);
     const spinnerDuration = 2000;
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
     const navigate = useNavigate();
 
-
+// eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=>{
-
         const fetchData = async ()=> {
             try{
-                const res = await axios.get("http://localhost:8080/api/admin");
+                const res = await axios.get(`${DOMAIN}/api/admin`);
                 setData(res.data)
                 setLoading(false);
                 setTimeout(() => {
@@ -81,7 +58,7 @@ const Personnel = () => {
     });
 
     if (result.isConfirmed) {
-      await axios.delete(`http://localhost:8080/api/admin/employe/${id}`);
+      await axios.delete(`${DOMAIN}/api/admin/employe/${id}`);
       window.location.reload();
     }
   } catch (err) {

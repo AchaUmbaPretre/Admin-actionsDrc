@@ -6,8 +6,10 @@ import userImg from '../../../assets/user.png'
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Webcam from 'react-webcam';
+import config from './../../../config'
 
 const Edit = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
 
 const [data, setData] = useState({});
 const {first_name, last_name,date_of_birth, gender,address, phone_number,email, identification_number,identification_type,skills,certifications,employment_status,source} = data;
@@ -15,7 +17,6 @@ const location = useLocation();
 const navigate = useNavigate();
 const id = location.pathname.split("/")[2];
 const [sources, setSources] = useState('import');
-const [message, setMessage] = useState(null);
 const [photo, setPhoto] = useState(null);
 const webcamRef = useRef(null);
   
@@ -49,7 +50,7 @@ const handleChange = (e) => {
   useEffect(()=>{
     const fetchData = async ()=> {
         try{
-            const res = await axios.get(`http://localhost:8080/api/admin/views/${id}`);
+            const res = await axios.get(`${DOMAIN}/api/admin/views/${id}`);
             setData(res.data[0])
     
           }catch(error){
@@ -63,7 +64,7 @@ const handleClick = async (e) => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:8080/api/admin/employe/${id}`, data);
+      await axios.put(`${DOMAIN}/api/admin/employe/${id}`, data);
       Swal.fire({
         title: 'Success',
         text: 'Employé mis à jour avec succès!',

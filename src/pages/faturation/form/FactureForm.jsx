@@ -4,9 +4,12 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
+import config from '../../../config'
 
 
 const FactureForm = () => {
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN
+
   const navigate = useNavigate();
   const [data, setData] = useState({});
   const [clientId, setClientId] = useState('');
@@ -34,8 +37,8 @@ console.log(status, clientId)
     
     const fetchData = async ()=> {
       try{
-          const res = await axios.get("http://localhost:8080/api/admin/client");
-          setOptionsClient(res.data)
+          const {data} = await axios.get(`${DOMAIN}/api/admin/client`);
+          setOptionsClient(data)
   
         }catch(error){
           console.log(error)
@@ -49,8 +52,8 @@ console.log(status, clientId)
     
     const fetchData = async ()=> {
       try{
-          const res = await axios.get("http://localhost:8080/api/admin/status");
-          setOptionsStatus(res.data)
+          const {data} = await axios.get(`${DOMAIN}/api/admin/status`);
+          setOptionsStatus(data)
   
         }catch(error){
           console.log(error)
@@ -64,7 +67,7 @@ console.log(status, clientId)
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8080/api/admin/factures', {
+      const response = await axios.post(`${DOMAIN}/api/admin/factures`, {
         client_id: clientId,
         invoice_date: invoiceDate,
         due_date: dueDate,

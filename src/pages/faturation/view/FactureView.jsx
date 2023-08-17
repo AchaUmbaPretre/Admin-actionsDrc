@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import '../../clientTab/clientView/clientView.scss'
-import { CalendarMonth, CodeOffOutlined, ContactPage, EmailOutlined, LoginOutlined, MapsHomeWorkOutlined, PasswordOutlined, Person2Outlined, Person3Outlined, PhoneAndroidOutlined, TimeToLeaveOutlined } from '@mui/icons-material';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { CalendarMonth, Person2Outlined, Person3Outlined } from '@mui/icons-material';
+import config from '../../../config'
 
 const FactureView = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const [data, setData] = useState({});
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
@@ -13,7 +14,7 @@ const FactureView = () => {
     useEffect(()=>{
         const fetchData = async ()=> {
             try{
-                const res = await axios.get(`http://localhost:8080/api/admin/factureAllView/${id}`);
+                const res = await axios.get(`${DOMAIN}/api/admin/factureAllView/${id}`);
                 setData(res.data[0])
         
               }catch(error){
@@ -21,7 +22,8 @@ const FactureView = () => {
               };
         }
         fetchData()
-    }, []);
+    }, [id]);
+
   return (
     <>
         <div className="clientView">

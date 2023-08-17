@@ -10,7 +10,6 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import axios from 'axios';
 import { DeleteOutline} from '@mui/icons-material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from "react-router-dom";
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import ContratForm from './formContrat/ContratForm';
@@ -18,6 +17,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
+import config from './../../config'
 
 const style = {
     position: 'absolute',
@@ -35,10 +35,10 @@ const style = {
 
 
 const Contrats = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const navigate = useNavigate();
     const [data, setData] = useState({});
     const [date, setDate] = useState('');
-    const [datefin, setDateFin] = useState('');
     const [inputs, setInputs] = useState({});
     const [selected, setSelected] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -47,10 +47,6 @@ const Contrats = () => {
       setSelected(newSelection.selectionModel);
     };
     
-
-    const handleChange = (e) =>{
-        setInputs(prev=>({...prev, [e.target.name]: e.target.value}))
-    }
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -112,12 +108,13 @@ const Contrats = () => {
         }},
       ]; 
 
+      // eslint-disable-next-line react-hooks/exhaustive-deps
        useEffect(()=>{
 
         const fetchData = async ()=> {
             try{
-                const res = await axios.get("http://localhost:8080/api/admin/contrat");
-                setData(res.data)
+                const {data} = await axios.get(`${DOMAIN}/api/admin/contrat`);
+                setData(data)
                 setLoading(false);
               }catch(error){
                 console.log(error)
@@ -126,19 +123,6 @@ const Contrats = () => {
         fetchData()
      }, [])
 
-     
-
-      const handleClick = async(e) =>{
-      e.preventDefault();
-
-      try{
-          await axios.post(`http://localhost:8080/api/admin/contrat`,{...inputs, 	start_date: date, end_date:datefin})
-          navigate("/contrats")
-      }
-      catch(error){
-          console.log(error)
-      }
-  }
 
   const handleDelete = async (id) => {
     try {
@@ -153,7 +137,7 @@ const Contrats = () => {
       });
   
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:8080/api/admin/contrat/${id}`);
+        await axios.delete(`${DOMAIN}/api/admin/contrat/${id}`);
         window.location.reload();
       }
     } catch (err) {
@@ -161,14 +145,6 @@ const Contrats = () => {
     }
   };
 
-/*   const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://localhost:8080/api/admin/contrat/${id}`);
-      window.location.reload()
-    } catch (err) {
-      console.log(err);
-    }
-  }; */
   return (
     <>
               <div className="contrats">

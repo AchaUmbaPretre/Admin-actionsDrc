@@ -1,14 +1,17 @@
 import './affectation.scss'
 import { DataGrid } from '@mui/x-data-grid'
-import { DeleteOutline} from '@mui/icons-material';
+import { DeleteOutline, Domain} from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import Swal from 'sweetalert2'
 import axios from 'axios';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
+import config from '../../config';
 
 const Affectation = () => {
+
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
 
   const [data, setData] = useState({});
   const [open, setOpen] = useState(false);
@@ -70,7 +73,7 @@ const Affectation = () => {
 
     const fetchDatas = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/admin/allaffectation");
+        const res = await axios.get(`${DOMAIN}/api/admin/allaffectation`);
         setData(res.data)
         setLoading(false);
 
@@ -94,7 +97,7 @@ const Affectation = () => {
     });
 
     if (result.isConfirmed) {
-      await axios.delete(`http://localhost:8080/api/admin/deleteAff/${id}`);
+      await axios.delete(`${DOMAIN}/api/admin/deleteAff/${id}`);
       window.location.reload();
     }
   } catch (err) {

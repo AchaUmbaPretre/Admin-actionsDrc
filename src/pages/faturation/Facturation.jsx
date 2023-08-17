@@ -16,6 +16,7 @@ import FactureForm from './form/FactureForm';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
+import config from '../../config'
 
 const style = {
   position: 'absolute',
@@ -32,7 +33,7 @@ const style = {
 }
 
 const Facturation = () => {
-
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState([]);
   const [optionsClient, setOptionsClient] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -41,26 +42,14 @@ const Facturation = () => {
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
 
-/*   useEffect(()=>{
 
-    const fetchData = async ()=> {
-        try{
-            const res = await axios.get("http://localhost:8080/api/admin/facture");
-            setData(res.data)
-            setLoading(false)
-          }catch(error){
-            console.log(error)
-          };
-    }
-    fetchData()
- }, []) */
-
+// eslint-disable-next-line react-hooks/exhaustive-deps
  useEffect(()=>{
 
   const fetchData = async ()=> {
       try{
-          const res = await axios.get("http://localhost:8080/api/admin/factureAll");
-          setData(res.data)
+          const {data} = await axios.get(`${DOMAIN}/api/admin/factureAll`);
+          setData(data)
           setLoading(false)
         }catch(error){
           console.log(error)
@@ -82,7 +71,7 @@ const Facturation = () => {
       });
   
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:8080/api/admin/facture/${id}`);
+        await axios.delete(`${DOMAIN}/api/admin/facture/${id}`);
         window.location.reload();
       }
     } catch (err) {

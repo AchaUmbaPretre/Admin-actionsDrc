@@ -13,7 +13,7 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { useState } from 'react';
 
 const Sidebar = () => {
-  const [activeItem, setActiveItem] = useState('');
+  const [activeItem, setActiveItem] = useState('Accueil');
   return (
     <>
         <div className="sidebar">

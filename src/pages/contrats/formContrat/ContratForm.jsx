@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import './contratForm.scss'
+import config from '../../../config'
 
 const ContratForm = () => {
+const DOMAIN = config.REACT_APP_SERVER_DOMAIN
 
 const [data, setData] = useState({});
 const navigate = useNavigate();
@@ -17,23 +19,12 @@ const handleChange = (e) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-/*   const handleClick = async (e) => {
-    e.preventDefault();
-
-    try {
-      await axios.post(`http://localhost:8080/api/admin/contrat`, data);
-      navigate("/contrats");
-    } catch (err) {
-
-      console.log(err);
-    }
-  } */
 
   const handleClick = async (e) => {
     e.preventDefault();
 
     try {
-      await axios.post(`http://localhost:8080/api/admin/contrat`, data);
+      await axios.post(`${DOMAIN}/api/admin/contrat`, data);
 
       Swal.fire({
         title: 'Success',
@@ -59,8 +50,8 @@ const handleChange = (e) => {
 
     const fetchData = async ()=> {
         try{
-            const res = await axios.get("http://localhost:8080/api/admin/avantages");
-            setSelectedAv(res.data)
+            const {data} = await axios.get(`${DOMAIN}/api/admin/avantages`)
+            setSelectedAv(data)
     
           }catch(error){
             console.log(error)
@@ -73,8 +64,8 @@ const handleChange = (e) => {
 
   const fetchData = async ()=> {
       try{
-          const res = await axios.get("http://localhost:8080/api/admin/avantages");
-          setSelectedAv(res.data)
+          const {data} = await axios.get(`${DOMAIN}/api/admin/avantages`);
+          setSelectedAv(data)
   
         }catch(error){
           console.log(error)
@@ -87,7 +78,7 @@ useEffect(()=>{
 
   const fetchData = async ()=> {
       try{
-          const res = await axios.get("http://localhost:8080/api/admin/contratType");
+          const res = await axios.get(`${DOMAIN}/api/admin/contratType`);
           setTypeContrat(res.data)
   
         }catch(error){
@@ -101,8 +92,8 @@ useEffect(()=>{
 
   const fetchData = async ()=> {
       try{
-          const res = await axios.get("http://localhost:8080/api/admin/statusContrat");
-          setStatusContrat(res.data)
+          const {data} = await axios.get(`${DOMAIN}/api/admin/statusContrat`);
+          setStatusContrat(data)
   
         }catch(error){
           console.log(error)
@@ -111,7 +102,6 @@ useEffect(()=>{
   fetchData()
 }, [])
 
-console.log(data)
   return (
     <>
         <div className="contratForm">

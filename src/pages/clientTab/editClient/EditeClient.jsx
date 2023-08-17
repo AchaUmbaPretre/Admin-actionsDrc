@@ -3,9 +3,11 @@ import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import config from '../../../config'
 
 const EditeClient = () => {
-const location = useLocation();
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN
+  const location = useLocation();
   const navigate = useNavigate();
   const [data, setData] = useState({});
   const id = location.pathname.split("/")[2];
@@ -17,7 +19,7 @@ const location = useLocation();
 useEffect(()=>{
     const fetchData = async ()=> {
         try{
-            const res = await axios.get(`http://localhost:8080/api/admin/viewsClient/${id}`);
+            const res = await axios.get(`${DOMAIN}/api/admin/viewsClient/${id}`);
             setData(res.data[0])
     
           }catch(error){
@@ -31,8 +33,8 @@ useEffect(()=>{
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:8080/api/admin/client/${id}`, data);
-      navigate("/");
+      await axios.put(`${DOMAIN}/api/admin/client/${id}`, data);
+      navigate("/client");
     } catch (err) {
 
       console.log(err);

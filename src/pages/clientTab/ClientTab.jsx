@@ -3,7 +3,6 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { DataGrid } from '@mui/x-data-grid'
 import { Link } from 'react-router-dom';
-import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import { DeleteOutline} from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
@@ -17,6 +16,7 @@ import axios from 'axios';
 import {useNavigate} from 'react-router-dom'
 import Swal from 'sweetalert2'
 import { FadeLoader } from 'react-spinners';
+import config from '../../config'
 
 const style = {
   position: 'absolute',
@@ -32,6 +32,8 @@ const style = {
 }
 
 const ClientTab = () => {
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN
+
   const navigate = useNavigate();
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -86,8 +88,8 @@ const ClientTab = () => {
     
     const fetchData = async ()=> {
       try{
-          const res = await axios.get("http://localhost:8080/api/admin/client");
-          setData(res.data)
+          const {data} = await axios.get(`${DOMAIN}/api/admin/client`);
+          setData(data)
           setLoading(false);
   
         }catch(error){
@@ -97,16 +99,7 @@ const ClientTab = () => {
   fetchData()
   }, [])
 
-  
 
-/*   const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://localhost:8080/api/admin/client/${id}`);
-      window.location.reload()
-    } catch (err) {
-      console.log(err);
-    }
-  }; */
   const handleDelete = async (id) => {
     try {
       const result = await Swal.fire({
@@ -120,7 +113,7 @@ const ClientTab = () => {
       });
   
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:8080/api/admin/client/${id}`);
+        await axios.delete(`${DOMAIN}/api/admin/client/${id}`);
         window.location.reload();
       }
     } catch (err) {

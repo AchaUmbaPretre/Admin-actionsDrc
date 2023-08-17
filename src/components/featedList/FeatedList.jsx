@@ -1,20 +1,16 @@
 import './featedList.scss'
 import { DataGrid } from '@mui/x-data-grid';
-import { Link } from 'react-router-dom';
-import {data} from '../../data'
 import { useEffect, useState } from 'react'
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import InfoIcon from '@mui/icons-material/Info';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import { useNavigate } from 'react-router-dom';
-import { DeleteOutline} from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import axios from 'axios';
 import { FadeLoader } from 'react-spinners';
 import { format } from 'date-fns';
+import config from '../../config'
 
 const FeatedList = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showSpinner, setShowSpinner] = useState(true);
@@ -67,7 +63,7 @@ const FeatedList = () => {
 
         const fetchData = async ()=> {
             try{
-                const res = await axios.get("http://localhost:8080/api/admin");
+                const res = await axios.get(`${DOMAIN}/api/admin`);
                 setData(res.data)
                 setLoading(false);
                 setTimeout(() => {

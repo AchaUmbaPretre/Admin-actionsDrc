@@ -5,18 +5,21 @@ import ShowChartIcon from '@mui/icons-material/ShowChart';
 import axios from 'axios';
 import GroupsIcon from '@mui/icons-material/Groups';
 import FlakyIcon from '@mui/icons-material/Flaky';
-
+import config from '../../config'
 const FeatedInfo = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
+
     const [data, setData] = useState([]);
     const [aff, setAff] = useState([]);
     const [client, setClient] = useState([]);
     const [contrat, setContrat] = useState([]);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=>{
 
         const fetchData = async ()=> {
             try{
-                const res = await axios.get("http://localhost:8080/api/admin/count");
+                const res = await axios.get(`${DOMAIN}/api/admin/count`);
                 setData(res.data)
               }catch(error){
                 console.log(error)
@@ -25,13 +28,12 @@ const FeatedInfo = () => {
         fetchData()
      }, [])
 
-     console.log(data[0]?.total)
-
+     // eslint-disable-next-line react-hooks/exhaustive-deps
      useEffect(()=>{
 
         const fetchData = async ()=> {
             try{
-                const res = await axios.get("http://localhost:8080/api/admin/affectationCount");
+                const res = await axios.get(`${DOMAIN}/api/admin/affectationCount`);
                 setAff(res.data)
               }catch(error){
                 console.log(error)
@@ -40,11 +42,12 @@ const FeatedInfo = () => {
         fetchData()
      }, [])
 
+     // eslint-disable-next-line react-hooks/exhaustive-deps
      useEffect(()=>{
 
         const fetchData = async ()=> {
             try{
-                const res = await axios.get("http://localhost:8080/api/admin/clientCount");
+                const res = await axios.get(`${DOMAIN}/api/admin/clientCount`);
                 setClient(res.data)
               }catch(error){
                 console.log(error)
@@ -53,11 +56,12 @@ const FeatedInfo = () => {
         fetchData()
      }, [])
 
+     // eslint-disable-next-line react-hooks/exhaustive-deps
      useEffect(()=>{
 
         const fetchData = async ()=> {
             try{
-                const res = await axios.get("http://localhost:8080/api/admin/contratCount");
+                const res = await axios.get(`${DOMAIN}/api/admin/contratCount`);
                 setContrat(res.data)
               }catch(error){
                 console.log(error)

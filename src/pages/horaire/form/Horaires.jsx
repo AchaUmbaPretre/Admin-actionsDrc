@@ -6,8 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import axios from 'axios';
 import moment from 'moment';
+import config from './../../../config'
 
 const Horaires = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
 
     const [employeeId, setEmployeeId] = useState('');
     const [clientId, setClientId] = useState('');
@@ -38,8 +40,8 @@ const Horaires = () => {
 
         const fetchData = async () => {
           try {
-            const res = await axios.get("http://localhost:8080/api/admin");
-            setSelected(res.data)
+            const {data} = await axios.get(`${DOMAIN}/api/admin`);
+            setSelected(data)
     
           } catch (error) {
             console.log(error)
@@ -48,12 +50,13 @@ const Horaires = () => {
         fetchData()
       }, [])
 
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       useEffect(()=>{
     
         const fetchData = async ()=> {
           try{
-              const res = await axios.get("http://localhost:8080/api/admin/client");
-              setClientEtat(res.data)
+              const {data} = await axios.get(`${DOMAIN}/api/admin/client`);
+              setClientEtat(data)
       
             }catch(error){
               console.log(error)
@@ -62,11 +65,12 @@ const Horaires = () => {
       fetchData()
       }, [])
 
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       useEffect(()=>{
     
         const fetchData = async ()=> {
           try{
-              const res = await axios.get("http://localhost:8080/api/admin/missionWeek");
+              const res = await axios.get(`${DOMAIN}/api/admin/missionWeek`);
               setMissionWeek(res.data)
       
             }catch(error){
@@ -80,7 +84,7 @@ const Horaires = () => {
         e.preventDefault();
     
         try {
-          await axios.post(`http://localhost:8080/api/admin//horairesPost`,data);
+          await axios.post(`${DOMAIN}/api/admin//horairesPost`,data);
     
           Swal.fire({
             title: 'Success',

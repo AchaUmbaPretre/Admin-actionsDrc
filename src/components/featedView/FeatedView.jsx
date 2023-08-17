@@ -1,19 +1,15 @@
 import './featedView.scss'
 import GroupsIcon from '@mui/icons-material/Groups';
-import {data} from '../../data'
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import InfoIcon from '@mui/icons-material/Info';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { PhoneAndroid } from '@mui/icons-material';
 import { FadeLoader } from 'react-spinners';
 import { DataGrid } from '@mui/x-data-grid'
-import { DeleteOutline} from '@mui/icons-material';
-import {Link, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
+import config from './../../config'
 
 const FeatedView = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -22,7 +18,7 @@ const FeatedView = () => {
     
         const fetchData = async ()=> {
           try{
-              const res = await axios.get("http://localhost:8080/api/admin/client");
+              const res = await axios.get(`${DOMAIN}/api/admin/client`);
               setData(res.data)
               setLoading(false);
       

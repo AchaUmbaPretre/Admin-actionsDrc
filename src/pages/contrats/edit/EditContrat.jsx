@@ -4,9 +4,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import moment from 'moment';
+import config from '../../../config'
 
 const EditContrat = () => {
-
+const DOMAIN = config.REACT_APP_SERVER_DOMAIN
 const [data, setData] = useState({});
 const {contract_type, start_date,end_date, hourly_rate,benefits, contract_status} = data;
 const location = useLocation();
@@ -21,7 +22,7 @@ const handleChange = (e) => {
   useEffect(()=>{
     const fetchData = async ()=> {
         try{
-            const res = await axios.get(`http://localhost:8080/api/admin/contrat/views/${id}`);
+            const res = await axios.get(`${DOMAIN}/api/admin/contrat/views/${id}`);
             setData(res.data[0])
     
           }catch(error){
@@ -31,23 +32,12 @@ const handleChange = (e) => {
     fetchData()
 }, [id]);
     
-/*   const handleClick = async (e) => {
-    e.preventDefault();
-
-    try {
-      await axios.put(`http://localhost:8080/api/admin/contrat/${id}`, data);
-      navigate("/contrats");
-    } catch (err) {
-
-      console.log(err);
-    }
-  } */
 
   const handleClick = async (e) => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:8080/api/admin/contrat/${id}`, data);
+      await axios.put(`${DOMAIN}/api/admin/contrat/${id}`, data);
 
       Swal.fire({
         title: 'Success',

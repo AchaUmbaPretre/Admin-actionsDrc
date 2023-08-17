@@ -1,5 +1,5 @@
 import { DataGrid } from '@mui/x-data-grid'
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useEffect, useState } from 'react';
@@ -8,8 +8,10 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { Checkbox } from '@mui/material';
 import Swal from 'sweetalert2';
-const AddContrat = () => {
+import config from '../../../config'
 
+const AddContrat = () => {
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const navigate = useNavigate();
   const HandleDelete = (id) => {
     const dataFilter = data.filter(item => item.id !== id)
@@ -79,7 +81,7 @@ const AddContrat = () => {
 
     selectedx.map((dd) => {
       axios
-        .post('http://localhost:8080/api/admin/affectations', {
+        .post(`${DOMAIN}/api/admin/affectations`, {
           fonction_id: dd.fonction,
           emploie_id: dd.agent,
           contrat_id: dd.contrat
@@ -104,36 +106,11 @@ const AddContrat = () => {
     });
   };
 
-/*   const handleSubmit = async(e) => {
-    e.preventDefault();
-
-    const selectedItems = data.filter((item) => selected.includes(item.id));
-    const selectedIds = selectedItems.map((item) => item.id);
-    const newSelectedx = selectedItems.map((item) => ({ agent: item.id, fonction: selects.fonction, contrat: id }));
-    setSelectedx(selectedx.concat(newSelectedx));
-    setSelectedData([...selectedData, ...selectedItems]);
-
-  
-    selectedx.map((dd) => {
-        axios.post('http://localhost:8080/api/admin/affectations', 
-        {
-          fonction_id : dd.fonction,
-          emploie_id : dd.agent,
-          contrat_id : dd.contrat
-        }).then((response) => {
-           navigate('/contrats')
-        }).catch((error) => {
-          alert(error)
-        })
-    })
-  } */
-
-
     useEffect(() => {
 
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/admin");
+        const res = await axios.get(`${DOMAIN}/api/admin`);
         setData(res.data)
 
       } catch (error) {
@@ -148,8 +125,8 @@ const AddContrat = () => {
 
     const fetchDatas = async ()=> {
         try{
-            const res = await axios.get("http://localhost:8080/api/admin/fonction");
-            setSelectData(res.data)
+            const {data} = await axios.get(`${DOMAIN}/api/admin/fonction`);
+            setSelectData(data)
     
           }catch(error){
             console.log(error)

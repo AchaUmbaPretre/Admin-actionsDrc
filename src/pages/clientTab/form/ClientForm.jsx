@@ -3,8 +3,11 @@ import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import config from '../../../config';
+
 
 const ClientForm = () => {
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const navigate = useNavigate();
   const [data, setData] = useState({});
   const handleChange = (e) => {
@@ -15,7 +18,7 @@ const ClientForm = () => {
     e.preventDefault();
 
     try{
-        await axios.post(`http://localhost:8080/api/admin/clientPost`, data)
+        await axios.post(`${DOMAIN}/api/admin/clientPost`, data)
 
         navigate("/client")
     }
@@ -41,14 +44,14 @@ const ClientForm = () => {
                 </div>
 
                 <div className="form-rows">
-                            <div className="form-row">
-                                <label htmlFor="" className="label-form">Tel entreprise<span>*</span></label>
-                                <input type="number"  name='phone_number' className="input-form" onChange={handleChange} />
-                            </div>
-                            <div className="form-row">
-                                <label htmlFor="" className="label-form">Nom du contact principal<span>*</span></label>
-                                <input type="text"  name='contact_name' className="input-form" onChange={handleChange} />
-                            </div>
+                  <div className="form-row">
+                    <label htmlFor="" className="label-form">Tel entreprise<span>*</span></label>
+                    <input type="number"  name='phone_number' className="input-form" onChange={handleChange} />
+                  </div>
+                  <div className="form-row">
+                    <label htmlFor="" className="label-form">Nom du contact principal<span>*</span></label>
+                    <input type="text"  name='contact_name' className="input-form" onChange={handleChange} />
+                  </div>
                 </div>
 
                 <div className="form-rows">

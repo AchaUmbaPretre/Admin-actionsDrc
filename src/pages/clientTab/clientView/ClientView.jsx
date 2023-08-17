@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './clientView.scss'
 import { CodeOffOutlined, ContactPage, EmailOutlined, LoginOutlined, MapsHomeWorkOutlined, PasswordOutlined, Person2Outlined, PhoneAndroidOutlined } from '@mui/icons-material';
+import config from './../../../config'
 
 const ClientView = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const [data, setData] = useState({});
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
@@ -13,7 +15,7 @@ const ClientView = () => {
     useEffect(()=>{
         const fetchData = async ()=> {
             try{
-                const res = await axios.get(`http://localhost:8080/api/admin/viewsClient/${id}`);
+                const res = await axios.get(`${DOMAIN}/api/admin/viewsClient/${id}`);
                 setData(res.data[0])
         
               }catch(error){
@@ -21,7 +23,8 @@ const ClientView = () => {
               };
         }
         fetchData()
-    }, []);
+    }, [id]);
+    
   return (
     <>
         <div className="clientView">

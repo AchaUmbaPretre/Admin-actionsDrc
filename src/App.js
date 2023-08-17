@@ -19,7 +19,6 @@ import EditContrat from './pages/contrats/edit/EditContrat';
 import ClientTab from './pages/clientTab/ClientTab';
 import ClientForm from './pages/clientTab/form/ClientForm';
 import AddContrat from './pages/contrats/addContrat/AddContrat';
-import PageContrat from './pages/contrats/pageContrat/PageContrat';
 import ClientView from './pages/clientTab/clientView/ClientView';
 import EditeClient from './pages/clientTab/editClient/EditeClient';
 import Mission from './pages/mission/Mission';
@@ -143,10 +142,6 @@ function App() {
         {
           path: '/contrats/addContrat/:id',
           element: <AddContrat />
-        },
-        {
-          path: '/pageContrat/:id',
-          element: <PageContrat />
         },
         {
           path: '/mission',

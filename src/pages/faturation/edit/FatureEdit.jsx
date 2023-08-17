@@ -4,8 +4,10 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import moment from 'moment';
 import Select from 'react-select';
+import config from './../../../config'
 
 const FatureEdit = () => {
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState({});
   const { client_id, invoice_date, due_date, total_amount, status } = data;
   const location = useLocation();
@@ -31,10 +33,11 @@ const FatureEdit = () => {
     setData((prev) => ({ ...prev, status: selectedOption.value }));
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/api/admin/factureAllView/${id}`);
+        const res = await axios.get(`${DOMAIN}/api/admin/factureAllView/${id}`);
         setData(res.data[0]);
       } catch (error) {
         console.log(error);
@@ -43,10 +46,11 @@ const FatureEdit = () => {
     fetchData();
   }, [id]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/admin/client");
+        const res = await axios.get(`${DOMAIN}/api/admin/client`);
         setOptionsClient(res.data);
       } catch (error) {
         console.log(error);
@@ -55,11 +59,12 @@ const FatureEdit = () => {
     fetchData();
   }, []);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/admin/status");
-        setOptionsStatus(res.data);
+        const {data} = await axios.get(`${DOMAIN}/api/admin/status`);
+        setOptionsStatus(data);
       } catch (error) {
         console.log(error);
       }
@@ -73,7 +78,7 @@ const FatureEdit = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:8080/api/admin/factureUpdate/${id}`, data);
+      await axios.put(`${DOMAIN}/api/admin/factureUpdate/${id}`, data);
 
       Swal.fire({
         title: 'Success',

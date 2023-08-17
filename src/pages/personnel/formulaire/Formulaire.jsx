@@ -9,16 +9,17 @@ import moment from 'moment';
 import 'moment/locale/fr';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
+import config from '../../../config'
 
 moment.locale('fr');
 
 
 const Formulaire = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
 
     const navigate = useNavigate();
     const [data, setData] = useState({});
     const [source, setSource] = useState('import');
-    const [message, setMessage] = useState(null);
     const [photo, setPhoto] = useState(null);
     const [competenceOption, setCompetenceOption] = useState([]);
     const [type, setType] = useState([]);
@@ -59,7 +60,7 @@ const Formulaire = () => {
         try{
           const formData = new FormData();
           formData.append('file', photo)
-          const res = await axios.post("http://localhost:8080/api/upload", formData)
+          const res = await axios.post(`${DOMAIN}/api/upload${formData}`)
           return res.data
         }
         catch(error){
@@ -73,7 +74,7 @@ const Formulaire = () => {
         const imgUrl = await upload();
       
         try {
-          await axios.post(`http://localhost:8080/api/admin/employe`, { ...data, source: imgUrl });
+          await axios.post(`${DOMAIN}/api/admin/employe`, { ...data, source: imgUrl });
       
           await Swal.fire({
             title: 'Success',
@@ -95,10 +96,11 @@ const Formulaire = () => {
         }
       }
 
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const res = await axios.get("http://localhost:8080/api/admin/competence");
+            const res = await axios.get(`${DOMAIN}/api/admin/competence`);
             setCompetenceOption(res.data);
           } catch (error) {
             console.log(error);
@@ -107,11 +109,11 @@ const Formulaire = () => {
         fetchData();
       }, []);
 
-      
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const res = await axios.get("http://localhost:8080/api/admin/niveau");
+            const res = await axios.get(`${DOMAIN}/api/admin/niveau`);
             setNiveau(res.data);
           } catch (error) {
             console.log(error);
@@ -120,10 +122,11 @@ const Formulaire = () => {
         fetchData();
       }, []);
 
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const res = await axios.get("http://localhost:8080/api/admin/typepiece");
+            const res = await axios.get(`${DOMAIN}/api/admin/typepiece`);
             setType(res.data);
           } catch (error) {
             console.log(error);
@@ -131,12 +134,12 @@ const Formulaire = () => {
         };
         fetchData();
       }, []);
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const res = await axios.get("http://localhost:8080/api/admin/status");
-            setStatusE(res.data);
+            const {data} = await axios.get(`${DOMAIN}/api/admin/status`);
+            setStatusE(data);
           } catch (error) {
             console.log(error);
           }
