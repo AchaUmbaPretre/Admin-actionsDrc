@@ -4,8 +4,10 @@ import axios from 'axios';
 import Select from 'react-select';
 import Swal from 'sweetalert2';
 import moment from 'moment';
+import config from '../../../config'
 
 const MissionEdit = () => {
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState([]);
   const {first_name,company_name,dateEntrant,dateSortant,duree,montant} = data;
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ const MissionEdit = () => {
   useEffect(()=>{
     const fetchData = async ()=> {
         try{
-            const res = await axios.get(`http://localhost:8080/api/admin/missionAllView/${id}`);
+            const res = await axios.get(`${DOMAIN}/api/admin/missionAllView/${id}`);
             setData(res.data[0])
     
           }catch(error){
@@ -44,12 +46,12 @@ const MissionEdit = () => {
           };
     }
     fetchData()
-}, []);
+}, [id]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/admin");
+        const res = await axios.get(`${DOMAIN}/api/admin`);
         setOptions(res.data);
       } catch (error) {
         console.log(error);
@@ -58,11 +60,12 @@ const MissionEdit = () => {
     fetchData();
   }, []);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/admin/client");
-        setOptionsClient(res.data);
+        const {data} = await axios.get(`${DOMAIN}/api/admin/client`);
+        setOptionsClient(data);
       } catch (error) {
         console.log(error);
       }
@@ -70,10 +73,11 @@ const MissionEdit = () => {
     fetchData();
   }, []);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/admin/duration");
+        const res = await axios.get(`${DOMAIN}/api/admin/duration`);
         setDuration(res.data);
       } catch (error) {
         console.log(error);

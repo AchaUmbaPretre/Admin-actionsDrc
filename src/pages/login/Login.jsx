@@ -43,19 +43,6 @@ const Login = () => {
         }
       };
 
-/*     const handSubmit = async(e) =>{
-        e.preventDefault();
-        try{
-           await Login(inputs);
-    
-          navigate('/')
-          
-        }catch(error){
-          setError(error.response.data)
-          
-        } 
-      } */
-
   return (
     <>
         <div className="login">
