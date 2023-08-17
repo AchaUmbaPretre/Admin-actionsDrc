@@ -5,7 +5,6 @@ import axios from 'axios';
 import userImg from './../../assets/user.png'
 import moment from 'moment';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import AddIcCallIcon from '@mui/icons-material/AddIcCall';
 import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
@@ -15,8 +14,10 @@ import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import EventIcon from '@mui/icons-material/Event';
 import WysiwygIcon from '@mui/icons-material/Wysiwyg';
 import WcIcon from '@mui/icons-material/Wc';
+import config from '../../config'
 
 const Views = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const [data, setData] = useState({});
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
@@ -24,7 +25,7 @@ const Views = () => {
     useEffect(()=>{
         const fetchData = async ()=> {
             try{
-                const res = await axios.get(`http://localhost:8080/api/admin/views/${id}`);
+                const res = await axios.get(`${DOMAIN}/api/admin/views/${id}`);
                 setData(res.data[0])
         
               }catch(error){
@@ -32,7 +33,7 @@ const Views = () => {
               };
         }
         fetchData()
-    }, []);
+    }, [id]);
 
     const formattedDateOfBirth = moment(data.date_of_birth).format('DD/MM/YYYY');
 

@@ -86,11 +86,12 @@ const MissionEdit = () => {
     fetchData();
   }, []);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetchDatas = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/admin/salaireMission");
-        setSalaires(res.data);
+        const {data} = await axios.get(`${DOMAIN}/api/admin/salaireMission`);
+        setSalaires(data);
       } catch (error) {
         console.log(error);
       }
@@ -102,7 +103,7 @@ const MissionEdit = () => {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:8080/api/admin/updateMission/${id}`, data);
+      await axios.put(`${DOMAIN}/api/admin/updateMission/${id}`, data);
       navigate("/");
       Swal.fire({
         title: 'Success',

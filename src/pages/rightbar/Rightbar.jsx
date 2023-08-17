@@ -1,6 +1,5 @@
 import FeatedInfo from '../../components/featedInfo/FeatedInfo'
 import FeatedList from '../../components/featedList/FeatedList'
-import FeatedView from '../../components/featedView/FeatedView'
 import './rightbar.scss'
 
 const Rightbar = () => {

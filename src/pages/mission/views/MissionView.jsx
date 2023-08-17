@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './missionView.scss'
 import { format } from 'date-fns';
-import { CalendarMonth, Money, PermDataSetting, Person, Person3 } from '@mui/icons-material';
+import { CalendarMonth, Money, Person, Person3 } from '@mui/icons-material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import config from '../../../config'
 
 const MissionView = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const [data, setData] = useState({});
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
@@ -14,7 +16,7 @@ const MissionView = () => {
     useEffect(()=>{
         const fetchData = async ()=> {
             try{
-                const res = await axios.get(`http://localhost:8080/api/admin/missionAllView/${id}`);
+                const res = await axios.get(`${DOMAIN}/api/admin/missionAllView/${id}`);
                 setData(res.data[0])
         
               }catch(error){
@@ -22,7 +24,7 @@ const MissionView = () => {
               };
         }
         fetchData()
-    }, []);
+    }, [id]);
 
   return (
     <>

@@ -13,25 +13,11 @@ import Swal from 'sweetalert2';
 import { useEffect } from 'react';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 1000,
-    bgcolor: 'background.paper',
-    border: '1px solid #FFF',
-    boxShadow: 24,
-    p: 4,
-    borderRadius: 2,
-    outline: 'none'
-  }
+import config from './../../config'
 
 const Mission = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const [data, setData] = useState({});
-    const [name,setName] = useState();
-    const [date, setDate] = useState();
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -39,27 +25,13 @@ const Mission = () => {
 
     const navigate = useNavigate();
 
-/*     useEffect(()=>{
-
-        const fetchData = async ()=> {
-            try{
-                const res = await axios.get("http://localhost:8080/api/admin/mission");
-                setData(res.data)
-                setLoading(false);
-        
-              }catch(error){
-                console.log(error)
-              };
-        }
-        fetchData()
-     }, []) */
 
      useEffect(()=>{
 
       const fetchData = async ()=> {
           try{
-              const res = await axios.get("http://localhost:8080/api/admin/allmission");
-              setData(res.data)
+              const {data} = await axios.get(`${DOMAIN}/api/admin/allmission`);
+              setData(data)
               setLoading(false);
       
             }catch(error){
@@ -82,7 +54,7 @@ const Mission = () => {
           });
       
           if (result.isConfirmed) {
-            await axios.delete(`http://localhost:8080/api/admin/mission/${id}`);
+            await axios.delete(`${DOMAIN}/api/admin/mission/${id}`);
             window.location.reload();
           }
         } catch (err) {

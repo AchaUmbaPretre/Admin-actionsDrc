@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import SendIcon from '@mui/icons-material/Send';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import config from '../../../config'
 
 const PresenceForm = () => {
-
-  const [data, setData] = useState([]);
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [employeeId, setEmployeeId] = useState('');
   const [clientEtat, setClientEtat] = useState([]);
   const [clientId, setClientId] = useState([]);
@@ -17,14 +15,13 @@ const PresenceForm = () => {
   const [date, setDate] = useState(null);
   const [selected, setSelected] = useState([]);
 
-console.log(employeeId,clientId,checkInTime,checkOutTime,date)
   const navigate = useNavigate();
 
       useEffect(() => {
 
         const fetchData = async () => {
           try {
-            const res = await axios.get("http://localhost:8080/api/admin");
+            const res = await axios.get(`${DOMAIN}/api/admin`);
             setSelected(res.data)
     
           } catch (error) {
@@ -38,8 +35,8 @@ console.log(employeeId,clientId,checkInTime,checkOutTime,date)
     
         const fetchData = async ()=> {
           try{
-              const res = await axios.get("http://localhost:8080/api/admin/client");
-              setClientEtat(res.data)
+              const {data} = await axios.get(`${DOMAIN}/api/admin/client`);
+              setClientEtat(data)
       
             }catch(error){
               console.log(error)
@@ -52,7 +49,7 @@ console.log(employeeId,clientId,checkInTime,checkOutTime,date)
         e.preventDefault();
     
         try {
-          await axios.post(`http://localhost:8080/api/admin/presences`, {
+          await axios.post(`${DOMAIN}/api/admin/presences`, {
             employee_id : employeeId,
             client_id : clientId,
             date : date,

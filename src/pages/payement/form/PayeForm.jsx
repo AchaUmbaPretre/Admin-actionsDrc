@@ -4,23 +4,23 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
+import config from './../../../config'
 
 
 const PayeForm = () => {
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const navigate = useNavigate();
   const [invoiceIds, setInvoiceIds] = useState('');
   const [paymentDate, setPaymentDate] = useState('');
   const [amount, setAmount] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
-
-console.log(invoiceIds, paymentMethod, paymentDate, amount)
   
 
   const handleClick = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8080/api/admin/payementPost',{
+      const response = await axios.post(`${DOMAIN}/api/admin/payementPost`,{
         invoice_id: invoiceIds,
         payment_date: paymentDate,
         amount: amount,

@@ -1,21 +1,20 @@
 import { DataGrid } from '@mui/x-data-grid'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './presence.scss'
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import { DeleteOutline} from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useEffect, useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import {presents} from './../../data'
 import axios from 'axios';
 import PresenceForm from './form/PresenceForm';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
+import config from '../../config'
 
 const style = {
   position: 'absolute',
@@ -32,11 +31,9 @@ const style = {
 }
 
 const Presence = () => {
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [employeeId, setEmployeeId] = useState('');
-  const [checkInTime, setCheckInTime] = useState('');
-  const [checkOutTime, setCheckOutTime] = useState('');
   const navigate = useNavigate();
 
   const HandleDelete = (id) =>{
@@ -48,27 +45,13 @@ const Presence = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-/*   useEffect(()=>{
-
-    const fetchData = async ()=> {
-        try{
-            const res = await axios.get("http://localhost:8080/api/admin/presence");
-            setData(res.data)
-            setLoading(false);
-    
-          }catch(error){
-            console.log(error)
-          };
-    }
-    fetchData()
- }, []) */
 
  useEffect(()=>{
 
   const fetchData = async ()=> {
       try{
-          const res = await axios.get("http://localhost:8080/api/admin/presenceAll");
-          setData(res.data)
+          const {data} = await axios.get(`${DOMAIN}/api/admin/presenceAll`);
+          setData(data)
           setLoading(false);
   
         }catch(error){

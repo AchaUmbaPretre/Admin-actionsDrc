@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { CalendarMonthOutlined, Person2Outlined, Person3Outlined } from '@mui/icons-material';
+import config from '../../../config'
 
 const PresenceView = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const [data, setData] = useState({});
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
@@ -12,7 +14,7 @@ const PresenceView = () => {
     useEffect(()=>{
         const fetchData = async ()=> {
             try{
-                const res = await axios.get(`http://localhost:8080/api/admin/presenceAllView/${id}`);
+                const res = await axios.get(`${DOMAIN}/api/admin/presenceAllView/${id}`);
                 setData(res.data[0])
         
               }catch(error){

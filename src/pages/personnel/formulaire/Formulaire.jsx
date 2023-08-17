@@ -46,7 +46,6 @@ const Formulaire = () => {
         console.log(imageSrc);
       };
 
-      console.log(photo)
 
       const handlePhotoSubmit = () => {
         if (source === 'import') {

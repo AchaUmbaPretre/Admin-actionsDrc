@@ -5,16 +5,16 @@ import Select from 'react-select';
 import './missionForm.scss';
 import Swal from 'sweetalert2';
 import moment from 'moment';
+import config from '../../../config'
 
 const MissionForm = () => {
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const [options, setOptions] = useState([]);
   const [optionsClient, setOptionsClient] = useState([]);
   const [duration, setDuration] = useState([]);
   const [salaires, setSalaires] = useState([]);
-  const [dateEntrant, setDateEntrant] = useState('');
-  const [dateSortant, setDateSortant] = useState('');
 
   const handleChange = (selectedOption, name) => {
     if (name === 'montant') {
@@ -35,7 +35,7 @@ const MissionForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/admin");
+        const res = await axios.get(`${DOMAIN}/api/admin`);
         setOptions(res.data);
       } catch (error) {
         console.log(error);
@@ -47,8 +47,8 @@ const MissionForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/admin/client");
-        setOptionsClient(res.data);
+        const {data} = await axios.get(`${DOMAIN}/api/admin/client`);
+        setOptionsClient(data);
       } catch (error) {
         console.log(error);
       }
@@ -59,7 +59,7 @@ const MissionForm = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8080/api/admin/missions", data);
+      await axios.post(`${DOMAIN}/api/admin/missions`, data);
       Swal.fire({
         title: 'Success',
         text: 'Mission créée avec succès!',
@@ -81,7 +81,7 @@ const MissionForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/admin/duration");
+        const res = await axios.get(`${DOMAIN}/api/admin/duration`);
         setDuration(res.data);
       } catch (error) {
         console.log(error);
@@ -93,8 +93,8 @@ const MissionForm = () => {
   useEffect(() => {
     const fetchDatas = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/admin/salaireMission");
-        setSalaires(res.data);
+        const {data} = await axios.get(`${DOMAIN}/api/admin/salaireMission`);
+        setSalaires(data);
       } catch (error) {
         console.log(error);
       }

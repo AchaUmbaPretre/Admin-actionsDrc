@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import FlakyIcon from '@mui/icons-material/Flaky';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { DataGrid } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
@@ -9,7 +8,6 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import axios from 'axios';
 import { DeleteOutline} from '@mui/icons-material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from "react-router-dom";
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
@@ -18,6 +16,7 @@ import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import PayeForm from './form/PayeForm';
+import config from './../../config'
 
 const style = {
     position: 'absolute',
@@ -35,6 +34,7 @@ const style = {
 
 
 const Payement = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const navigate = useNavigate();
     const [data, setData] = useState({});
     const [selected, setSelected] = useState([]);
@@ -85,25 +85,11 @@ const Payement = () => {
         }},
       ]; 
 
-/*        useEffect(()=>{
-
-        const fetchData = async ()=> {
-            try{
-                const res = await axios.get("http://localhost:8080/api/admin/payement");
-                setData(res.data)
-                setLoading(false);
-              }catch(error){
-                console.log(error)
-              };
-        }
-        fetchData()
-     }, []) */
-
      useEffect(()=>{
 
         const fetchData = async ()=> {
             try{
-                const res = await axios.get("http://localhost:8080/api/admin/payementAll");
+                const res = await axios.get(`${DOMAIN}/api/admin/payementAll`);
                 setData(res.data)
                 setLoading(false);
               }catch(error){
@@ -128,7 +114,7 @@ const Payement = () => {
       });
   
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:8080/api/admin/payemen/${id}`);
+        await axios.delete(`${DOMAIN}/api/admin/payemen/${id}`);
         window.location.reload();
       }
     } catch (err) {
@@ -138,7 +124,7 @@ const Payement = () => {
 
   return (
     <>
-              <div className="contrats">
+        <div className="contrats">
             <div className="contrats-wrapper">
                 <div className="contrats-top">
                     <AttachMoneyIcon className='contrats-icon'/>

@@ -6,8 +6,10 @@ import { useNavigate } from 'react-router'
 import axios from 'axios'
 import Swal from 'sweetalert2';
 import { useState } from 'react';
+import config from '../../config'
 
 const Register = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const navigate = useNavigate();
     const [inputs, setInputs] = useState({});
     const [error, setError] = useState(null);
@@ -20,7 +22,7 @@ const Register = () => {
       e.preventDefault();
   
       try {
-        await axios.post("http://localhost:8080/api/auth/register", inputs);
+        await axios.post(`${DOMAIN}/api/auth/register`, inputs);
   
         Swal.fire({
           title: 'Success',
@@ -42,18 +44,6 @@ const Register = () => {
       }
     }
 
-/*     const handSubmit = async (e) =>{
-        e.preventDefault();
-        try{
-          await axios.post("http://localhost:8080/api/auth/register", inputs);
-          navigate('/login')
-          
-        }catch(error){
-          setError(error.response.data)
-          
-        } 
-    
-      } */
   return (
     <>
          <div className="register">
