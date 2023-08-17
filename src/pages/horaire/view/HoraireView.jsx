@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import '../../clientTab/clientView/clientView.scss'
-import { CalendarMonth, CodeOffOutlined, ContactPage, EmailOutlined, LoginOutlined, MapsHomeWorkOutlined, PasswordOutlined, Person2Outlined, Person3Outlined, PhoneAndroidOutlined, TimeToLeaveOutlined } from '@mui/icons-material';
+import { CalendarMonth, Person2Outlined, Person3Outlined } from '@mui/icons-material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import config from '../../../config'
 
 const HoraireView = () => {
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const [data, setData] = useState({});
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
@@ -13,7 +15,7 @@ const HoraireView = () => {
     useEffect(()=>{
         const fetchData = async ()=> {
             try{
-                const res = await axios.get(`http://localhost:8080/api/admin/horairesAllView/${id}`);
+                const res = await axios.get(`${DOMAIN}/api/admin/horairesAllView/${id}`);
                 setData(res.data[0])
         
               }catch(error){

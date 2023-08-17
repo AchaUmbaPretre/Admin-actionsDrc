@@ -1,8 +1,7 @@
 import { DataGrid } from '@mui/x-data-grid'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { DeleteOutline} from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import Backdrop from '@mui/material/Backdrop';
@@ -92,27 +91,14 @@ const HoraireAll = () => {
     }},
   ];
 
-/*   useEffect(()=>{
 
-    const fetchData = async ()=> {
-        try{
-            const res = await axios.get("http://localhost:8080/api/admin/horaire");
-            setData(res.data)
-            setLoading(false);
-    
-          }catch(error){
-            console.log(error)
-          };
-    }
-    fetchData()
- }, []) */
 
  useEffect(()=>{
 
   const fetchData = async ()=> {
       try{
-          const res = await axios.get("http://localhost:8080/api/admin/horaires");
-          setData(res.data)
+          const {data} = await axios.get(`${DOMAIN}/api/admin/horaires`);
+          setData(data)
           setLoading(false);
   
         }catch(error){
@@ -136,7 +122,7 @@ const HoraireAll = () => {
     });
 
     if (result.isConfirmed) {
-      await axios.delete(`http://localhost:8080/api/admin/deleteHoraire/${id}`);
+      await axios.delete(`${DOMAIN}/api/admin/deleteHoraire/${id}`);
       window.location.reload();
     }
   } catch (err) {

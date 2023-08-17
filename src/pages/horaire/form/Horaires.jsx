@@ -34,8 +34,7 @@ const Horaires = () => {
       const handleTimeChange = (selectedTime, name) => {;
         setData((prev) => ({ ...prev, [name]: selectedTime }));
       };
-
-      console.log(data)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       useEffect(() => {
 
         const fetchData = async () => {
