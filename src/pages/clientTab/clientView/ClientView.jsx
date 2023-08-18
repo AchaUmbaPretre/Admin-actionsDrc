@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './clientView.scss'
 import { CodeOffOutlined, ContactPage, EmailOutlined, LoginOutlined, MapsHomeWorkOutlined, PasswordOutlined, Person2Outlined, PhoneAndroidOutlined } from '@mui/icons-material';
-import config from './../../../config'
+import config from '../../../config'
 
 const ClientView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -24,7 +24,7 @@ const ClientView = () => {
         }
         fetchData()
     }, [id]);
-    
+
   return (
     <>
         <div className="clientView">

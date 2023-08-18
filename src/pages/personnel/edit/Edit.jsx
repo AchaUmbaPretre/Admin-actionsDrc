@@ -6,7 +6,7 @@ import userImg from '../../../assets/user.png'
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Webcam from 'react-webcam';
-import config from './../../../config'
+import config from '../../../config'
 
 const Edit = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
-import config from './../../../config'
+import config from '../../../config'
 
 
 const PayeForm = () => {

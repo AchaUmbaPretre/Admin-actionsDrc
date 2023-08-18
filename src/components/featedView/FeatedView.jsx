@@ -6,7 +6,7 @@ import axios from 'axios';
 import { FadeLoader } from 'react-spinners';
 import { DataGrid } from '@mui/x-data-grid'
 import {useNavigate} from 'react-router-dom'
-import config from './../../config'
+import config from '../../config'
 
 const FeatedView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN

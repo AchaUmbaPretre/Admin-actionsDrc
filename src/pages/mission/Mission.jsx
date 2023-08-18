@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 import { useEffect } from 'react';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
-import config from './../../config'
+import config from '../../config'
 
 const Mission = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN

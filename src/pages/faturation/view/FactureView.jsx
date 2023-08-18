@@ -2,7 +2,9 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../../clientTab/clientView/clientView.scss'
-import { CalendarMonth, Person2Outlined, Person3Outlined } from '@mui/icons-material';
+import { CalendarMonth, Person2Outlined} from '@mui/icons-material';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import TroubleshootIcon from '@mui/icons-material/Troubleshoot';
 import config from '../../../config'
 import moment from 'moment';
 
@@ -39,7 +41,7 @@ const FactureView = () => {
                         <span className="client-nom">{data?.company_name}</span>
                     </div>
                     <div className="client-row">
-                        <span className="client-nom"><Person3Outlined/>  Date de la facture :</span>
+                        <span className="client-nom"><CalendarMonth/>  Date de la facture :</span>
                         <span className="client-nom">{formattedDateVoice}</span>
                     </div>
 
@@ -49,12 +51,12 @@ const FactureView = () => {
                     </div>
 
                     <div className="client-row">
-                        <span className="client-nom"><CalendarMonth/>  Montant total :</span>
+                        <span className="client-nom"><MonetizationOnIcon/>  Montant total :</span>
                         <span className="client-nom">{data?.total_amount}</span>
                     </div>
 
                     <div className="client-row">
-                        <span className="client-nom"><CalendarMonth/>  Statut de la facture :</span>
+                        <span className="client-nom"><TroubleshootIcon/>  Statut de la facture :</span>
                         <span className="client-nom">{data?.status}</span>
                     </div>
 

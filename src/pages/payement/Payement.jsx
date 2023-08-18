@@ -16,7 +16,7 @@ import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import PayeForm from './form/PayeForm';
-import config from './../../config'
+import config from '../../config'
 
 const style = {
     position: 'absolute',

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import axios from 'axios';
 import moment from 'moment';
-import config from './../../../config'
+import config from '../../../config'
 
 const Horaires = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN

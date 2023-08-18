@@ -4,7 +4,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import moment from 'moment';
 import Select from 'react-select';
-import config from './../../../config'
+import config from '../../../config'
 
 const FatureEdit = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
