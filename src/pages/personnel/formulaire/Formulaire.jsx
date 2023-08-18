@@ -59,7 +59,7 @@ const Formulaire = () => {
             confirmButtonText: 'OK'
           });
         
-          navigate('/personnel');
+          navigate('/');
         } catch (error) {
           await Swal.fire({
             title: 'Error',
