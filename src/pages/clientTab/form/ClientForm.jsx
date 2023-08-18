@@ -4,9 +4,10 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import config from '../../../config';
+import Swal from 'sweetalert2';
 
 
-const ClientForm = () => {
+const ClientForm = ({handleModalClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const navigate = useNavigate();
   const [data, setData] = useState({});
@@ -14,18 +15,32 @@ const ClientForm = () => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleClick = async(e) =>{
+  const handleClick = async (e) => {
     e.preventDefault();
-
-    try{
-        await axios.post(`${DOMAIN}/api/admin/clientPost`, data)
-
-        navigate("/client")
+  
+    try {
+      await axios.post(`${DOMAIN}/api/admin/clientPost`, data);
+  
+      await Swal.fire({
+        title: 'Success',
+        text: 'Client créé avec succès!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+      handleModalClose();
+  
+      navigate('/');
+    } catch (error) {
+      await Swal.fire({
+        title: 'Error',
+        text: error.message,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+  
+      console.log(error);
     }
-    catch(error){
-        console.log(error)
-    }
-}
+  };
 
   return (
     <>

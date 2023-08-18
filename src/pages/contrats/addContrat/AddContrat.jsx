@@ -157,6 +157,7 @@ const AddContrat = () => {
               <label htmlFor="" className="add-label">Fonction</label>
               
               <select id="pet-select" name="fonction" onChange={handleChange} className='form-select'>
+                <option disabled> selectionnez la fonctio...</option>
               { selectData?.map(item =>( 
                 <option value={item.id}>{item.nom}</option>
                 ))}

@@ -25,7 +25,6 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 800,
   bgcolor: 'background.paper',
-  boxShadow: 24,
   p: 4,
   borderRadius: 2,
   outline: 'none'
@@ -135,26 +134,26 @@ const ClientTab = () => {
             </div>
             <button className="contrats-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</button>
             <Modal
-                    aria-labelledby="transition-modal-title"
-                    aria-describedby="transition-modal-description"
-                    open={open}
-                    onClose={handleClose}
-                    closeAfterTransition
-                    slots={{ backdrop: Backdrop }}
-                    slotProps={{
-                    backdrop: {
-                        timeout: 500,
-                    },
-                    }} 
-                >
-                    <Fade in={open}>
-                        <Box sx={style}>
-                            <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
-                              <ClientForm/>
-                            </Box>
-                        </Box>
-                    </Fade>
-            </Modal>
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            slots={{ backdrop: Backdrop }}
+            slotProps={{
+              backdrop: {
+                timeout: 500,
+              },
+            }}
+          >
+            <Fade in={open}>
+              <Box sx={style}>
+                <Box component="form" sx={{ '& > :not(style)': { m: 1 } }}>
+                  <ClientForm handleModalClose={handleClose} />
+                </Box>
+              </Box>
+            </Fade>
+          </Modal>
           </div>
           {loading ? (
           <div className="spinner-container">

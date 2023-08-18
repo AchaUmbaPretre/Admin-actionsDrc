@@ -28,12 +28,12 @@ const handleChange = (e) => {
 
       Swal.fire({
         title: 'Success',
-        text: 'Contract created successfully!',
+        text: 'Contrat créé avec succès!',
         icon: 'success',
         confirmButtonText: 'OK'
       });
 
-      navigate('/contrats');
+      navigate('/');
     } catch (err) {
       Swal.fire({
         title: 'Error',

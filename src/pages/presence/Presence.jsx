@@ -80,12 +80,14 @@ const Presence = () => {
     {
         field: 'check_in_time',
         headerName: "Heure d'arrivée",
-        width: 150 
+        width: 150,
+        valueGetter: (params) => params.row.check_in_time.substring(0, 5)
     },
     {
       field: 'check_out_time',
       headerName: 'Heure de départ',
-      width: 150 
+      width: 150,
+      valueGetter: (params) => params.row.check_out_time.substring(0, 5)
     },
     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
         return(

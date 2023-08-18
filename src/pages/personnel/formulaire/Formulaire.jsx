@@ -40,48 +40,25 @@ const Formulaire = () => {
       const handleChange = (e) => {
         setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
       };
-        console.log(data)
-      const capture = () => {
-        const imageSrc = webcamRef.current.getScreenshot();
-        console.log(imageSrc);
-      };
 
-
-      const handlePhotoSubmit = () => {
-        if (source === 'import') {
-          const formData = new FormData();
-          formData.append('photo', photo);
-        } else if (source === 'webcam') {
-          const photoSrc = webcamRef.current.getScreenshot();
-        }
-      }
-      const upload = async ()=>{
-        try{
-          const formData = new FormData();
-          formData.append('file', photo)
-          const res = await axios.post(`${DOMAIN}/api/upload${formData}`)
-          return res.data
-        }
-        catch(error){
-          console.log(error)
-        }
-      }
-    console.log(data)
- 
-    const handleClick = async (e) => {
-        e.preventDefault();
-        const imgUrl = await upload();
-      
+      const handlePhotoSubmit = async () => {
         try {
-          await axios.post(`${DOMAIN}/api/admin/employe`, { ...data, source: imgUrl });
-      
+          let photoSrc;
+          if (source === 'import') {
+            photoSrc = await upload();
+          } else if (source === 'webcam') {
+            photoSrc = webcamRef.current.getScreenshot();
+          }
+          
+          await axios.post(`${DOMAIN}/api/admin/employe`, { ...data, source: photoSrc });
+        
           await Swal.fire({
             title: 'Success',
             text: 'Employé créé avec succès!',
             icon: 'success',
             confirmButtonText: 'OK'
           });
-      
+        
           navigate('/personnel');
         } catch (error) {
           await Swal.fire({
@@ -90,10 +67,25 @@ const Formulaire = () => {
             icon: 'error',
             confirmButtonText: 'OK'
           });
-      
+        
           console.log(error);
         }
-      }
+      };
+
+      const upload = async () => {
+        try {
+          const formData = new FormData();
+          formData.append('file', photo);
+          const res = await axios.post(`${DOMAIN}/api/upload`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+          return res.data;
+        } catch (error) {
+          console.log(error);
+        }
+      };
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
       useEffect(() => {
@@ -200,7 +192,7 @@ const Formulaire = () => {
                                     name="identification_type"
                                     onChange={(selectedOption) => handleSelectChange(selectedOption, "identification_type")}
                                     options={type.map((item) => ({
-                                        value: item.id,
+                                        value: item.nom_type,
                                         label: item.nom_type
                                     }))}
                                 />
@@ -214,7 +206,7 @@ const Formulaire = () => {
                                     name="skills"
                                     onChange={(selectedOption) => handleSelectChange(selectedOption, "skills")}
                                     options={competenceOption.map((item) => ({
-                                        value: item.id,
+                                        value: item.nom,
                                         label: item.nom
                                     }))}
                                 />
@@ -225,7 +217,7 @@ const Formulaire = () => {
                                     name="certifications"
                                     onChange={(selectedOption) => handleSelectChange(selectedOption, "certifications")}
                                     options={niveau.map((item) => ({
-                                        value: item.id,
+                                        value: item.titre,
                                         label: item.titre
                                     }))}
                                 />
@@ -242,7 +234,7 @@ const Formulaire = () => {
                                     name="employment_status"
                                     onChange={(selectedOption) => handleSelectChange(selectedOption, "employment_status")}
                                     options={statusE.map((item) => ({
-                                        value: item.id,
+                                        value: item.nom_status,
                                         label: item.nom_status
                                     }))}
                                 />
@@ -265,7 +257,7 @@ const Formulaire = () => {
                                 </div>
                             </div>
                         </div>
-                        <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>
+                        <button className="form-btn" onClick={handlePhotoSubmit}>Envoyer <SendIcon className='form-icon' /></button>
                     </form>
                 </div>
             </div>

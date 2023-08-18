@@ -10,12 +10,30 @@ const PresenceView = () => {
     const [data, setData] = useState({});
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
+    const [attendanceCount, setAttendanceCount] = useState(0);
 
     useEffect(()=>{
         const fetchData = async ()=> {
             try{
                 const res = await axios.get(`${DOMAIN}/api/admin/presenceAllView/${id}`);
                 setData(res.data[0])
+        
+              }catch(error){
+                console.log(error)
+              };
+        }
+        fetchData()
+    }, []);
+
+    useEffect(()=>{
+        const fetchData = async ()=> {
+            try{
+                const res = await axios.get(`${DOMAIN}/api/admin/presenceCount/${id}`);
+
+                const employeeAttendanceCount = res.data.attendanceCount;
+      
+                setAttendanceCount(employeeAttendanceCount);
+                console.log(attendanceCount)
         
               }catch(error){
                 console.log(error)
@@ -51,6 +69,11 @@ const PresenceView = () => {
                     <div className="client-row">
                         <span className="client-nom"><AccessTimeIcon/> Heure de départ  :</span>
                         <span className="client-nom">{data?.check_out_time}</span>
+                    </div>
+
+                    <div className="client-row">
+                        <span className="client-nom"><AccessTimeIcon/> Nombre de presence  :</span>
+                        <span className="client-nom">{attendanceCount}</span>
                     </div>
 
                 </div>

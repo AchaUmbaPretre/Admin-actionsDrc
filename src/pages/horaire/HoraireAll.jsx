@@ -70,15 +70,17 @@ const HoraireAll = () => {
       width: 120 
     },
     {
-        field: 'start_time',
-        headerName: "Heure d'arrivée",
-        width: 120 
-      },
-      {
-        field: 'end_time',
-        headerName: 'Heure de sortie',
-        width: 120 
-      },
+      field: 'start_time',
+      headerName: "Heure d'arrivée",
+      width: 120,
+      valueGetter: (params) => params.row.start_time.substring(0, 5)
+    },
+    {
+      field: 'end_time',
+      headerName: 'Heure de sortie',
+      width: 120,
+      valueGetter: (params) => params.row.end_time.substring(0, 5)
+    },
     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
         return(
           <>

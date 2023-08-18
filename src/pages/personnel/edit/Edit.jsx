@@ -182,7 +182,7 @@ const handleClick = async (e) => {
                                 </div>
                             </div>
                         </div>
-                        <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>
+                        <button className="form-btn" onClick={handlePhotoSubmit}>Envoyer <SendIcon className='form-icon' /></button>
                     </form>
                 </div>
             </div>

@@ -11,13 +11,6 @@ import config from '../../../config'
 const Horaires = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
 
-    const [employeeId, setEmployeeId] = useState('');
-    const [clientId, setClientId] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-    const [weekday, setWeekday] = useState('');
-    const [startTime, setStartTime] = useState('');
-    const [endTime, setEndTime] = useState('');
     const navigate = useNavigate();
     const [selected, setSelected] = useState([]);
     const [clientEtat, setClientEtat] = useState([]);
@@ -31,8 +24,9 @@ const Horaires = () => {
         const formattedDate = moment(selectedDate).format('YYYY-MM-DD');
         setData((prev) => ({ ...prev, [name]: formattedDate }));
       };
-      const handleTimeChange = (selectedTime, name) => {;
-        setData((prev) => ({ ...prev, [name]: selectedTime }));
+      const handleTimeChange = (selectedTime, name) => {
+        const formattedTime = moment(selectedTime, 'HH:mm').format('HH:mm');
+        setData((prev) => ({ ...prev, [name]: formattedTime }));
       };
       // eslint-disable-next-line react-hooks/exhaustive-deps
       useEffect(() => {
@@ -62,7 +56,7 @@ const Horaires = () => {
             };
       }
       fetchData()
-      }, [])
+      }, [DOMAIN])
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
       useEffect(()=>{
@@ -77,13 +71,13 @@ const Horaires = () => {
             };
       }
       fetchData()
-      }, [])
+      }, [DOMAIN])
 
       const handleClick = async (e) => {
         e.preventDefault();
     
         try {
-          await axios.post(`${DOMAIN}/api/admin//horairesPost`,data);
+          await axios.post(`${DOMAIN}/api/admin/horairesPost`,data);
     
           Swal.fire({
             title: 'Success',
@@ -160,14 +154,14 @@ const Horaires = () => {
                     </div>
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Heure d'arrivée<span>*</span></label>
-                    <input type="time" name='start_time'  className="input-form" onChange={(e) => handleTimeChange(e.target.value, "start_time")} />
+                    <input type="time" name='start_time'  className="input-form" onChange={(e) => handleTimeChange(e.target.value.substring(0, 5), "start_time")} />
                   </div>
                 </div>
 
                 <div className="form-rows">
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Heure de départ<span>*</span></label>
-                    <input type="time" name='end_time' className="input-form" onChange={(e) => handleTimeChange(e.target.value, "end_time")} />
+                    <input type="time" name='end_time' className="input-form" onChange={(e) => handleTimeChange(e.target.value.substring(0, 5), "end_time")} />
                 </div>
                 </div>
                         

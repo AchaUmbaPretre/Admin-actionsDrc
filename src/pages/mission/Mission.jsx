@@ -80,12 +80,8 @@ const Mission = () => {
           valueGetter: (params) =>
             format(new Date(params.row.dateSortant), 'yyyy-MM-dd'),
         },
-        {
-            field: 'duree',
-            headerName: 'Durée',
-            width: 130,
-        },
-        { field: 'montant', headerName: 'Montant', width: 130 },
+        { field: 'duree', headerName: 'Durée', width: 120, renderCell: (params) => `${params.value} mois` },
+        { field: 'montant', headerName: 'Montant', width: 130,renderCell: (params) => `${params.value} $` },
         {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
             return(
               <>
