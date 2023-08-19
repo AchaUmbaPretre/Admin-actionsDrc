@@ -69,13 +69,12 @@ const Payement = () => {
         {
           field: 'payment_method',
           headerName: "Methode de payement",
-          width: 180,
+          width: 190,
       },
         {field: 'action', HeaderName: 'Action', width: 190, renderCell: (params) =>{
             return(
               <>
                 <div className="table-icons-row">
-                    <Link to={`/editContrat/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
                     <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
                 </div>
               </>
