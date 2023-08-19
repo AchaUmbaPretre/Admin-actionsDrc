@@ -52,8 +52,8 @@ console.log(status, clientId)
     
     const fetchData = async ()=> {
       try{
-          const {data} = await axios.get(`${DOMAIN}/api/admin/status`);
-          setOptionsStatus(data)
+          const res = await axios.get(`${DOMAIN}/api/admin/statusFacture`);
+          setOptionsStatus(res.data)
   
         }catch(error){
           console.log(error)
@@ -61,6 +61,8 @@ console.log(status, clientId)
   }
   fetchData()
   }, [])
+
+  console.log('bonjour')
   
 
   const handleClick = async (e) => {
@@ -90,7 +92,7 @@ console.log(status, clientId)
       setTotalAmount('');
       setStatus('');
 
-      navigate('/facturation')
+      navigate('/')
 
     } catch (error) {
       console.error('Erreur lors de la création de la facture :', error);
@@ -145,11 +147,10 @@ console.log(status, clientId)
                         value={selectedOptionClient}
                         onChange={handleSelectChanges}
                         options={optionsStatus.map((item) => ({
-                          value: item.id,
+                          value: item.status,
                           label: item.status
                         }))}
                         placeholder="Selectionnez un status..."
-                        className=""
                       />
                     </div>
                 </div>

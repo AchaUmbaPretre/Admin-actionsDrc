@@ -35,7 +35,7 @@ const Affectation = () => {
     {
       field: 'salaire',
       headerName: 'Salaire',
-      width: 150 
+      width: 150,renderCell: (params) => `${params.value} $`
     },
     {
       field: 'end_date',

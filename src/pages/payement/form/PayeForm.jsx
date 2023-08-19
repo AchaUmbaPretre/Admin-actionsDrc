@@ -41,7 +41,7 @@ const PayeForm = () => {
       setAmount('');
       setPaymentMethod('');
 
-      navigate('/payement')
+      navigate('/')
 
     } catch (error) {
       console.error('Erreur lors de la création du payement :', error);
@@ -91,11 +91,15 @@ const PayeForm = () => {
                 <div className="form-rows">
                     <div className="form-row">
                         <label htmlFor="" className="label-form">Méthode de paiement <span>*</span></label>
-                        <select id="pet-select" className='input-form' required value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
-                          <option value="espèces">espèces</option>
-                          <option value="chèque">chèque</option>
-                          <option value="virement">virement</option>
-                        </select>
+                        <Select
+                          options={[
+                            { value: 'espèces', label: 'espèces' },
+                            { value: 'chèque', label: 'chèque' },
+                            { value: 'virement', label: 'virement' }
+                          ]}
+                          value={{ value: paymentMethod, label: paymentMethod }}
+                          onChange={(selectedOption) => setPaymentMethod(selectedOption.value)}
+                        />
                     </div>
                 </div>
                         

@@ -77,7 +77,6 @@ const Payement = () => {
                 <div className="table-icons-row">
                     <Link to={`/editContrat/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
                     <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
-                    <Link to={`addContrat/${params.row.id}`}><AddCircleOutlineIcon className="userListDelete"  /></Link>
                 </div>
               </>
     

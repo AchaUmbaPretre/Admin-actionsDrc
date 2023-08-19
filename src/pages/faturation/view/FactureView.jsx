@@ -34,7 +34,7 @@ const FactureView = () => {
     <>
         <div className="clientView">
             <div className="clientView-wrapper">
-                <h2 className="client-title">FACTURE N° {data?.status}</h2>
+                <h2 className="client-title">FACTURE N° {data?.id}</h2>
                 <div className="client-rows">
                     <div className="client-row">
                         <span className="client-nom"><Person2Outlined/> Client :</span>
@@ -52,7 +52,7 @@ const FactureView = () => {
 
                     <div className="client-row">
                         <span className="client-nom"><MonetizationOnIcon/>  Montant total :</span>
-                        <span className="client-nom">{data?.total_amount}</span>
+                        <span className="client-nom">{data?.total_amount}$</span>
                     </div>
 
                     <div className="client-row">

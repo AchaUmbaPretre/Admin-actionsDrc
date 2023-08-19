@@ -29,7 +29,7 @@ const AddContrat = () => {
   const handleChange = (e) => {
     setSelects((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
-
+  console.log(selects)
   const columns = [
     {
       field: 'id', headerName: 'ID', width: 70,
@@ -68,6 +68,16 @@ const AddContrat = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!selects || !selects.fonction) {
+      Swal.fire({
+        title: 'Erreur',
+        text: 'Veuillez sélectionner une fonction',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
 
     const selectedItems = data.filter((item) => selected.includes(item.id));
     const selectedIds = selectedItems.map((item) => item.id);
@@ -157,7 +167,7 @@ const AddContrat = () => {
               <label htmlFor="" className="add-label">Fonction</label>
               
               <select id="pet-select" name="fonction" onChange={handleChange} className='form-select'>
-                <option disabled> selectionnez la fonctio...</option>
+                <option > selectionnez la fonctio...</option>
               { selectData?.map(item =>( 
                 <option value={item.id}>{item.nom}</option>
                 ))}

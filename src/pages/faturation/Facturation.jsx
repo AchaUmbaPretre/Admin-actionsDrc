@@ -100,7 +100,7 @@ const Facturation = () => {
     {
         field: 'total_amount',
         headerName: "Montant total",
-        width: 140 
+        width: 140,renderCell: (params) => `${params.value} $`
     },
     {
       field: 'status',
