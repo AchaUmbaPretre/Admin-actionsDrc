@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { CalendarMonth, Money, Person, Person3 } from '@mui/icons-material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import config from '../../../config'
+import moment from 'moment';
 
 const MissionView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -26,6 +27,9 @@ const MissionView = () => {
         fetchData()
     }, [id]);
 
+    const formattedDateEntrant = moment(data?.dateEntrant).format('DD/MM/YYYY');
+    const formattedDatSortant = moment(data?.dateSortant).format('DD/MM/YYYY');
+
   return (
     <>
         <div className="clientView">
@@ -43,17 +47,17 @@ const MissionView = () => {
 
                     <div className="client-row">
                         <span className="client-nom"><CalendarMonth/>  Date de début :</span>
-                        <span className="client-nom">{data?.dateEntrant}</span>
+                        <span className="client-nom">{formattedDateEntrant}</span>
                     </div>
 
                     <div className="client-row">
                         <span className="client-nom"><CalendarMonth/>  Date de fin :</span>
-                        <span className="client-nom">{data?.dateSortant}</span>
+                        <span className="client-nom">{formattedDatSortant}</span>
                     </div>
                     
                     <div className="client-row">
                         <span className="client-nom"><AccessTimeIcon/>  durée :</span>
-                        <span className="client-nom">{data?.duree}</span>
+                        <span className="client-nom">{data?.duree} mois</span>
                     </div>
 
                     <div className="client-row">

@@ -40,7 +40,7 @@ const Formulaire = () => {
       const handleChange = (e) => {
         setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
       };
-
+      console.log(data)
       const handlePhotoSubmit = async () => {
         try {
           let photoSrc;
