@@ -159,7 +159,6 @@ export default function Topbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenu}>Déconnexion</MenuItem>
     </Menu>
   );

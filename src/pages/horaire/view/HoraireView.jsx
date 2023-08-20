@@ -5,6 +5,7 @@ import '../../clientTab/clientView/clientView.scss'
 import { CalendarMonth, Person2Outlined, Person3Outlined } from '@mui/icons-material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import config from '../../../config'
+import moment from 'moment';
 
 const HoraireView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -24,6 +25,9 @@ const HoraireView = () => {
         }
         fetchData()
     }, []);
+
+    const formattedDateEntrant = moment(data?.start_date).format('DD/MM/YYYY');
+    const formattedDatSortant = moment(data?.end_date).format('DD/MM/YYYY');
   return (
     <>
         <div className="clientView">
@@ -41,12 +45,12 @@ const HoraireView = () => {
 
                     <div className="client-row">
                         <span className="client-nom"><CalendarMonth/> Date de debut :</span>
-                        <span className="client-nom">{data?.start_date}</span>
+                        <span className="client-nom">{formattedDateEntrant}</span>
                     </div>
 
                     <div className="client-row">
                         <span className="client-nom"><CalendarMonth/>  Date de la fin :</span>
-                        <span className="client-nom">{data?.end_date}</span>
+                        <span className="client-nom">{formattedDatSortant}</span>
                     </div>
 
                     <div className="client-row">
@@ -56,12 +60,12 @@ const HoraireView = () => {
 
                     <div className="client-row">
                         <span className="client-nom"><AccessTimeIcon/>   Heure d'arrivée :</span>
-                        <span className="client-nom">{data?.start_time}</span>
+                        <span className="client-nom">{data && data.start_time && data.start_time.substring(0, 5)}</span>
                     </div>
 
                     <div className="client-row">
                         <span className="client-nom"><AccessTimeIcon/>  Heure de sortie :</span>
-                        <span className="client-nom">{data?.end_time}</span>
+                        <span className="client-nom">{data && data.end_time && data.end_time.substring(0, 5)}</span>
                     </div>
                 </div>
             </div>

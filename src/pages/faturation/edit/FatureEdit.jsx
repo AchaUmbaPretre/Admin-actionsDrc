@@ -175,7 +175,7 @@ const FatureEdit = () => {
                   onChange={handleSelectChanges}
                   options={optionsStatus.map((item) => ({
                   value: item.id,
-                  label: item.status
+                  label: item.nom_status
                   }))}
                   placeholder="Selectionnez un statut..."
                   className=""

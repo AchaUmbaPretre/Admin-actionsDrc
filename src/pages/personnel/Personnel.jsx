@@ -80,8 +80,7 @@ const Personnel = () => {
           headerName: 'Postnom',
           type: 'number',
           width: 100,
-        },
-        
+        },        
         {
           field: 'phone_number',
           headerName: 'Telephone',

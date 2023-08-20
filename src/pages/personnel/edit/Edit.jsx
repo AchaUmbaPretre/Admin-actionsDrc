@@ -7,6 +7,8 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import Webcam from 'react-webcam';
 import config from '../../../config'
+import moment from 'moment';
+
 
 const Edit = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -170,7 +172,7 @@ const handleClick = async (e) => {
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Date de naissance <span>*</span></label>
-                                <input type="date" name="date_of_birth" value={date_of_birth} className="input-form" onChange={handleChange} />
+                                <input type="date" value={moment(date_of_birth).format('YYYY-MM-DD') || ''} name="date_of_birth" className="input-form" onChange={handleChange} />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Genre <span>*</span></label>

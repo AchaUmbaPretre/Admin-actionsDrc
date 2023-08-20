@@ -104,7 +104,7 @@ function App() {
           element: <Presence />
         },
         {
-          path: '/presenceView/:id',
+          path: "/presenceView/:emp1_id/:rowId",
           element: <PresenceView />
         },
         {

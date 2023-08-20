@@ -15,6 +15,7 @@ import EventIcon from '@mui/icons-material/Event';
 import WysiwygIcon from '@mui/icons-material/Wysiwyg';
 import WcIcon from '@mui/icons-material/Wc';
 import config from '../../config'
+import ShowChartIcon from '@mui/icons-material/ShowChart';
 
 const Views = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -111,6 +112,12 @@ const Views = () => {
                             <div className="views-right">
                                 <span className="view-label"><WysiwygIcon  className="icon-person"/>Status : </span>
                                 <span className="view-result">{data.employment_status}</span>
+                            </div>
+                        </div>
+                        <div className="views-rows">
+                            <div className="views-left">
+                                <span className="view-label"><ShowChartIcon  className="icon-person"/>Affectation : </span>
+                                <span className="view-result">{''}</span>
                             </div>
                         </div>
                     </div>

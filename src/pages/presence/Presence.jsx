@@ -93,7 +93,7 @@ const Presence = () => {
         return(
           <>
             <div className="table-icons-row">
-                <VisibilityIcon className='userEye' onClick={() => navigate(`/presenceView/${params.row.id}`)}/>
+                <VisibilityIcon className='userEye' onClick={() => navigate(`/presenceView/${params.row.emp1_id}/${params.row.id}`)} />
                 <DeleteOutline className="userListDelete" onClick={()=>{HandleDelete(params.row.id)}} />
             </div>
           </>

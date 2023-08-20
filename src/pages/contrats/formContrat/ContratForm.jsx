@@ -12,6 +12,7 @@ const DOMAIN = config.REACT_APP_SERVER_DOMAIN
 const [data, setData] = useState({});
 const navigate = useNavigate();
 const [selectedAv, setSelectedAv] = useState([]);
+const [clientEtat, setClientEtat] = useState([]);
 const [statusContrat, setStatusContrat] = useState([]);
 const [typeContrat, setTypeContrat] = useState([]);
 
@@ -19,6 +20,7 @@ const handleChange = (e) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  console.log(data)
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -45,6 +47,18 @@ const handleChange = (e) => {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`${DOMAIN}/api/admin/client`);
+        setClientEtat(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   useEffect(()=>{
 
@@ -121,19 +135,24 @@ useEffect(()=>{
                             </select>
                         </div>
                         <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Date de début <span>*</span></label>
-                            <input type="date"  name="start_date" className="input-form" onChange={handleChange} />
+                          <label htmlFor="" className="label-edit">Client(e) <span>*</span></label>
+                          <select id="pet-select" name="client_id" className="input-form" onChange={handleChange}>
+                            <option >selectionnez un client</option>
+                            {clientEtat?.map(item =>( 
+                                <option value={item.id}>{item.company_name}</option>
+                              ))}
+                          </select>
                         </div>
                     </div>
 
                     <div className="edit-rows">
                         <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Date de la fin <span>*</span></label>
-                            <input type="date" data-format="MM /jj/aaaa"  name='end_date' className="input-form" onChange={handleChange} />
+                            <label htmlFor="" className="label-edit">Date de début <span>*</span></label>
+                            <input type="date"  name="start_date" className="input-form" onChange={handleChange} />
                         </div>
                         <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Salaire <span>*</span></label>
-                            <input type="number"   name='hourly_rate' className="input-form" onChange={handleChange} />
+                            <label htmlFor="" className="label-edit">Date de la fin <span>*</span></label>
+                            <input type="date" data-format="MM /jj/aaaa"  name='end_date' className="input-form" onChange={handleChange} />
                         </div>
                     </div>
 
@@ -158,6 +177,10 @@ useEffect(()=>{
                         </div>
                     </div>
                     <div className="edit-rows">
+                        <div className="edit-row">
+                            <label htmlFor="" className="label-edit">Salaire <span>*</span></label>
+                            <input type="number"   name='hourly_rate' className="input-form" onChange={handleChange} />
+                        </div>
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Date de l'engagement <span>*</span></label>
                             <input type="date" data-format="MM /jj/aaaa"  name='date_engagement' className="input-form" onChange={handleChange} />

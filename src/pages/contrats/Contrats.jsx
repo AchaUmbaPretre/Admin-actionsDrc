@@ -55,7 +55,8 @@ const Contrats = () => {
   
      const columns = [
         { field: 'id', headerName: 'ID', width: 50 },
-        { field: 'contract_type', headerName: 'Type de contrat', width: 120 },
+        { field: 'company_name', headerName: 'Client', width: 110 },
+        { field: 'contract_type', headerName: 'Type de contrat', width: 100 },
 
         {
           field: 'start_date',
@@ -67,14 +68,14 @@ const Contrats = () => {
         {
             field: 'end_date',
             headerName: 'Date de la fin',
-            width: 110,
+            width: 100,
             valueGetter: (params) =>
             format(new Date(params.row.end_date), 'yyyy-MM-dd'),
         },
         {
           field: 'date_engagement',
           headerName: "Date de l'engagement",
-          width: 110,
+          width: 100,
           valueGetter: (params) =>
             format(new Date(params.row.date_engagement), 'yyyy-MM-dd'),
       },
@@ -82,17 +83,17 @@ const Contrats = () => {
             field: 'hourly_rate',
             headerName: 'Salaire',
             type: 'number',
-            width: 100 
+            width: 90 
         },
         {
           field: 'benefits',
           headerName: 'Avantages sociaux',
-          width: 130 
+          width: 110 
         },
         {
           field: 'contract_status',
           headerName: 'Statut du contrat',
-          width: 130 
+          width: 90 
         },
         {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
             return(

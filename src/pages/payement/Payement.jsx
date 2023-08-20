@@ -64,7 +64,7 @@ const Payement = () => {
         {
             field: 'amount',
             headerName: 'Montant',
-            width: 180,
+            width: 180,renderCell: (params) => `${params.value} $`
         },
         {
           field: 'payment_method',
