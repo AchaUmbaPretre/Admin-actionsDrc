@@ -180,6 +180,35 @@ const Formulaire = () => {
                                 <input type="text"  name='address' required className="input-form" onChange={handleChange} placeholder='Entrez votre adresse..' />
                             </div>
                         </div>
+                        <div className="form-rows">
+                            <div className="form-row">
+                                <label htmlFor="" className="label-form">Etat civil <span>*</span></label>
+                                <Select
+                                  name="etat_civil"
+                                  className="input-form"
+                                  options={[
+                                    { value: 'celibataire', label: 'Célibataire' },
+                                    { value: 'marie(e)', label: 'Marié(e)' }
+                                  ]}
+                                  onChange={(selectedOption) => handleSelectChange(selectedOption, "etat_civil")}
+                                />
+                            </div>
+                            <div className="form-row">
+                                <label htmlFor="" className="label-form">Nombre d'enfant <span>*</span></label>
+                                <input type="number"  name='nombre_enfant' required className="input-form" onChange={handleChange} placeholder="Entrez votre nombre d'enfant.." />
+                            </div>
+                        </div>
+
+                        <div className="form-rows">
+                            <div className="form-row">
+                                <label htmlFor="" className="label-form">N° INPP <span>*</span></label>
+                                <input type="number"  name='num_inpp' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero inpp.." />
+                            </div>
+                            <div className="form-row">
+                                <label htmlFor="" className="label-form">CNSS <span>*</span></label>
+                                <input type="number"  name='num_cnss' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero cnss.." />
+                            </div>
+                        </div>
 
                         <div className="form-rows">
                             <div className="form-row">

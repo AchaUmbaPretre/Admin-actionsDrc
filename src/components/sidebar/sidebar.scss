@@ -2,17 +2,19 @@
     flex: 2;
     height: calc(100vh - 0px);
     background: #253053;
-    top:50px;
+    top: 0;
+    bottom: 0;
     position: sticky;
+    overflow:initial;
     .sidebar-wrapper{
-        padding: 40px 20px;
+        padding: 20px;
         color: #d6d3d3;
         .sidebar-imgs{
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-bottom: 40px;
+            padding-bottom: 20px;
             .sidenav-img{
                width: 30%;
                border-radius: 50% 50% 10% 10%;
