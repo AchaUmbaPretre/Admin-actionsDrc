@@ -22,7 +22,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 800,
+    width: 900,
     bgcolor: 'background.paper',
     border: '1px solid #FFF',
     boxShadow: 24,
@@ -162,7 +162,7 @@ const HoraireAll = () => {
                     <Fade in={open}>
                         <Box sx={style}>
                             <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
-                              <Horaires/>
+                              <Horaires handleClose={handleClose}/>
                             </Box>
                         </Box>
                     </Fade>

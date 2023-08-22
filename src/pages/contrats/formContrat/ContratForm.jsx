@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import './contratForm.scss'
 import config from '../../../config'
 
-const ContratForm = () => {
+const ContratForm = ({handleClose}) => {
 const DOMAIN = config.REACT_APP_SERVER_DOMAIN
 
 const [data, setData] = useState({});
@@ -24,6 +24,7 @@ const handleChange = (e) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    handleClose()
 
     try {
       await axios.post(`${DOMAIN}/api/admin/contrat`, data);
@@ -35,7 +36,7 @@ const handleChange = (e) => {
         confirmButtonText: 'OK'
       });
 
-      navigate('/');
+      navigate('/contrats');
     } catch (err) {
       Swal.fire({
         title: 'Error',

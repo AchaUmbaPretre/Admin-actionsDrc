@@ -11,6 +11,7 @@ import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { useState } from 'react';
+import actions from './../../assets/actionssarl.PNG'
 
 const Sidebar = () => {
   const [activeItem, setActiveItem] = useState('Accueil');
@@ -18,6 +19,9 @@ const Sidebar = () => {
     <>
         <div className="sidebar">
           <div className="sidebar-wrapper">
+            <div className="sidebar-imgs">
+              <img src={actions} alt="" className='sidenav-img' />
+            </div>
             <ul className="sidebar-ul">
               <li className={`sidenav-li ${activeItem === 'Accueil' ? 'active' : ''}`}><HomeIcon className='sidebar-icon'/><Link to="/" onClick={() => setActiveItem('Accueil')}>Accueil</Link></li>
               <li className={`sidenav-li ${activeItem === 'Personnel' ? 'active' : ''}`}><PersonOutlineIcon className='sidebar-icon'/><Link to={"/personnel"} onClick={() => setActiveItem('Personnel')}>Personnel</Link></li>

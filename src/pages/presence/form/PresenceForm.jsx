@@ -6,7 +6,7 @@ import axios from 'axios';
 import config from '../../../config';
 import Select from 'react-select';
 
-const PresenceForm = () => {
+const PresenceForm = ({handleClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [employeeId, setEmployeeId] = useState('');
   const [clientEtat, setClientEtat] = useState([]);
@@ -44,7 +44,7 @@ const PresenceForm = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-
+    handleClose()
     try {
       await axios.post(`${DOMAIN}/api/admin/presences`, {
         employee_id: employeeId,

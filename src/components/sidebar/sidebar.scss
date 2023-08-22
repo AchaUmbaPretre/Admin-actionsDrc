@@ -1,12 +1,23 @@
 .sidebar{
     flex: 2;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 0px);
     background: #253053;
     top:50px;
     position: sticky;
     .sidebar-wrapper{
         padding: 40px 20px;
         color: #d6d3d3;
+        .sidebar-imgs{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 40px;
+            .sidenav-img{
+               width: 30%;
+               border-radius: 50% 50% 10% 10%;
+            }
+        }
         .sidebar-ul{
             display: flex;
             flex-direction: column;

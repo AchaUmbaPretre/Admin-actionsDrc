@@ -51,8 +51,10 @@ function App() {
         <div className="appContainer">
           <Sidebar />
           <div className="appOutlet">
-          <Topbar />
-            <Outlet />
+            <Topbar />
+            <div className="appOutletRow">
+              <Outlet />
+            </div>
           </div>
         </div>
       </div>
@@ -60,7 +62,7 @@ function App() {
   };
 
   const SecuriteRoute = ({ children }) => {
-    if (!currentUser) {
+    if (currentUser) {
       return <Navigate to="/login" />;
     }
     return children;

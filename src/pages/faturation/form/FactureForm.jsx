@@ -7,7 +7,7 @@ import Select from 'react-select';
 import config from '../../../config'
 
 
-const FactureForm = () => {
+const FactureForm = ({handleModalClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
 
   const navigate = useNavigate();
@@ -67,6 +67,7 @@ console.log(status, clientId)
 
   const handleClick = async (e) => {
     e.preventDefault();
+    handleModalClose();
 
     try {
       const response = await axios.post(`${DOMAIN}/api/admin/factures`, {
@@ -78,6 +79,8 @@ console.log(status, clientId)
       });
 
       const invoiceId = response.data.invoice_id;
+
+      navigate('/facturation')
       Swal.fire({
         icon: 'success',
         title: 'Facture créée avec succès',
@@ -92,7 +95,6 @@ console.log(status, clientId)
       setTotalAmount('');
       setStatus('');
 
-      navigate('/')
 
     } catch (error) {
       console.error('Erreur lors de la création de la facture :', error);

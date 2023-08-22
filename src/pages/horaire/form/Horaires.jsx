@@ -8,7 +8,7 @@ import axios from 'axios';
 import moment from 'moment';
 import config from '../../../config'
 
-const Horaires = () => {
+const Horaires = ({handleClose}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
 
     const navigate = useNavigate();
@@ -75,9 +75,12 @@ const Horaires = () => {
 
       const handleClick = async (e) => {
         e.preventDefault();
+        handleClose()
     
         try {
           await axios.post(`${DOMAIN}/api/admin/horairesPost`,data);
+
+          navigate('/horaireAll');
     
           Swal.fire({
             title: 'Success',
@@ -85,8 +88,6 @@ const Horaires = () => {
             icon: 'success',
             confirmButtonText: 'OK'
           });
-    
-          navigate('/personnel');
         } catch (error) {
           Swal.fire({
             title: 'Error',

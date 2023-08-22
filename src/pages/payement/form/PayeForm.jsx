@@ -7,7 +7,7 @@ import Select from 'react-select';
 import config from '../../../config'
 
 
-const PayeForm = () => {
+const PayeForm = ({handleModalClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const navigate = useNavigate();
   const [invoiceIds, setInvoiceIds] = useState('');
@@ -18,6 +18,7 @@ const PayeForm = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    handleModalClose();
 
     try {
       const response = await axios.post(`${DOMAIN}/api/admin/payementPost`,{
@@ -41,7 +42,7 @@ const PayeForm = () => {
       setAmount('');
       setPaymentMethod('');
 
-      navigate('/')
+      navigate('/payement')
 
     } catch (error) {
       console.error('Erreur lors de la création du payement :', error);

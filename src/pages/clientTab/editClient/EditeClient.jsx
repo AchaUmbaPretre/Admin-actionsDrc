@@ -44,7 +44,7 @@ useEffect(()=>{
 
   return (
     <>
-        <div className="clientForm">
+        <div className="ediitForm">
             <div className="clientForm-wrapper">
               <form action="" className="form-center">
               <h1 className="title-h1">Edite</h1>

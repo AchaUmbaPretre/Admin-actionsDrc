@@ -17,6 +17,7 @@ const ClientForm = ({handleModalClose}) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    handleModalClose();
   
     try {
       await axios.post(`${DOMAIN}/api/admin/clientPost`, data);
@@ -27,9 +28,8 @@ const ClientForm = ({handleModalClose}) => {
         icon: 'success',
         confirmButtonText: 'OK'
       });
-      handleModalClose();
   
-      navigate('/');
+      navigate('/client');
     } catch (error) {
       await Swal.fire({
         title: 'Error',

@@ -150,7 +150,7 @@ const Facturation = () => {
                     <Fade in={open}>
                         <Box sx={style}>
                             <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
-                              <FactureForm/>
+                              <FactureForm handleModalClose={handleClose} />
                             </Box>
                         </Box>
                     </Fade>

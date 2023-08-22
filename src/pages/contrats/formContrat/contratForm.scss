@@ -1,5 +1,5 @@
 .contratForm{
-    width: 100%;
+    width: 70%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,7 +48,7 @@
                     .input-form{
                         border: 1px solid #d1d0d0;
                         width: 100%;
-                        padding: 8px;
+                        padding: 15px 10px;
                         width: 100%;
                         border-radius: 5px;
                         background: #f2f2f269;
@@ -60,7 +60,6 @@
                 }
             }
             .edit-btn{
-                padding: 8px;
                 border: none;
                 display: flex;
                 align-items: center;
@@ -72,7 +71,7 @@
                 color: #f2f2f2;
                 cursor: pointer;
                 transition: .5s;
-                padding: 10px 15px;
+                padding: 15px;
                 width: max-content;
                 &:hover{
                     background: rgba(54, 85, 179, 0.979);

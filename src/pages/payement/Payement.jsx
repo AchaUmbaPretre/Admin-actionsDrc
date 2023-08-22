@@ -148,7 +148,7 @@ const Payement = () => {
                     <Fade in={open}>
                         <Box sx={style}>
                             <Box component="form" sx={{'& > :not(style)': { m: 1, width: '250ch' }, display:'flex', flexWrap:'wrap'}} noValidate autoComplete="off">
-                              <PayeForm/>
+                              <PayeForm handleModalClose={handleClose} />
                             </Box>
                         </Box>
                     </Fade>

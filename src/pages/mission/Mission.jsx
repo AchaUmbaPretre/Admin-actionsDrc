@@ -14,6 +14,22 @@ import { useEffect } from 'react';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import config from '../../config'
+import MissionForm from './form/MissionForm';
+import { Box, Fade, Modal } from '@mui/material';
+import Backdrop from '@mui/material/Backdrop';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 800,
+  bgcolor: 'background.paper',
+  border: '1px solid #FFF',
+  boxShadow: 24,
+  p: 4,
+  borderRadius: 2,
+}
 
 const Mission = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -108,7 +124,28 @@ const Mission = () => {
                         <span className="personnel-span"></span>
                     </div>
                 </div>
-                <button className="personnel-btn" onClick={()=>(navigate('/missionForm'))}><PersonAddAlt1Icon/>Ajouter</button>
+                <button className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</button>
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    slots={{ backdrop: Backdrop }}
+                    slotProps={{
+                    backdrop: {
+                        timeout: 500,
+                    },
+                    }} 
+                >
+                    <Fade in={open}>
+                        <Box sx={style}>
+                            <Box component="form" sx={{'& > :not(style)': { m: 1, width: '250ch' }, display:'flex', flexWrap:'wrap'}} noValidate autoComplete="off">
+                              <MissionForm handleModalClose={handleClose} />
+                            </Box>
+                        </Box>
+                    </Fade>
+                </Modal>
             </div>
             {loading ? (
           <div className="spinner-container">

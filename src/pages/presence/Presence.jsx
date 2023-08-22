@@ -130,7 +130,7 @@ const Presence = () => {
                     <Fade in={open}>
                         <Box sx={style}>
                             <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
-                              <PresenceForm/>
+                              <PresenceForm handleClose={handleClose}/>
                             </Box>
                         </Box>
                     </Fade>

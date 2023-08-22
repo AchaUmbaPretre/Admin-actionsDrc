@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import moment from 'moment';
 import config from '../../../config'
 
-const MissionForm = () => {
+const MissionForm = ({handleModalClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState([]);
   const navigate = useNavigate();
@@ -58,6 +58,7 @@ const MissionForm = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    handleModalClose()
     try {
       await axios.post(`${DOMAIN}/api/admin/missions`, data);
       Swal.fire({
