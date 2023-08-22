@@ -39,7 +39,6 @@ const Contrats = () => {
     const navigate = useNavigate();
     const [data, setData] = useState({});
     const [date, setDate] = useState('');
-    const [inputs, setInputs] = useState({});
     const [selected, setSelected] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -55,45 +54,27 @@ const Contrats = () => {
   
      const columns = [
         { field: 'id', headerName: 'ID', width: 50 },
-        { field: 'company_name', headerName: 'Client', width: 110 },
-        { field: 'contract_type', headerName: 'Type de contrat', width: 100 },
+        { field: 'company_name', headerName: 'Client', width: 150 },
+        { field: 'contract_type', headerName: 'Type de contrat', width: 150 },
 
         {
           field: 'start_date',
           headerName: 'Date du debut',
-          width: 110,
+          width: 150,
           valueGetter: (params) =>
           format(new Date(params.row.start_date), 'yyyy-MM-dd'),
         },
         {
             field: 'end_date',
             headerName: 'Date de la fin',
-            width: 100,
+            width: 150,
             valueGetter: (params) =>
             format(new Date(params.row.end_date), 'yyyy-MM-dd'),
         },
         {
-          field: 'date_engagement',
-          headerName: "Date de l'engagement",
-          width: 100,
-          valueGetter: (params) =>
-            format(new Date(params.row.date_engagement), 'yyyy-MM-dd'),
-      },
-        {
-            field: 'hourly_rate',
-            headerName: 'Salaire',
-            type: 'number',
-            width: 90 
-        },
-        {
-          field: 'benefits',
-          headerName: 'Avantages sociaux',
-          width: 110 
-        },
-        {
           field: 'contract_status',
           headerName: 'Statut du contrat',
-          width: 90 
+          width: 150 
         },
         {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
             return(
@@ -104,7 +85,6 @@ const Contrats = () => {
                     <Link to={`addContrat/${params.row.id}`}><AddCircleOutlineIcon className="userListAjout"  /></Link>
                 </div>
               </>
-    
             )
         }},
       ]; 

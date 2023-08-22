@@ -9,6 +9,7 @@ import axios from 'axios';
 import { Checkbox } from '@mui/material';
 import Swal from 'sweetalert2';
 import config from '../../../config'
+import { de } from 'date-fns/locale';
 
 const AddContrat = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -25,11 +26,12 @@ const AddContrat = () => {
   const [selects, setSelects] = useState()
   const [selected, setSelected] = useState([]);
   const [selectedx, setSelectedx] = useState([]);
+  const [selectedFunctionDetails, setSelectedFunctionDetails] = useState(null);
   const { id } = useParams();
   const handleChange = (e) => {
     setSelects((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
-  console.log(selects)
+  console.log(selectedFunctionDetails)
   const columns = [
     {
       field: 'id', headerName: 'ID', width: 70,
@@ -145,6 +147,30 @@ const AddContrat = () => {
     fetchDatas()
  }, [])
 
+ const handleFunctionSelect = async (event) => {
+  const functionId = event.target.value;
+  console.log(functionId) // Récupérer l'ID de la fonction sélectionnée
+  try {
+    const response = await axios.get(`${DOMAIN}/api/admin/fonctionDetail/${functionId}`);
+    const selectedFunctionDetails = response.data;
+    console.log('bonjour', response.data);
+    setSelectedFunctionDetails(selectedFunctionDetails);
+
+    // Ajouter les valeurs de selectedFunctionDetails à selectedx
+    const newData = selectedx.map((item) => ({
+      ...item,
+      prix: selectedFunctionDetails.prix,
+      salaire: selectedFunctionDetails.salaire,
+      avantages: selectedFunctionDetails.avantages,
+      horaire_conge: selectedFunctionDetails.horaire_conge,
+    }));
+    setSelectedx(newData);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+console.log(selectedFunctionDetails)
   return (
     <>
       <div className="facturation">
@@ -163,18 +189,28 @@ const AddContrat = () => {
             <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
           </div>
           <div className="add-row2">
-            <div className="add-row-top">
-              <label htmlFor="" className="add-label">Fonction</label>
-              
-              <select id="pet-select" name="fonction" onChange={handleChange} className='form-select'>
-                <option > selectionnez la fonctio...</option>
-              { selectData?.map(item =>( 
-                <option value={item.id}>{item.nom}</option>
-                ))}
-              </select>
-            </div>
-            <div className="add-row-bottom">
-              <Link className="add-btn" onClick={handleSubmit} >Envoyer</Link>
+            <div className="add-container-rows">
+              <div className="add-row-top">
+                <label htmlFor="" className="add-label">Fonction</label>
+                
+                <select id="pet-select" name="fonction" onChange={handleFunctionSelect} className='form-select'>
+                  <option>selectionnez la fonction...</option>
+                  {selectData?.map(item => (
+                    <option value={item.id} key={item.id}>{item.nom}</option>
+                  ))}
+                </select>
+              </div>
+              { selectedFunctionDetails ?
+              <div className="add-row-bottom">
+                <div className="add-row-bottom1">
+                  <h2 className="add-row-h2">Fonction : {selectedFunctionDetails[0]?.nom}</h2>
+                  <span className="add-row-span"><strong>Prix :</strong> {selectedFunctionDetails[0]?.prix}</span>
+                  <span className="add-row-span"><strong>Salaire :</strong> {selectedFunctionDetails[0]?.salaire}</span>
+                  <span className="add-row-span"><strong>Avantages :</strong> {selectedFunctionDetails[0]?.avantages}</span>
+                  <span className="add-row-span"><strong>Horaires :</strong>Horaires : {selectedFunctionDetails[0]?.horaire_conge}</span>
+                </div>
+              </div>
+            : ''}
             </div>
           </div>
         </div>

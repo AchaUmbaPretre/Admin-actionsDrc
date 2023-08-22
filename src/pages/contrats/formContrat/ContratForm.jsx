@@ -156,37 +156,6 @@ useEffect(()=>{
                             <input type="date" data-format="MM /jj/aaaa"  name='end_date' className="input-form" onChange={handleChange} />
                         </div>
                     </div>
-
-                    <div className="edit-rows">
-                        <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Avantages sociaux du contrat <span>*</span></label>
-                            <select id="pet-select" name="benefits" onChange={handleChange} className="input-form">
-                            <option >selectionnez l'avantage</option>
-                              {selectedAv?.map(item =>( 
-                                <option value={item.avantage_1}>{item.avantage_1}</option>
-                              ))}
-                            </select>
-                        </div>
-                        <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Status du contrat <span>*</span></label>
-                            <select id="pet-select" name="contract_status" className="input-form" onChange={handleChange}>
-                            <option >selectionnez le status du contrat</option>
-                            {statusContrat?.map(item =>( 
-                                <option value={item.nomContrat}>{item.nomContrat}</option>
-                              ))}
-                            </select>
-                        </div>
-                    </div>
-                    <div className="edit-rows">
-                        <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Salaire <span>*</span></label>
-                            <input type="number"   name='hourly_rate' className="input-form" onChange={handleChange} />
-                        </div>
-                        <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Date de l'engagement <span>*</span></label>
-                            <input type="date" data-format="MM /jj/aaaa"  name='date_engagement' className="input-form" onChange={handleChange} />
-                        </div>
-                    </div>
                     <button className="edit-btn" onClick={handleClick}>Envoyer</button>
                 </form>
             </div>
