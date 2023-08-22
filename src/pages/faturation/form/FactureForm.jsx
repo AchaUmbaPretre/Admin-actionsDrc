@@ -32,7 +32,6 @@ const FactureForm = ({handleModalClose}) => {
     setStatus(selectedOptionClient.value);
   };
 
-console.log(status, clientId)
   useEffect(()=>{
     
     const fetchData = async ()=> {

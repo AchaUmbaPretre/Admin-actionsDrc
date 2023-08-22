@@ -28,10 +28,12 @@ const AddContrat = () => {
   const [selectedx, setSelectedx] = useState([]);
   const [selectedFunctionDetails, setSelectedFunctionDetails] = useState(null);
   const { id } = useParams();
+  const [setSelectedFunction,selectedFunction] = useState([]);
+
   const handleChange = (e) => {
-    setSelects((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  }
-  console.log(selectedFunctionDetails)
+    setSelectedFunction(e.target.value);
+  };
+  console.log(selectedx)
   const columns = [
     {
       field: 'id', headerName: 'ID', width: 70,
@@ -71,7 +73,7 @@ const AddContrat = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!selects || !selects.fonction) {
+/*     if (!selects || !selects.fonction) {
       Swal.fire({
         title: 'Erreur',
         text: 'Veuillez sélectionner une fonction',
@@ -79,13 +81,13 @@ const AddContrat = () => {
         confirmButtonText: 'OK'
       });
       return;
-    }
+    } */
 
     const selectedItems = data.filter((item) => selected.includes(item.id));
     const selectedIds = selectedItems.map((item) => item.id);
     const newSelectedx = selectedItems.map((item) => ({
       agent: item.id,
-      fonction: selects.fonction,
+      fonction: selectedFunctionDetails.id,
       contrat: id
     }));
     setSelectedx(selectedx.concat(newSelectedx));
@@ -132,6 +134,13 @@ const AddContrat = () => {
     fetchData()
   }, [])
 
+    // Filtrer les employés en fonction de la fonction sélectionnée
+    const filteredEmployees = data.filter((employee) => {
+      if (selectedFunctionDetails) {
+        return employee.skills === selectedFunctionDetails[0]?.nom;
+      }
+      return true;
+    });
 
   useEffect(()=>{
 
@@ -148,16 +157,14 @@ const AddContrat = () => {
  }, [])
 
  const handleFunctionSelect = async (event) => {
-  const functionId = event.target.value;
+const functionId = event.target.value;
 
 
   try {
     const response = await axios.get(`${DOMAIN}/api/admin/fonctionDetail/${functionId}`);
     const selectedFunctionDetails = response.data;
-    console.log('bonjour', response.data);
     setSelectedFunctionDetails(selectedFunctionDetails);
 
-    // Ajouter les valeurs de selectedFunctionDetails à selectedx
     const newData = selectedx.map((item) => ({
       ...item,
       prix: selectedFunctionDetails.prix,
@@ -168,10 +175,10 @@ const AddContrat = () => {
     setSelectedx(newData);
   } catch (error) {
     console.log(error);
-  }
+  } 
 };
 
-console.log(selectedx)
+console.log(selectedFunctionDetails)
   return (
     <>
       <div className="facturation">
@@ -187,7 +194,7 @@ console.log(selectedx)
         </div>
         <div className="add-rows">
           <div className="add-row1">
-            <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
+            <DataGrid rows={filteredEmployees} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
           </div>
           <div className="add-row2">
             <div className="add-container-rows">
@@ -210,6 +217,7 @@ console.log(selectedx)
                   <span className="add-row-span"><strong>Avantages :</strong> {selectedFunctionDetails[0]?.avantages}</span>
                   <span className="add-row-span"><strong>Horaires :</strong> {selectedFunctionDetails[0]?.horaire_conge}</span>
                 </div>
+                <button className='add-row-btn' onClick={handleSubmit}>Affecter</button>
               </div>
             : ''}
             </div>
