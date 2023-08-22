@@ -149,7 +149,8 @@ const AddContrat = () => {
 
  const handleFunctionSelect = async (event) => {
   const functionId = event.target.value;
-  console.log(functionId) // Récupérer l'ID de la fonction sélectionnée
+
+
   try {
     const response = await axios.get(`${DOMAIN}/api/admin/fonctionDetail/${functionId}`);
     const selectedFunctionDetails = response.data;
@@ -170,7 +171,7 @@ const AddContrat = () => {
   }
 };
 
-console.log(selectedFunctionDetails)
+console.log(selectedx)
   return (
     <>
       <div className="facturation">
@@ -207,7 +208,7 @@ console.log(selectedFunctionDetails)
                   <span className="add-row-span"><strong>Prix :</strong> {selectedFunctionDetails[0]?.prix}</span>
                   <span className="add-row-span"><strong>Salaire :</strong> {selectedFunctionDetails[0]?.salaire}</span>
                   <span className="add-row-span"><strong>Avantages :</strong> {selectedFunctionDetails[0]?.avantages}</span>
-                  <span className="add-row-span"><strong>Horaires :</strong>Horaires : {selectedFunctionDetails[0]?.horaire_conge}</span>
+                  <span className="add-row-span"><strong>Horaires :</strong> {selectedFunctionDetails[0]?.horaire_conge}</span>
                 </div>
               </div>
             : ''}
