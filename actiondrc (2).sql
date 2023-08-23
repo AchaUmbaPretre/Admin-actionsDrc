@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 20 août 2023 à 13:13
+-- Généré le : mer. 23 août 2023 à 18:11
 -- Version du serveur : 10.4.22-MariaDB
 -- Version de PHP : 8.1.0
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `loginsma_actiondrc`
+-- Base de données : `actiondrc`
 --
 
 -- --------------------------------------------------------
@@ -34,6 +34,14 @@ CREATE TABLE `affectations` (
   `contrat_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Déchargement des données de la table `affectations`
+--
+
+INSERT INTO `affectations` (`id`, `fonction_id`, `emploie_id`, `contrat_id`) VALUES
+(39, 1, 44, 18),
+(41, 4, 46, 18);
+
 -- --------------------------------------------------------
 
 --
@@ -48,15 +56,6 @@ CREATE TABLE `attendance` (
   `check_in_time` time(6) NOT NULL,
   `check_out_time` time(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Déchargement des données de la table `attendance`
---
-
-INSERT INTO `attendance` (`id`, `employee_id`, `client_id`, `date`, `check_in_time`, `check_out_time`) VALUES
-(2, 40, 9, '2023-08-18', '08:00:00.000000', '17:00:00.000000'),
-(3, 40, 9, '2023-08-19', '09:00:00.000000', '17:00:00.000000'),
-(4, 40, 9, '2023-08-19', '07:50:00.000000', '17:00:00.000000');
 
 -- --------------------------------------------------------
 
@@ -137,9 +136,6 @@ CREATE TABLE `contrats` (
   `contract_type` varchar(200) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
-  `date_engagement` date DEFAULT NULL,
-  `hourly_rate` varchar(100) NOT NULL,
-  `benefits` varchar(100) NOT NULL,
   `contract_status` varchar(100) NOT NULL,
   `client_id` int(11) NOT NULL,
   `employee_id` int(11) NOT NULL
@@ -149,8 +145,8 @@ CREATE TABLE `contrats` (
 -- Déchargement des données de la table `contrats`
 --
 
-INSERT INTO `contrats` (`id`, `contract_type`, `start_date`, `end_date`, `date_engagement`, `hourly_rate`, `benefits`, `contract_status`, `client_id`, `employee_id`) VALUES
-(15, 'journalier', '2023-08-20', '2023-08-21', '2023-08-21', '200', 'malade', 'actif', 8, 0);
+INSERT INTO `contrats` (`id`, `contract_type`, `start_date`, `end_date`, `contract_status`, `client_id`, `employee_id`) VALUES
+(18, 'interim', '2023-08-22', '2023-08-24', 'En cours', 8, 0);
 
 -- --------------------------------------------------------
 
@@ -168,6 +164,10 @@ CREATE TABLE `employees` (
   `phone_number` int(100) NOT NULL,
   `email` varchar(45) NOT NULL,
   `identification_number` int(45) NOT NULL,
+  `etat_civil` varchar(200) NOT NULL,
+  `number_inpp` varchar(200) NOT NULL,
+  `number_cnss` varchar(200) NOT NULL,
+  `nombre_enfant` varchar(200) NOT NULL,
   `identification_type` varchar(255) NOT NULL,
   `skills` varchar(100) NOT NULL,
   `certifications` varchar(100) NOT NULL,
@@ -180,10 +180,10 @@ CREATE TABLE `employees` (
 -- Déchargement des données de la table `employees`
 --
 
-INSERT INTO `employees` (`id`, `first_name`, `last_name`, `date_of_birth`, `gender`, `address`, `phone_number`, `email`, `identification_number`, `identification_type`, `skills`, `certifications`, `employment_status`, `contrat_id`, `source`) VALUES
-(40, 'Ndambi', 'acha', '2023-08-19', 'h', 'debonhomme', 2147483647, 'achandambi@gmail.com', 131, 'Carte d\'identité', 'Informaticien', 'Licence', 'Interne', NULL, '1692362791441-1.jpeg'),
-(42, 'Kilolo', 'tite', '2023-08-17', 'h', 'ngaliema', 112, 'admin@gmail.com', 121, 'Carte d\'identité', 'Informaticien', 'Licence', 'Interne', NULL, '1692375348345-chauffeur.webp'),
-(43, 'Malu', 'miguel', '2023-08-20', 'f', 'Kintambo', 243822222, 'user@gmail.com', 211, 'Carte d\'identité', 'Informaticien', 'Licence', 'Interne', NULL, '1692452263933-illustrator.png');
+INSERT INTO `employees` (`id`, `first_name`, `last_name`, `date_of_birth`, `gender`, `address`, `phone_number`, `email`, `identification_number`, `etat_civil`, `number_inpp`, `number_cnss`, `nombre_enfant`, `identification_type`, `skills`, `certifications`, `employment_status`, `contrat_id`, `source`) VALUES
+(44, 'Ndambi', 'acha', '2023-08-24', 'h', 'debonhomme', 2147483647, 'achandambi@gmail.com', 2312, 'celibataire', '231', '3421', '4', 'Carte d\'identité', 'Informaticien', 'Licence', 'Interne', 18, '1692788591915-illustrator.png'),
+(45, 'Malu', 'miguel', '2023-08-24', 'h', 'ngaliema', 2147483647, 'user@gmail.com', 122, 'celibataire', '131', '321', '4', 'Carte d\'identité', 'Informaticien', 'Licence', 'Interne', NULL, '1692788764257-illustrator.png'),
+(46, 'Kilolo', 'tite', '1999-08-23', 'h', 'ngaliema', 2147483647, 'admin@gmail.com', 145, 'marie(e)', '312', '211', '4', 'Carte d\'identité', 'Electricien', 'Licence', 'Interne', 18, '1692790867368-chauffeur.webp');
 
 -- --------------------------------------------------------
 
@@ -193,19 +193,22 @@ INSERT INTO `employees` (`id`, `first_name`, `last_name`, `date_of_birth`, `gend
 
 CREATE TABLE `fonctions` (
   `id` int(11) NOT NULL,
-  `nom` varchar(255) NOT NULL,
-  `salaire` decimal(65,0) NOT NULL
+  `nom` varchar(255) DEFAULT NULL,
+  `avantages` text DEFAULT NULL,
+  `prix` decimal(10,2) DEFAULT NULL,
+  `salaire` decimal(10,2) DEFAULT NULL,
+  `horaire_conge` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `fonctions`
 --
 
-INSERT INTO `fonctions` (`id`, `nom`, `salaire`) VALUES
-(2, 'informaticien', '250'),
-(4, 'chauffeur', '200'),
-(6, 'nounou', '150'),
-(10, 'cuisinier', '100');
+INSERT INTO `fonctions` (`id`, `nom`, `avantages`, `prix`, `salaire`, `horaire_conge`) VALUES
+(1, 'Informaticien', 'malade, transport, congé payé', '200.00', '180.00', 20),
+(2, 'Mecanicien', 'Maladie, transport', '200.00', '150.00', 50),
+(3, 'Nounou', 'Malade, transport', '150.00', '100.00', 20),
+(4, 'Electricien', 'Malade, transport', '200.00', '150.00', 30);
 
 -- --------------------------------------------------------
 
@@ -503,13 +506,6 @@ CREATE TABLE `work_schedule` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Déchargement des données de la table `work_schedule`
---
-
-INSERT INTO `work_schedule` (`id`, `employee_id`, `client_id`, `start_date`, `end_date`, `weekday`, `start_time`, `end_time`) VALUES
-(9, 40, 9, '2023-08-18', '2023-10-18', '7', '08:00:00.000000', '17:00:00.000000');
-
---
 -- Index pour les tables déchargées
 --
 
@@ -518,9 +514,9 @@ INSERT INTO `work_schedule` (`id`, `employee_id`, `client_id`, `start_date`, `en
 --
 ALTER TABLE `affectations`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fonction_id` (`fonction_id`),
   ADD KEY `emploie_id` (`emploie_id`),
-  ADD KEY `contrat_id` (`contrat_id`);
+  ADD KEY `contrat_id` (`contrat_id`),
+  ADD KEY `fonction_id` (`fonction_id`);
 
 --
 -- Index pour la table `attendance`
@@ -558,7 +554,8 @@ ALTER TABLE `contrats`
 -- Index pour la table `employees`
 --
 ALTER TABLE `employees`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `contrat_id` (`contrat_id`);
 
 --
 -- Index pour la table `fonctions`
@@ -675,7 +672,7 @@ ALTER TABLE `work_schedule`
 -- AUTO_INCREMENT pour la table `affectations`
 --
 ALTER TABLE `affectations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT pour la table `attendance`
@@ -705,19 +702,19 @@ ALTER TABLE `competences`
 -- AUTO_INCREMENT pour la table `contrats`
 --
 ALTER TABLE `contrats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT pour la table `fonctions`
 --
 ALTER TABLE `fonctions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `invoices`
@@ -817,9 +814,9 @@ ALTER TABLE `work_schedule`
 -- Contraintes pour la table `affectations`
 --
 ALTER TABLE `affectations`
-  ADD CONSTRAINT `affectations_ibfk_1` FOREIGN KEY (`fonction_id`) REFERENCES `fonctions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `affectations_ibfk_2` FOREIGN KEY (`emploie_id`) REFERENCES `employees` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `affectations_ibfk_3` FOREIGN KEY (`contrat_id`) REFERENCES `contrats` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `affectations_ibfk_3` FOREIGN KEY (`contrat_id`) REFERENCES `contrats` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `affectations_ibfk_4` FOREIGN KEY (`fonction_id`) REFERENCES `fonctions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `attendance`
@@ -827,6 +824,13 @@ ALTER TABLE `affectations`
 ALTER TABLE `attendance`
   ADD CONSTRAINT `clientId` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `employeeId` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `employees`
+--
+ALTER TABLE `employees`
+  ADD CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`contrat_id`) REFERENCES `contrats` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `employees_ibfk_2` FOREIGN KEY (`contrat_id`) REFERENCES `contrats` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `invoices`
@@ -838,7 +842,6 @@ ALTER TABLE `invoices`
 -- Contraintes pour la table `mission`
 --
 ALTER TABLE `mission`
-  ADD CONSTRAINT `mission_ibfk_1` FOREIGN KEY (`agent_id`) REFERENCES `employees` (`id`),
   ADD CONSTRAINT `mission_ibfk_2` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`);
 
 --
@@ -846,12 +849,6 @@ ALTER TABLE `mission`
 --
 ALTER TABLE `payments`
   ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `salaire`
---
-ALTER TABLE `salaire`
-  ADD CONSTRAINT `fonction_id` FOREIGN KEY (`fonction_id`) REFERENCES `fonctions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `tasks`
