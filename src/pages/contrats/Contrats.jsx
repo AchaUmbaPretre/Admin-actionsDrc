@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import config from '../../config'
-import { DeleteOutline, EditOutlined, AddCircleOutline } from '@mui/icons-material';
+import { DeleteOutline, EditOutlined, AddCircleOutline, VisibilityOutlined } from '@mui/icons-material';
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PendingIcon from '@mui/icons-material/Pending';
@@ -77,8 +77,6 @@ const Contrats = () => {
         headerName: 'Statut du contrat',
         width: 150,
         renderCell: (params) => {
-          let icon;
-          let color;
     
           switch (params.value) {
             case 'Résilié':
@@ -118,6 +116,7 @@ const Contrats = () => {
                 <Link to={`/editContrat/${params.row.id}`}>
                   <EditOutlined className="userListBtn" />
                 </Link>
+                <VisibilityOutlined className='userEye' onClick={() => navigate(`/views/${params.row.id}`)} />
                 <DeleteOutline className="userListDelete" onClick={() => { handleDelete(params.row.id) }} />
                 <Link to={`addContrat/${params.row.id}`}>
                   <AddCircleOutline className="userListAjout" />
