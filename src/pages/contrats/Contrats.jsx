@@ -116,7 +116,7 @@ const Contrats = () => {
                 <Link to={`/editContrat/${params.row.id}`}>
                   <EditOutlined className="userListBtn" />
                 </Link>
-                <VisibilityOutlined className='userEye' onClick={() => navigate(`/views/${params.row.id}`)} />
+                <VisibilityOutlined className='userEye' onClick={() => navigate(`/contratsView/${params.row.id}`)} />
                 <DeleteOutline className="userListDelete" onClick={() => { handleDelete(params.row.id) }} />
                 <Link to={`addContrat/${params.row.id}`}>
                   <AddCircleOutline className="userListAjout" />

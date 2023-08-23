@@ -34,6 +34,7 @@ import FactureView from './pages/faturation/view/FactureView';
 import MissionEdit from './pages/mission/edite/MissionEdit';
 import FatureEdit from './pages/faturation/edit/FatureEdit';
 import Payement from './pages/payement/Payement';
+import ContratView from './pages/contrats/view/ContratView';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -92,6 +93,10 @@ function App() {
         {
           path: '/contrats',
           element: <Contrats />
+        },
+        {
+          path: '/contratsView/:id',
+          element: <ContratView />
         },
         {
           path: '/client',
