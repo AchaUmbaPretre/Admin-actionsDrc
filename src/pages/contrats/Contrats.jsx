@@ -9,7 +9,6 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import axios from 'axios';
-import { DeleteOutline} from '@mui/icons-material';
 import { useNavigate } from "react-router-dom";
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import ContratForm from './formContrat/ContratForm';
@@ -18,6 +17,11 @@ import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import config from '../../config'
+import { DeleteOutline, EditOutlined, AddCircleOutline } from '@mui/icons-material';
+import CancelIcon from '@mui/icons-material/Cancel';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import PendingIcon from '@mui/icons-material/Pending';
+// ...
 
 const style = {
     position: 'absolute',
@@ -52,42 +56,78 @@ const Contrats = () => {
     const handleClose = () => setOpen(false);
 
   
-     const columns = [
-        { field: 'id', headerName: 'ID', width: 50 },
-        { field: 'company_name', headerName: 'Client', width: 150 },
-        { field: 'contract_type', headerName: 'Type de contrat', width: 150 },
-
-        {
-          field: 'start_date',
-          headerName: 'Date du debut',
-          width: 150,
-          valueGetter: (params) =>
-          format(new Date(params.row.start_date), 'yyyy-MM-dd'),
+    const columns = [
+      { field: 'id', headerName: 'ID', width: 50 },
+      { field: 'company_name', headerName: 'Client', width: 150 },
+      { field: 'contract_type', headerName: 'Type de contrat', width: 150 },
+      {
+        field: 'start_date',
+        headerName: 'Date du debut',
+        width: 150,
+        valueGetter: (params) => format(new Date(params.row.start_date), 'yyyy-MM-dd'),
+      },
+      {
+        field: 'end_date',
+        headerName: 'Date de la fin',
+        width: 150,
+        valueGetter: (params) => format(new Date(params.row.end_date), 'yyyy-MM-dd'),
+      },
+      {
+        field: 'contract_status',
+        headerName: 'Statut du contrat',
+        width: 150,
+        renderCell: (params) => {
+          let icon;
+          let color;
+    
+          switch (params.value) {
+            case 'Résilié':
+              return (
+                <span style={{ color: 'red', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  Résilié
+                  <CancelIcon style={{ fontSize: '16px' }} />
+                </span>
+              );
+            case 'En attente':
+              return (
+                <span style={{ color: 'green', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  En attente
+                  <CheckCircleIcon style={{ fontSize: '16px' }} />
+                </span>
+              );
+            case 'En cours':
+              return (
+                <span style={{ color: 'blue', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: "10px" }}>
+                  En cours
+                  <PendingIcon style={{ fontSize: '16px' }} />
+                </span>
+              );
+            default:
+              return null;
+          }
         },
-        {
-            field: 'end_date',
-            headerName: 'Date de la fin',
-            width: 150,
-            valueGetter: (params) =>
-            format(new Date(params.row.end_date), 'yyyy-MM-dd'),
+      },
+      {
+        field: 'action',
+        headerName: 'Action',
+        width: 150,
+        renderCell: (params) => {
+          return (
+            <>
+              <div className="table-icons-row">
+                <Link to={`/editContrat/${params.row.id}`}>
+                  <EditOutlined className="userListBtn" />
+                </Link>
+                <DeleteOutline className="userListDelete" onClick={() => { handleDelete(params.row.id) }} />
+                <Link to={`addContrat/${params.row.id}`}>
+                  <AddCircleOutline className="userListAjout" />
+                </Link>
+              </div>
+            </>
+          );
         },
-        {
-          field: 'contract_status',
-          headerName: 'Statut du contrat',
-          width: 150 
-        },
-        {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
-            return(
-              <>
-                <div className="table-icons-row">
-                    <Link to={`/editContrat/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
-                    <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
-                    <Link to={`addContrat/${params.row.id}`}><AddCircleOutlineIcon className="userListAjout"  /></Link>
-                </div>
-              </>
-            )
-        }},
-      ]; 
+      },
+    ];
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
        useEffect(()=>{
@@ -124,6 +164,20 @@ const Contrats = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const YourComponent = ({ data }) => {
+    return (
+      <DataGrid
+        rows={data}
+        columns={columns}
+        pageSize={10}
+        checkboxSelection
+        selectionModel={selected}
+        onSelectionModelChange={handleSelectionChange}
+        className="contratTable"
+      />
+    );
   };
 
   return (
@@ -166,9 +220,7 @@ const Contrats = () => {
           </div>
             ) : (
             <div className="contrats-left">
-              <DataGrid rows={data} columns={columns}  pageSize={10}  checkboxSelection
-                selectionModel={selected}
-                onSelectionModelChange={handleSelectionChange} className="contratTable" />
+            <YourComponent data={data} /> 
             </div>
             )}
         </div>
