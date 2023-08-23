@@ -139,7 +139,7 @@ const Views = () => {
                         <div className="views-rows">
                             <div className="views-left">
                                 <span className="view-label"><ShowChartIcon  className="icon-person"/>Affectation : </span>
-                                <span className="view-result">{''}</span>
+                                <span className="view-result">{data.nom_client}</span>
                             </div>
                         </div>
                     </div>

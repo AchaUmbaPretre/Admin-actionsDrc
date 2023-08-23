@@ -2,14 +2,13 @@ import { DataGrid } from '@mui/x-data-grid'
 import { Link, useParams } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './addContrat.scss'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { Checkbox } from '@mui/material';
 import Swal from 'sweetalert2';
-import config from '../../../config'
-import { de } from 'date-fns/locale';
+import config from '../../../config';
 
 const AddContrat = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -30,15 +29,52 @@ const AddContrat = () => {
   const { id } = useParams();
   const [setSelectedFunction,selectedFunction] = useState([]);
   const [functionId, setFunctionId] = useState(null);
+  const [employees, setEmployees] = useState([]);
 
-/*   const handleChange = (e) => {
-    setSelectedFunction(e.target.value);
-  } */;
-  console.log(selectedx)
-  console.log(selectedFunctionDetails)
+
+  const handleSelectionChange = (event, id) => {
+    if (event.target.checked) {
+      setSelected([...selected, id]);
+    } else {
+      setSelected(selected.filter((selectedId) => selectedId !== id));
+    }
+  };
+  const renderEmployeeStatus = (employee) => {
+    if (employee.contrat_id === null || new Date(employee.date_fin) < new Date()) {
+      return <span className="dot green"></span>;
+    } else {
+      return <span className="dot red"></span>;
+    }
+  };
+  
+
+  useEffect(() => {
+    axios.get(`${DOMAIN}/api/admin/emploieDispo`).then((response) => {
+      const transformedEmployees = response.data.map((employee) => ({
+        id: employee.id,
+        nom: employee.nom,
+        prenom: employee.prenom,
+        email: employee.email,
+        gender: employee.gender,
+        skills: employee.skills,
+        contrat_id: employee.contrat_id,
+        date_debut: employee.date_debut,
+        date_fin: employee.date_fin,
+        disponibilite: employee.contrat_id === null || new Date(employee.date_fin) < new Date() ? 'disponible' : 'indisponible',
+        disponibiliteIcon: employee.contrat_id === null || new Date(employee.date_fin) < new Date() ? '🟢' : '🔴'
+      }));
+      setEmployees(transformedEmployees);
+    });
+  }, []);
+  console.log(employees)
+  
+
+  
   const columns = [
     {
-      field: 'id', headerName: 'ID', width: 70,
+      field: 'id',
+      headerName: 'ID',
+      width: 70,
       renderCell: (params) => (
         <Checkbox
           checked={selected.includes(params.row.id)}
@@ -47,30 +83,38 @@ const AddContrat = () => {
         />
       )
     },
-    { field: 'first_name', headerName: 'Nom', width: 110 },
-    { field: 'last_name', headerName: 'Prenom', width: 100 },
     {
-      field: 'email',
-      headerName: 'Email',
-      type: 'number',
+      field: 'nom',
+      headerName: 'Nom',
       width: 120,
     },
-    { field: 'gender', headerName: 'Genre', width: 50 },
+    {
+      field: 'prenom',
+      headerName: 'Prenom',
+      width: 120,
+    },
     {
       field: 'skills',
       headerName: 'Competence',
       width: 120,
     },
+    {
+      field: 'disponibilite',
+      headerName: 'Disponibilité',
+      width: 120,
+      cellClassName: (params) => {
+        return params.value === 'disponible' ? 'disponible' : 'indisponible';
+      },
+      renderCell: (params) => (
+        <React.Fragment>
+          {params.row.disponibiliteIcon} {params.row.disponibilite}
+        </React.Fragment>
+      )
+    },
   ];
-  const [selectedData, setSelectedData] = useState([]);
 
-  const handleSelectionChange = (event, id) => {
-    if (event.target.checked) {
-      setSelected([...selected, id])
-    } else {
-      setSelected(selected.filter((row) => row !== id))
-    }
-  };
+
+  const [selectedData, setSelectedData] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -129,8 +173,8 @@ const AddContrat = () => {
     fetchData()
   }, [])
 
-    // Filtrer les employés en fonction de la fonction sélectionnée
-    const filteredEmployees = data.filter((employee) => {
+    
+    const filteredEmployees = employees.filter((employee) => {
       if (selectedFunctionDetails) {
         return employee.skills === selectedFunctionDetails[0]?.nom;
       }
