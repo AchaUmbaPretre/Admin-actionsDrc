@@ -39,13 +39,6 @@ const AddContrat = () => {
       setSelected(selected.filter((selectedId) => selectedId !== id));
     }
   };
-  const renderEmployeeStatus = (employee) => {
-    if (employee.contrat_id === null || new Date(employee.date_fin) < new Date()) {
-      return <span className="dot green"></span>;
-    } else {
-      return <span className="dot red"></span>;
-    }
-  };
   
 
   useEffect(() => {
@@ -219,7 +212,7 @@ const functionIdData = event.target.value;
   } 
 };
 
-/* console.log(selectedFunctionDetails) */
+
   return (
     <>
       <div className="facturation">

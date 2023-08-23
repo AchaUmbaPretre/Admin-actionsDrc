@@ -21,11 +21,12 @@ const Affectation = () => {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
-    { field: 'first_name', headerName: "Nom", width: 150 },
+    { field: 'client_nom', headerName: "Client", width: 120 },
+    { field: 'first_name', headerName: "Nom", width: 120 },
     {
       field: 'last_name',
       headerName: "Post-nom",
-      width: 150 
+      width: 120 
     },
     {
       field: 'skills',
