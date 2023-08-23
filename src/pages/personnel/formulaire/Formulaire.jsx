@@ -58,8 +58,9 @@ const Formulaire = () => {
             icon: 'success',
             confirmButtonText: 'OK'
           });
-        
-          navigate('/');
+          
+          navigate("/personnel")
+         
         } catch (error) {
           await Swal.fire({
             title: 'Error',
@@ -202,11 +203,11 @@ const Formulaire = () => {
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">N° INPP <span>*</span></label>
-                                <input type="number"  name='num_inpp' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero inpp.." />
+                                <input type="number"  name='number_inpp' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero inpp.." />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">CNSS <span>*</span></label>
-                                <input type="number"  name='num_cnss' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero cnss.." />
+                                <input type="number"  name='number_cnss' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero cnss.." />
                             </div>
                         </div>
 

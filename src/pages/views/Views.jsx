@@ -95,6 +95,28 @@ const Views = () => {
 
                         <div className="views-rows">
                             <div className="views-left">
+                                <span className="view-label"><RecentActorsIcon className="icon-person"/>Etat civil : </span>
+                                <span className="view-result">{data.etat_civil}</span>
+                            </div>
+                            <div className="views-right">
+                                <span className="view-label"><EngineeringIcon className="icon-person"/>Nombre d'enfant : </span>
+                                <span className="view-result">{data.nombre_enfant}</span>
+                            </div>
+                        </div>
+
+                        <div className="views-rows">
+                            <div className="views-left">
+                                <span className="view-label"><RecentActorsIcon className="icon-person"/>N° INPP : </span>
+                                <span className="view-result">{data.number_inpp}</span>
+                            </div>
+                            <div className="views-right">
+                                <span className="view-label"><EngineeringIcon className="icon-person"/>N° CNSS : </span>
+                                <span className="view-result">{data.number_cnss}</span>
+                            </div>
+                        </div>
+
+                        <div className="views-rows">
+                            <div className="views-left">
                                 <span className="view-label"><RecentActorsIcon className="icon-person"/>Type du pièce : </span>
                                 <span className="view-result">{data.identification_type}</span>
                             </div>

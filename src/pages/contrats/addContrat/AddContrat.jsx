@@ -29,11 +29,13 @@ const AddContrat = () => {
   const [selectedFunctionDetails, setSelectedFunctionDetails] = useState(null);
   const { id } = useParams();
   const [setSelectedFunction,selectedFunction] = useState([]);
+  const [functionId, setFunctionId] = useState(null);
 
-  const handleChange = (e) => {
+/*   const handleChange = (e) => {
     setSelectedFunction(e.target.value);
-  };
+  } */;
   console.log(selectedx)
+  console.log(selectedFunctionDetails)
   const columns = [
     {
       field: 'id', headerName: 'ID', width: 70,
@@ -72,27 +74,17 @@ const AddContrat = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-/*     if (!selects || !selects.fonction) {
-      Swal.fire({
-        title: 'Erreur',
-        text: 'Veuillez sélectionner une fonction',
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
-      return;
-    } */
-
+  
     const selectedItems = data.filter((item) => selected.includes(item.id));
     const selectedIds = selectedItems.map((item) => item.id);
     const newSelectedx = selectedItems.map((item) => ({
       agent: item.id,
-      fonction: selectedFunctionDetails.id,
+      fonction: selectedFunctionDetails[0].id,
       contrat: id
     }));
     setSelectedx(selectedx.concat(newSelectedx));
     setSelectedData([...selectedData, ...selectedItems]);
-
+  
     selectedx.map((dd) => {
       axios
         .post(`${DOMAIN}/api/admin/affectations`, {
@@ -101,25 +93,28 @@ const AddContrat = () => {
           contrat_id: dd.contrat
         })
         .then((response) => {
-          Swal.fire({
-            title: 'Success',
-            text: 'Affectation réussie!',
-            icon: 'success',
-            confirmButtonText: 'OK'
-          });
-          navigate('/contrats');
-        })
-        .catch((error) => {
-          Swal.fire({
-            title: 'Error',
-            text: error.message,
-            icon: 'error',
-            confirmButtonText: 'OK'
-          });
+          axios
+            .put(`${DOMAIN}/api/admin/employeFonctionPut/${dd.agent}`, { contrat_id: dd.contrat })
+            .then((response) => {
+              Swal.fire({
+                title: 'Success',
+                text: 'Affectation réussie!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+              });
+              navigate('/affectation');
+            })
+            .catch((error) => {
+              Swal.fire({
+                title: 'Error',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'OK'
+              });
+            });
         });
     });
   };
-
     useEffect(() => {
 
     const fetchData = async () => {
@@ -157,12 +152,14 @@ const AddContrat = () => {
  }, [])
 
  const handleFunctionSelect = async (event) => {
-const functionId = event.target.value;
+const functionIdData = event.target.value;
 
 
   try {
-    const response = await axios.get(`${DOMAIN}/api/admin/fonctionDetail/${functionId}`);
+    const response = await axios.get(`${DOMAIN}/api/admin/fonctionDetail/${functionIdData}`);
     const selectedFunctionDetails = response.data;
+    console.log(selectedFunctionDetails)
+
     setSelectedFunctionDetails(selectedFunctionDetails);
 
     const newData = selectedx.map((item) => ({
@@ -178,7 +175,7 @@ const functionId = event.target.value;
   } 
 };
 
-console.log(selectedFunctionDetails)
+/* console.log(selectedFunctionDetails) */
   return (
     <>
       <div className="facturation">
