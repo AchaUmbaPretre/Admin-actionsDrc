@@ -21,7 +21,6 @@ import { DeleteOutline, EditOutlined, AddCircleOutline, VisibilityOutlined } fro
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PendingIcon from '@mui/icons-material/Pending';
-// ...
 
 const style = {
     position: 'absolute',
@@ -81,21 +80,21 @@ const Contrats = () => {
           switch (params.value) {
             case 'Résilié':
               return (
-                <span style={{ color: 'red', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ color: 'red', display: 'flex', alignItems: 'center', justifyContent: 'space-between',gap: "5px"}}>
                   Résilié
                   <CancelIcon style={{ fontSize: '16px' }} />
                 </span>
               );
             case 'En attente':
               return (
-                <span style={{ color: 'green', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <span style={{ color: 'green', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: "5px" }}>
                   En attente
                   <CheckCircleIcon style={{ fontSize: '16px' }} />
                 </span>
               );
             case 'En cours':
               return (
-                <span style={{ color: 'blue', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: "10px" }}>
+                <span style={{ color: 'blue', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: "5px" }}>
                   En cours
                   <PendingIcon style={{ fontSize: '16px' }} />
                 </span>

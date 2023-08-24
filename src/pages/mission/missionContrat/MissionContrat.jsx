@@ -37,8 +37,10 @@ const MissionContrat = () => {
   console.log(selectedIds)
   const columns = [
     { field: 'id', headerName: 'ID', width: 60 },
-    { field: 'start_date', headerName: "Date de debut", width: 160 },
-    { field: 'end_date', headerName: 'Date de la fin', width: 160 },
+    { field: 'start_date', headerName: "Date de debut", width: 160 , valueGetter: (params) =>
+    format(new Date(params.row.start_date), 'yyyy-MM-dd'), },
+    { field: 'end_date', headerName: 'Date de la fin', width: 160,  valueGetter: (params) =>
+    format(new Date(params.row.end_date), 'yyyy-MM-dd')},
     { field: 'contract_type', headerName: "Type du contrat", width: 160 },
     { field: 'contract_status', headerName: "status du contrat", width: 150 },
     {
