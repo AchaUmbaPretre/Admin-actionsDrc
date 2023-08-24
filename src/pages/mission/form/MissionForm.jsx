@@ -15,6 +15,7 @@ const MissionForm = ({handleModalClose}) => {
   const [optionsClient, setOptionsClient] = useState([]);
   const [duration, setDuration] = useState([]);
   const [salaires, setSalaires] = useState([]);
+  const [sites, SetSites] = useState([]);
 
   const handleChange = (selectedOption, name) => {
     if (name === 'montant') {
@@ -35,7 +36,7 @@ const MissionForm = ({handleModalClose}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${DOMAIN}/api/admin`);
+        const res = await axios.get(`${DOMAIN}/api/admin/contrat`);
         setOptions(res.data);
       } catch (error) {
         console.log(error);
@@ -60,14 +61,20 @@ const MissionForm = ({handleModalClose}) => {
     e.preventDefault();
     handleModalClose()
     try {
-      await axios.post(`${DOMAIN}/api/admin/missions`, data);
+/*       await axios.post(`${DOMAIN}/api/admin/missions`, data);
       Swal.fire({
         title: 'Success',
         text: 'Mission créée avec succès!',
         icon: 'success',
         confirmButtonText: 'OK'
+      }); */
+      const params = new URLSearchParams();
+      Object.entries(data).forEach(([key, value]) => {
+        params.append(key, value);
       });
-      navigate('/mission');
+  
+      
+      navigate(`/missionContrat?${params.toString()}`);
     } catch (err) {
       Swal.fire({
         title: 'Error',
@@ -103,6 +110,17 @@ const MissionForm = ({handleModalClose}) => {
     fetchDatas();
   }, []);
 
+  useEffect(() => {
+    const fetchDatas = async () => {
+      try {
+        const {data} = await axios.get(`${DOMAIN}/api/admin/sites`);
+        SetSites(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchDatas();
+  }, []);
   return (
     <>
       <div className="contratForm">
@@ -112,18 +130,18 @@ const MissionForm = ({handleModalClose}) => {
           </div>
           <form action="" className="formulaire-edit">
             <div className="edit-rows">
-              <div className="edit-row">
-                <label htmlFor="" className="label-edit">Agent <span>*</span></label>
+              {/* <div className="edit-row">
+                <label htmlFor="" className="label-edit">Contrat<span>*</span></label>
                 <Select
                   name="agent_id"
-                  onChange={(selectedOption) => handleChange(selectedOption, "agent_id")}
+                  onChange={(selectedOption) => handleChange(selectedOption, "contrat_id")}
                   options={options.map((item) => ({
                     value: item.id,
-                    label: item.first_name
+                    label: item.contract_type
                   }))}
                   
                 />
-              </div>
+              </div> */}
               <div className="edit-row">
                 <label htmlFor="" className="label-edit">Client <span>*</span></label>
                 <Select
@@ -138,7 +156,7 @@ const MissionForm = ({handleModalClose}) => {
               </div>
             </div>
 
-            <div className="edit-rows">
+{/*             <div className="edit-rows">
               <div className="edit-row">
                 <label htmlFor="" className="label-edit">Date de début<span>*</span></label>
                 <input
@@ -157,19 +175,21 @@ const MissionForm = ({handleModalClose}) => {
                   className="input-form"
                 />
               </div>
-            </div>
+            </div> */}
 
-            <div className="edit-rows">
+            {/* <div className="edit-rows">
               <div className="edit-row">
-                <label htmlFor="" className="label-edit">Montant <span>*</span></label>
-                <input
-                  type="number"
-                  name="montant"
-                  className="input-form"
-                  onChange={(e) => handleChange(e.target.value, "montant")}
+                <label htmlFor="" className="label-edit">Sites <span>*</span></label>
+                <Select
+                  name="nom_site"
+                  onChange={(selectedOption) => handleChange(selectedOption, "nom_site")}
+                  options={sites.map((item) => ({
+                    value: item.id,
+                    label: item.nom_site
+                  }))}
                 />
               </div>
-            </div>
+            </div> */}
             <button className="edit-btn" onClick={handleClick}>Envoyer</button>
           </form>
         </div>

@@ -1,19 +1,51 @@
 import './clientForm.scss'
 import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import config from '../../../config';
 import Swal from 'sweetalert2';
+import { components } from 'react-select';
+import Select from 'react-select';
 
 
 const ClientForm = ({handleModalClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const navigate = useNavigate();
   const [data, setData] = useState({});
+  const [provinces, setProvinces] = useState([])
+  const [pays, setPays] = useState([])
   const handleChange = (e) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+  useEffect(()=>{
+
+    const fetchData = async ()=> {
+        try{
+            const {data} = await axios.get(`${DOMAIN}/api/admin/province`);
+            setProvinces(data)
+          }catch(error){
+            console.log(error)
+          };
+    }
+    fetchData()
+ }, [])
+
+ useEffect(()=>{
+
+  const fetchData = async ()=> {
+      try{
+          const {data} = await axios.get(`${DOMAIN}/api/admin/pays`);
+          setPays(data)
+        }catch(error){
+          console.log(error)
+        };
+  }
+  fetchData()
+}, [])
+
+ console.log(data)
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -84,10 +116,34 @@ const ClientForm = ({handleModalClose}) => {
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Rccm<span>*</span></label>
                     <input type="number" name='rccm' className="input-form" onChange={handleChange} />
-                </div>
+                  </div>
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Id nate<span>*</span></label>
                     <input type="number" name='idnate' className="input-form" onChange={handleChange} />
+                  </div>
+                </div>
+                <div className="form-rows">
+                  <div className="form-row">
+                    <label htmlFor="" className="label-form">Pays<span>*</span></label>
+                    <Select
+                      name="pays"
+                      options={pays?.map(item => ({ value: item.nom, label: item.nom }))}
+                      onChange={selectedOption => handleChange({ target: { name: 'pays', value: selectedOption.value } })}
+                    />
+                </div>
+                  <div className="form-row">
+                    <label htmlFor="" className="label-form">Province<span>*</span></label>
+                    <Select
+                      name="province"
+                      options={provinces?.map(item => ({ value: item.nom, label: item.nom }))}
+                      onChange={selectedOption => handleChange({ target: { name: 'province', value: selectedOption.value } })}
+                    />
+                  </div>
+                </div>
+                <div className="form-rows">
+                  <div className="form-row">
+                    <label htmlFor="" className="label-form">APR<span>*</span></label>
+                    <input type="text" name='apr' className="input-form" onChange={handleChange} />
                   </div>
                 </div>
                         

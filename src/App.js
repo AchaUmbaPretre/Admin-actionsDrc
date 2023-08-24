@@ -35,6 +35,9 @@ import MissionEdit from './pages/mission/edite/MissionEdit';
 import FatureEdit from './pages/faturation/edit/FatureEdit';
 import Payement from './pages/payement/Payement';
 import ContratView from './pages/contrats/view/ContratView';
+import { MissedVideoCallTwoTone } from '@mui/icons-material';
+import MissiAff from './pages/mission/missionAff/MissiAff';
+import MissionContrat from './pages/mission/missionContrat/MissionContrat';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -153,6 +156,14 @@ function App() {
         {
           path: '/mission',
           element: <Mission />
+        },
+        {
+          path: '/missionContrat',
+          element: <MissionContrat />
+        },
+        {
+          path: '/missions',
+          element: <MissiAff />
         },
         {
           path: '/missionForm',
