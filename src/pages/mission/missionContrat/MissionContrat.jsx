@@ -94,8 +94,8 @@ const MissionContrat = () => {
     try {
       const selectedAgentIds = selectedIds.join(',');
       const params = new URLSearchParams({
-        contrat_id: selectedAgentIds, // Remplacez 'contrat_id' par le nom de votre paramètre d'ID contrat dans l'URL de destination
-        agent_id: clientId // Remplacez 'client_id' par le nom de votre paramètre d'ID client dans l'URL de destination
+        contrat_id: selectedAgentIds,
+        agent_id: clientId
       });
   
       navigate(`/missions?${params.toString()}`);

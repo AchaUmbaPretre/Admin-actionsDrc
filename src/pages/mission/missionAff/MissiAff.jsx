@@ -9,19 +9,24 @@ import axios from 'axios';
 import { FadeLoader } from 'react-spinners';
 import config from '../../../config'
 import { useLocation } from 'react-router-dom';
+import Select from 'react-select';
+import './missioAff.scss'
 
 
 const MissiAff = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState({});
-  const [loading, setLoading] = useState(false);;
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const [agentsAffectes, setAgentsAffectes] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
+  const [sites, SetSites] = useState([]);
 
+  const handleChange = ()=>{
 
+  }
 
   const handleCheckboxChange = (id) => {
     if (selectedIds.includes(id)) {
@@ -34,23 +39,9 @@ const MissiAff = () => {
   console.log(selectedIds)
   const columns = [
     { field: 'id', headerName: 'ID', width: 60 },
-    { field: 'first_name', headerName: "Employé(e)", width: 120 },
-    { field: 'last_name', headerName: 'Prenom', width: 120 },
-    { field: 'phone_number', headerName: "Telephone", width: 120 },
-    {
-      field: 'action',
-      HeaderName: 'Action',
-      width: 150,
-      renderCell: (params) => {
-        return (
-          <>
-            <div className="table-icons-row">
-              <VisibilityIcon className='userEye' onClick={() => navigate(`/horairesView/${params.row.id}`)}/>
-            </div>
-          </>
-        );
-      },
-    },
+    { field: 'first_name', headerName: "Employé(e)", width: 140 },
+    { field: 'last_name', headerName: 'Prenom', width: 140 },
+    { field: 'phone_number', headerName: "Telephone", width: 140 },
     {
       field: 'checkbox',
       headerName: 'Sélectionner',
@@ -66,6 +57,18 @@ const MissiAff = () => {
       },
     },
   ];
+
+  useEffect(() => {
+    const fetchDatas = async () => {
+      try {
+        const {data} = await axios.get(`${DOMAIN}/api/admin/sites`);
+        SetSites(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchDatas();
+  }, []);
 
   useEffect(() => {
     const fetchAgentsAffectes = async () => {
@@ -86,7 +89,7 @@ const MissiAff = () => {
 
   return (
     <>
-      <div className="facturation">
+      <div className="missAff">
         <div className="facturation-wrapper">
           <div className="contrats-top">
               <AccessTimeIcon className='contrats-icon'/>
@@ -97,13 +100,30 @@ const MissiAff = () => {
           </div>
           <button className="personnel-btn" onClick={''}><PersonAddAlt1Icon/>Ajouter</button>
         </div>
-        {loading ? (
-        <div className="spinner-container">
-            <FadeLoader color={'#36D7B7'} loading={loading} />
+        <div className="personnel-aff">
+          {loading ? (
+          <div className="spinner-container">
+              <FadeLoader color={'#36D7B7'} loading={loading} />
+          </div>
+          ) : (
+          <DataGrid rows={agentsAffectes} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
+          )}
+          <div className="personnel-aff-bottom">
+            <div className="personnel-bottom">
+              <label htmlFor="" className='personnel-bottom-title'>Sites <span>*</span></label>
+              <Select
+                  className='bottom-select'
+                  name="nom_site"
+                  onChange={(selectedOption) => handleChange(selectedOption, "nom_site")}
+                  options={sites.map((item) => ({
+                    value: item.id,
+                    label: item.nom_site
+                  }))}
+                />
+            </div>
+          </div>
         </div>
-        ) : (
-        <DataGrid rows={agentsAffectes} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
-        )}
+        
       </div>
     </>
   )

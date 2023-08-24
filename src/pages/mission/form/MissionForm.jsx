@@ -110,17 +110,6 @@ const MissionForm = ({handleModalClose}) => {
     fetchDatas();
   }, []);
 
-  useEffect(() => {
-    const fetchDatas = async () => {
-      try {
-        const {data} = await axios.get(`${DOMAIN}/api/admin/sites`);
-        SetSites(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchDatas();
-  }, []);
   return (
     <>
       <div className="contratForm">

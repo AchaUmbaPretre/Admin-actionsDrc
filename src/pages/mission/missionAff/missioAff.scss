@@ -1,0 +1,124 @@
+.missAff{
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 5px;
+    .facturation-wrapper{
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        border-radius: 5px;
+        .contrats-top{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            .contrats-icon{
+                font-size: 3rem;
+                background: #fff;
+                padding: 10px;
+                color: royalblue;
+                -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+                box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            }
+            .contrats-info{
+                .contrats-title{
+                    font-size: 1rem;
+                }
+                .contrats-span{
+                    font-size: .7rem;
+                    font-weight: 300;
+                }
+            }
+        }
+        .personnel-btn{
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 5px;
+            border: 1px solid royalblue;
+            background: #fff;
+            cursor: pointer;
+            color: royalblue;
+            -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+        }
+    }
+    .table-icons-row{
+        display: flex;
+        gap: 10px;
+        .userListBtn{
+            border: none;
+            color: #3bb077;
+            cursor: pointer;
+            &:hover{
+                transform: scale(1.1);
+            }
+        }
+        .userEye{
+            color: rgba(21, 50, 136, 0.801);
+            cursor: pointer;
+            &:hover{
+                transform: scale(1.1);
+            }
+        }
+        .userListDelete{
+            color: red;
+            cursor: pointer;
+            &:hover{
+                transform: scale(1.1);
+            }
+        }
+    }
+    .personnel-aff{
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        .presenceTable{
+            flex: 2;
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+        }
+        .personnel-btn{
+            background: royalblue;
+            border: none;
+            color: #fff;
+            width: max-content;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: .5s;
+            &:hover{
+                background: rgb(19, 30, 65);
+            }
+        }
+        .personnel-aff-bottom{
+            flex: 1;
+            padding: 20px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            background: #fff;
+            .personnel-bottom{
+                .personnel-bottom-title{
+                    color: #555;
+
+                }
+                .bottom-select{
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+    
+}
