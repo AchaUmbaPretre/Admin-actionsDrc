@@ -92,13 +92,11 @@ const MissionContrat = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      const params = new URLSearchParams();
-      Object.entries(data).forEach(([key, value]) => {
-        params.append(key, value);
-      });
-  
       const selectedAgentIds = selectedIds.join(',');
-      params.append('agent_id', selectedAgentIds);
+      const params = new URLSearchParams({
+        contrat_id: selectedAgentIds, // Remplacez 'contrat_id' par le nom de votre paramètre d'ID contrat dans l'URL de destination
+        agent_id: clientId // Remplacez 'client_id' par le nom de votre paramètre d'ID client dans l'URL de destination
+      });
   
       navigate(`/missions?${params.toString()}`);
     } catch (err) {

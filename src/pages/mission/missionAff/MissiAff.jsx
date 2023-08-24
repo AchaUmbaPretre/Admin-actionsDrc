@@ -70,9 +70,9 @@ const MissiAff = () => {
   useEffect(() => {
     const fetchAgentsAffectes = async () => {
       try {
-        const agentId = searchParams.get('agent_id');
+        const contratId = searchParams.get('contrat_id');
   
-        const response = await axios.get(`${DOMAIN}/api/admin/contrats/${agentId}/agents`);
+        const response = await axios.get(`${DOMAIN}/api/admin/contrats/${contratId}/agents`);
   
         setAgentsAffectes(response.data);
       } catch (error) {
