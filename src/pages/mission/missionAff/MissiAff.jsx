@@ -11,18 +11,21 @@ import config from '../../../config'
 import { useLocation } from 'react-router-dom';
 import Select from 'react-select';
 import './missioAff.scss'
+import Swal from 'sweetalert2';
 
 
 
 const MissiAff = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState({});
+  const [datas, setDatas] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const [agentsAffectes, setAgentsAffectes] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
+  const [selectedIds1, setSelectedIds1] = useState([]);
   const [sites, SetSites] = useState([]);
   const [idEmployee, setIdEmployee] = useState('');
   const [jourSemaine, setJourSemaine] = useState('');
@@ -30,9 +33,7 @@ const MissiAff = () => {
   const [heureFin, setHeureFin] = useState('');
   const [missionWeek, setMissionWeek] = useState([])
 
-  const handleChange = ()=>{
 
-  }
 
   const handleCheckboxChange = (id) => {
     if (selectedIds.includes(id)) {
@@ -42,7 +43,19 @@ const MissiAff = () => {
     }
   };
 
-  console.log(selectedIds)
+  const handleCheckboxChange1 = (id) => {
+    if (selectedIds1.includes(id)) {
+      setSelectedIds1(selectedIds1.filter((selectedId1) => selectedId1 !== id));
+    } else {
+      setSelectedIds1([...selectedIds1, id]);
+    }
+  };
+
+  const handleChange = (e) => {
+    setDatas((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+
   const columns = [
     { field: 'id', headerName: 'ID', width: 60 },
     { field: 'first_name', headerName: "Employé(e)", width: 140 },
@@ -75,8 +88,8 @@ const MissiAff = () => {
         return (
           <input
             type="checkbox"
-            checked={selectedIds.includes(params.row.id)}
-            onChange={() => handleCheckboxChange(params.row.id)}
+            checked={selectedIds1.includes(params.row.id)}
+            onChange={() => handleCheckboxChange1(params.row.id)}
           />
         );
       },
@@ -126,6 +139,52 @@ const MissiAff = () => {
     fetchAgentsAffectes();
   }, []);
 
+  console.log(datas, 'rrrr')
+  console.log(selectedIds1)
+  console.log(selectedIds)
+  console.log(heureDebut,heureFin)
+
+
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const requestDataArray = [];
+  
+      for (let i = 0; i < selectedIds1.length; i++) {
+        const requestData = {
+          agent_id: selectedIds[i],
+          duree: selectedIds1[i],
+          site: datas.site,
+          dateEntrant: heureDebut,
+          dateSortant: heureFin
+        };
+  
+        requestDataArray.push(requestData);
+      }
+  
+      await Promise.all(requestDataArray.map(requestData => axios.post(`${DOMAIN}/api/admin/missions`, requestData)));
+  
+      Swal.fire({
+        title: 'Success',
+        text: 'Missions créées avec succès!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+  
+      navigate('/mission');
+    } catch (err) {
+      Swal.fire({
+        title: 'Error',
+        text: err.message,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      console.log(err);
+    }
+  };
+
 
   return (
     <>
@@ -153,8 +212,8 @@ const MissiAff = () => {
               <h2 htmlFor="" className='personnel-bottom-title'>Sites <span>*</span></h2>
               <Select
                   className='bottom-select'
-                  name="nom_site"
-                  onChange={(selectedOption) => handleChange(selectedOption, "nom_site")}
+                  name="site"
+                  onChange={(selectedOption) =>handleChange({ target: { name: 'site', value: selectedOption.value } })}
                   options={sites.map((item) => ({
                     value: item.id,
                     label: item.nom_site
@@ -191,7 +250,7 @@ const MissiAff = () => {
                       </div>
                     </div>
                   </div>
-                  <button className="person-btn">Envoyer</button>
+                  <button className="person-btn" onClick={handleClick} >Envoyer</button>
             </div>
           </div>
         </div>

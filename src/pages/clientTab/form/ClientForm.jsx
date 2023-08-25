@@ -45,7 +45,6 @@ const ClientForm = ({handleModalClose}) => {
   fetchData()
 }, [])
 
- console.log(data)
 
   const handleClick = async (e) => {
     e.preventDefault();

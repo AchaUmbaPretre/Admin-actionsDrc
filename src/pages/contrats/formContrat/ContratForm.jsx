@@ -20,7 +20,6 @@ const handleChange = (e) => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  console.log(data)
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -74,20 +73,6 @@ const handleChange = (e) => {
     }
     fetchData()
  }, [])
-
- useEffect(()=>{
-
-  const fetchData = async ()=> {
-      try{
-          const {data} = await axios.get(`${DOMAIN}/api/admin/avantages`);
-          setSelectedAv(data)
-  
-        }catch(error){
-          console.log(error)
-        };
-  }
-  fetchData()
-}, [])
 
 useEffect(()=>{
 

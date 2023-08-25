@@ -80,8 +80,8 @@ const Mission = () => {
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'first_name', headerName: 'Agent', width: 130 },
-        { field: 'company_name', headerName: 'Client', width: 130 },
+        { field: 'agent_id', headerName: 'Agent', width: 130 },
+        { field: 'duree', headerName: 'Durée', width: 120 },
         {
           field: 'dateEntrant',
           headerName: 'Date de début',
@@ -96,8 +96,7 @@ const Mission = () => {
           valueGetter: (params) =>
             format(new Date(params.row.dateSortant), 'yyyy-MM-dd'),
         },
-        { field: 'duree', headerName: 'Durée', width: 120, renderCell: (params) => `${params.value} mois` },
-        { field: 'montant', headerName: 'Montant', width: 130,renderCell: (params) => `${params.value} $` },
+
         {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
             return(
               <>
