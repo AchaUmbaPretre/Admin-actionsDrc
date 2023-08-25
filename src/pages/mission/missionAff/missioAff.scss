@@ -112,10 +112,68 @@
             .personnel-bottom{
                 .personnel-bottom-title{
                     color: #555;
-
+                    font-size: 1rem;
+                    font-weight: 300;
+                    span{
+                        color: red;
+                    }
                 }
                 .bottom-select{
                     margin-top: 10px;
+                }
+            }
+            .personnel-horaire{
+                .personnel-bottom-title{
+                    font-size: 1rem;
+                    font-weight: 300;
+                    color: #555;
+                    padding-top: 20px;
+                    span{
+                        color: red;
+                    }
+                }
+                
+                .personnel-date{
+                    .personnel-bottom-title-h{
+                        font-size: 1rem;
+                        color: #555;
+                        padding: 10px 0;
+                        font-weight: 300;
+                        span{
+                            color: red;
+                        }
+                    }
+                    .person-scroll-tab{
+                        height: 300px;
+                        margin: 10px 0;
+                    }
+                }
+                .personnel-rows-bttm{
+                    display: flex;
+                    gap: 5px;
+                    label{
+                        font-size: .8rem;
+                        color: #555;
+                    }
+                    .person-time-input{
+                        border: 1px solid #e7e6e6;
+                        border-radius: 5px;
+                        background: #f8f8f8;
+                        outline: none;
+                        outline: none;
+                    }
+                }
+                .person-btn{
+                    border: none;
+                    padding: 8px 15px;
+                    color: #fff;
+                    background: royalblue;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: .5s;
+                    &:hover{
+                        background: rgb(28, 43, 88);
+                    }
                 }
             }
         }

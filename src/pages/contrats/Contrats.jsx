@@ -41,7 +41,6 @@ const Contrats = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const navigate = useNavigate();
     const [data, setData] = useState({});
-    const [date, setDate] = useState('');
     const [selected, setSelected] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -72,7 +71,7 @@ const Contrats = () => {
         valueGetter: (params) => format(new Date(params.row.end_date), 'yyyy-MM-dd'),
       },
       {
-        field: 'contract_status',
+        field: 'status',
         headerName: 'Statut du contrat',
         width: 150,
         renderCell: (params) => {

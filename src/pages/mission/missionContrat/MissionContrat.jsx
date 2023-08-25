@@ -11,6 +11,9 @@ import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import config from '../../../config'
 import { useLocation } from 'react-router-dom';
+import CancelIcon from '@mui/icons-material/Cancel';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import PendingIcon from '@mui/icons-material/Pending';
 
 
 const MissionContrat = () => {
@@ -34,7 +37,6 @@ const MissionContrat = () => {
     }
   };
 
-  console.log(selectedIds)
   const columns = [
     { field: 'id', headerName: 'ID', width: 60 },
     { field: 'start_date', headerName: "Date de debut", width: 160 , valueGetter: (params) =>
@@ -42,7 +44,34 @@ const MissionContrat = () => {
     { field: 'end_date', headerName: 'Date de la fin', width: 160,  valueGetter: (params) =>
     format(new Date(params.row.end_date), 'yyyy-MM-dd')},
     { field: 'contract_type', headerName: "Type du contrat", width: 160 },
-    { field: 'contract_status', headerName: "status du contrat", width: 150 },
+    { field: 'status', headerName: "status du contrat", width: 150, renderCell: (params) => {
+    
+      switch (params.value) {
+        case 'Résilié':
+          return (
+            <span style={{ color: 'red', display: 'flex', alignItems: 'center', justifyContent: 'space-between',gap: "5px"}}>
+              Résilié
+              <CancelIcon style={{ fontSize: '16px' }} />
+            </span>
+          );
+        case 'En attente':
+          return (
+            <span style={{ color: 'green', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: "5px" }}>
+              En attente
+              <CheckCircleIcon style={{ fontSize: '16px' }} />
+            </span>
+          );
+        case 'En cours':
+          return (
+            <span style={{ color: 'blue', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: "5px" }}>
+              En cours
+              <PendingIcon style={{ fontSize: '16px' }} />
+            </span>
+          );
+        default:
+          return null;
+      }
+    }, },
     {
       field: 'action',
       HeaderName: 'Action',
@@ -95,7 +124,7 @@ const MissionContrat = () => {
       const selectedAgentIds = selectedIds.join(',');
       const params = new URLSearchParams({
         contrat_id: selectedAgentIds,
-        agent_id: clientId
+        client_id: clientId
       });
   
       navigate(`/missions?${params.toString()}`);

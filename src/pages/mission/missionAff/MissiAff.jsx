@@ -13,6 +13,7 @@ import Select from 'react-select';
 import './missioAff.scss'
 
 
+
 const MissiAff = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState({});
@@ -23,6 +24,11 @@ const MissiAff = () => {
   const [agentsAffectes, setAgentsAffectes] = useState([]);
   const [selectedIds, setSelectedIds] = useState([]);
   const [sites, SetSites] = useState([]);
+  const [idEmployee, setIdEmployee] = useState('');
+  const [jourSemaine, setJourSemaine] = useState('');
+  const [heureDebut, setHeureDebut] = useState('');
+  const [heureFin, setHeureFin] = useState('');
+  const [missionWeek, setMissionWeek] = useState([])
 
   const handleChange = ()=>{
 
@@ -57,6 +63,40 @@ const MissiAff = () => {
       },
     },
   ];
+
+  const horaireTable = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'days', headerName: 'Jour de la semaine', width: 80 },
+    {
+      field: 'checkbox',
+      headerName: 'Sélectionner',
+      width: 80,
+      renderCell: (params) => {
+        return (
+          <input
+            type="checkbox"
+            checked={selectedIds.includes(params.row.id)}
+            onChange={() => handleCheckboxChange(params.row.id)}
+          />
+        );
+      },
+    },
+  ];
+
+  useEffect(()=>{
+    
+    const fetchData = async ()=> {
+      try{
+          const res = await axios.get(`${DOMAIN}/api/admin/missionWeek`);
+          setMissionWeek(res.data)
+  
+        }catch(error){
+          console.log(error)
+        };
+  }
+  fetchData()
+  }, [DOMAIN])
+
 
   useEffect(() => {
     const fetchDatas = async () => {
@@ -110,7 +150,7 @@ const MissiAff = () => {
           )}
           <div className="personnel-aff-bottom">
             <div className="personnel-bottom">
-              <label htmlFor="" className='personnel-bottom-title'>Sites <span>*</span></label>
+              <h2 htmlFor="" className='personnel-bottom-title'>Sites <span>*</span></h2>
               <Select
                   className='bottom-select'
                   name="nom_site"
@@ -120,6 +160,38 @@ const MissiAff = () => {
                     label: item.nom_site
                   }))}
                 />
+            </div>
+            <div className="personnel-horaire">
+                  <h2 className='personnel-bottom-title'>Horaire <span>*</span></h2>
+                  <div className="personnel-date">
+                    <h2 className='personnel-bottom-title'>Jour de la semaine<span>*</span></h2>
+                    <div className="person-scroll-tab">
+                      <DataGrid rows={missionWeek} columns={horaireTable} pageSize={10} checkboxSelection />
+                    </div>
+                  </div>
+                  <div className="personnel-date">
+                    <h2 className='personnel-bottom-title-h'>Heure <span>*</span></h2>
+                    <div className="personnel-rows-bttm">
+                      <label htmlFor="">Heure de début:</label>
+                      <input
+                        className='person-time-input'
+                        type="time"
+                        value={heureDebut}
+                        onChange={(e) => setHeureDebut(e.target.value)}
+                      />
+
+                      <div className="personnel-rows-bttm">
+                        <label htmlFor="">Heure de la fin:</label>
+                        <input
+                          className='person-time-input'
+                          type="time"
+                          value={heureFin}
+                          onChange={(e) => setHeureFin(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <button className="person-btn">Envoyer</button>
             </div>
           </div>
         </div>

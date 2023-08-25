@@ -115,7 +115,7 @@ const MissionForm = ({handleModalClose}) => {
       <div className="contratForm">
         <div className="contrat-wrapper">
           <div className="edit-title">
-            <h2 className="edit-h2">Mission</h2>
+            <h2 className="edit-h2">Client</h2>
           </div>
           <form action="" className="formulaire-edit">
             <div className="edit-rows">
