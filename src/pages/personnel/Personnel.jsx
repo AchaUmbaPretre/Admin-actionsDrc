@@ -16,6 +16,22 @@ import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import userImg from './../../../src/assets/user.png'
 import config from '../../config'
+import { Box, Fade, Modal } from '@mui/material';
+import Backdrop from '@mui/material/Backdrop';
+import Formulaire from './formulaire/Formulaire';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 1200,
+  bgcolor: 'background.paper',
+  border: '1px solid #FFF',
+  boxShadow: 24,
+  p: 2,
+  borderRadius: 2,
+}
 
 const Personnel = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -26,6 +42,8 @@ const Personnel = () => {
     const spinnerDuration = 2000;
     const [open, setOpen] = useState(false);
     const navigate = useNavigate();
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=>{
@@ -133,7 +151,28 @@ const Personnel = () => {
                         <span className="personnel-span">Liste des employés</span>
                     </div>
                 </div>
-                <Link className="personnel-btn" to='/formulaire'><PersonAddAlt1Icon/>Ajouter</Link>
+                <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    slots={{ backdrop: Backdrop }}
+                    slotProps={{
+                    backdrop: {
+                        timeout: 500,
+                    },
+                    }} 
+                >
+                    <Fade in={open}>
+                        <Box sx={style}>
+                            <Box component="form" sx={{'& > :not(style)': { m: 1, }, display:'flex', flexWrap:'wrap'}} noValidate autoComplete="off">
+                              <Formulaire handleModalClose={handleClose} />
+                            </Box>
+                        </Box>
+                    </Fade>
+                </Modal>
             </div>
                 {loading ? (
           <div className="spinner-container">

@@ -14,7 +14,7 @@ import config from '../../../config'
 moment.locale('fr');
 
 
-const Formulaire = () => {
+const Formulaire = ({handleModalClose}) => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
 
     const navigate = useNavigate();
@@ -42,6 +42,8 @@ const Formulaire = () => {
       };
       console.log(data)
       const handlePhotoSubmit = async () => {
+
+        handleModalClose()
         try {
           let photoSrc;
           if (source === 'import') {
@@ -160,6 +162,7 @@ const Formulaire = () => {
                 </div>
                 <div className="formulaire-right">
                     <form action="" className="form-center">
+                        <h2 className="form-h2">Personnel :</h2>
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Nom <span>*</span></label>
@@ -169,24 +172,25 @@ const Formulaire = () => {
                                 <label htmlFor="" className="label-form">Prenom <span>*</span></label>
                                 <input type="text" name="last_name" className="input-form" onChange={handleChange} placeholder='Entrez votre postnom..' />
                             </div>
-                        </div>
-
-                        <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Email <span>*</span></label>
                                 <input type="text"  name='email' className="input-form" onChange={handleChange} placeholder='Entrez votre adresse email..' />
                             </div>
+                        </div>
+
+                        <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Adresse <span>*</span></label>
                                 <input type="text"  name='address' required className="input-form" onChange={handleChange} placeholder='Entrez votre adresse..' />
                             </div>
-                        </div>
-                        <div className="form-rows">
+                            <div className="form-row">
+                                <label htmlFor="" className="label-form">Date de naissace <span>*</span></label>
+                                <input type="date" name="date_of_birth" required className="input-form" onChange={handleChange} />
+                            </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Etat civil <span>*</span></label>
                                 <Select
                                   name="etat_civil"
-                                  className="input-form"
                                   options={[
                                     { value: 'celibataire', label: 'Célibataire' },
                                     { value: 'marie(e)', label: 'Marié(e)' }
@@ -194,12 +198,32 @@ const Formulaire = () => {
                                   onChange={(selectedOption) => handleSelectChange(selectedOption, "etat_civil")}
                                 />
                             </div>
+                        </div>
+                        <div className="form-rows">
+
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Nombre d'enfant <span>*</span></label>
                                 <input type="number"  name='nombre_enfant' required className="input-form" onChange={handleChange} placeholder="Entrez votre nombre d'enfant.." />
                             </div>
-                        </div>
+                            <div className="form-row">
+                                <label htmlFor="" className="label-form">Telephone <span>*</span></label>
+                                <input type="number" name='phone_number' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero de tel.."  />
+                            </div>
 
+                            <div className="form-row">
+                                <label htmlFor="" className="label-form">Genre <span>*</span></label>
+                                <div className="form-radio">
+                                    <input type="radio" id="Choice1" onChange={handleChange} name="gender" value="homme" />
+                                    <label for="Choice1">Homme</label>
+                                    <input type="radio" id="Choice2" onChange={handleChange} name="gender" value="femme" />
+                                    <label for="Choice2">Femme</label>
+                                    <input type="radio" id="Choice3" onChange={handleChange} checked name="gender" value="autres" />
+                                    <label for="Choice3">autres</label>
+                                </div>
+                            </div>
+                        </div>
+                        <h2 className="form-h2">Professionel :</h2>
+                        
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">N° INPP <span>*</span></label>
@@ -209,13 +233,14 @@ const Formulaire = () => {
                                 <label htmlFor="" className="label-form">CNSS <span>*</span></label>
                                 <input type="number"  name='number_cnss' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero cnss.." />
                             </div>
-                        </div>
-
-                        <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Numero du pièce <span>*</span></label>
                                 <input type="number" name='identification_number' required className="input-form" onChange={handleChange} placeholder='Entrez votre numero du pièce..' />
                             </div>
+                        </div>
+
+                        <div className="form-rows">
+
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Type du pièce <span>*</span></label>
                                 <Select
@@ -227,9 +252,6 @@ const Formulaire = () => {
                                     }))}
                                 />
                             </div>
-                        </div>
-
-                        <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Competence <span>*</span></label>
                                 <Select
@@ -254,10 +276,7 @@ const Formulaire = () => {
                             </div>
                         </div>
                         <div className="form-rows">
-                            <div className="form-row">
-                                <label htmlFor="" className="label-form">Telephone <span>*</span></label>
-                                <input type="number" name='phone_number' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero de tel.."  />
-                            </div>
+
                             <div className="form-row">
                                 <label htmlFor="pet-select" className="label-form">Status <span>*</span></label>
                                 <Select
@@ -268,23 +287,6 @@ const Formulaire = () => {
                                         label: item.nom_status
                                     }))}
                                 />
-                            </div>
-                        </div>
-                        <div className="form-rows">
-                            <div className="form-row">
-                                <label htmlFor="" className="label-form">Date de naissace <span>*</span></label>
-                                <input type="date" name="date_of_birth" required className="input-form" onChange={handleChange} />
-                            </div>
-                            <div className="form-row">
-                                <label htmlFor="" className="label-form">Genre <span>*</span></label>
-                                <div className="form-radio">
-                                    <input type="radio" id="Choice1" onChange={handleChange} name="gender" value="homme" />
-                                    <label for="Choice1">Homme</label>
-                                    <input type="radio" id="Choice2" onChange={handleChange} name="gender" value="femme" />
-                                    <label for="Choice2">Femme</label>
-                                    <input type="radio" id="Choice3" onChange={handleChange} checked name="gender" value="autres" />
-                                    <label for="Choice3">autres</label>
-                                </div>
                             </div>
                         </div>
                         <button className="form-btn" onClick={handlePhotoSubmit}>Envoyer <SendIcon className='form-icon' /></button>

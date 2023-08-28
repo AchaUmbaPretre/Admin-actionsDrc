@@ -1,5 +1,4 @@
 import axios from 'axios';
-import '../form/clientForm.scss'
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './clientView.scss'
@@ -31,38 +30,50 @@ const ClientView = () => {
             <div className="clientView-wrapper">
                 <h2 className="client-title">INFORMATION DU CLIENT</h2>
                 <div className="client-rows">
-                    <div className="client-row">
-                        <span className="client-nom"><Person2Outlined/> Nom de compagnie :</span>
-                        <span className="client-nom">{data.company_name}</span>
-                    </div>
-                    <div className="client-row">
-                        <span className="client-nom"><MapsHomeWorkOutlined/>  Adresse :</span>
-                        <span className="client-nom">{data.address}</span>
-                    </div>
+                    <div className="client-row1">
+                        <h2 className="client-row-title">Raison sociale <span>*</span></h2>
+                        <div className="client-row">
+                            <span className="client-nom"><Person2Outlined/> Nom de compagnie :</span>
+                            <span className="client-nom">{data.company_name}</span>
+                        </div>
+                        <div className="client-row">
+                            <span className="client-nom"><MapsHomeWorkOutlined/>  Adresse :</span>
+                            <span className="client-nom">AAAAAAAAAAAAAAAAAAAAAAAAAAAA{data.address}</span>
+                        </div>
+                        <div className="client-row">
+                            <span className="client-nom"><MapsHomeWorkOutlined/> Ville :</span>
+                            <span className="client-nom">{data.company_name}</span>
+                        </div>
+                        <div className="client-row">
+                            <span className="client-nom"><MapsHomeWorkOutlined/> Pays :</span>
+                            <span className="client-nom">{data.company_name}</span>
+                        </div>
+                        <div className="client-row">
+                            <span className="client-nom"><PasswordOutlined/>  Rccm :</span>
+                            <span className="client-nom">{data.rccm}</span>
+                        </div>
 
-                    <div className="client-row">
-                        <span className="client-nom"><PhoneAndroidOutlined/> Tel de compagnie :</span>
-                        <span className="client-nom">{data.phone_number}</span>
+                        <div className="client-row">
+                            <span className="client-nom"><PasswordOutlined/>  Id nate :</span>
+                            <span className="client-nom">{data.idnate}</span>
+                        </div>
+                        
                     </div>
+                    <div className="client-row1">
+                        <h2 className="client-row-title">Contact <span>*</span></h2>
+                        <div className="client-row">
+                            <span className="client-nom"><PhoneAndroidOutlined/> Tel de compagnie :</span>
+                            <span className="client-nom">{data.phone_number}</span>
+                        </div>
+                        <div className="client-row">
+                            <span className="client-nom"><PhoneAndroidOutlined/> Tel du contact principal :</span>
+                            <span className="client-nom">{data.contact_name}AAAAAAAAAAA</span>
+                        </div>
 
-                    <div className="client-row">
-                        <span className="client-nom"><PhoneAndroidOutlined/> Tel du contact principal :</span>
-                        <span className="client-nom">{data.contact_name}</span>
-                    </div>
-
-                    <div className="client-row">
-                        <span className="client-nom"><EmailOutlined/> Email :</span>
-                        <span className="client-nom">{data.contact_email}</span>
-                    </div>
-
-                    <div className="client-row">
-                        <span className="client-nom"><PasswordOutlined/>  Rccm :</span>
-                        <span className="client-nom">{data.rccm}</span>
-                    </div>
-
-                    <div className="client-row">
-                        <span className="client-nom"><PasswordOutlined/>  Id nate :</span>
-                        <span className="client-nom">{data.idnate}</span>
+                        <div className="client-row">
+                            <span className="client-nom"><EmailOutlined/> Email :</span>
+                            <span className="client-nom">{data.contact_email}</span>
+                        </div>
                     </div>
                 </div>
             </div>

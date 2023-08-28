@@ -1,18 +1,17 @@
 .formulaire-person{
-    -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
     width: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 30px;
+    padding: 10px;
     border-radius: 5px;
     background: #fff;
     .formulaire-wrapper{
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex-direction: row-reverse;
         gap: 20px;
         .formulaire-left{
             flex: 2;
@@ -63,6 +62,11 @@
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
+                .form-h2{
+                    padding : 10px 0;
+                    color: #5a5959;
+                    font-weight: 300;
+                }
                 .form-rows{
                     display: flex;
                     align-items: center;
