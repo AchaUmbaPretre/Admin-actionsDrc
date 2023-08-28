@@ -79,14 +79,14 @@ const Mission = () => {
       };
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'company_name', headerName: 'Client', width: 130 },
-        { field: 'first_name', headerName: 'Agent', width: 130 },
-        { field: 'days', headerName: 'Jour', width: 120 },
+        { field: 'id', headerName: 'ID', width: 80 },
+        { field: 'company_name', headerName: 'Client', width: 150 },
+        { field: 'first_name', headerName: 'Agent', width: 150 },
+        { field: 'days', headerName: 'Jour', width: 150 },
         {
           field: 'heureEntrant',
           headerName: 'Heure de début',
-          width: 130,valueGetter: (params) => params.row.heureEntrant.substring(0, 5)
+          width: 150,valueGetter: (params) => params.row.heureEntrant.substring(0, 5)
         },
         {
           field: 'heureSortant',
@@ -94,7 +94,7 @@ const Mission = () => {
           width: 150, valueGetter: (params) => params.row.heureSortant.substring(0, 5)
         },
 
-        {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
+        {field: 'action', HeaderName: 'Action', width: 160, renderCell: (params) =>{
             return(
               <>
                 <div className="table-icons-row">

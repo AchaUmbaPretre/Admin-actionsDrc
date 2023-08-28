@@ -85,7 +85,7 @@ const Personnel = () => {
 };
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 60 },
+        { field: 'id', headerName: 'ID', width: 50 },
         { field: 'first_name', headerName: 'Nom', width: 100, renderCell: (params) =>{
           return <div className="userList">
                     <img src={params.row.source ? `../upload/${params.row.source}`: userImg} alt="" className="userImg" />
