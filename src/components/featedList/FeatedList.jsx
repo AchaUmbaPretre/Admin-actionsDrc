@@ -38,7 +38,7 @@ const FeatedList = () => {
             headerName: 'Date de naissance',
             width: 110,
             valueGetter: (params) =>
-            format(new Date(params.row.date_of_birth), 'yyyy-MM-dd'),
+            format(new Date(params.row.date_of_birth), 'dd-MM-yyyy'),
         },
         { field: 'gender', headerName: 'Genre', width: 50 },
         { field: 'phone_number', headerName: 'Telephone', width: 100 },

@@ -86,12 +86,12 @@ const Mission = () => {
         {
           field: 'heureEntrant',
           headerName: 'Heure de début',
-          width: 130,
+          width: 130,valueGetter: (params) => params.row.heureEntrant.substring(0, 5)
         },
         {
           field: 'heureSortant',
           headerName: 'Heure de fin',
-          width: 150,
+          width: 150, valueGetter: (params) => params.row.heureSortant.substring(0, 5)
         },
 
         {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{

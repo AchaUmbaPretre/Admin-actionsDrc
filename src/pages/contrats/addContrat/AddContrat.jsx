@@ -246,10 +246,10 @@ const functionIdData = event.target.value;
               <div className="add-row-bottom">
                 <div className="add-row-bottom1">
                   <h2 className="add-row-h2">Fonction : {selectedFunctionDetails[0]?.nom}</h2>
-                  <span className="add-row-span"><strong>Prix :</strong> {selectedFunctionDetails[0]?.prix}</span>
-                  <span className="add-row-span"><strong>Salaire :</strong> {selectedFunctionDetails[0]?.salaire}</span>
+                  <span className="add-row-span"><strong>Prix :</strong> {selectedFunctionDetails[0]?.prix} $</span>
+                  <span className="add-row-span"><strong>Salaire :</strong> {selectedFunctionDetails[0]?.salaire} $</span>
                   <span className="add-row-span"><strong>Avantages :</strong> {selectedFunctionDetails[0]?.avantages}</span>
-                  <span className="add-row-span"><strong>Horaires :</strong> {selectedFunctionDetails[0]?.horaire_conge}</span>
+                  <span className="add-row-span"><strong>Horaires :</strong> {selectedFunctionDetails[0]?.horaire_conge} jours</span>
                 </div>
                 <button className='add-row-btn' onClick={handleSubmit}>Affecter</button>
               </div>

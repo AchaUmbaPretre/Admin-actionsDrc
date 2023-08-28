@@ -38,7 +38,7 @@ const ClientView = () => {
                         </div>
                         <div className="client-row">
                             <span className="client-nom"><MapsHomeWorkOutlined/>  Adresse :</span>
-                            <span className="client-nom">AAAAAAAAAAAAAAAAAAAAAAAAAAAA{data.address}</span>
+                            <span className="client-nom">{data.address}</span>
                         </div>
                         <div className="client-row">
                             <span className="client-nom"><MapsHomeWorkOutlined/> Ville :</span>
@@ -67,7 +67,7 @@ const ClientView = () => {
                         </div>
                         <div className="client-row">
                             <span className="client-nom"><PhoneAndroidOutlined/> Tel du contact principal :</span>
-                            <span className="client-nom">{data.contact_name}AAAAAAAAAAA</span>
+                            <span className="client-nom">{data.contact_name}</span>
                         </div>
 
                         <div className="client-row">

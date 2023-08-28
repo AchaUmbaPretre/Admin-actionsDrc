@@ -6,6 +6,7 @@ import axios from 'axios';
 import GroupsIcon from '@mui/icons-material/Groups';
 import FlakyIcon from '@mui/icons-material/Flaky';
 import config from '../../config'
+
 const FeatedInfo = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
 
