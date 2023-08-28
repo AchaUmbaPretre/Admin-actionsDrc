@@ -62,13 +62,13 @@ const Contrats = () => {
         field: 'start_date',
         headerName: 'Date du debut',
         width: 150,
-        valueGetter: (params) => format(new Date(params.row.start_date), 'yyyy-MM-dd'),
+        valueGetter: (params) => format(new Date(params.row.start_date), 'dd-MM-yyyy'),
       },
       {
         field: 'end_date',
         headerName: 'Date de la fin',
         width: 150,
-        valueGetter: (params) => format(new Date(params.row.end_date), 'yyyy-MM-dd'),
+        valueGetter: (params) => format(new Date(params.row.end_date), 'dd-MM-yyyy'),
       },
       {
         field: 'status',

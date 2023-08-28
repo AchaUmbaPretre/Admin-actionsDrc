@@ -6,6 +6,7 @@ import ShowChartIcon from '@mui/icons-material/ShowChart';
 import Swal from 'sweetalert2'
 import axios from 'axios';
 import { format } from 'date-fns';
+import { fr } from 'date-fns/locale';
 import { FadeLoader } from 'react-spinners';
 import config from '../../config';
 
@@ -43,7 +44,7 @@ const Affectation = () => {
       headerName: 'Date de la fin',
       width: 150,
       valueGetter: (params) =>
-      format(new Date(params.row.end_date), 'yyyy-MM-dd'),
+      format(new Date(params.row.end_date), 'dd-MM-yyyy', { locale: fr }),
     },
     {field: 'action', HeaderName: 'Action', width: 200, renderCell: (params) =>{
         return(

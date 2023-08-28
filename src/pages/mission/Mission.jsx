@@ -80,21 +80,18 @@ const Mission = () => {
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'agent_id', headerName: 'Agent', width: 130 },
-        { field: 'duree', headerName: 'Durée', width: 120 },
+        { field: 'company_name', headerName: 'Client', width: 130 },
+        { field: 'first_name', headerName: 'Agent', width: 130 },
+        { field: 'days', headerName: 'Jour', width: 120 },
         {
-          field: 'dateEntrant',
-          headerName: 'Date de début',
+          field: 'heureEntrant',
+          headerName: 'Heure de début',
           width: 130,
-          valueGetter: (params) =>
-            format(new Date(params.row.dateEntrant), 'yyyy-MM-dd'),
         },
         {
-          field: 'dateSortant',
-          headerName: 'Date de fin',
+          field: 'heureSortant',
+          headerName: 'Heure de fin',
           width: 150,
-          valueGetter: (params) =>
-            format(new Date(params.row.dateSortant), 'yyyy-MM-dd'),
         },
 
         {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{

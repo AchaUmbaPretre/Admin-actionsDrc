@@ -32,6 +32,7 @@ const MissiAff = () => {
   const [heureDebut, setHeureDebut] = useState('');
   const [heureFin, setHeureFin] = useState('');
   const [missionWeek, setMissionWeek] = useState([])
+  const clientId = searchParams.get('client_id');
 
 
 
@@ -76,6 +77,7 @@ const MissiAff = () => {
       },
     },
   ];
+  console.log(selectedIds)
 
   const horaireTable = [
     { field: 'id', headerName: 'ID', width: 50 },
@@ -154,11 +156,12 @@ const MissiAff = () => {
   
       for (let i = 0; i < selectedIds1.length; i++) {
         const requestData = {
-          agent_id: selectedIds[i],
-          duree: selectedIds1[i],
+          agent_id: selectedIds,
+          client_id: clientId,
+          jour: selectedIds1[i],
           site: datas.site,
-          dateEntrant: heureDebut,
-          dateSortant: heureFin
+          heureEntrant: heureDebut,
+          heureSortant: heureFin
         };
   
         requestDataArray.push(requestData);

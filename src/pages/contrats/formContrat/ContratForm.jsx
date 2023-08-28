@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import moment from 'moment';
 import Swal from 'sweetalert2';
 import './contratForm.scss'
 import config from '../../../config'
+import moment from 'moment';
+import 'moment/locale/fr';
 
 const ContratForm = ({handleClose}) => {
 const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -17,8 +18,18 @@ const [statusContrat, setStatusContrat] = useState([]);
 const [typeContrat, setTypeContrat] = useState([]);
 
 const handleChange = (e) => {
-    setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  const { name, value } = e.target;
+
+  if (name === 'start_date' || name === 'end_date') {
+    const formattedDate = moment(value).locale('fr').format('DD-MM-YYYY');
+    setData((prev) => ({ ...prev, [name]: formattedDate }));
+  } else {
+    setData((prev) => ({ ...prev, [name]: value }));
+  }
+
+};
+
+console.log(data)
 
 
   const handleClick = async (e) => {
