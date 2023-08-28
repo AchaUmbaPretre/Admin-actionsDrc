@@ -162,7 +162,7 @@ const Formulaire = ({handleModalClose}) => {
                 </div>
                 <div className="formulaire-right">
                     <form action="" className="form-center">
-                        <h2 className="form-h2">Personnel :</h2>
+                        <h2 className="form-h2"><span>*</span> Detail Personnel :</h2>
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Nom <span>*</span></label>
@@ -207,7 +207,7 @@ const Formulaire = ({handleModalClose}) => {
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Telephone <span>*</span></label>
-                                <input type="number" name='phone_number' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero de tel.."  />
+                                <input type="number" min={0} name='phone_number' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero de tel.."  />
                             </div>
 
                             <div className="form-row">
@@ -222,7 +222,7 @@ const Formulaire = ({handleModalClose}) => {
                                 </div>
                             </div>
                         </div>
-                        <h2 className="form-h2">Professionel :</h2>
+                        <h2 className="form-h2"><span>*</span> Detail Professionel :</h2>
                         
                         <div className="form-rows">
                             <div className="form-row">

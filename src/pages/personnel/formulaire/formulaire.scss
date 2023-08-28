@@ -63,9 +63,14 @@
                 flex-direction: column;
                 gap: 10px;
                 .form-h2{
-                    padding : 10px 0;
+                    padding : 5px 0;
                     color: #5a5959;
                     font-weight: 300;
+                    font-size: 1.1rem;
+                    span{
+                        color: red;
+                        font-size: 1.1rem;
+                    }
                 }
                 .form-rows{
                     display: flex;
@@ -98,6 +103,10 @@
                             outline: none;
                             &:focus{
                                 border: 1px solid rgba(58, 88, 180, 0.781);
+                            }
+                            &::placeholder{
+                                font-size: .7rem;
+                                color: #949393;
                             }
                         }
                         .form-radio{
