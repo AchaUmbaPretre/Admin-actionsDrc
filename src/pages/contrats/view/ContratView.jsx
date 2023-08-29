@@ -5,6 +5,7 @@ import './../../clientTab/clientView/clientView.scss'
 import { CalendarMonth, CodeOffOutlined, ContactPage, EmailOutlined, LoginOutlined, MapsHomeWorkOutlined, PasswordOutlined, Person2Outlined, PhoneAndroidOutlined } from '@mui/icons-material';
 import config from '../../../config'
 import moment from 'moment';
+import './../view/contratView.scss'
 
 const ContratView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -29,7 +30,7 @@ const ContratView = () => {
     const formattedDatSortant = moment(data?.end_date).format('DD/MM/YYYY');
   return (
     <>
-        <div className="clientView">
+        <div className="contrat-View">
             <div className="clientView-wrapper">
                 <h2 className="client-title">INFORMATION DU CONTRAT</h2>
                 <div className="client-rows">

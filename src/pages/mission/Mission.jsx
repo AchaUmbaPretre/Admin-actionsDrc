@@ -117,7 +117,7 @@ const Mission = () => {
                     <PeopleIcon className='personnel-icon'/>
                     <div className="personnel-info">
                         <h2 className="personnel-title">Mission</h2>
-                        <span className="personnel-span"></span>
+                        <span className="personnel-span">liste des missions</span>
                     </div>
                 </div>
                 <button className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</button>
