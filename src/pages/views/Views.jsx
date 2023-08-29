@@ -49,6 +49,7 @@ const Views = () => {
                 <div className="views-rows-items">
                     <img src={data.source ? `../upload/${data.source}` : userImg } alt="" className="views-photo" />
                     <div className="views-container">
+                        <h2 className="view-h2"><span>*</span> Detail Personnel :</h2>
                         <div className="views-rows">
                             <div className="views-left">
                                 <span className="view-label"><AccountCircleIcon className="icon-person"/>Nom : </span>
@@ -103,7 +104,7 @@ const Views = () => {
                                 <span className="view-result">{data.nombre_enfant}</span>
                             </div>
                         </div>
-
+                        <h2 className="view-h2"><span>*</span> Detail Professionel :</h2>
                         <div className="views-rows">
                             <div className="views-left">
                                 <span className="view-label"><RecentActorsIcon className="icon-person"/>N° INPP : </span>

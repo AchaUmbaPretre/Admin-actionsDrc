@@ -66,7 +66,7 @@ function App() {
   };
 
   const SecuriteRoute = ({ children }) => {
-    if (!currentUser) {
+    if (currentUser) {
       return <Navigate to="/login" />;
     }
     return children;
