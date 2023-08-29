@@ -44,7 +44,6 @@ const Views = () => {
             <div className="views-wrapper">
                 <div className="views-title">
                     <h1 className='h1-views'>Information de l'employé</h1>
-                    <span className="views-bar"></span>
                 </div>
                 <div className="views-rows-items">
                     <img src={data.source ? `../upload/${data.source}` : userImg } alt="" className="views-photo" />

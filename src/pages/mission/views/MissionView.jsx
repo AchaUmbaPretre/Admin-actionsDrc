@@ -7,6 +7,7 @@ import { CalendarMonth, Money, Person, Person3 } from '@mui/icons-material';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import config from '../../../config'
 import moment from 'moment';
+import "./../views/missionView.scss"
 
 const MissionView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -32,7 +33,7 @@ const MissionView = () => {
 
   return (
     <>
-        <div className="clientView">
+        <div className="missionView">
             <div className="clientView-wrapper">
                 <h2 className="client-title">INFORMATION DE MISSION</h2>
                 <div className="client-rows">
@@ -51,18 +52,8 @@ const MissionView = () => {
                     </div>
 
                     <div className="client-row">
-                        <span className="client-nom"><CalendarMonth/>  Date de fin :</span>
+                        <span className="client-nom"><CalendarMonth/>  Date de fin : </span>
                         <span className="client-nom">{formattedDatSortant}</span>
-                    </div>
-                    
-                    <div className="client-row">
-                        <span className="client-nom"><AccessTimeIcon/>  durée :</span>
-                        <span className="client-nom">{data?.duree} mois</span>
-                    </div>
-
-                    <div className="client-row">
-                        <span className="client-nom"><Money/>  Montant :</span>
-                        <span className="client-nom">{data?.montant}</span>
                     </div>
                 </div>
             </div>
