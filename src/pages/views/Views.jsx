@@ -43,7 +43,7 @@ const Views = () => {
         <div className="views">
             <div className="views-wrapper">
                 <div className="views-title">
-                    <h1 className='h1-views'>Information de l'employé</h1>
+                    <h1 className='h1-views'>INFORMATION DE L'EMPLOYE</h1>
                 </div>
                 <div className="views-rows-items">
                     <div className="views-container">
