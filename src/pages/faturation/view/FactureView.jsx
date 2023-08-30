@@ -32,7 +32,7 @@ const FactureView = () => {
 
   return (
     <>
-        <div className="clientView">
+        <div className="contrat-View">
             <div className="clientView-wrapper">
                 <h2 className="client-title">FACTURE N° {data?.id}</h2>
                 <div className="client-rows">

@@ -61,7 +61,7 @@ const PresenceForm = ({handleClose}) => {
         confirmButtonText: 'OK'
       });
 
-      navigate('/');
+      navigate('/presence');
     } catch (error) {
       let errorMessage = 'Une erreur s\'est produite lors de la communication avec le serveur';
 
@@ -96,7 +96,7 @@ const PresenceForm = ({handleClose}) => {
                   required
                 />
               </div>
-{/*               <div className="form-row">
+            <div className="form-row">
                 <label htmlFor="" className="label-form">Client <span>*</span></label>
                 <Select
                   options={clientEtat.map(item => ({ value: item.id, label: item.company_name }))}
@@ -105,7 +105,7 @@ const PresenceForm = ({handleClose}) => {
                   isSearchable
                   required
                 />
-              </div> */}
+              </div>
             </div>
 
             <div className="form-rows">

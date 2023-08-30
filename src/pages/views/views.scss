@@ -32,25 +32,43 @@
             background: #fdfdfd;
             display: flex;
             align-items: center;
-            flex-direction: row-reverse;
             padding: 30px;
             gap: 20px;
             border-radius: 5px;
             margin: 0 auto;
-            .views-photo{
-                flex: 2;
-                height: 250px;
-                width: 250px;
-                object-fit: cover;
-            }
 
             .views-container{
-                flex: 5;
+                width: 100%;
                 margin: 0 auto;
                 padding: 10px 0;
                 display: flex;
                 flex-direction: column;
                 gap: 20px;
+                .views-ctn1{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 20px;
+                    .views-cont2{
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+                        .views-rows{
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                        }
+                    }
+                    .views-photo{
+                        height: 300px;
+                        width: 300px;
+                        object-fit: cover;
+                        border: 1px solid #f0efef;
+                        border-radius: 5px;
+                    }
+                }
                 .view-h2{
                     font-size: 1.2rem;
                     font-weight: 300;

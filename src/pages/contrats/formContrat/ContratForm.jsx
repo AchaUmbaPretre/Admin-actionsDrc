@@ -21,7 +21,7 @@ const handleChange = (e) => {
   const { name, value } = e.target;
 
   if (name === 'start_date' || name === 'end_date') {
-    const formattedDate = moment(value).locale('fr').format('DD-MM-YYYY');
+    const formattedDate = moment(value).format('YYYY-MM-DD');
     setData((prev) => ({ ...prev, [name]: formattedDate }));
   } else {
     setData((prev) => ({ ...prev, [name]: value }));

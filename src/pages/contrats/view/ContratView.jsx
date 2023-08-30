@@ -40,7 +40,7 @@ const ContratView = () => {
                     </div>
                     <div className="client-row">
                         <span className="client-nom"><Person2Outlined/> Client :</span>
-                        <span className="client-nom">{data?.client_id}</span>
+                        <span className="client-nom">{data?.company_name}</span>
                     </div>
 
                     <div className="client-row">

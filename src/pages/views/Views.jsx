@@ -46,63 +46,68 @@ const Views = () => {
                     <h1 className='h1-views'>Information de l'employé</h1>
                 </div>
                 <div className="views-rows-items">
-                    <img src={data.source ? `../upload/${data.source}` : userImg } alt="" className="views-photo" />
                     <div className="views-container">
-                        <h2 className="view-h2"><span>*</span> Detail Personnel :</h2>
-                        <div className="views-rows">
-                            <div className="views-left">
-                                <span className="view-label"><AccountCircleIcon className="icon-person"/>Nom : </span>
-                                <span className="view-result">{data.first_name}</span>
+                        <div className="views-ctn1">
+                            <div className="views-cont2">
+                                <h2 className="view-h2"><span>*</span> Detail Personnel :</h2>
+                                <div className="views-rows">
+                                    <div className="views-left">
+                                        <span className="view-label"><AccountCircleIcon className="icon-person"/>Nom : </span>
+                                        <span className="view-result">{data.first_name}</span>
+                                    </div>
+                                    <div className="views-right">
+                                        <span className="view-label"><AccountCircleIcon className="icon-person"/>Prenom : </span>
+                                        <span className="view-result">{data.last_name}</span>
+                                    </div>
+                                </div>
+
+                                <div className="views-rows">
+                                    <div className="views-left">
+                                        <span className="view-label"><EventIcon className="icon-person"/>Date de naissance : </span>
+                                        <span className="view-result">{formattedDateOfBirth}</span>
+                                    </div>
+                                    <div className="views-right">
+                                        <span className="view-label"><WcIcon className="icon-person"/> Genre : </span>
+                                        <span className="view-result">{data.gender}</span>
+                                    </div>
+                                </div>
+
+                                <div className="views-rows">
+                                    <div className="views-left">
+                                        <span className="view-label"><AddLocationAltIcon className="icon-person"/>Adresse : </span>
+                                        <span className="view-result">{data.address}</span>
+                                    </div>
+                                    <div className="views-right">
+                                        <span className="view-label"><AddIcCallIcon className="icon-person"/>Téléphone : </span>
+                                        <span className="view-result">{data.phone_number}</span>
+                                    </div>
+                                </div>
+
+                                <div className="views-rows">
+                                    <div className="views-left">
+                                        <span className="view-label"><MailOutlineIcon className="icon-person"/>Email : </span>
+                                        <span className="view-result">{data.email}</span>
+                                    </div>
+                                    <div className="views-right">
+                                        <span className="view-label"><ContactEmergencyIcon className="icon-person"/>Numero du pièce : </span>
+                                        <span className="view-result">{data.identification_number}</span>
+                                    </div>
+                                </div>
+
+                                <div className="views-rows">
+                                    <div className="views-left">
+                                        <span className="view-label"><RecentActorsIcon className="icon-person"/>Etat civil : </span>
+                                        <span className="view-result">{data.etat_civil}</span>
+                                    </div>
+                                    <div className="views-right">
+                                        <span className="view-label"><EngineeringIcon className="icon-person"/>Nombre d'enfant : </span>
+                                        <span className="view-result">{data.nombre_enfant}</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="views-right">
-                                <span className="view-label"><AccountCircleIcon className="icon-person"/>Prenom : </span>
-                                <span className="view-result">{data.last_name}</span>
-                            </div>
+                            <img src={data.source ? `../upload/${data.source}` : userImg } alt="" className="views-photo" />
                         </div>
 
-                        <div className="views-rows">
-                            <div className="views-left">
-                                <span className="view-label"><EventIcon className="icon-person"/>Date de naissance : </span>
-                                <span className="view-result">{formattedDateOfBirth}</span>
-                            </div>
-                            <div className="views-right">
-                                <span className="view-label"><WcIcon className="icon-person"/> Genre : </span>
-                                <span className="view-result">{data.gender}</span>
-                            </div>
-                        </div>
-
-                        <div className="views-rows">
-                            <div className="views-left">
-                                <span className="view-label"><AddLocationAltIcon className="icon-person"/>Adresse : </span>
-                                <span className="view-result">{data.address}</span>
-                            </div>
-                            <div className="views-right">
-                                <span className="view-label"><AddIcCallIcon className="icon-person"/>Téléphone : </span>
-                                <span className="view-result">{data.phone_number}</span>
-                            </div>
-                        </div>
-
-                        <div className="views-rows">
-                            <div className="views-left">
-                                <span className="view-label"><MailOutlineIcon className="icon-person"/>Email : </span>
-                                <span className="view-result">{data.email}</span>
-                            </div>
-                            <div className="views-right">
-                                <span className="view-label"><ContactEmergencyIcon className="icon-person"/>Numero du pièce : </span>
-                                <span className="view-result">{data.identification_number}</span>
-                            </div>
-                        </div>
-
-                        <div className="views-rows">
-                            <div className="views-left">
-                                <span className="view-label"><RecentActorsIcon className="icon-person"/>Etat civil : </span>
-                                <span className="view-result">{data.etat_civil}</span>
-                            </div>
-                            <div className="views-right">
-                                <span className="view-label"><EngineeringIcon className="icon-person"/>Nombre d'enfant : </span>
-                                <span className="view-result">{data.nombre_enfant}</span>
-                            </div>
-                        </div>
                         <h2 className="view-h2"><span>*</span> Detail Professionel :</h2>
                         <div className="views-rows">
                             <div className="views-left">
