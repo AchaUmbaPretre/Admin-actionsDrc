@@ -2,13 +2,14 @@ import { DataGrid } from '@mui/x-data-grid'
 import { Link, useParams } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './addContrat.scss'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { Checkbox } from '@mui/material';
 import Swal from 'sweetalert2';
-import config from '../../../config';
+import config from '../../../config'
+import { de } from 'date-fns/locale';
 
 const AddContrat = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -28,46 +29,14 @@ const AddContrat = () => {
   const [selectedFunctionDetails, setSelectedFunctionDetails] = useState(null);
   const { id } = useParams();
   const [setSelectedFunction,selectedFunction] = useState([]);
-  const [functionId, setFunctionId] = useState(null);
-  const [employees, setEmployees] = useState([]);
 
-
-  const handleSelectionChange = (event, id) => {
-    if (event.target.checked) {
-      setSelected([...selected, id]);
-    } else {
-      setSelected(selected.filter((selectedId) => selectedId !== id));
-    }
+  const handleChange = (e) => {
+    setSelectedFunction(e.target.value);
   };
-  
-
-  useEffect(() => {
-    axios.get(`${DOMAIN}/api/admin/emploieDispo`).then((response) => {
-      const transformedEmployees = response.data.map((employee) => ({
-        id: employee.id,
-        nom: employee.nom,
-        prenom: employee.prenom,
-        email: employee.email,
-        gender: employee.gender,
-        skills: employee.skills,
-        contrat_id: employee.contrat_id,
-        date_debut: employee.date_debut,
-        date_fin: employee.date_fin,
-        disponibilite: employee.contrat_id === null || new Date(employee.date_fin) < new Date() ? 'disponible' : 'indisponible',
-        disponibiliteIcon: employee.contrat_id === null || new Date(employee.date_fin) < new Date() ? '🟢' : '🔴'
-      }));
-      setEmployees(transformedEmployees);
-    });
-  }, []);
-  console.log(employees)
-  
-
-  
+  console.log(selectedx)
   const columns = [
     {
-      field: 'id',
-      headerName: 'ID',
-      width: 70,
+      field: 'id', headerName: 'ID', width: 70,
       renderCell: (params) => (
         <Checkbox
           checked={selected.includes(params.row.id)}
@@ -76,52 +45,54 @@ const AddContrat = () => {
         />
       )
     },
+    { field: 'first_name', headerName: 'Nom', width: 110 },
+    { field: 'last_name', headerName: 'Prenom', width: 100 },
     {
-      field: 'nom',
-      headerName: 'Nom',
+      field: 'email',
+      headerName: 'Email',
+      type: 'number',
       width: 120,
     },
-    {
-      field: 'prenom',
-      headerName: 'Prenom',
-      width: 120,
-    },
+    { field: 'gender', headerName: 'Genre', width: 50 },
     {
       field: 'skills',
       headerName: 'Competence',
       width: 120,
     },
-    {
-      field: 'disponibilite',
-      headerName: 'Disponibilité',
-      width: 120,
-      cellClassName: (params) => {
-        return params.value === 'disponible' ? 'disponible' : 'indisponible';
-      },
-      renderCell: (params) => (
-        <React.Fragment>
-          {params.row.disponibiliteIcon} {params.row.disponibilite}
-        </React.Fragment>
-      )
-    },
   ];
-
-
   const [selectedData, setSelectedData] = useState([]);
+
+  const handleSelectionChange = (event, id) => {
+    if (event.target.checked) {
+      setSelected([...selected, id])
+    } else {
+      setSelected(selected.filter((row) => row !== id))
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
+/*     if (!selects || !selects.fonction) {
+      Swal.fire({
+        title: 'Erreur',
+        text: 'Veuillez sélectionner une fonction',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
+    } */
+
     const selectedItems = data.filter((item) => selected.includes(item.id));
     const selectedIds = selectedItems.map((item) => item.id);
     const newSelectedx = selectedItems.map((item) => ({
       agent: item.id,
-      fonction: selectedFunctionDetails[0].id,
+      fonction: selectedFunctionDetails.id,
       contrat: id
     }));
     setSelectedx(selectedx.concat(newSelectedx));
     setSelectedData([...selectedData, ...selectedItems]);
-  
+
     selectedx.map((dd) => {
       axios
         .post(`${DOMAIN}/api/admin/affectations`, {
@@ -130,28 +101,25 @@ const AddContrat = () => {
           contrat_id: dd.contrat
         })
         .then((response) => {
-          axios
-            .put(`${DOMAIN}/api/admin/employeFonctionPut/${dd.agent}`, { contrat_id: dd.contrat })
-            .then((response) => {
-              Swal.fire({
-                title: 'Success',
-                text: 'Affectation réussie!',
-                icon: 'success',
-                confirmButtonText: 'OK'
-              });
-              navigate('/affectation');
-            })
-            .catch((error) => {
-              Swal.fire({
-                title: 'Error',
-                text: error.message,
-                icon: 'error',
-                confirmButtonText: 'OK'
-              });
-            });
+          Swal.fire({
+            title: 'Success',
+            text: 'Affectation réussie!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
+          navigate('/contrats');
+        })
+        .catch((error) => {
+          Swal.fire({
+            title: 'Error',
+            text: error.message,
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
         });
     });
   };
+
     useEffect(() => {
 
     const fetchData = async () => {
@@ -166,8 +134,7 @@ const AddContrat = () => {
     fetchData()
   }, [])
 
-    
-    const filteredEmployees = employees.filter((employee) => {
+    const filteredEmployees = data.filter((employee) => {
       if (selectedFunctionDetails) {
         return employee.skills === selectedFunctionDetails[0]?.nom;
       }
@@ -189,14 +156,12 @@ const AddContrat = () => {
  }, [])
 
  const handleFunctionSelect = async (event) => {
-const functionIdData = event.target.value;
+const functionId = event.target.value;
 
 
   try {
-    const response = await axios.get(`${DOMAIN}/api/admin/fonctionDetail/${functionIdData}`);
+    const response = await axios.get(`${DOMAIN}/api/admin/fonctionDetail/${functionId}`);
     const selectedFunctionDetails = response.data;
-    console.log(selectedFunctionDetails)
-
     setSelectedFunctionDetails(selectedFunctionDetails);
 
     const newData = selectedx.map((item) => ({
@@ -212,7 +177,7 @@ const functionIdData = event.target.value;
   } 
 };
 
-
+console.log(selectedFunctionDetails)
   return (
     <>
       <div className="facturation">
@@ -246,10 +211,10 @@ const functionIdData = event.target.value;
               <div className="add-row-bottom">
                 <div className="add-row-bottom1">
                   <h2 className="add-row-h2">Fonction : {selectedFunctionDetails[0]?.nom}</h2>
-                  <span className="add-row-span"><strong>Prix :</strong> {selectedFunctionDetails[0]?.prix} $</span>
-                  <span className="add-row-span"><strong>Salaire :</strong> {selectedFunctionDetails[0]?.salaire} $</span>
+                  <span className="add-row-span"><strong>Prix :</strong> {selectedFunctionDetails[0]?.prix}</span>
+                  <span className="add-row-span"><strong>Salaire :</strong> {selectedFunctionDetails[0]?.salaire}</span>
                   <span className="add-row-span"><strong>Avantages :</strong> {selectedFunctionDetails[0]?.avantages}</span>
-                  <span className="add-row-span"><strong>Horaires :</strong> {selectedFunctionDetails[0]?.horaire_conge} jours</span>
+                  <span className="add-row-span"><strong>Horaires :</strong> {selectedFunctionDetails[0]?.horaire_conge}</span>
                 </div>
                 <button className='add-row-btn' onClick={handleSubmit}>Affecter</button>
               </div>

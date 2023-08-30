@@ -24,13 +24,11 @@ const FeatedList = () => {
         {
           field: 'phone_number',
           headerName: 'Telephone',
-          type: 'number',
           width: 100,
         },
         {
             field: 'email',
             headerName: 'Email',
-            type: 'number',
             width: 120,
           },
         {
