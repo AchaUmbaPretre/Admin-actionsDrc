@@ -203,11 +203,11 @@ const Formulaire = ({handleModalClose}) => {
 
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Nombre d'enfant <span>*</span></label>
-                                <input type="number" min={0}  name='nombre_enfant' required className="input-form" onChange={handleChange} placeholder="Entrez votre nombre d'enfant.." />
+                                <input type="number"  name='nombre_enfant' required className="input-form" onChange={handleChange} placeholder="Entrez votre nombre d'enfant.." />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Telephone <span>*</span></label>
-                                <input type="number" min={0} name='phone_number' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero de tel.."  />
+                                <input type="number" name='phone_number' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero de tel.."  />
                             </div>
 
                             <div className="form-row">
@@ -227,15 +227,15 @@ const Formulaire = ({handleModalClose}) => {
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">N° INPP <span>*</span></label>
-                                <input type="number" min={0}  name='number_inpp' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero inpp.." />
+                                <input type="number"   name='number_inpp' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero inpp.." />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">CNSS <span>*</span></label>
-                                <input type="number" min={0} name='number_cnss' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero cnss.." />
+                                <input type="number"  name='number_cnss' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero cnss.." />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Numero du pièce <span>*</span></label>
-                                <input type="number" min={0} name='identification_number' required className="input-form" onChange={handleChange} placeholder='Entrez votre numero du pièce..' />
+                                <input type="number"  name='identification_number' required className="input-form" onChange={handleChange} placeholder='Entrez votre numero du pièce..' />
                             </div>
                         </div>
 

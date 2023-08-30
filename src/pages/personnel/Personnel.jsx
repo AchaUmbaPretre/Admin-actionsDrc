@@ -89,26 +89,22 @@ const Personnel = () => {
         { field: 'first_name', headerName: 'Nom', width: 100, renderCell: (params) =>{
           return <div className="userList">
                     <img src={params.row.source ? `../upload/${params.row.source}`: userImg} alt="" className="userImg" />
-                    {console.log(params.row.source)}
                     {params.row.first_name}
                  </div>
         }},
         {
           field: 'last_name',
           headerName: 'Postnom',
-          type: 'number',
           width: 100,
         },        
         {
           field: 'phone_number',
           headerName: 'Telephone',
-          type: 'number',
           width: 100,
         },
         {
             field: 'email',
             headerName: 'Email',
-            type: 'number',
             width: 110,
           },
         {
