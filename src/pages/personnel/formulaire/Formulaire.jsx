@@ -227,11 +227,11 @@ const Formulaire = ({handleModalClose}) => {
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">N° INPP <span>*</span></label>
-                                <input type="number"   name='number_inpp' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero inpp.." />
+                                <input type="text"  name='number_inpp' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero inpp.." />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">CNSS <span>*</span></label>
-                                <input type="number"  name='number_cnss' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero cnss.." />
+                                <input type="text" name='number_cnss' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero cnss.." />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Numero du pièce <span>*</span></label>

@@ -6,6 +6,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { useState } from 'react';
 import * as React from 'react';
 import axios from 'axios';
@@ -19,6 +20,7 @@ import config from '../../config'
 import { Box, Fade, Modal } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import Formulaire from './formulaire/Formulaire';
+
 
 const style = {
   position: 'absolute',
@@ -76,7 +78,7 @@ const Personnel = () => {
     });
 
     if (result.isConfirmed) {
-      await axios.delete(`${DOMAIN}/api/admin/employe/${id}`);
+      await axios.put(`${DOMAIN}/api/admin/employes/${id}`);
       window.location.reload();
     }
   } catch (err) {
@@ -115,18 +117,19 @@ const Personnel = () => {
             format(new Date(params.row.date_of_birth), 'dd-MM-yyyy'),
         },
         { field: 'gender', headerName: 'Genre', width: 50 },
-        { field: 'address', headerName: 'Adresse', width: 110 },
+        { field: 'address', headerName: 'Adresse', width: 100 },
         {
           field: 'skills',
           headerName: 'Competence',
-          width: 120,
+          width: 100,
         },
-        {field: 'action', HeaderName: 'Action', width: 120, renderCell: (params) =>{
+        {field: 'action', HeaderName: 'Action', width: 130, renderCell: (params) =>{
             return(
               <>
                 <div className="table-icons-row">
                     <Link to={`/edit/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
                     <VisibilityIcon className='userEye' onClick={() => navigate(`/views/${params.row.id}`)} />
+                    <PictureAsPdfIcon className="userListDelete" onClick={() => navigate(`/personpdf/${params.row.id}`)} />
                     <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
                 </div>
               </>

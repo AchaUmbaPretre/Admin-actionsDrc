@@ -38,6 +38,7 @@ import ContratView from './pages/contrats/view/ContratView';
 import { MissedVideoCallTwoTone } from '@mui/icons-material';
 import MissiAff from './pages/mission/missionAff/MissiAff';
 import MissionContrat from './pages/mission/missionContrat/MissionContrat';
+import PersonPdf from './pages/personnel/personPdf/PersonPdf';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -92,6 +93,10 @@ function App() {
         {
           path: '/edit/:id',
           element: <Edit />
+        },
+        {
+          path: '/personpdf/:id',
+          element: <PersonPdf />
         },
         {
           path: '/contrats',
