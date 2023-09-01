@@ -44,6 +44,7 @@ import ContratPdf from './pages/contrats/contratPdf/ContratPdf';
 import MissionPdf from './pages/mission/missionPdf/MissionPdf';
 import ClientPdf from './pages/clientTab/clientPdf/ClientPdf';
 import PresencePdf from './pages/presence/presencePdf/PresencePdf';
+import FaturationPdf from './pages/faturation/FaturationPdf';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -142,6 +143,10 @@ function App() {
         {
           path: '/facturation',
           element: <Facturation />
+        },
+        {
+          path: '/facturationPdf',
+          element: <FaturationPdf />
         },
         {
           path: '/facturationView/:id',

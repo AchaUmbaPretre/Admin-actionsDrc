@@ -136,7 +136,7 @@ const Facturation = () => {
           </div>
           <div className="personPdf">
             <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
-            <Link className="personnel-btn-pdf" onClick={() => navigate('/personpdfTable')}><PictureAsPdfIcon/>Pdf</Link>
+            <Link className="personnel-btn-pdf" onClick={() => navigate('/facturationPdf')}><PictureAsPdfIcon/>Pdf</Link>
           </div>
           <Modal
                     aria-labelledby="transition-modal-title"
