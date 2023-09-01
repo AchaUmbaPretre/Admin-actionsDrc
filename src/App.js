@@ -40,6 +40,10 @@ import MissiAff from './pages/mission/missionAff/MissiAff';
 import MissionContrat from './pages/mission/missionContrat/MissionContrat';
 import PersonPdf from './pages/personnel/personPdf/PersonPdf';
 import PersonTablePdf from './pages/personnel/personPdf/PersonTablePdf';
+import ContratPdf from './pages/contrats/contratPdf/ContratPdf';
+import MissionPdf from './pages/mission/missionPdf/MissionPdf';
+import ClientPdf from './pages/clientTab/clientPdf/ClientPdf';
+import PresencePdf from './pages/presence/presencePdf/PresencePdf';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -112,6 +116,10 @@ function App() {
           element: <ContratView />
         },
         {
+          path: '/contratsPdf',
+          element: <ContratPdf />
+        },
+        {
           path: '/client',
           element: <ClientTab />
         },
@@ -122,6 +130,10 @@ function App() {
         {
           path: '/presence',
           element: <Presence />
+        },
+        {
+          path: '/presencePdf',
+          element: <PresencePdf />
         },
         {
           path: "/presenceView/:emp1_id/:rowId",
@@ -156,6 +168,10 @@ function App() {
           element: <ClientView />
         },
         {
+          path: '/clientPdf',
+          element: <ClientPdf />
+        },
+        {
           path: '/clientUpdate/:id',
           element: <EditeClient />
         },
@@ -174,6 +190,10 @@ function App() {
         {
           path: '/missions',
           element: <MissiAff />
+        },
+        {
+          path: '/missionsPdf',
+          element: <MissionPdf />
         },
         {
           path: '/missionForm',
