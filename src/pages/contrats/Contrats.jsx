@@ -21,6 +21,7 @@ import { DeleteOutline, EditOutlined, AddCircleOutline, VisibilityOutlined } fro
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PendingIcon from '@mui/icons-material/Pending';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 
 const style = {
     position: 'absolute',
@@ -188,7 +189,10 @@ const Contrats = () => {
                         <span className="contrats-span">Liste des contrats</span>
                     </div>
                 </div>
-                <button className="contrats-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</button>
+                <div className="personPdf">
+                  <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
+                  <Link className="personnel-btn-pdf" onClick={() => navigate('/personpdfTable')}><PictureAsPdfIcon/>Pdf</Link>
+                </div>
                 <Modal
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"

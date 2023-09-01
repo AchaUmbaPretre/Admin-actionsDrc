@@ -11,12 +11,12 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import { useEffect } from 'react';
-import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import config from '../../config'
 import MissionForm from './form/MissionForm';
 import { Box, Fade, Modal } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 
 const style = {
   position: 'absolute',
@@ -120,7 +120,10 @@ const Mission = () => {
                         <span className="personnel-span">liste des missions</span>
                     </div>
                 </div>
-                <button className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</button>
+                <div className="personPdf">
+                  <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
+                  <Link className="personnel-btn-pdf" onClick={() => navigate('/personpdfTable')}><PictureAsPdfIcon/>Pdf</Link>
+                </div>
                 <Modal
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"

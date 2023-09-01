@@ -1,5 +1,5 @@
 import { DataGrid } from '@mui/x-data-grid'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './presence.scss'
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import { DeleteOutline} from '@mui/icons-material';
@@ -15,6 +15,7 @@ import PresenceForm from './form/PresenceForm';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import config from '../../config'
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 
 const style = {
   position: 'absolute',
@@ -113,7 +114,10 @@ const Presence = () => {
                   <span className="contrats-span">Liste des presences</span>
               </div>
           </div>
-          <button className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</button>
+          <div className="personPdf">
+            <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
+            <Link className="personnel-btn-pdf" onClick={() => navigate('/personpdfTable')}><PictureAsPdfIcon/>Pdf</Link>
+          </div>
           <Modal
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"

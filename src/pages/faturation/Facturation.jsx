@@ -16,6 +16,7 @@ import FactureForm from './form/FactureForm';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import config from '../../config'
 
 const style = {
@@ -133,7 +134,10 @@ const Facturation = () => {
                   <span className="contrats-span">Liste des facturation</span>
               </div>
           </div>
-          <button className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</button>
+          <div className="personPdf">
+            <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
+            <Link className="personnel-btn-pdf" onClick={() => navigate('/personpdfTable')}><PictureAsPdfIcon/>Pdf</Link>
+          </div>
           <Modal
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"

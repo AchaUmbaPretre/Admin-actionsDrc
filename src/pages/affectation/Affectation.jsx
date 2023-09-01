@@ -9,6 +9,9 @@ import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { FadeLoader } from 'react-spinners';
 import config from '../../config';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import { Link, useNavigate } from "react-router-dom";
 
 const Affectation = () => {
 
@@ -18,7 +21,8 @@ const Affectation = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+ const [loading, setLoading] = useState(true);
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
@@ -118,6 +122,10 @@ const Affectation = () => {
                   <h2 className="contrats-title">Affectation</h2>
                   <span className="contrats-span">Liste des agents affectés</span>
               </div>
+          </div>
+          <div className="personPdf">
+            <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
+            <Link className="personnel-btn-pdf" onClick={() => navigate('/personpdfTable')}><PictureAsPdfIcon/>Pdf</Link>
           </div>
         </div>
           {loading ? (

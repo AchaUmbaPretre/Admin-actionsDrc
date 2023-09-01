@@ -150,7 +150,11 @@ const Personnel = () => {
                         <span className="personnel-span">Liste des employés</span>
                     </div>
                 </div>
-                <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
+                <div className="personPdf">
+                  <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
+                  <Link className="personnel-btn-pdf" onClick={() => navigate('/personpdfTable')}><PictureAsPdfIcon/>Pdf</Link>
+                </div>
+                
                 <Modal
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"
@@ -179,6 +183,7 @@ const Personnel = () => {
           </div>
         ) : (
           <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="userTable" />
+          
         )}
         </div>
     </>
