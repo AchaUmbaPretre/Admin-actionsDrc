@@ -20,6 +20,8 @@ import config from '../../config'
 import { Box, Fade, Modal } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import Formulaire from './formulaire/Formulaire';
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 
 const style = {
@@ -129,7 +131,6 @@ const Personnel = () => {
                 <div className="table-icons-row">
                     <Link to={`/edit/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
                     <VisibilityIcon className='userEye' onClick={() => navigate(`/views/${params.row.id}`)} />
-                    <PictureAsPdfIcon className="userListDelete" onClick={() => navigate(`/personpdf/${params.row.id}`)} />
                     <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
                 </div>
               </>
@@ -138,6 +139,35 @@ const Personnel = () => {
         }},
       ];
       
+      const exportToExcel = () => {
+        
+        const excelData = data.map(row => ({
+          ID: row.id,
+          Nom: row.first_name,
+          Postnom: row.last_name,
+          Telephone: row.phone_number,
+          Email: row.email,
+          'Date de naissance': format(new Date(row.date_of_birth), 'dd-MM-yyyy'),
+          Genre: row.gender,
+          Adresse: row.address,
+          Competence: row.skills
+        }));
+      
+
+        const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.json_to_sheet(excelData);
+      
+   
+        XLSX.utils.book_append_sheet(workbook, worksheet, 'Feuille 1');
+      
+  
+        const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+        const excelBlob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        
+
+        const excelFilename = 'tableau.xlsx';
+        saveAs(excelBlob, excelFilename);
+      };
 
   return (
     <>
@@ -153,6 +183,7 @@ const Personnel = () => {
                 <div className="personPdf">
                   <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
                   <Link className="personnel-btn-pdf" onClick={() => navigate('/personpdfTable')}><PictureAsPdfIcon/>Pdf</Link>
+                  <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
                 </div>
                 
                 <Modal

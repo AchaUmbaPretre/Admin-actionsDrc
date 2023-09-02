@@ -75,6 +75,20 @@
                 -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
                 box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
             }
+            .personnel-btn-excel{
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                border: none;
+                padding: 6px 10px;
+                border-radius: 5px;
+                border: 1px solid green;
+                background: #fff;
+                cursor: pointer;
+                color: green;
+                -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+                box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
+            }
         }
         .contract{
             

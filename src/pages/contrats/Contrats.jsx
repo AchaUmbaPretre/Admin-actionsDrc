@@ -22,6 +22,8 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PendingIcon from '@mui/icons-material/Pending';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 const style = {
     position: 'absolute',
@@ -127,6 +129,31 @@ const Contrats = () => {
       },
     ];
 
+    const exportToExcel = () => {
+        
+      const excelData = data.map(row => ({
+        Client : row.company_name,
+        "Type de contrat": row.contract_type,
+        'Date du debut': format(new Date(params.row.start_date), 'dd-MM-yyyy'),
+        'Date de la fin': format(new Date(params.row.end_date), 'dd-MM-yyyy'),
+      }));
+    
+  
+      const workbook = XLSX.utils.book_new();
+      const worksheet = XLSX.utils.json_to_sheet(excelData);
+    
+  
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Feuille 1');
+    
+  
+      const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+      const excelBlob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      
+  
+      const excelFilename = 'tableau.xlsx';
+      saveAs(excelBlob, excelFilename);
+    };
+
       // eslint-disable-next-line react-hooks/exhaustive-deps
        useEffect(()=>{
 
@@ -192,6 +219,7 @@ const Contrats = () => {
                 <div className="personPdf">
                   <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
                   <Link className="personnel-btn-pdf" onClick={() => navigate('/contratsPdf')}><PictureAsPdfIcon/>Pdf</Link>
+                  <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
                 </div>
                 <Modal
                     aria-labelledby="transition-modal-title"

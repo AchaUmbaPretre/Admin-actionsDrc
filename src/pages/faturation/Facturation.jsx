@@ -18,6 +18,8 @@ import { FadeLoader } from 'react-spinners';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import config from '../../config'
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 const style = {
   position: 'absolute',
@@ -122,6 +124,32 @@ const Facturation = () => {
     }},
   ];
 
+  const exportToExcel = () => {
+        
+    const excelData = data.map(row => ({
+      Client : row.company_name      ,
+      Postnom: row.last_name,
+      "Date d'écheance": row.due_date      ,
+      "Date de la facture": row.invoice_date,
+      "Montant": row.total_amount,
+      Status: row.status,
+    }));
+  
+
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(excelData);
+  
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Feuille 1');
+  
+
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const excelBlob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    
+
+    const excelFilename = 'tableau.xlsx';
+    saveAs(excelBlob, excelFilename);
+  };
 
   return (
     <>
@@ -137,6 +165,7 @@ const Facturation = () => {
           <div className="personPdf">
             <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
             <Link className="personnel-btn-pdf" onClick={() => navigate('/facturationPdf')}><PictureAsPdfIcon/>Pdf</Link>
+            <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
           </div>
           <Modal
                     aria-labelledby="transition-modal-title"

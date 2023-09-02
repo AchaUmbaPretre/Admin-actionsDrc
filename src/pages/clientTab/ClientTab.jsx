@@ -18,6 +18,8 @@ import Swal from 'sweetalert2'
 import { FadeLoader } from 'react-spinners';
 import config from '../../config'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 const style = {
   position: 'absolute',
@@ -121,6 +123,36 @@ const ClientTab = () => {
     }
   };
 
+  const exportToExcel = () => {
+        
+    const excelData = data.map(row => ({
+      ID: row.id,
+      Compagnie: row.company_name,
+      Adresse: row.address,
+      'Tel contact principal': row.contact_name,
+      'Tel principal': row.contact_phone,
+      Email: row.contact_email,
+      APR : row.apr,
+      'ID NATE' : row.idnate,
+      Pyas : row.pays,
+      Province : row.province
+    }));
+  
+
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(excelData);
+  
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Feuille 1');
+  
+
+    const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const excelBlob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    
+
+    const excelFilename = 'tableau.xlsx';
+    saveAs(excelBlob, excelFilename);
+  };
 
   return (
     <>
@@ -136,6 +168,7 @@ const ClientTab = () => {
             <div className="personPdf">
               <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
               <Link className="personnel-btn-pdf" onClick={() => navigate('/clientPdf')}><PictureAsPdfIcon/>Pdf</Link>
+              <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
             </div>
             <Modal
             aria-labelledby="transition-modal-title"

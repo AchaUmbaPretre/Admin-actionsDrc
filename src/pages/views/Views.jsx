@@ -141,14 +141,6 @@ const Views = () => {
 
                         <div className="views-rows">
                             <div className="views-left">
-                                <span className="view-label"><WysiwygIcon  className="icon-person"/>Certificat : </span>
-                                <span className="view-result">{data.certifications}</span>
-                            </div>
-                            <div className="views-right">
-                                <span className="view-label"><WysiwygIcon  className="icon-person"/>Status : </span>
-                                <span className="view-result">{data.employment_status}</span>
-                            </div>
-                            <div className="views-left">
                                 <span className="view-label"><ShowChartIcon  className="icon-person"/>Affectation : </span>
                                 <span className="view-result">{data.nom_client}</span>
                             </div>
