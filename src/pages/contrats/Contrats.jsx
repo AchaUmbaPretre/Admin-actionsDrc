@@ -134,8 +134,8 @@ const Contrats = () => {
       const excelData = data.map(row => ({
         Client : row.company_name,
         "Type de contrat": row.contract_type,
-        'Date du debut': format(new Date(params.row.start_date), 'dd-MM-yyyy'),
-        'Date de la fin': format(new Date(params.row.end_date), 'dd-MM-yyyy'),
+        'Date du debut': format(new Date(row.start_date), 'dd-MM-yyyy'),
+        'Date de la fin': format(new Date(row.end_date), 'dd-MM-yyyy'),
       }));
     
   

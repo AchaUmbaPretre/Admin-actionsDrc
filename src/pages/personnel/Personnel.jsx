@@ -142,7 +142,6 @@ const Personnel = () => {
       const exportToExcel = () => {
         
         const excelData = data.map(row => ({
-          ID: row.id,
           Nom: row.first_name,
           Postnom: row.last_name,
           Telephone: row.phone_number,
@@ -150,7 +149,15 @@ const Personnel = () => {
           'Date de naissance': format(new Date(row.date_of_birth), 'dd-MM-yyyy'),
           Genre: row.gender,
           Adresse: row.address,
-          Competence: row.skills
+          Competence: row.skills,
+          certifications : row.certifications,
+          Status: row.employment_status,
+          "Etat civil" : row.etat_civil,
+          Genre : row.gender,
+          "Type de l'identité" : row.identification_type,
+          "Nombre d'enfant": row.nombre_enfant,
+          "CNSS": row.number_cnss,
+          "INPP": row.number_inpp,
         }));
       
 

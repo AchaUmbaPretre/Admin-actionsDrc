@@ -82,7 +82,7 @@
         justify-content: space-between;
         gap: 20px;
         .presenceTable{
-            flex: 2;
+            flex: .8;
             background: #fff;
             padding: 10px;
             border-radius: 5px;
@@ -132,7 +132,13 @@
                         color: red;
                     }
                 }
-                
+                .person-scroll-tab{
+                    .input-time{
+                        padding: 6px 10px;
+                        border: 1px solid #ebe9e9;
+                        border-radius: 5px;
+                    }
+                }
                 .personnel-date{
                     .personnel-bottom-title-h{
                         font-size: 1rem;

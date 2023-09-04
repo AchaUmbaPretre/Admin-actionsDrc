@@ -12,6 +12,8 @@ import config from '../../config';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { Link, useNavigate } from "react-router-dom";
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 const Affectation = () => {
 
@@ -111,6 +113,33 @@ const Affectation = () => {
   }
 };
 
+const exportToExcel = () => {
+        
+  const excelData = data.map(row => ({
+    Client : row.client_nom,
+    Nom: row.first_name,
+    'Post-nom': row.last_name,
+    Compténce: row.skills,
+    Salaire: row.salaire,
+    'Date de la fin':row.end_date
+  }));
+
+
+  const workbook = XLSX.utils.book_new();
+  const worksheet = XLSX.utils.json_to_sheet(excelData);
+
+
+  XLSX.utils.book_append_sheet(workbook, worksheet, 'Feuille 1');
+
+
+  const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  const excelBlob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  
+
+  const excelFilename = 'tableau.xlsx';
+  saveAs(excelBlob, excelFilename);
+};
+
   return (
     <>
 
@@ -126,6 +155,7 @@ const Affectation = () => {
           <div className="personPdf">
             <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
             <Link className="personnel-btn-pdf" onClick={() => navigate('/personpdfTable')}><PictureAsPdfIcon/>Pdf</Link>
+            <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
           </div>
         </div>
           {loading ? (

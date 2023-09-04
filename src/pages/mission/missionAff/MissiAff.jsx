@@ -12,6 +12,8 @@ import { useLocation } from 'react-router-dom';
 import Select from 'react-select';
 import './missioAff.scss'
 import Swal from 'sweetalert2';
+import ToggleOffIcon from '@mui/icons-material/ToggleOff';
+import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 
 
 
@@ -44,13 +46,19 @@ const MissiAff = () => {
     }
   };
 
+
+
   const handleCheckboxChange1 = (id) => {
     if (selectedIds1.includes(id)) {
       setSelectedIds1(selectedIds1.filter((selectedId1) => selectedId1 !== id));
+      
     } else {
       setSelectedIds1([...selectedIds1, id]);
     }
   };
+
+  const x = ([heureDebut,heureFin])
+  console.log(x)
 
   const handleChange = (e) => {
     setDatas((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -59,43 +67,94 @@ const MissiAff = () => {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 60 },
-    { field: 'first_name', headerName: "Employé(e)", width: 140 },
-    { field: 'last_name', headerName: 'Prenom', width: 140 },
-    { field: 'phone_number', headerName: "Telephone", width: 140 },
-    {
-      field: 'checkbox',
-      headerName: 'Sélectionner',
-      width: 120,
-      renderCell: (params) => {
-        return (
-          <input
-            type="checkbox"
-            checked={selectedIds.includes(params.row.id)}
-            onChange={() => handleCheckboxChange(params.row.id)}
-          />
-        );
-      },
-    },
-  ];
-  console.log(selectedIds)
-
-  const horaireTable = [
-    { field: 'id', headerName: 'ID', width: 50 },
-    { field: 'days', headerName: 'Jour de la semaine', width: 80 },
+    { field: 'first_name', headerName: "Employé(e)", width: 100 },
+    { field: 'last_name', headerName: 'Prenom', width: 100 },
     {
       field: 'checkbox',
       headerName: 'Sélectionner',
       width: 80,
       renderCell: (params) => {
+        const isChecked = selectedIds.includes(params.row.id);
+    
+        return (
+          <>
+            {isChecked ? (
+              <ToggleOnIcon
+                color="primary"
+                style={{ fontSize: '40px', cursor: 'pointer' }}
+                onClick={() => handleCheckboxChange(params.row.id)}
+              />
+            ) : (
+              <ToggleOffIcon
+                color="disabled"
+                style={{ fontSize: '40px', cursor: 'pointer' }}
+                onClick={() => handleCheckboxChange(params.row.id)}
+              />
+            )}
+          </>
+        );
+      },
+    },
+  ];
+
+  const horaireTable = [
+    { field: 'id', headerName: 'ID', width: 50 },
+    { field: 'days', headerName: 'Jour de la semaine', width: 80 },
+    {
+      field: 'start_time',
+      headerName: 'Heure début',
+      width: 100,
+      renderCell: (params) => {
         return (
           <input
-            type="checkbox"
-            checked={selectedIds1.includes(params.row.id)}
-            onChange={() => handleCheckboxChange1(params.row.id)}
+            type="time"
+            className='input-time'
+            onChange={(e) => setHeureDebut(e.target.value)}
           />
         );
       },
     },
+    {
+      field: 'end_time',
+      headerName: 'Heure fin',
+      width: 100,
+      renderCell: (params) => {
+        return (
+          <input
+            type="time"
+            className='input-time'
+            onChange={(e) => setHeureFin(e.target.value)}
+          />
+        );
+      },
+    },
+    {
+      field: 'checkbox',
+      headerName: 'Sélectionner',
+      width: 80,
+      renderCell: (params) => {
+        const isChecked = selectedIds1.includes(params.row.id);
+        return (
+          <>
+            
+            {isChecked ? (
+              <ToggleOnIcon
+                color="primary"
+                style={{ fontSize: '40px', cursor: 'pointer' }}
+                onClick={() => handleCheckboxChange1(params.row.id)}
+              />
+            ) : (
+              <ToggleOffIcon
+                color="disabled"
+                style={{ fontSize: '40px', cursor: 'pointer' }}
+                onClick={() => handleCheckboxChange1(params.row.id)}
+              />
+            )}
+          </>
+        );
+      },
+    },
+    
   ];
 
   useEffect(()=>{
@@ -224,14 +283,13 @@ const MissiAff = () => {
                 />
             </div>
             <div className="personnel-horaire">
-                  <h2 className='personnel-bottom-title'>Horaire <span>*</span></h2>
                   <div className="personnel-date">
                     <h2 className='personnel-bottom-title'>Jour de la semaine<span>*</span></h2>
                     <div className="person-scroll-tab">
                       <DataGrid rows={missionWeek} columns={horaireTable} pageSize={10} checkboxSelection />
                     </div>
                   </div>
-                  <div className="personnel-date">
+{/*                   <div className="personnel-date">
                     <h2 className='personnel-bottom-title-h'>Heure <span>*</span></h2>
                     <div className="personnel-rows-bttm">
                       <label htmlFor="">Heure de début:</label>
@@ -252,7 +310,7 @@ const MissiAff = () => {
                         />
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <button className="person-btn" onClick={handleClick} >Envoyer</button>
             </div>
           </div>

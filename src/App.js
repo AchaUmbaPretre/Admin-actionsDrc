@@ -45,6 +45,7 @@ import MissionPdf from './pages/mission/missionPdf/MissionPdf';
 import ClientPdf from './pages/clientTab/clientPdf/ClientPdf';
 import PresencePdf from './pages/presence/presencePdf/PresencePdf';
 import FaturationPdf from './pages/faturation/FaturationPdf';
+import Horaire from './pages/horaire/Horaire';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -231,6 +232,10 @@ function App() {
         {
           path: '/payement',
           element: <Payement />
+        },
+        {
+          path: '/horaire',
+          element: <Horaire />
         }
       ]
     },
