@@ -1,7 +1,8 @@
-import { Document, PDFViewer, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
+import { Document, PDFViewer, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
 import React, { useEffect, useState } from 'react';
 import config from '../../../config';
 import axios from 'axios';
+import logo from '../../../assets/actionssarl.PNG'
 
 const PersonTablePdf = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -34,6 +35,7 @@ const PersonTablePdf = () => {
     },
     tableRow: {
       flexDirection: 'row',
+      borderBottom: "1px solid #c5c5c5"
     },
     tableCell: {
       padding: 10,
@@ -46,6 +48,9 @@ const PersonTablePdf = () => {
         padding: 10,
         fontWeight: 200,
         fontSize: 11,
+        width: '40%',
+      },
+      img: {
         width: '40%',
       },
   });
@@ -70,6 +75,9 @@ const PersonTablePdf = () => {
     <PDFViewer style={{ width: '100%', height: '100vh' }}>
       <Document>
         <Page style={styles.page}>
+          <View>
+            <Text style={styles.tableCells}>10 aout 2021</Text>
+          </View>
           <Text style={styles.title}>Liste des personnels</Text>
           <View style={styles.table}>
             <View style={[styles.tableRow, styles.tableHeader]}>

@@ -58,25 +58,24 @@ const Contrats = () => {
 
   
     const columns = [
-      { field: 'id', headerName: 'ID', width: 50 },
-      { field: 'company_name', headerName: 'Client', width: 150 },
-      { field: 'contract_type', headerName: 'Type de contrat', width: 150 },
+      { field: 'company_name', headerName: 'Client', width: 160 },
+      { field: 'contract_type', headerName: 'Type de contrat', width: 160 },
       {
         field: 'start_date',
         headerName: 'Date du debut',
-        width: 150,
+        width: 160,
         valueGetter: (params) => format(new Date(params.row.start_date), 'dd-MM-yyyy'),
       },
       {
         field: 'end_date',
         headerName: 'Date de la fin',
-        width: 150,
+        width: 160,
         valueGetter: (params) => format(new Date(params.row.end_date), 'dd-MM-yyyy'),
       },
       {
         field: 'status',
         headerName: 'Statut du contrat',
-        width: 150,
+        width: 160,
         renderCell: (params) => {
     
           switch (params.value) {
@@ -109,19 +108,32 @@ const Contrats = () => {
       {
         field: 'action',
         headerName: 'Action',
-        width: 150,
+        width: 160,
         renderCell: (params) => {
           return (
             <>
               <div className="table-icons-row">
-                <Link to={`/editContrat/${params.row.id}`}>
-                  <EditOutlined className="userListBtn" />
-                </Link>
-                <VisibilityOutlined className='userEye' onClick={() => navigate(`/contratsView/${params.row.id}`)} />
-                <DeleteOutline className="userListDelete" onClick={() => { handleDelete(params.row.id) }} />
-                <Link to={`addContrat/${params.row.id}`}>
-                  <AddCircleOutline className="userListAjout" />
-                </Link>
+              
+                <div className="userOvert0">
+                  <Link to={`/editContrat/${params.row.id}`}>
+                    <EditOutlined className="userListBtn" />
+                    <span className='userOvert'>Modifier</span>
+                  </Link>
+                </div>
+                <div className="userOvert1">
+                  <VisibilityOutlined className='userEye' onClick={() => navigate(`/contratsView/${params.row.id}`)} />
+                  <span className='userOvert'>détail</span>
+                </div>
+                <div className="userOvert2">
+                  <DeleteOutline className="userListDelete" onClick={() => { handleDelete(params.row.id) }} />
+                  <span className='userOvert'>Supprimer</span>
+                </div>
+                <div className="userOvert3">
+                  <Link to={`addContrat/${params.row.id}`}>
+                    <AddCircleOutline className="userListAjout" />
+                    <span className='userOvert'>Ajouter</span>
+                  </Link>
+                </div>
               </div>
             </>
           );

@@ -10,7 +10,7 @@ import config from '../../../config'
 const EditContrat = () => {
 const DOMAIN = config.REACT_APP_SERVER_DOMAIN
 const [data, setData] = useState({});
-const {contract_type,client_id, start_date,end_date, hourly_rate,benefits, contract_status,date_engagement} = data;
+const {contract_type,client_id, start_date,end_date} = data;
 const location = useLocation();
 const navigate = useNavigate();
 const id = location.pathname.split("/")[2];
@@ -79,7 +79,7 @@ useEffect(() => {
         <div className="edit">
             <div className="edit-wrapper">
                 <div className="edit-title">
-                    <h2 className="edit-h2">Editer contrat</h2>
+                    <h2 className="edit-h2">Modifier le contrat</h2>
                 </div>
                 <form action="" className="formulaire-edit">
                     <div className="edit-rows">
@@ -108,27 +108,7 @@ useEffect(() => {
                             <input type="date"  value={moment(end_date).format('YYYY-MM-DD') || ''} data-format="MM /jj/aaaa" name='end_date' className="input-form" onChange={handleChange} />
                         </div>
                     </div>
-                    
-                    <div className="edit-rows">
-                        <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Salaire <span>*</span></label>
-                            <input type="number" value={hourly_rate}  name='hourly_rate' className="input-form" onChange={handleChange} />
-                        </div>
-                        <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Avantages sociaux du contrat <span>*</span></label>
-                            <input type="text" value={benefits}  name='benefits' className="input-form" onChange={handleChange} />
-                        </div>
-                    </div>
-                    <div className="edit-rows">
-                        <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Status du contrat <span>*</span></label>
-                            <input type="text" value={contract_status}  name='contract_status' className="input-form" onChange={handleChange} />
-                        </div>
-                        <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Date de l'engagement <span>*</span></label>
-                            <input type="date" value={moment(date_engagement).format('YYYY-MM-DD') || ''} data-format="MM /jj/aaaa"  name='date_engagement' className="input-form" onChange={handleChange} />
-                        </div>
-                    </div>
+  
                     <button className="edit-btn" onClick={handleClick}>Edit</button>
                 </form>
             </div>

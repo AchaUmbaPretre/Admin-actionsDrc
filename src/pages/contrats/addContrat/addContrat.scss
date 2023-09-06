@@ -85,7 +85,7 @@
         gap: 20px;
         width: 100%;
         .add-row1{
-            flex: 5;
+            flex: 2;
             width: 100%;
             position: relative;
             overflow-x: scroll;
@@ -108,7 +108,7 @@
         }
         .add-row2{
             height: max-content;
-            flex: 2;
+            flex: 1;
             background: #fff;
             border-radius: 5px;
             -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
@@ -119,14 +119,41 @@
             gap: 40px;
             .add-container-rows{
                 .add-row-top{
-                    display: flex;
-                    flex-direction: column;
-                    gap: 10px;
-                    .form-select{
-                        border: 1px solid #eeeded;
-                        padding: 8px;
-                        border-radius: 5px;
-                        cursor: pointer;
+                    h2{
+                        font-size: 1rem;
+                        color: rgb(48, 48, 48);
+                        padding: 20px 0;
+                    }
+                    .input-row{
+                        label{
+                            font-size: .9rem;
+                            color: #555;
+                            .info-name{
+                                background: #f8f8f8;
+                                display: flex;
+                                align-items: center;
+                                gap: 7px;
+                                padding: 8px;
+                                .input-radio{
+                                    padding-right: 8px;
+                                    outline: rgb(3, 3, 228);
+                                }
+                            }
+                            .label-info{
+                                font-size: .9rem;
+                                color: black;
+                                padding-left: 20px;
+                                display: flex;
+                                flex-direction: column;
+                                gap: 8px;
+                            }
+                        }
+                    }
+                    .rows-btn{
+                        display: flex;
+                        align-items: center;
+                        gap: 10px;
+                        padding: 20px 0;
                     }
                 }
                 .add-row-bottom{

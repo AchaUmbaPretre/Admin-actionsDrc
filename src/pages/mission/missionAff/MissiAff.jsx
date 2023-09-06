@@ -34,10 +34,39 @@ const MissiAff = () => {
   const [heureDebut, setHeureDebut] = useState('');
   const [heureFin, setHeureFin] = useState('');
   const [missionWeek, setMissionWeek] = useState([])
+  const [horaireTables, setHoraireTables] = useState( [
+    { id: 2, start_time: '', end_time: '' },
+    { id: 3, start_time: '', end_time: '' },
+    { id: 4, start_time: '', end_time: '' },
+    { id: 5, start_time: '', end_time: '' },
+    { id: 6, start_time: '', end_time: '' },
+    { id: 7, start_time: '', end_time: '' },
+    { id: 8, start_time: '', end_time: '' },
+  ])
   const clientId = searchParams.get('client_id');
 
+/*   const handleTimeChange = (id, field, value) => {
+    const updatedTable = [id, field, value];
+    const index = updatedTable.findIndex((item) => item.id === id);
 
 
+    if (index !== -1) {
+      updatedTable[index][field] = value;
+    }
+
+    setHoraireTables(updatedTable);
+    console.log(updatedTable)
+  }; */
+
+  const handleTimeChange = (id, field, value) => {
+    setHoraireTables((prevData) =>
+      prevData.map((item) =>
+        item.id === id ? { ...item, [field]: value } : item
+      )
+    );
+  };  
+  console.log(horaireTables)
+  
   const handleCheckboxChange = (id) => {
     if (selectedIds.includes(id)) {
       setSelectedIds(selectedIds.filter((selectedId) => selectedId !== id));
@@ -57,8 +86,6 @@ const MissiAff = () => {
     }
   };
 
-  const x = ([heureDebut,heureFin])
-  console.log(x)
 
   const handleChange = (e) => {
     setDatas((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -97,6 +124,7 @@ const MissiAff = () => {
     },
   ];
 
+ 
   const horaireTable = [
     { field: 'id', headerName: 'ID', width: 50 },
     { field: 'days', headerName: 'Jour de la semaine', width: 80 },
@@ -109,7 +137,8 @@ const MissiAff = () => {
           <input
             type="time"
             className='input-time'
-            onChange={(e) => setHeureDebut(e.target.value)}
+            value={params.row.start_time}
+            onChange={(e) => handleTimeChange(params.row.id, 'start_time', e.target.value)}
           />
         );
       },
@@ -123,7 +152,8 @@ const MissiAff = () => {
           <input
             type="time"
             className='input-time'
-            onChange={(e) => setHeureFin(e.target.value)}
+            value={params.row.end_time}
+            onChange={(e) => handleTimeChange(params.row.id, 'end_time', e.target.value)}
           />
         );
       },
@@ -136,7 +166,6 @@ const MissiAff = () => {
         const isChecked = selectedIds1.includes(params.row.id);
         return (
           <>
-            
             {isChecked ? (
               <ToggleOnIcon
                 color="primary"
@@ -154,7 +183,6 @@ const MissiAff = () => {
         );
       },
     },
-    
   ];
 
   useEffect(()=>{
@@ -213,14 +241,14 @@ const MissiAff = () => {
     try {
       const requestDataArray = [];
   
-      for (let i = 0; i < selectedIds1.length; i++) {
+      for (let i = 0; i < horaireTables.length; i++) {
         const requestData = {
           agent_id: selectedIds,
           client_id: clientId,
-          jour: selectedIds1[i],
+          jour: horaireTables[i].id,
           site: datas.site,
-          heureEntrant: heureDebut,
-          heureSortant: heureFin
+          heureEntrant: horaireTables[i].start_time,
+          heureSortant: horaireTables[i].end_time
         };
   
         requestDataArray.push(requestData);

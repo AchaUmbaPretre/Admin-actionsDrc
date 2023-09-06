@@ -5,6 +5,11 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Add as AddIcon, Remove as RemoveIcon } from '@mui/icons-material';
+import Collapse from '@mui/material/Collapse';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useState } from 'react';
 import * as React from 'react';
 import axios from 'axios';
@@ -14,7 +19,7 @@ import { useEffect } from 'react';
 import { FadeLoader } from 'react-spinners';
 import config from '../../config'
 import MissionForm from './form/MissionForm';
-import { Box, Fade, Modal } from '@mui/material';
+import { Box, Fade, Modal} from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { saveAs } from 'file-saver';
@@ -35,7 +40,7 @@ const style = {
 
 const Mission = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
-    const [data, setData] = useState({});
+    const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -80,36 +85,109 @@ const Mission = () => {
         }
       };
 
-    const columns = [
-        { field: 'id', headerName: 'ID', width: 80 },
-        { field: 'company_name', headerName: 'Client', width: 150 },
-        { field: 'first_name', headerName: 'Agent', width: 150 },
-        { field: 'days', headerName: 'Jour', width: 150 },
-        {
-          field: 'heureEntrant',
-          headerName: 'Heure de début',
-          width: 150,valueGetter: (params) => params.row.heureEntrant.substring(0, 5)
-        },
-        { 
-          field: 'heureSortant',
-          headerName: 'Heure de fin',
-          width: 150, valueGetter: (params) => params.row.heureSortant.substring(0, 5)
-        },
-
-        {field: 'action', HeaderName: 'Action', width: 160, renderCell: (params) =>{
-            return(
-              <>
+      const MyTable = ({ data }) => {
+        
+        const groupedData = data.reduce((acc, row) => {
+          const { first_name, ...rest } = row;
+          if (!acc[first_name]) {
+            acc[first_name] = {
+              first_name,
+              rows: [rest],
+            };
+          } else {
+            acc[first_name].rows.push(rest);
+          }
+          return acc;
+        }, {});
+      
+        return (
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell>Client</TableCell>
+                  <TableCell>Agent</TableCell>
+                  <TableCell>Jour</TableCell>
+                  <TableCell>Heure de début</TableCell>
+                  <TableCell>Heure fin</TableCell>
+                  <TableCell>Action</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {Object.values(groupedData).map((group) => (
+                  <CollapsibleRow key={group.first_name} group={group} />
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        );
+      };
+      
+      const CollapsibleRow = ({ group }) => {
+        const [open, setOpen] = React.useState(false);
+      
+        return (
+          <>
+            <TableRow>
+              <TableCell>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <KeyboardArrowDownIcon
+                    onClick={() => setOpen(!open)}
+                    sx={{ cursor: 'pointer' }}
+                  />
+                </Box>
+              </TableCell>
+              <TableCell>{group.rows[0].company_name}</TableCell>
+              <TableCell>{group.first_name}</TableCell>
+              <TableCell>{group.rows[0].days}</TableCell>
+              <TableCell>{group.rows[0].heureEntrant.substring(0, 5)}</TableCell>
+              <TableCell>{group.rows[0].heureSortant.substring(0, 5)}</TableCell>
+              <TableCell>
                 <div className="table-icons-row">
-                    <Link to={`/missionEdite/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
-                    <VisibilityIcon className='userEye' onClick={() => navigate(`/missionView/${params.row.id}`)} />
-                    <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
+                  <Link to={`/missionEdite/${group.rows[0].id}`}>
+                    <ModeEditOutlineIcon className='userListBtn' />
+                  </Link>
+                  <DeleteOutline
+                    className="userListDelete"
+                    onClick={() => {
+                      handleDelete(group.rows[0].id);
+                    }}
+                  />
                 </div>
-                
-              </>
-    
-            )
-        }},
-      ];
+              </TableCell>
+            </TableRow>
+            {open && (
+              <TableRow>
+                <TableCell colSpan={7}>
+                  <TableContainer>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>Jour</TableCell>
+                          <TableCell>Heure de début</TableCell>
+                          <TableCell>Heure fin</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {group.rows.map((row) => (
+                          <TableRow key={row.id}>
+                            <TableCell>{row.days}</TableCell>
+                            <TableCell>{row.heureEntrant.substring(0, 5)}</TableCell>
+                            <TableCell>{row.heureSortant.substring(0, 5)}</TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </TableCell>
+              </TableRow>
+            )}
+          </>
+        );
+      };
+
+
 
       const exportToExcel = () => {
         
@@ -180,7 +258,9 @@ const Mission = () => {
             <FadeLoader color={'#36D7B7'} loading={loading} />
           </div>
           ) : (
-            <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="userTable" />
+            <div>
+              <MyTable data={data} />
+            </div>
             )}
         </div>
     </>

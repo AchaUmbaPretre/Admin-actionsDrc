@@ -1,6 +1,6 @@
 import './affectation.scss'
 import { DataGrid } from '@mui/x-data-grid'
-import { DeleteOutline, Domain} from '@mui/icons-material';
+import { DeleteOutline, Domain, VisibilityOutlined} from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import Swal from 'sweetalert2'
@@ -56,6 +56,10 @@ const Affectation = () => {
         return(
           <>
             <div className="table-icons-row">
+                <div className="userOvert1">
+                    <VisibilityOutlined className='userEye' onClick={() => navigate(`/affectations/${params.row.id}`)} />
+                  <span className='userOvert'>détail</span>
+                </div>
                 <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
             </div>
           </>

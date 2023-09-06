@@ -29,7 +29,6 @@ const handleChange = (e) => {
 
 };
 
-console.log(data)
 
 
   const handleClick = async (e) => {

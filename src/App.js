@@ -46,6 +46,7 @@ import ClientPdf from './pages/clientTab/clientPdf/ClientPdf';
 import PresencePdf from './pages/presence/presencePdf/PresencePdf';
 import FaturationPdf from './pages/faturation/FaturationPdf';
 import Horaire from './pages/horaire/Horaire';
+import AffView from './pages/affectation/affView.jsx/AffView';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -128,6 +129,10 @@ function App() {
         {
           path: '/affectation',
           element: <Affectation />
+        },
+        {
+          path: '/affectations/:id',
+          element: <AffView />
         },
         {
           path: '/presence',

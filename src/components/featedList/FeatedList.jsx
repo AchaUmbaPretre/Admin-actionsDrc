@@ -18,9 +18,8 @@ const FeatedList = () => {
     const navigate = useNavigate();
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 70 },
         { field: 'first_name', headerName: 'Nom', width: 110 },
-        { field: 'last_name', headerName: 'Prenom', width: 100 },
+        { field: 'last_name', headerName: 'Prenom', width: 110 },
         {
           field: 'phone_number',
           headerName: 'Telephone',
@@ -39,7 +38,7 @@ const FeatedList = () => {
             format(new Date(params.row.date_of_birth), 'dd-MM-yyyy'),
         },
         { field: 'gender', headerName: 'Genre', width: 50 },
-        { field: 'phone_number', headerName: 'Telephone', width: 100 },
+        { field: 'phone_number', headerName: 'Telephone', width: 120 },
         {
           field: 'skills',
           headerName: 'Competence',

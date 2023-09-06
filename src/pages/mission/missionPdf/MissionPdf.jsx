@@ -35,6 +35,7 @@ const MissionPdf = () => {
         },
         tableRow: {
           flexDirection: 'row',
+          borderBottom: "1px solid #c5c5c5"
         },
         tableCell: {
           padding: 10,

@@ -29,14 +29,28 @@ const AddContrat = () => {
   const [selectedFunctionDetails, setSelectedFunctionDetails] = useState(null);
   const { id } = useParams();
   const [setSelectedFunction,selectedFunction] = useState([]);
+  const [informationsSelectionnees,setInformationsSelectionnees] = useState([]);
+  const [nouvelleInformation,setNouvelleInformation] = useState([]);
 
   const handleChange = (e) => {
     setSelectedFunction(e.target.value);
   };
-  console.log(selectedx)
+
   const columns = [
     {
       field: 'id', headerName: 'ID', width: 70,
+    },
+    { field: 'first_name', headerName: 'Nom', width: 120 },
+    { field: 'last_name', headerName: 'Prenom', width: 120 },
+    {
+      field: 'skills',
+      headerName: 'Competence',
+      width: 120,
+    },
+    {
+      field: '',
+      headerName: 'Selectionnez',
+      width: 110,
       renderCell: (params) => (
         <Checkbox
           checked={selected.includes(params.row.id)}
@@ -44,20 +58,6 @@ const AddContrat = () => {
           inputProps={{ 'arial-label': 'controlled' }}
         />
       )
-    },
-    { field: 'first_name', headerName: 'Nom', width: 110 },
-    { field: 'last_name', headerName: 'Prenom', width: 100 },
-    {
-      field: 'email',
-      headerName: 'Email',
-      type: 'number',
-      width: 120,
-    },
-    { field: 'gender', headerName: 'Genre', width: 50 },
-    {
-      field: 'skills',
-      headerName: 'Competence',
-      width: 120,
     },
   ];
   const [selectedData, setSelectedData] = useState([]);
@@ -73,15 +73,6 @@ const AddContrat = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-/*     if (!selects || !selects.fonction) {
-      Swal.fire({
-        title: 'Erreur',
-        text: 'Veuillez sélectionner une fonction',
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
-      return;
-    } */
 
     const selectedItems = data.filter((item) => selected.includes(item.id));
     const selectedIds = selectedItems.map((item) => item.id);
@@ -155,6 +146,16 @@ const AddContrat = () => {
     fetchDatas()
  }, [])
 
+ const handleSelectionInformation = (informationId) => {
+  if (informationsSelectionnees.includes(informationId)) {
+    setInformationsSelectionnees((prevSelections) =>
+      prevSelections.filter((id) => id !== informationId)
+    );
+  } else {
+    setInformationsSelectionnees((prevSelections) => [...prevSelections, informationId]);
+  }
+};
+
  const handleFunctionSelect = async (event) => {
 const functionId = event.target.value;
 
@@ -177,7 +178,6 @@ const functionId = event.target.value;
   } 
 };
 
-console.log(selectedFunctionDetails)
   return (
     <>
       <div className="facturation">
@@ -198,27 +198,44 @@ console.log(selectedFunctionDetails)
           <div className="add-row2">
             <div className="add-container-rows">
               <div className="add-row-top">
-                <label htmlFor="" className="add-label">Fonction</label>
-                
-                <select id="pet-select" name="fonction" onChange={handleFunctionSelect} className='form-select'>
-                  <option>selectionnez la fonction...</option>
-                  {selectData?.map(item => (
-                    <option value={item.id} key={item.id}>{item.nom}</option>
-                  ))}
-                </select>
-              </div>
-              { selectedFunctionDetails ?
-              <div className="add-row-bottom">
-                <div className="add-row-bottom1">
-                  <h2 className="add-row-h2">Fonction : {selectedFunctionDetails[0]?.nom}</h2>
-                  <span className="add-row-span"><strong>Prix :</strong> {selectedFunctionDetails[0]?.prix}</span>
-                  <span className="add-row-span"><strong>Salaire :</strong> {selectedFunctionDetails[0]?.salaire}</span>
-                  <span className="add-row-span"><strong>Avantages :</strong> {selectedFunctionDetails[0]?.avantages}</span>
-                  <span className="add-row-span"><strong>Horaires :</strong> {selectedFunctionDetails[0]?.horaire_conge}</span>
+                <h2>Sélectionnez les informations qui vous intéressent</h2>
+                {selectData?.map((information) => (
+                  <div key={information.id} className='input-row'>
+                    <label>
+                      <div className='info-name'>
+                        <input
+                          className='input-radio'
+                          type="checkbox"
+                          checked={informationsSelectionnees.includes(information.id)}
+                          onChange={() => handleSelectionInformation(information.id)}
+                        />
+                          {information.nom}
+                      </div>
+                        <div className="label-info">
+                          <div>
+                            Avantage : {information.avantages}
+                          </div>
+                          <div>
+                            Prix : {information.prix}
+                          </div>
+                          <div>
+                            Salaire : {information.salaire}
+                          </div>
+                        </div>
+                    </label>
+                  </div>
+                ))}
+                  <div className="rows-btn">
+{/*                     <h2>Ajouter vos propres informations</h2>
+                  <input
+                    type="text"
+                    value={nouvelleInformation}
+                    onChange={(e) => setNouvelleInformation(e.target.value)}
+                  /> */}
+                    <button onClick={''}>Envoyer</button>
+                    <button onClick={''} className='ajouter'>Ajoute tes info</button>
                 </div>
-                <button className='add-row-btn' onClick={handleSubmit}>Affecter</button>
-              </div>
-            : ''}
+                </div>
             </div>
           </div>
         </div>
