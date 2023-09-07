@@ -154,6 +154,23 @@
                         align-items: center;
                         gap: 10px;
                         padding: 20px 0;
+                        button{
+                            border: none;
+                            padding: 10px 15px;
+                            color: #fff;
+                            background: rgb(2, 2, 223);
+                            border-radius: 5px;
+                            cursor: pointer;
+                            &:hover{
+                                background: rgb(3, 3, 114);
+                            }
+                        }
+                        .ajouter{
+                            background: rgb(2, 92, 2);
+                            &:hover{
+                                background: green;
+                            }
+                        }
                     }
                 }
                 .add-row-bottom{

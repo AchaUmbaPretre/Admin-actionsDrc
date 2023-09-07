@@ -2,6 +2,10 @@ import { DataGrid } from '@mui/x-data-grid'
 import { Link, useParams } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
 import { useEffect, useState } from 'react';
 import './addContrat.scss'
 import { useNavigate } from "react-router-dom";
@@ -9,8 +13,21 @@ import axios from 'axios';
 import { Checkbox } from '@mui/material';
 import Swal from 'sweetalert2';
 import config from '../../../config'
-import { de } from 'date-fns/locale';
+import FormAdd from './formAdd/FormAdd';
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 700,
+  bgcolor: 'background.paper',
+  border: '1px solid #FFF',
+  boxShadow: 24,
+  p: 2,
+  borderRadius: 2,
+  outline: 'none'
+}
 const AddContrat = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const navigate = useNavigate();
@@ -32,9 +49,12 @@ const AddContrat = () => {
   const [informationsSelectionnees,setInformationsSelectionnees] = useState([]);
   const [nouvelleInformation,setNouvelleInformation] = useState([]);
 
+
+
   const handleChange = (e) => {
     setSelectedFunction(e.target.value);
   };
+
 
   const columns = [
     {
@@ -195,6 +215,27 @@ const functionId = event.target.value;
           <div className="add-row1">
             <DataGrid rows={filteredEmployees} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
           </div>
+          <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    slots={{ backdrop: Backdrop }}
+                    slotProps={{
+                    backdrop: {
+                        timeout: 500,
+                    },
+                    }} 
+                >
+                    <Fade in={open}>
+                        <Box sx={style}>
+                            <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
+                              <FormAdd handleClose={handleClose}/>
+                            </Box>
+                        </Box>
+                    </Fade>
+          </Modal>
           <div className="add-row2">
             <div className="add-container-rows">
               <div className="add-row-top">
@@ -226,14 +267,8 @@ const functionId = event.target.value;
                   </div>
                 ))}
                   <div className="rows-btn">
-{/*                     <h2>Ajouter vos propres informations</h2>
-                  <input
-                    type="text"
-                    value={nouvelleInformation}
-                    onChange={(e) => setNouvelleInformation(e.target.value)}
-                  /> */}
                     <button onClick={''}>Envoyer</button>
-                    <button onClick={''} className='ajouter'>Ajoute tes info</button>
+                    <button onClick={handleOpen} className='ajouter'>Ajouter tes info</button>
                 </div>
                 </div>
             </div>

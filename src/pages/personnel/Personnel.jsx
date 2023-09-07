@@ -89,7 +89,6 @@ const Personnel = () => {
 };
 
     const columns = [
-        { field: 'id', headerName: 'ID', width: 50 },
         { field: 'first_name', headerName: 'Nom', width: 100, renderCell: (params) =>{
           return <div className="userList">
                     <img src={params.row.source ? `../upload/${params.row.source}`: userImg} alt="" className="userImg" />
@@ -104,12 +103,12 @@ const Personnel = () => {
         {
           field: 'phone_number',
           headerName: 'Telephone',
-          width: 100,
+          width: 130,
         },
         {
             field: 'email',
             headerName: 'Email',
-            width: 110,
+            width: 130,
           },
         {
             field: 'date_of_birth',
@@ -123,7 +122,7 @@ const Personnel = () => {
         {
           field: 'skills',
           headerName: 'Competence',
-          width: 100,
+          width: 120,
         },
         {field: 'action', HeaderName: 'Action', width: 130, renderCell: (params) =>{
             return(

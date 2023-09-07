@@ -47,6 +47,7 @@ import PresencePdf from './pages/presence/presencePdf/PresencePdf';
 import FaturationPdf from './pages/faturation/FaturationPdf';
 import Horaire from './pages/horaire/Horaire';
 import AffView from './pages/affectation/affView.jsx/AffView';
+import FormAdd from './pages/contrats/addContrat/formAdd/FormAdd';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -117,6 +118,10 @@ function App() {
         {
           path: '/contratsView/:id',
           element: <ContratView />
+        },
+        {
+          path: '/formAdd',
+          element: <FormAdd />
         },
         {
           path: '/contratsPdf',
