@@ -27,13 +27,12 @@ const Affectation = () => {
  const [loading, setLoading] = useState(true);
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 100 },
-    { field: 'client_nom', headerName: "Client", width: 120 },
-    { field: 'first_name', headerName: "Nom", width: 120 },
+    { field: 'client_nom', headerName: "Client", width: 130 },
+    { field: 'first_name', headerName: "Nom", width: 130 },
     {
       field: 'last_name',
       headerName: "Post-nom",
-      width: 120 
+      width: 130 
     },
     {
       field: 'skills',
@@ -67,19 +66,7 @@ const Affectation = () => {
         )
     }},
   ];
-/*   useEffect(() => {
 
-    const fetchData = async () => {
-      try {
-        const res = await axios.get("http://localhost:8080/api/admin/affectation");
-        setData(res.data)
-
-      } catch (error) {
-        console.log(error)
-      };
-    }
-    fetchData()
-  }, []) */
 
   useEffect(() => {
 

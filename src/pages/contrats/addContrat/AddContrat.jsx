@@ -1,7 +1,6 @@
 import { DataGrid } from '@mui/x-data-grid'
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -14,6 +13,8 @@ import { Checkbox } from '@mui/material';
 import Swal from 'sweetalert2';
 import config from '../../../config'
 import FormAdd from './formAdd/FormAdd';
+import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
+import DoDisturbOutlinedIcon from '@mui/icons-material/DoDisturbOutlined';
 
 const style = {
   position: 'absolute',
@@ -44,39 +45,48 @@ const AddContrat = () => {
   const [setSelectedFunction,selectedFunction] = useState([]);
   const [informationsSelectionnees,setInformationsSelectionnees] = useState([]);
   const [nouvelleInformation,setNouvelleInformation] = useState([]);
+  const [selectedData, setSelectedData] = useState([]);
 
 
-
-  const handleChange = (e) => {
+/*   const handleChange = (e) => {
     setSelectedFunction(e.target.value);
-  };
-
+  }; */
 
   const columns = [
     {
-      field: 'id', headerName: 'ID', width: 70,
+      field: 'id',
+      headerName: 'ID',
+      width: 70,
     },
-    { field: 'first_name', headerName: 'Nom', width: 120 },
-    { field: 'last_name', headerName: 'Prenom', width: 120 },
+    { field: 'first_name', headerName: 'Nom', width: 110 },
+    { field: 'last_name', headerName: 'Prénom', width: 110 },
     {
       field: 'skills',
-      headerName: 'Competence',
-      width: 120,
+      headerName: 'Compétence',
+      width: 110,
+    },
+    {
+      field: 'availability',
+      headerName: 'Disponibilité',
+      width: 80,
+      renderCell: (params) => (
+        params.row.contrat_id ? <DoDisturbOutlinedIcon style={{ color: 'red' }} /> : <CheckCircleOutlinedIcon style={{ color: 'green' }} />
+      ),
     },
     {
       field: '',
-      headerName: 'Selectionnez',
-      width: 110,
+      headerName: 'Sélectionnez',
+      width: 100,
       renderCell: (params) => (
         <Checkbox
           checked={selected.includes(params.row.id)}
           onChange={(event) => handleSelectionChange(event, params.row.id)}
-          inputProps={{ 'arial-label': 'controlled' }}
+          inputProps={{ 'aria-label': 'controlled' }}
         />
-      )
+      ),
     },
   ];
-  const [selectedData, setSelectedData] = useState([]);
+
 
   const handleSelectionChange = (event, id) => {
     if (event.target.checked) {
@@ -85,50 +95,6 @@ const AddContrat = () => {
       setSelected(selected.filter((row) => row !== id))
     }
   };
-
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-
-    const selectedItems = data.filter((item) => selected.includes(item.id));
-    const selectedIds = selectedItems.map((item) => item.id);
-    const newSelectedx = selectedItems.map((item) => ({
-      agent: item.id,
-      fonction: selectedFunctionDetails.id,
-      contrat: id
-    }));
-    setSelectedx(selectedx.concat(newSelectedx));
-    setSelectedData([...selectedData, ...selectedItems]);
-
-    selectedx.map((dd) => {
-      axios
-        .post(`${DOMAIN}/api/admin/affectations`, {
-          fonction_id: dd.fonction,
-          emploie_id: dd.agent,
-          contrat_id: dd.contrat
-        })
-        .then((response) => {
-          Swal.fire({
-            title: 'Success',
-            text: 'Affectation réussie!',
-            icon: 'success',
-            confirmButtonText: 'OK'
-          });
-          navigate('/contrats');
-        })
-        .catch((error) => {
-          Swal.fire({
-            title: 'Error',
-            text: error.message,
-            icon: 'error',
-            confirmButtonText: 'OK'
-          });
-        });
-    });
-  };
-
-  console.log(selected, id)
 
     useEffect(() => {
 
@@ -143,6 +109,8 @@ const AddContrat = () => {
     }
     fetchData()
   }, [])
+
+  console.log(selected, id)
 
     const filteredEmployees = data.filter((employee) => {
       if (selectedFunctionDetails) {
@@ -175,27 +143,49 @@ const AddContrat = () => {
   }
 };
 
- const handleFunctionSelect = async (event) => {
-const functionId = event.target.value;
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
+  const selectedItems = data.filter((item) => selected.includes(item.id));
+  const selectedIds = selectedItems.map((item) => item.id);
+  const newSelectedx = selectedItems.map((item) => ({
+    agent: item.id,
+    fonction: informationsSelectionnees,
+    contrat: id
+  }));
+  setSelectedx(selectedx.concat(newSelectedx));
+  setSelectedData([...selectedData, ...selectedItems]);
 
-  try {
-    const response = await axios.get(`${DOMAIN}/api/admin/fonctionDetail/${functionId}`);
-    const selectedFunctionDetails = response.data;
-    setSelectedFunctionDetails(selectedFunctionDetails);
-
-    const newData = selectedx.map((item) => ({
-      ...item,
-      prix: selectedFunctionDetails.prix,
-      salaire: selectedFunctionDetails.salaire,
-      avantages: selectedFunctionDetails.avantages,
-      horaire_conge: selectedFunctionDetails.horaire_conge,
-    }));
-    setSelectedx(newData);
-  } catch (error) {
-    console.log(error);
-  } 
+  selectedx.map((dd) => {
+     axios
+      .post(`${DOMAIN}/api/admin/affectations`, {
+        fonction_id: dd.fonction,
+        emploie_id: dd.agent,
+        contrat_id: dd.contrat
+      })
+      axios.put(`${DOMAIN}/api/admin/employeFonctionPut/${dd.agent}`,{
+          contrat_id : dd.contrat
+      })
+      .then((response) => {
+        Swal.fire({
+          title: 'Success',
+          text: 'Affectation réussie!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+        navigate('/affectation');
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: 'Error',
+          text: error.message,
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      });
+  });
 };
+
 
   return (
     <>
@@ -229,7 +219,7 @@ const functionId = event.target.value;
                     <Fade in={open}>
                         <Box sx={style}>
                             <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
-                              <FormAdd handleClose={handleClose}/>
+                              <FormAdd handleClose={handleClose} contratId={selected} employeesId={id} />
                             </Box>
                         </Box>
                     </Fade>

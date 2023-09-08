@@ -7,6 +7,12 @@
     gap: 20px;
     border-radius: 5px;
     padding: 10px;
+    .client-h2 {
+        font-size: 1.4rem;
+        color: #555555;
+        border-bottom: 1px solid #b4b4b4;
+        padding-bottom: 10px;
+    }
     .clientForm-wrapper{
         display: flex;
         align-items: center;

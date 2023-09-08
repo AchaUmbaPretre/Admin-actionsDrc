@@ -41,22 +41,8 @@ const MissiAff = () => {
     { id: 5, start_time: '', end_time: '' },
     { id: 6, start_time: '', end_time: '' },
     { id: 7, start_time: '', end_time: '' },
-    { id: 8, start_time: '', end_time: '' },
   ])
   const clientId = searchParams.get('client_id');
-
-/*   const handleTimeChange = (id, field, value) => {
-    const updatedTable = [id, field, value];
-    const index = updatedTable.findIndex((item) => item.id === id);
-
-
-    if (index !== -1) {
-      updatedTable[index][field] = value;
-    }
-
-    setHoraireTables(updatedTable);
-    console.log(updatedTable)
-  }; */
 
   const handleTimeChange = (id, field, value) => {
     setHoraireTables((prevData) =>
@@ -317,28 +303,6 @@ const MissiAff = () => {
                       <DataGrid rows={missionWeek} columns={horaireTable} pageSize={10} checkboxSelection />
                     </div>
                   </div>
-{/*                   <div className="personnel-date">
-                    <h2 className='personnel-bottom-title-h'>Heure <span>*</span></h2>
-                    <div className="personnel-rows-bttm">
-                      <label htmlFor="">Heure de début:</label>
-                      <input
-                        className='person-time-input'
-                        type="time"
-                        value={heureDebut}
-                        onChange={(e) => setHeureDebut(e.target.value)}
-                      />
-
-                      <div className="personnel-rows-bttm">
-                        <label htmlFor="">Heure de la fin:</label>
-                        <input
-                          className='person-time-input'
-                          type="time"
-                          value={heureFin}
-                          onChange={(e) => setHeureFin(e.target.value)}
-                        />
-                      </div>
-                    </div>
-                  </div> */}
                   <button className="person-btn" onClick={handleClick} >Envoyer</button>
             </div>
           </div>

@@ -110,12 +110,28 @@ const Contrats = () => {
         headerName: 'Action',
         width: 160,
         renderCell: (params) => {
+          const handleEdit = () => {
+            Swal.fire({
+              title: 'Confirmation',
+              text: 'Voulez-vous vraiment modifier ?',
+              icon: 'question',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Oui',
+              cancelButtonText: 'Non',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                navigate(`/editContrat/${params.row.id}`);
+              }
+            });
+          }
           return (
             <>
               <div className="table-icons-row">
               
                 <div className="userOvert0">
-                  <Link to={`/editContrat/${params.row.id}`}>
+                  <Link onClick={handleEdit}>
                     <EditOutlined className="userListBtn" />
                     <span className='userOvert'>Modifier</span>
                   </Link>

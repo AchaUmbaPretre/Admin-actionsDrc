@@ -56,8 +56,6 @@ const ContratFonction = ({handleModalClose}) => {
           fetchData();
         }, []);
 
-    console.log('bonjour', data)
-
   const handleClick = async (e) => {
     e.preventDefault();
     handleModalClose()
@@ -74,7 +72,7 @@ const ContratFonction = ({handleModalClose}) => {
         confirmButtonText: 'OK'
       });
 
-      navigate('/contrats');
+      navigate('/fonction');
     } catch (err) {
       Swal.fire({
         title: 'Error',
@@ -91,6 +89,7 @@ const ContratFonction = ({handleModalClose}) => {
   return (
     <>
       <div className="clientForm">
+        <h2 className="client-h2">Formulaire de Fonction</h2>
         <div className="clientForm-wrapper">
           <form action="" className="form-center">
             <div className="form-rows">

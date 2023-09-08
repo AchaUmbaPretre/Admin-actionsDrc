@@ -6,7 +6,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import config from './../../../../config';
 
-const FormAdd = ({handleClose}) => {
+const FormAdd = ({handleClose, contratId, employeesId}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [clientEtat, setClientEtat] = useState([]);
   const [data, setData] = useState(null);
@@ -16,9 +16,19 @@ const FormAdd = ({handleClose}) => {
   const navigate = useNavigate();
 
   const handleChange = (value, name) => {
-    const formattedValue = value.charAt(0).toUpperCase() + value.slice(1);
+    let formattedValue = value;
+  
+    if (typeof value === 'string' && value.length > 0) {
+      formattedValue = value.charAt(0).toUpperCase() + value.slice(1);
+    }
+  
     setData((prev) => ({ ...prev, [name]: formattedValue }));
   };
+
+  console.log(data)
+
+  console.log(contratId,employeesId)
+
   useEffect(()=>{
 
     const fetchDatas = async ()=> {
@@ -33,51 +43,75 @@ const FormAdd = ({handleClose}) => {
     fetchDatas()
  }, [])
 
-  const handleClick = async (e) => {
-    e.preventDefault();
-    handleClose()
-
+ useEffect(() => {
+  const fetchData = async () => {
     try {
-      await axios.post(`${DOMAIN}/api/admin/statusContratInfo`, data);
-
-      Swal.fire({
-        title: 'Success',
-        text: 'Contrat créé avec succès!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
-
-      navigate('/contrats');
-    } catch (err) {
-      Swal.fire({
-        title: 'Error',
-        text: err.message,
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
-
-      console.log(err);
+      const res = await axios.get(`${DOMAIN}/api/admin/competence`);
+      setCompetenceOption(res.data);
+    } catch (error) {
+      console.log(error);
     }
-   
   };
+  fetchData();
+}, []);
+
+const handleClick = async (e) => {
+  e.preventDefault();
+  handleClose()
+  try {
+    const employeesArray = Array.from(employeesId)
+    employeesArray?.map((dd)=>{
+
+       axios.post(`${DOMAIN}/api/admin/ContratInfo`,{
+          ...data
+        });
+      
+        axios.post(`${DOMAIN}/api/admin/affectations`, {
+          fonction_id: dd.fonction,
+          emploie_id: dd.agent,
+          contrat_id: contratId
+        })
+        
+        axios.put(`${DOMAIN}/api/admin/employeFonctionPut/${dd.agent}`,{
+          contrat_id : dd.contrat
+      })
+    })
+
+    Swal.fire({
+      title: 'Success',
+      text: 'Contrat créé avec succès!',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
+
+    navigate('/fonction');
+  } catch (err) {
+    Swal.fire({
+      title: 'Error',
+      text: err.message,
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+
+    console.log(err);
+  }
+ 
+};
+
+
 
   return (
     <>
-      <div className="clientForm">
+              <div className="clientForm">
+        <h2 className="client-h2">Formulaire de Fonction</h2>
         <div className="clientForm-wrapper">
           <form action="" className="form-center">
             <div className="form-rows">
               <div className="form-row">
                 <label htmlFor="" className="label-form">Competence<span>*</span></label>
-                <select name="" id="" className="input-form" onChange={(e) => handleChange(e.target.value, "nom")}>
-                  <option >selectionnez la compétence</option>
-                    {selectData?.map(item =>( 
-                  <option value={item.id}>{item.nom}</option>
-                                ))}
-                </select>
                 <Select
                   name="skills"
-                  onChange={(e) => handleChange(e.target.value, "skills")}
+                  onChange={(selectedOption) => handleChange(selectedOption.value, "skills")}
                   options={competenceOption.map((item) => ({
                     value: item.id,
                     label: item.nom
