@@ -48,6 +48,8 @@ import FaturationPdf from './pages/faturation/FaturationPdf';
 import Horaire from './pages/horaire/Horaire';
 import AffView from './pages/affectation/affView.jsx/AffView';
 import FormAdd from './pages/contrats/addContrat/formAdd/FormAdd';
+import ContratFonction from './pages/contrats/contratFonction/ContratFonction';
+import Fonctions from './pages/fonctions/Fonctions';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -124,6 +126,10 @@ function App() {
           element: <FormAdd />
         },
         {
+          path: '/contratFonction/:id',
+          element: <ContratFonction />
+        },
+        {
           path: '/contratsPdf',
           element: <ContratPdf />
         },
@@ -138,6 +144,10 @@ function App() {
         {
           path: '/affectations/:id',
           element: <AffView />
+        },
+        {
+          path: '/fonction',
+          element: <Fonctions />
         },
         {
           path: '/presence',

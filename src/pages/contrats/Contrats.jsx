@@ -249,7 +249,7 @@ const Contrats = () => {
                     <Fade in={open}>
                         <Box sx={style}>
                             <Box component="form" sx={{'& > :not(style)': { m: 1, width: '300ch' }, display:'flex', flexWrap:'wrap'}} noValidate autoComplete="off">
-                              <ContratForm handleClose={handleClose}/>
+                              <ContratForm handleClose={handleClose} />
                             </Box>
                         </Box>
                     </Fade>

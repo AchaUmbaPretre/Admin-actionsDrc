@@ -31,10 +31,6 @@ const style = {
 const AddContrat = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const navigate = useNavigate();
-  const HandleDelete = (id) => {
-    const dataFilter = data.filter(item => item.id !== id)
-    setData(dataFilter)
-  }
   const [selectData, setSelectData] = useState();
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
@@ -90,6 +86,7 @@ const AddContrat = () => {
     }
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -131,6 +128,8 @@ const AddContrat = () => {
     });
   };
 
+  console.log(selected, id)
+
     useEffect(() => {
 
     const fetchData = async () => {
@@ -156,7 +155,7 @@ const AddContrat = () => {
 
     const fetchDatas = async ()=> {
         try{
-            const {data} = await axios.get(`${DOMAIN}/api/admin/fonction`);
+            const {data} = await axios.get(`${DOMAIN}/api/admin/ContratInfo/${id}`);
             setSelectData(data)
     
           }catch(error){
@@ -209,7 +208,6 @@ const functionId = event.target.value;
               <span className="contrats-span"></span>
             </div>
           </div>
-          <button className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon />Ajouter</button>
         </div>
         <div className="add-rows">
           <div className="add-row1">
@@ -257,17 +255,17 @@ const functionId = event.target.value;
                             Avantage : {information.avantages}
                           </div>
                           <div>
-                            Prix : {information.prix}
+                            Prix : {information.prix} $
                           </div>
                           <div>
-                            Salaire : {information.salaire}
+                            Salaire : {information.salaire} $
                           </div>
                         </div>
                     </label>
                   </div>
                 ))}
                   <div className="rows-btn">
-                    <button onClick={''}>Envoyer</button>
+                    <button onClick={handleSubmit}>Envoyer</button>
                     <button onClick={handleOpen} className='ajouter'>Ajouter tes info</button>
                 </div>
                 </div>

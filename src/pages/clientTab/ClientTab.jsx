@@ -3,7 +3,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { DataGrid } from '@mui/x-data-grid'
 import { Link } from 'react-router-dom';
-import { DeleteOutline} from '@mui/icons-material';
+import { AddCircleOutline, DeleteOutline} from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { useEffect, useState } from 'react';
@@ -43,6 +43,7 @@ const ClientTab = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'company_name', headerName: "Compagnie", width: 120 },
@@ -81,7 +82,6 @@ const ClientTab = () => {
                 <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
             </div>
           </>
-
         )
     }},
   ];
@@ -191,6 +191,7 @@ const ClientTab = () => {
               </Box>
             </Fade>
           </Modal>
+
           </div>
           {loading ? (
           <div className="spinner-container">

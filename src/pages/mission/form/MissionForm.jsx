@@ -61,13 +61,7 @@ const MissionForm = ({handleModalClose}) => {
     e.preventDefault();
     handleModalClose()
     try {
-/*       await axios.post(`${DOMAIN}/api/admin/missions`, data);
-      Swal.fire({
-        title: 'Success',
-        text: 'Mission créée avec succès!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      }); */
+
       const params = new URLSearchParams();
       Object.entries(data).forEach(([key, value]) => {
         params.append(key, value);
