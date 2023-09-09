@@ -13,7 +13,13 @@ const ClientForm = ({handleModalClose}) => {
   const navigate = useNavigate();
   const [data, setData] = useState({});
   const [provinces, setProvinces] = useState([])
-  const [pays, setPays] = useState([])
+  const [pays, setPays] = useState([]);
+  const [site, setSite] = useState([]);
+  const [inputVisible, setInputVisible] = useState(false);
+
+  const handleLabelClick = () => {
+    setInputVisible(!inputVisible);
+  };
 
   const handleChange = (e) => {
     const fieldName = e.target.name;
@@ -84,6 +90,8 @@ const ClientForm = ({handleModalClose}) => {
       console.log(error);
     }
   };
+
+  console.log(site)
 
   return (
     <>
@@ -161,8 +169,11 @@ const ClientForm = ({handleModalClose}) => {
                     <label htmlFor="" className="label-form">APR<span>*</span></label>
                     <input type="text" name='apr' className="input-form" onChange={handleChange} />
                   </div>
-                </div>
-                        
+                  <div className="form-row">
+                    { !inputVisible ? <label htmlFor="" className="label-form" onClick={handleLabelClick} style={{ cursor: "pointer" }}>Cliquez ici pour ajouter des Sites<span>*</span></label>:<label htmlFor="" className="label-form">Sites<span>*</span></label>}
+                    {inputVisible && (<input type="text" name='site' className="input-form" onChange={(e)=>setSite(e.target.value)} /> )}
+                  </div>
+                </div>  
                 <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>
               </form>
             </div>
