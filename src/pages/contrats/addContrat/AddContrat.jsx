@@ -25,7 +25,7 @@ const style = {
   bgcolor: 'background.paper',
   border: '1px solid #FFF',
   boxShadow: 24,
-  p: 2,
+  p: 4,
   borderRadius: 2,
   outline: 'none'
 }
@@ -110,7 +110,6 @@ const AddContrat = () => {
     fetchData()
   }, [])
 
-  console.log(selected, id)
 
     const filteredEmployees = data.filter((employee) => {
       if (selectedFunctionDetails) {
@@ -219,7 +218,7 @@ const handleSubmit = async (e) => {
                     <Fade in={open}>
                         <Box sx={style}>
                             <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
-                              <FormAdd handleClose={handleClose} contratId={selected} employeesId={id} />
+                              <FormAdd handleClose={handleClose} contratId={selected} employeesId={id} fonction={informationsSelectionnees} />
                             </Box>
                         </Box>
                     </Fade>

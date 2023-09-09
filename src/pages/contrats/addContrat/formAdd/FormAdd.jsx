@@ -6,12 +6,13 @@ import axios from 'axios';
 import Select from 'react-select';
 import config from './../../../../config';
 
-const FormAdd = ({handleClose, contratId, employeesId}) => {
+const FormAdd = ({handleClose, contratId, employeesId,fonction}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [clientEtat, setClientEtat] = useState([]);
   const [data, setData] = useState(null);
   const [selectData, setSelectData] = useState([]);
   const [competenceOption, setCompetenceOption] = useState([]);
+  const [selectedx, setSelectedx] = useState([]);
 
   const navigate = useNavigate();
 
@@ -55,25 +56,32 @@ const FormAdd = ({handleClose, contratId, employeesId}) => {
   fetchData();
 }, []);
 
-const handleClick = async (e) => {
+const employeesArray = Array.from(employeesId)
+employeesArray.map((dd)=>{console.log(dd)})
+const skill = data?.skills;
+
+const handleClick =  (e) => {
   e.preventDefault();
   handleClose()
+
   try {
     const employeesArray = Array.from(employeesId)
-    employeesArray?.map((dd)=>{
-
-       axios.post(`${DOMAIN}/api/admin/ContratInfo`,{
-          ...data
+    employeesArray.map((dd)=>{
+      console.log(dd)
+       axios.post(`${DOMAIN}/api/admin/contratEmploie`,{
+          ...data,
+          emploie_id: dd,
+          contrat_id: contratId
         });
       
         axios.post(`${DOMAIN}/api/admin/affectations`, {
-          fonction_id: dd.fonction,
-          emploie_id: dd.agent,
+          fonction_id: skill,
+          emploie_id: dd,
           contrat_id: contratId
         })
         
         axios.put(`${DOMAIN}/api/admin/employeFonctionPut/${dd.agent}`,{
-          contrat_id : dd.contrat
+          contrat_id : contratId
       })
     })
 

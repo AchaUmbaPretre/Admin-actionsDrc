@@ -61,7 +61,6 @@ const FactureForm = ({handleModalClose}) => {
   fetchData()
   }, [])
 
-  console.log('bonjour')
   
 
   const handleClick = async (e) => {
