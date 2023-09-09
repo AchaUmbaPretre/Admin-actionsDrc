@@ -149,7 +149,6 @@ const Personnel = () => {
                     <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
                 </div>
               </>
-    /*  */
             )
         }},
       ];

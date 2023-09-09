@@ -62,14 +62,17 @@ const ClientForm = ({handleModalClose}) => {
   fetchData()
 }, [])
 
-
+console.log(site)
   const handleClick = async (e) => {
     e.preventDefault();
     handleModalClose();
   
     try {
-      await axios.post(`${DOMAIN}/api/admin/clientPost`, data);
-  
+/*       await axios.post(`${DOMAIN}/api/admin/clientPost`, data); */
+      await axios.post(`${DOMAIN}/api/admin/sites`, {
+        nom_site : site
+      });
+
       await Swal.fire({
         title: 'Success',
         text: 'Client créé avec succès!',
@@ -91,7 +94,6 @@ const ClientForm = ({handleModalClose}) => {
     }
   };
 
-  console.log(site)
 
   return (
     <>
@@ -170,9 +172,29 @@ const ClientForm = ({handleModalClose}) => {
                     <input type="text" name='apr' className="input-form" onChange={handleChange} />
                   </div>
                   <div className="form-row">
-                    { !inputVisible ? <label htmlFor="" className="label-form" onClick={handleLabelClick} style={{ cursor: "pointer" }}>Cliquez ici pour ajouter des Sites<span>*</span></label>:<label htmlFor="" className="label-form">Sites<span>*</span></label>}
-                    {inputVisible && (<input type="text" name='site' className="input-form" onChange={(e)=>setSite(e.target.value)} /> )}
-                  </div>
+                  {!inputVisible ? (
+                    <label
+                      htmlFor=""
+                      className="label-form"
+                      onClick={handleLabelClick}
+                      style={{ cursor: "pointer" }}
+                    >
+                      Cliquez ici pour ajouter des Sites<span>*</span>
+                    </label>
+                  ) : (
+                    <label htmlFor="" className="label-form">
+                      Sites<span>*</span>
+                    </label>
+                  )}
+                  {inputVisible && (
+                    <input
+                      type="text"
+                      name="nom_site"
+                      className="input-form"
+                      onChange={(e) => setSite(e.target.value)}
+                    />
+                  )}
+                </div>
                 </div>  
                 <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>
               </form>

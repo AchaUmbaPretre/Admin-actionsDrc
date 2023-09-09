@@ -20,7 +20,7 @@ const Sidebar = () => {
         <div className="sidebar">
           <div className="sidebar-wrapper">
             <div className="sidebar-imgs">
-              <img src={actions} alt="" className='sidenav-img' />
+              <img src={actions} alt="" className='sidenav-img'/>
             </div>
             <ul className="sidebar-ul">
               <li className={`sidenav-li ${activeItem === 'Accueil' ? 'active' : ''}`}><HomeIcon className='sidebar-icon'/><Link to="/" onClick={() => setActiveItem('Accueil')}>Accueil</Link></li>
@@ -33,7 +33,7 @@ const Sidebar = () => {
 {/*               <li className={`sidenav-li ${activeItem === 'Horaires de travail' ? 'active' : ''}`}><AccessTimeIcon className='sidebar-icon'/><Link to={"/horaireAll"} onClick={() => setActiveItem('Horaires de travail')}>Horaires de travail</Link></li> */}
               <li className={`sidenav-li ${activeItem === 'Presence' ? 'active' : ''}`}><ChecklistRtlIcon className='sidebar-icon'/><Link to={"/presence"} onClick={() => setActiveItem('Presence')}>Presence</Link></li>
               <li className={`sidenav-li ${activeItem === 'Facturation' ? 'active' : ''}`}><FactCheckIcon className='sidebar-icon'/><Link to={"/facturation"} onClick={() => setActiveItem('Facturation')}>Facturation</Link></li>
-              <li className={`sidenav-li ${activeItem === 'Payement' ? 'active' : ''}`}><AttachMoneyIcon className='sidebar-icon'/><Link to={"/payement"} onClick={() => setActiveItem('Payement')}>Payement</Link></li>
+              <li className={`sidenav-li ${activeItem === 'Payement' ? 'active' : ''}`}><AttachMoneyIcon className='sidebar-icon'/><Link to={"/payement"} onClick={() => setActiveItem('Payement')}>Paiement</Link></li>
 {/*               <li className="sidenav-li"><FormatListNumberedIcon className='sidebar-icon'/><Link to={"/listeConge"}>Liste de congé</Link></li> */}
             </ul>
           </div>

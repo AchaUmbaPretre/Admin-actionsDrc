@@ -45,13 +45,12 @@ const ClientTab = () => {
 
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'company_name', headerName: "Compagnie", width: 120 },
+    { field: 'company_name', headerName: "Compagnie", width: 140 },
 
     {
       field: 'address',
       headerName: 'Adresse',
-      width: 130 
+      width: 150 
     },
     {
         field: 'phone_number',
@@ -61,7 +60,7 @@ const ClientTab = () => {
     {
         field: 'contact_name',
         headerName: "Nom du contact principal",
-        width: 130 
+        width: 140 
     },
     {
       field: 'contact_email',
