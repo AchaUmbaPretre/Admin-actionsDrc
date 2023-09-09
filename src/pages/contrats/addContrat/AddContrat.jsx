@@ -96,6 +96,7 @@ const AddContrat = () => {
     }
   };
 
+
     useEffect(() => {
 
     const fetchData = async () => {
@@ -218,7 +219,7 @@ const handleSubmit = async (e) => {
                     <Fade in={open}>
                         <Box sx={style}>
                             <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
-                              <FormAdd handleClose={handleClose} contratId={selected} employeesId={id} fonction={informationsSelectionnees} />
+                              <FormAdd handleClose={handleClose} contratId={id} employeesId={selected} fonction={informationsSelectionnees} />
                             </Box>
                         </Box>
                     </Fade>

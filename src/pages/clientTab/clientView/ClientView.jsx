@@ -42,11 +42,11 @@ const ClientView = () => {
                         </div>
                         <div className="client-row">
                             <span className="client-nom"><MapsHomeWorkOutlined/> Ville :</span>
-                            <span className="client-nom">{data.company_name}</span>
+                            <span className="client-nom">{data.province}</span>
                         </div>
                         <div className="client-row">
                             <span className="client-nom"><MapsHomeWorkOutlined/> Pays :</span>
-                            <span className="client-nom">{data.company_name}</span>
+                            <span className="client-nom">{data.pays}</span>
                         </div>
                         <div className="client-row">
                             <span className="client-nom"><PasswordOutlined/>  Rccm :</span>
@@ -66,7 +66,7 @@ const ClientView = () => {
                             <span className="client-nom">{data.phone_number}</span>
                         </div>
                         <div className="client-row">
-                            <span className="client-nom"><PhoneAndroidOutlined/> Tel du contact principal :</span>
+                            <span className="client-nom"><PhoneAndroidOutlined/> Nom du contact principal :</span>
                             <span className="client-nom">{data.contact_name}</span>
                         </div>
 

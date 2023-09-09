@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import config from '../../../config';
 import Swal from 'sweetalert2';
-import { components } from 'react-select';
 import Select from 'react-select';
 
 
@@ -15,8 +14,20 @@ const ClientForm = ({handleModalClose}) => {
   const [data, setData] = useState({});
   const [provinces, setProvinces] = useState([])
   const [pays, setPays] = useState([])
+
   const handleChange = (e) => {
-    setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const fieldName = e.target.name;
+    const fieldValue = e.target.value;
+  
+    let updatedValue = fieldValue;
+  
+    if (fieldName === "contact_email") {
+      updatedValue = fieldValue.toLowerCase();
+    } else if (Number.isNaN(Number(fieldValue))) {
+      updatedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
+    }
+  
+    setData((prev) => ({ ...prev, [fieldName]: updatedValue }));
   };
 
   useEffect(()=>{
@@ -59,6 +70,7 @@ const ClientForm = ({handleModalClose}) => {
         icon: 'success',
         confirmButtonText: 'OK'
       });
+      window.location.reload();
   
       navigate('/client');
     } catch (error) {
@@ -92,33 +104,38 @@ const ClientForm = ({handleModalClose}) => {
                 <div className="form-rows">
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Tel entreprise<span>*</span></label>
-                    <input type="number"  name='phone_number' className="input-form" onChange={handleChange} />
+                    <input
+                        type="tel"
+                        name="phone_number"
+                        className="input-form"
+                        onChange={handleChange}  
+                    />
                   </div>
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Nom du contact principal<span>*</span></label>
-                    <input type="text"  name='contact_name' className="input-form" onChange={handleChange} />
+                    <input type="tel"  name='contact_name' className="input-form" onChange={handleChange} />
                   </div>
                 </div>
 
                 <div className="form-rows">
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Email<span>*</span></label>
-                    <input type="text" name='contact_email' className="input-form" onChange={handleChange}  />
+                    <input type='email' pattern=".+@globex\.com" size="30" required name='contact_email' className="input-form" onChange={handleChange}  />
                   </div>
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Tel principal<span>*</span></label>
-                    <input type="number" name='contact_phone' className="input-form" onChange={handleChange} />
+                    <input type="tel" name='contact_phone' className="input-form" onChange={handleChange} />
                   </div>
                 </div>
 
                 <div className="form-rows">
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Rccm<span>*</span></label>
-                    <input type="number" name='rccm' className="input-form" onChange={handleChange} />
+                    <input type="text" name='rccm' className="input-form" onChange={handleChange} />
                   </div>
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Id nate<span>*</span></label>
-                    <input type="number" name='idnate' className="input-form" onChange={handleChange} />
+                    <input type="text" name='idnate' className="input-form" onChange={handleChange} />
                   </div>
                 </div>
                 <div className="form-rows">

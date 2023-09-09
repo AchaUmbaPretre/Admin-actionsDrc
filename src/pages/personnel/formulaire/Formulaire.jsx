@@ -38,9 +38,17 @@ const Formulaire = ({handleModalClose}) => {
       };
       
       const handleChange = (e) => {
-        setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-      };
-      console.log(data)
+        const fieldName = e.target.name;
+        const fieldValue = e.target.value;
+      
+        if (Number.isNaN(Number(fieldValue))) {
+          const capitalizedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
+          setData((prev) => ({ ...prev, [fieldName]: capitalizedValue }));
+        } else {
+          setData((prev) => ({ ...prev, [fieldName]: fieldValue }));
+        }
+      }
+
       const handlePhotoSubmit = async () => {
 
         handleModalClose()

@@ -125,15 +125,31 @@ const Personnel = () => {
           width: 120,
         },
         {field: 'action', HeaderName: 'Action', width: 130, renderCell: (params) =>{
+          const handleEdit = () => {
+            Swal.fire({
+              title: 'Confirmation',
+              text: 'Voulez-vous vraiment modifier ?',
+              icon: 'question',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Oui',
+              cancelButtonText: 'Non',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                navigate(`/edit/${params.row.id}`);
+              }
+            });
+          }
             return(
               <>
                 <div className="table-icons-row">
-                    <Link to={`/edit/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
+                    <Link onClick={handleEdit}><ModeEditOutlineIcon className='userListBtn'/></Link>
                     <VisibilityIcon className='userEye' onClick={() => navigate(`/views/${params.row.id}`)} />
                     <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
                 </div>
               </>
-    
+    /*  */
             )
         }},
       ];

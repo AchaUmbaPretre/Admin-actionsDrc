@@ -26,9 +26,6 @@ const FormAdd = ({handleClose, contratId, employeesId,fonction}) => {
     setData((prev) => ({ ...prev, [name]: formattedValue }));
   };
 
-  console.log(data)
-
-  console.log(contratId,employeesId)
 
   useEffect(()=>{
 
@@ -66,16 +63,14 @@ const handleClick =  (e) => {
 
   try {
     const employeesArray = Array.from(employeesId)
-    employeesArray.map((dd)=>{
-      console.log(dd)
+    
        axios.post(`${DOMAIN}/api/admin/contratEmploie`,{
           ...data,
-          emploie_id: dd,
           contrat_id: contratId
         });
-      
+      employeesArray.map((dd)=>{
         axios.post(`${DOMAIN}/api/admin/affectations`, {
-          fonction_id: skill,
+          fonction_id: fonction,
           emploie_id: dd,
           contrat_id: contratId
         })
