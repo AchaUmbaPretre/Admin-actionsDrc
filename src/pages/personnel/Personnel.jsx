@@ -89,7 +89,7 @@ const Personnel = () => {
 };
 
     const columns = [
-        { field: 'first_name', headerName: 'Nom', width: 100, renderCell: (params) =>{
+        { field: 'first_name', headerName: 'Nom', width: 130, renderCell: (params) =>{
           return <div className="userList">
                     <img src={params.row.source ? `../upload/${params.row.source}`: userImg} alt="" className="userImg" />
                     {params.row.first_name}
@@ -144,9 +144,18 @@ const Personnel = () => {
             return(
               <>
                 <div className="table-icons-row">
-                    <Link onClick={handleEdit}><ModeEditOutlineIcon className='userListBtn'/></Link>
-                    <VisibilityIcon className='userEye' onClick={() => navigate(`/views/${params.row.id}`)} />
-                    <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
+                    <div className="userOvert0">
+                      <Link onClick={handleEdit}><ModeEditOutlineIcon className='userListBtn'/></Link>
+                      <span className='userOvert'>Modifier</span>
+                    </div>
+                    <div className="userOvert1">
+                      <VisibilityIcon className='userEye' onClick={() => navigate(`/views/${params.row.id}`)} />
+                      <span className='userOvert'>détail</span>
+                    </div>
+                    <div className="userOvert2">
+                      <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
+                      <span className='userOvert'>Supprimer</span>
+                    </div>
                 </div>
               </>
             )

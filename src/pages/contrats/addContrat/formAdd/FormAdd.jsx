@@ -55,37 +55,40 @@ const FormAdd = ({handleClose, contratId, employeesId,fonction}) => {
 
 const employeesArray = Array.from(employeesId)
 employeesArray.map((dd)=>{console.log(dd)})
-const skill = data?.skills;
 
-const handleClick =  (e) => {
+const handleClick = async (e) => {
   e.preventDefault();
-  handleClose()
+  handleClose();
 
   try {
-    const employeesArray = Array.from(employeesId)
-    
-       axios.post(`${DOMAIN}/api/admin/contratEmploie`,{
-          ...data,
-          contrat_id: contratId
-        });
-      employeesArray.map((dd)=>{
-        axios.post(`${DOMAIN}/api/admin/affectations`, {
-          fonction_id: fonction,
+    const contratEmploieResponse = await axios.post(`${DOMAIN}/api/admin/contratEmploie`, {
+      ...data,
+      contrat_id: contratId,
+    });
+
+    const contratEmploieId = contratEmploieResponse.data.contratEmploieId;
+
+    await Promise.all(
+      employeesArray.map(async (dd) => {
+        await axios.post(`${DOMAIN}/api/admin/affectations`, {
+          fonction_clientId: contratEmploieId,
           emploie_id: dd,
-          contrat_id: contratId
-        })
-        
-        axios.put(`${DOMAIN}/api/admin/employeFonctionPut/${dd.agent}`,{
-          contrat_id : contratId
+          contrat_id: contratId,
+        });
+
+        await axios.put(`${DOMAIN}/api/admin/employeFonctionPut/${dd}`, {
+          contrat_id: contratEmploieId,
+        });
       })
-    })
+    );
 
     Swal.fire({
       title: 'Success',
       text: 'Contrat créé avec succès!',
       icon: 'success',
-      confirmButtonText: 'OK'
+      confirmButtonText: 'OK',
     });
+
     window.location.reload();
     navigate('/fonction');
   } catch (err) {
@@ -93,12 +96,11 @@ const handleClick =  (e) => {
       title: 'Error',
       text: err.message,
       icon: 'error',
-      confirmButtonText: 'OK'
+      confirmButtonText: 'OK',
     });
 
     console.log(err);
   }
- 
 };
 
 

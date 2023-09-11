@@ -61,7 +61,7 @@ const Affectation = () => {
           <>
             <div className="table-icons-row">
                 <div className="userOvert1">
-                    <VisibilityOutlined className='userEye' onClick={() => navigate(`/affectations/${params.row.id}`)} />
+                    {/* <VisibilityOutlined className='userEye' onClick={() => navigate(`/affectations/${params.row.id}`)} /> */}
                   <span className='userOvert'>détail</span>
                 </div>
                 <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
@@ -149,7 +149,6 @@ const exportToExcel = () => {
               </div>
           </div>
           <div className="personPdf">
-            <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
             <Link className="personnel-btn-pdf" onClick={() => navigate('/personpdfTable')}><PictureAsPdfIcon/>Pdf</Link>
             <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
           </div>

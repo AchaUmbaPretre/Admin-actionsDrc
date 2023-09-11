@@ -1,8 +1,9 @@
-import { Document, PDFViewer, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
+import { Document, PDFViewer, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
 import React, { useEffect, useState } from 'react';
 import config from '../../../config';
 import axios from 'axios';
 import moment from 'moment';
+import logo from '../../../assets/actionssarl.PNG'
 
 const MissionPdf = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -12,46 +13,55 @@ const MissionPdf = () => {
     const spinnerDuration = 2000;
 
     const styles = StyleSheet.create({
-        page: {
-          fontFamily: 'Helvetica',
+      page: {
+        fontFamily: 'Helvetica',
+        padding: 10,
+        flex: 1,
+      },
+      title: {
+        fontSize: 14,
+        marginBottom: 20,
+        textAlign: "center"
+      },
+      table: {
+        width: '100%',
+        marginBottom: 10,
+        borderCollapse: 'collapse',
+      },
+      tableHeader: {
+        backgroundColor: '#f2f2f2',
+        fontWeight: 200,
+        fontSize: 12,
+        padding: 5,
+      },
+      tableRow: {
+        flexDirection: 'row',
+        borderBottom: "1px solid #c5c5c5"
+      },
+      tableCell: {
+        padding: 10,
+        width: 100,
+        fontWeight: 200,
+        fontSize: 11,
+        width: '100%',
+      },
+      tableCells: {
           padding: 10,
-          flex: 1,
-        },
-        title: {
-          fontSize: 14,
-          marginBottom: 20,
-          textAlign: "center"
-        },
-        table: {
-          width: '100%',
-          marginBottom: 10,
-          borderCollapse: 'collapse',
-        },
-        tableHeader: {
-          backgroundColor: '#f2f2f2',
           fontWeight: 200,
-          fontSize: 12,
-          padding: 5,
+          fontSize: 11,
+          width: '40%',
         },
-        tableRow: {
-          flexDirection: 'row',
-          borderBottom: "1px solid #c5c5c5"
+        imgFlex:{
+          display: 'flex',
         },
-        tableCell: {
-          padding: 10,
-          width: 100,
-          fontWeight: 200,
-          fontSize: 10,
-          width: '100%',
+        img:{
+          width: '9%',
         },
-        tableCells: {
-            padding: 10,
-            fontWeight: 200,
-            fontSize: 11,
-            width: '40%',
-          },
-      });
-
+        textTitle:{
+          fontSize:11,
+          textAlign: 'right',
+        },
+    });
       useEffect(()=>{
 
         const fetchData = async ()=> {
@@ -72,12 +82,17 @@ const MissionPdf = () => {
         <PDFViewer style={{ width: '100%', height: '100vh' }}>
             <Document>
                 <Page style={styles.page}>
+                <View style={styles.imgFlex}>
+                  <Image style={styles.img} src={logo} />
+                  <Text style={styles.textTitle}>Le....septembre 2023</Text>
+                </View>
                     <Text style={styles.title}>Liste des missions</Text>
                     <View style={styles.table}>
                         <View style={[styles.tableRow, styles.tableHeader]}>
                             <Text style={styles.tableCells}>N°</Text>
                             <Text style={styles.tableCell}>Client</Text>
                             <Text style={styles.tableCell}>Type de contrat</Text>
+                            <Text style={styles.tableCell}>Jour</Text>
                             <Text style={styles.tableCell}>Date de debut</Text>
                             <Text style={styles.tableCell}>Date de la fin</Text>
                         </View>
@@ -87,6 +102,7 @@ const MissionPdf = () => {
                                 <Text style={styles.tableCells}>{index + 1}</Text>
                                 <Text style={styles.tableCell}>{row.company_name}</Text>
                                 <Text style={styles.tableCell}>{row.first_name}</Text>
+                                <Text style={styles.tableCell}>{row.days}</Text>
                                 <Text style={styles.tableCell}>{row.heureEntrant.substring(0, 5)}</Text>
                                 <Text style={styles.tableCell}>{row.heureSortant.substring(0, 5)}</Text>
                             </View>

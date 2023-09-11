@@ -50,8 +50,15 @@ const PersonTablePdf = () => {
         fontSize: 11,
         width: '40%',
       },
-      img: {
-        width: '40%',
+      imgFlex:{
+        display: 'flex',
+      },
+      img:{
+        width: '9%',
+      },
+      textTitle:{
+        fontSize:11,
+        textAlign: 'right',
       },
   });
 
@@ -75,8 +82,9 @@ const PersonTablePdf = () => {
     <PDFViewer style={{ width: '100%', height: '100vh' }}>
       <Document>
         <Page style={styles.page}>
-          <View>
-            <Text style={styles.tableCells}>10 aout 2021</Text>
+          <View style={styles.imgFlex}>
+            <Image style={styles.img} src={logo} />
+            <Text style={styles.textTitle}>Le....septembre 2023</Text>
           </View>
           <Text style={styles.title}>Liste des personnels</Text>
           <View style={styles.table}>

@@ -1,8 +1,9 @@
-import { Document, PDFViewer, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
+import { Document, PDFViewer, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
 import React, { useEffect, useState } from 'react';
 import config from '../../../config';
 import axios from 'axios';
 import moment from 'moment';
+import logo from '../../../assets/actionssarl.PNG'
 
 const ContratPdf = () => {
 
@@ -42,7 +43,7 @@ const ContratPdf = () => {
         padding: 10,
         width: 100,
         fontWeight: 200,
-        fontSize: 10,
+        fontSize: 11,
         width: '100%',
       },
       tableCells: {
@@ -50,6 +51,16 @@ const ContratPdf = () => {
           fontWeight: 200,
           fontSize: 11,
           width: '40%',
+        },
+        imgFlex:{
+          display: 'flex',
+        },
+        img:{
+          width: '9%',
+        },
+        textTitle:{
+          fontSize:11,
+          textAlign: 'right',
         },
     });
 
@@ -74,6 +85,10 @@ const ContratPdf = () => {
             <PDFViewer style={{ width: '100%', height: '100vh' }}>
                 <Document>
                     <Page style={styles.page}>
+                    <View style={styles.imgFlex}>
+                      <Image style={styles.img} src={logo} />
+                      <Text style={styles.textTitle}>Le....septembre 2023</Text>
+                    </View>
                     <Text style={styles.title}>Liste des contrats</Text>
                     <View style={styles.table}>
                         <View style={[styles.tableRow, styles.tableHeader]}>

@@ -68,7 +68,7 @@ const Formulaire = ({handleModalClose}) => {
             icon: 'success',
             confirmButtonText: 'OK'
           });
-          
+          window.location.reload();
           navigate("/personnel")
          
         } catch (error) {

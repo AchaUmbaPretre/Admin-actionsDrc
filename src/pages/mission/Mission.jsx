@@ -87,7 +87,18 @@ const Mission = () => {
 
       const MyTable = ({ data }) => {
         
-        const groupedData = data.reduce((acc, row) => {
+        const uniqueData = data.filter(
+          (row, index, self) =>
+            index ===
+            self.findIndex(
+              (r) =>
+                r.days === row.days &&
+                r.heureEntrant === row.heureEntrant &&
+                r.heureSortant === row.heureSortant
+            )
+        );
+      
+        const groupedData = uniqueData.reduce((acc, row) => {
           const { first_name, ...rest } = row;
           if (!acc[first_name]) {
             acc[first_name] = {
@@ -111,7 +122,6 @@ const Mission = () => {
                   <TableCell>Jour</TableCell>
                   <TableCell>Heure de début</TableCell>
                   <TableCell>Heure fin</TableCell>
-                  <TableCell>Site</TableCell>
                   <TableCell>Action</TableCell>
                 </TableRow>
               </TableHead>
@@ -144,12 +154,11 @@ const Mission = () => {
               <TableCell>{group.rows[0].days}</TableCell>
               <TableCell>{group.rows[0].heureEntrant.substring(0, 5)}</TableCell>
               <TableCell>{group.rows[0].heureSortant.substring(0, 5)}</TableCell>
-              <TableCell>{group.site}</TableCell>
               <TableCell>
                 <div className="table-icons-row">
-                  <Link to={`/missionEdite/${group.rows[0].id}`}>
+{/*                   <Link to={`/missionEdite/${group.rows[0].id}`}>
                     <ModeEditOutlineIcon className='userListBtn' />
-                  </Link>
+                  </Link> */}
                   <DeleteOutline
                     className="userListDelete"
                     onClick={() => {

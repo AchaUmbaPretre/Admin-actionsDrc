@@ -248,7 +248,7 @@ const MissiAff = () => {
         icon: 'success',
         confirmButtonText: 'OK'
       });
-      window.location.reload();
+
       navigate('/mission');
     } catch (err) {
       Swal.fire({
@@ -270,7 +270,7 @@ const MissiAff = () => {
               <AccessTimeIcon className='contrats-icon'/>
               <div className="contrats-info">
                   <h2 className="contrats-title">Liste des agents  qui sont affectés dans ce contrat</h2>
-                  <span className="contrats-span">Liste agents affectés</span>
+                  <span className="contrats-span">Liste des agents affectés</span>
               </div>
           </div>
           <button className="personnel-btn" onClick={''}><PersonAddAlt1Icon/>Ajouter</button>
