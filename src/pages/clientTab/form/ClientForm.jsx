@@ -21,6 +21,19 @@ const ClientForm = ({handleModalClose}) => {
     setInputVisible(!inputVisible);
   };
 
+  const handleSiteChange = (e) => {
+    const siteArray = e.target.value.split(',');
+
+    const formattedSites = siteArray.map((value) => {
+      const trimmedValue = value.trim();
+      return trimmedValue.charAt(0).toUpperCase() + trimmedValue.slice(1);
+    });
+
+    setSite(formattedSites);
+  };
+
+  console.log(site)
+
   const handleChange = (e) => {
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
@@ -62,16 +75,19 @@ const ClientForm = ({handleModalClose}) => {
   fetchData()
 }, [])
 
-console.log(site)
   const handleClick = async (e) => {
     e.preventDefault();
     handleModalClose();
   
     try {
-/*       await axios.post(`${DOMAIN}/api/admin/clientPost`, data); */
-      await axios.post(`${DOMAIN}/api/admin/sites`, {
-        nom_site : site
-      });
+/*        await axios.post(`${DOMAIN}/api/admin/clientPost`, data); */
+       await Promise.all(
+        site.map((item) =>
+          axios.post(`${DOMAIN}/api/admin/sites`, {
+            nom_site: item.trim()
+          })
+        )
+      );
 
       await Swal.fire({
         title: 'Success',
@@ -191,7 +207,7 @@ console.log(site)
                       type="text"
                       name="nom_site"
                       className="input-form"
-                      onChange={(e) => setSite(e.target.value)}
+                      onChange={handleSiteChange}
                     />
                   )}
                 </div>
