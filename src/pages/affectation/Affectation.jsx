@@ -27,27 +27,32 @@ const Affectation = () => {
  const [loading, setLoading] = useState(true);
 
   const columns = [
-    { field: 'client_nom', headerName: "Client", width: 130 },
-    { field: 'first_name', headerName: "Nom", width: 130 },
+    { field: 'client_nom', headerName: "Client", width: 125 },
+    { field: 'first_name', headerName: "Nom", width: 125 },
     {
       field: 'last_name',
       headerName: "Post-nom",
-      width: 130 
+      width: 125 
     },
     {
       field: 'skills',
       headerName: 'Competence',
-      width: 150 
+      width: 125 
     },
     {
       field: 'salaire',
       headerName: 'Salaire',
-      width: 150,renderCell: (params) => `${params.value} $`
+      width: 125,renderCell: (params) => `${params.value} $`
+    },
+    {
+      field: 'prix',
+      headerName: 'Prix',
+      width: 125,renderCell: (params) => `${params.value} $`
     },
     {
       field: 'end_date',
       headerName: 'Date de la fin',
-      width: 150,
+      width: 130,
       valueGetter: (params) =>
       format(new Date(params.row.end_date), 'dd-MM-yyyy', { locale: fr }),
     },
