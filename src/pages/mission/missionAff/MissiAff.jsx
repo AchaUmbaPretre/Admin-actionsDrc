@@ -189,7 +189,7 @@ const MissiAff = () => {
   useEffect(() => {
     const fetchDatas = async () => {
       try {
-        const {data} = await axios.get(`${DOMAIN}/api/admin/sites`);
+        const {data} = await axios.get(`${DOMAIN}/api/admin/sites/${clientId}`);
         SetSites(data);
       } catch (error) {
         console.log(error);
@@ -248,7 +248,7 @@ const MissiAff = () => {
         icon: 'success',
         confirmButtonText: 'OK'
       });
-  
+      window.location.reload();
       navigate('/mission');
     } catch (err) {
       Swal.fire({

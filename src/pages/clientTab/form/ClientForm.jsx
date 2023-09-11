@@ -80,10 +80,13 @@ const ClientForm = ({handleModalClose}) => {
     handleModalClose();
   
     try {
-/*        await axios.post(`${DOMAIN}/api/admin/clientPost`, data); */
-       await Promise.all(
+      const clientResponse = await axios.post(`${DOMAIN}/api/admin/clientPost`, data);
+      const { clientId } = clientResponse.data;
+      console.log(clientId)
+        await Promise.all(
         site.map((item) =>
           axios.post(`${DOMAIN}/api/admin/sites`, {
+            client_id: clientId,
             nom_site: item.trim()
           })
         )

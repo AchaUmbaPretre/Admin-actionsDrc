@@ -173,6 +173,7 @@ const handleSubmit = async (e) => {
           icon: 'success',
           confirmButtonText: 'OK'
         });
+        window.location.reload();
         navigate('/affectation');
       })
       .catch((error) => {

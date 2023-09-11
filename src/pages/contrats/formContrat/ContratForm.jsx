@@ -44,7 +44,7 @@ const handleChange = (e) => {
         icon: 'success',
         confirmButtonText: 'OK'
       });
-
+      window.location.reload();
       navigate('/contrats');
     } catch (err) {
       Swal.fire({

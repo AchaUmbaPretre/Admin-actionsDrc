@@ -86,7 +86,7 @@ const handleClick =  (e) => {
       icon: 'success',
       confirmButtonText: 'OK'
     });
-
+    window.location.reload();
     navigate('/fonction');
   } catch (err) {
     Swal.fire({

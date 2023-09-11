@@ -111,6 +111,7 @@ const Mission = () => {
                   <TableCell>Jour</TableCell>
                   <TableCell>Heure de début</TableCell>
                   <TableCell>Heure fin</TableCell>
+                  <TableCell>Site</TableCell>
                   <TableCell>Action</TableCell>
                 </TableRow>
               </TableHead>
@@ -143,6 +144,7 @@ const Mission = () => {
               <TableCell>{group.rows[0].days}</TableCell>
               <TableCell>{group.rows[0].heureEntrant.substring(0, 5)}</TableCell>
               <TableCell>{group.rows[0].heureSortant.substring(0, 5)}</TableCell>
+              <TableCell>{group.site}</TableCell>
               <TableCell>
                 <div className="table-icons-row">
                   <Link to={`/missionEdite/${group.rows[0].id}`}>
