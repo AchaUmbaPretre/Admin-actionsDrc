@@ -41,7 +41,10 @@ const Formulaire = ({handleModalClose}) => {
         const fieldName = e.target.name;
         const fieldValue = e.target.value;
       
-        if (Number.isNaN(Number(fieldValue))) {
+        if (fieldName === "email") {
+          const lowercaseValue = fieldValue.charAt(0).toLowerCase() + fieldValue.slice(1);
+          setData((prev) => ({ ...prev, [fieldName]: lowercaseValue }));
+        } else if (Number.isNaN(Number(fieldValue))) {
           const capitalizedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
           setData((prev) => ({ ...prev, [fieldName]: capitalizedValue }));
         } else {
@@ -148,6 +151,8 @@ const Formulaire = ({handleModalClose}) => {
         };
         fetchData();
       }, []);
+
+      console.log(data)
 
   return (
     <>

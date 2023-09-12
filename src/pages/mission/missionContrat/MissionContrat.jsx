@@ -120,6 +120,17 @@ const MissionContrat = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+
+    if (selectedIds.length === 0) {
+      Swal.fire({
+        title: 'Aucun agent n\'est sélectionné',
+        icon: 'warning',
+        text: 'Veuillez sélectionner au moins un agent.',
+        confirmButtonText: 'OK',
+      });
+      return;
+    }
+
     try {
       const selectedAgentIds = selectedIds.join(',');
       const params = new URLSearchParams({
@@ -149,10 +160,9 @@ const MissionContrat = () => {
               <AccessTimeIcon className='contrats-icon'/>
               <div className="contrats-info">
                   <h2 className="contrats-title">Liste des contrats qui sont liés au client...</h2>
-                  <span className="contrats-span">Liste des contrat</span>
+                  <span className="contrats-span">Liste des contrats</span>
               </div>
           </div>
-          <button className="personnel-btn" onClick={''}><PersonAddAlt1Icon/>Ajouter</button>
         </div>
         {loading ? (
         <div className="spinner-container">

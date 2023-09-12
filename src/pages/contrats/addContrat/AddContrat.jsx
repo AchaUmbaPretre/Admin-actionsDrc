@@ -146,6 +146,26 @@ const AddContrat = () => {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
+  if (selected.length === 0) {
+    Swal.fire({
+      title: 'Aucun agent n\'est sélectionné',
+      icon: 'warning',
+      text: 'Veuillez sélectionner au moins un agent.',
+      confirmButtonText: 'OK',
+    });
+    return;
+  }
+
+  if (informationsSelectionnees.length === 0) {
+    Swal.fire({
+      title: 'Aucune fonction n\'est sélectionnée',
+      icon: 'warning',
+      text: 'Veuillez sélectionner une fonction.',
+      confirmButtonText: 'OK',
+    });
+    return;
+  }
+
   const selectedItems = data.filter((item) => selected.includes(item.id));
   const selectedIds = selectedItems.map((item) => item.id);
   const newSelectedx = selectedItems.map((item) => ({

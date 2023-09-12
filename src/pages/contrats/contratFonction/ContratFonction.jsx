@@ -44,7 +44,7 @@ const ContratFonction = ({handleModalClose}) => {
     }, [])
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        useEffect(() => {
+ useEffect(() => {
           const fetchData = async () => {
             try {
               const res = await axios.get(`${DOMAIN}/api/admin/competence`);
@@ -54,7 +54,7 @@ const ContratFonction = ({handleModalClose}) => {
             }
           };
           fetchData();
-        }, []);
+}, []);
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -72,7 +72,6 @@ const ContratFonction = ({handleModalClose}) => {
         confirmButtonText: 'OK'
       });
 
-      window.location.reload();
       navigate('/fonction');
     } catch (err) {
       Swal.fire({
