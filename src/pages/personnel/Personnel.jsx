@@ -89,7 +89,8 @@ const Personnel = () => {
 };
 
     const columns = [
-        { field: 'first_name', headerName: 'Nom', width: 130, renderCell: (params) =>{
+        { field: 'num',width: 10, headerRender: () => 'N°', valueGetter: (params) => params.row.id },
+        { field: 'first_name', headerName: 'Nom', width: 120, renderCell: (params) =>{
           return <div className="userList">
                     <img src={params.row.source ? `../upload/${params.row.source}`: userImg} alt="" className="userImg" />
                     {params.row.first_name}
@@ -103,12 +104,12 @@ const Personnel = () => {
         {
           field: 'phone_number',
           headerName: 'Telephone',
-          width: 130,
+          width: 100,
         },
         {
             field: 'email',
             headerName: 'Email',
-            width: 130,
+            width: 110,
           },
         {
             field: 'date_of_birth',
@@ -122,7 +123,7 @@ const Personnel = () => {
         {
           field: 'skills',
           headerName: 'Competence',
-          width: 120,
+          width: 110,
         },
         {field: 'action', HeaderName: 'Action', width: 130, renderCell: (params) =>{
           const handleEdit = () => {
@@ -161,6 +162,20 @@ const Personnel = () => {
             )
         }},
       ];
+
+      const columnsWithNumber = columns.map((column, index) => {
+        return { ...column, num: index + 1 };
+      });
+      
+      // Utilisez maintenant le tableau columnsWithNumber avec le numéro ajouté à chaque ligne
+      
+      // Afficher le numéro dans la colonne "N°"
+      const updatedColumns = columnsWithNumber.map((column) => {
+        if (column.field === 'num') {
+          return { ...column, renderCell: (params) => params.row.num };
+        }
+        return column;
+      });
       
       const exportToExcel = () => {
         
@@ -243,7 +258,7 @@ const Personnel = () => {
             <FadeLoader color={'#36D7B7'} loading={loading} />
           </div>
         ) : (
-          <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="userTable" />
+          <DataGrid rows={data} columns={updatedColumns} pageSize={10} checkboxSelection className="userTable" />
           
         )}
         </div>
