@@ -20,6 +20,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import AdsClickIcon from '@mui/icons-material/AdsClick';
 
 const Affectation = () => {
 
@@ -234,12 +235,12 @@ const exportToExcel = () => {
         ) : (
           <Box sx={{ width: '100%', typography: 'body1' }}>
             <TabContext value={value}>
-              <Box sx={{ borderBottom: 1, borderColor: 'divider', background:'white' }}>
-                <TabList onChange={handleChange} aria-label="lab API tabs example">
-                  <Tab label="Liste des affectations" value="1" />
-                  <Tab label="Liste des affectations personnalisées" value="2" />
-                </TabList>
-              </Box>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider', background:'white' }}>
+              <TabList onChange={handleChange} aria-label="lab API tabs example" sx={{ display: 'flex', gap: '10px' }}>
+                <Tab sx={{ display: 'flex', alignItems: 'center' }} icon={<AdsClickIcon />} label="Liste des affectations" value="1" />
+                <Tab sx={{ display: 'flex', alignItems: 'center' }} icon={<AdsClickIcon />} label="Liste des affectations personnalisées" value="2" />
+              </TabList>
+            </Box>
               <TabPanel value="1" sx={{background:'white' }}>
                 <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
               </TabPanel>
