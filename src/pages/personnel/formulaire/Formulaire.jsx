@@ -220,7 +220,7 @@ const Formulaire = ({handleModalClose}) => {
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Telephone <span>*</span></label>
-                                <input type="number" name='phone_number' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero de tel.."  />
+                                <input type="tel" name='phone_number' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero de tel.."  />
                             </div>
 
                             <div className="form-row">

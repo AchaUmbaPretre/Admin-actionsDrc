@@ -73,6 +73,12 @@ const Contrats = () => {
         valueGetter: (params) => format(new Date(params.row.end_date), 'dd-MM-yyyy'),
       },
       {
+        field: 'duree',
+        headerName: 'Durée',
+        width: 160,
+        valueGetter: (params) => `${params.value} Mois`,
+      },
+      {
         field: 'status',
         headerName: 'Statut du contrat',
         width: 160,

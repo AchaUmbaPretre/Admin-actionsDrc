@@ -32,8 +32,6 @@ const ClientForm = ({handleModalClose}) => {
     setSite(formattedSites);
   };
 
-  console.log(site)
-
   const handleChange = (e) => {
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
