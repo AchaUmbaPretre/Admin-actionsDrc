@@ -20,7 +20,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 900,
+    width: 850,
     bgcolor: 'background.paper',
     p: 4,
     borderRadius: 2,
@@ -51,7 +51,7 @@ const Fonctions = () => {
     {
       field: 'avantages',
       headerName: 'Avantages',
-      width: 150 
+      width: 160 
     },
     {
         field: 'prix',

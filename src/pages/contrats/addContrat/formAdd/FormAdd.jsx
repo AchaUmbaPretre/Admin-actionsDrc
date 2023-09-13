@@ -77,7 +77,7 @@ const handleClick = async (e) => {
         });
 
         await axios.put(`${DOMAIN}/api/admin/employeFonctionPut/${dd}`, {
-          contrat_id: contratEmploieId,
+          contrat_id: contratId,
         });
       })
     );
@@ -107,8 +107,8 @@ const handleClick = async (e) => {
 
   return (
     <>
-              <div className="clientForm">
-        <h2 className="client-h2">Formulaire de Fonction 1</h2>
+      <div className="clientForm">
+        <h2 className="client-h2">Formulaire de Fonction</h2>
         <div className="clientForm-wrapper">
           <form action="" className="form-center">
             <div className="form-rows">

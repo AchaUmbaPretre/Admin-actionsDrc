@@ -14,6 +14,12 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { Link, useNavigate } from "react-router-dom";
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 
 const Affectation = () => {
 
@@ -21,42 +27,95 @@ const Affectation = () => {
 
   const [data, setData] = useState({});
   const [open, setOpen] = useState(false);
+  const [tap1, setTap1] = useState({});
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
  const [loading, setLoading] = useState(true);
 
+ const [value, setValue] = React.useState('1');
+
+ const handleChange = (event, newValue) => {
+   setValue(newValue);
+ };
+
   const columns = [
-    { field: 'client_nom', headerName: "Client", width: 125 },
-    { field: 'first_name', headerName: "Nom", width: 125 },
+    { field: 'client_nom', headerName: "Client", width: 120 },
+    { field: 'first_name', headerName: "Nom", width: 120 },
     {
       field: 'last_name',
       headerName: "Post-nom",
-      width: 125 
+      width: 120
     },
     {
       field: 'skills',
       headerName: 'Competence',
-      width: 125 
+      width: 120 
     },
     {
       field: 'salaire',
       headerName: 'Salaire',
-      width: 125,renderCell: (params) => `${params.value} $`
+      width: 120,renderCell: (params) => `${params.value} $`
     },
     {
       field: 'prix',
       headerName: 'Prix',
-      width: 125,renderCell: (params) => `${params.value} $`
+      width: 120,renderCell: (params) => `${params.value} $`
     },
     {
       field: 'end_date',
       headerName: 'Date de la fin',
-      width: 130,
+      width: 120,
       valueGetter: (params) =>
       format(new Date(params.row.end_date), 'dd-MM-yyyy', { locale: fr }),
     },
-    {field: 'action', HeaderName: 'Action', width: 200, renderCell: (params) =>{
+    {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
+        return(
+          <>
+            <div className="table-icons-row">
+                <div className="userOvert1">
+                    {/* <VisibilityOutlined className='userEye' onClick={() => navigate(`/affectations/${params.row.id}`)} /> */}
+                  <span className='userOvert'>détail</span>
+                </div>
+                <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
+            </div>
+          </>
+
+        )
+    }},
+  ];
+
+  const columns2 = [
+    { field: 'company2', headerName: "Client", width: 130 },
+    { field: 'first2', headerName: "Nom", width: 130},
+    {
+      field: 'last2',
+      headerName: "Post-nom",
+      width: 130
+    },
+    {
+      field: 'skills2',
+      headerName: 'Competence',
+      width: 120
+    },
+    {
+      field: 'salaire2',
+      headerName: 'Salaire',
+      width: 100,renderCell: (params) => `${params.value} $`
+    },
+    {
+      field: 'prix2',
+      headerName: 'Prix',
+      width: 100,renderCell: (params) => `${params.value} $`
+    },
+    {
+      field: 'date2',
+      headerName: 'Date de la fin',
+      width: 100,
+      valueGetter: (params) =>
+      format(new Date(params.row.date2), 'dd-MM-yyyy', { locale: fr }),
+    },
+    {field: 'action', HeaderName: 'Action', width: 140, renderCell: (params) =>{
         return(
           <>
             <div className="table-icons-row">
@@ -88,6 +147,21 @@ const Affectation = () => {
     fetchDatas()
   }, [])
   
+  useEffect(() => {
+
+    const fetchDatas = async () => {
+      try {
+        const res = await axios.get(`${DOMAIN}/api/admin/contratEmploie`);
+        setTap1(res.data)
+        setLoading(false);
+
+      } catch (error) {
+        console.log(error)
+      };
+    }
+    fetchDatas()
+  }, [])
+
   const handleDelete = async (id) => {
   try {
     const result = await Swal.fire({
@@ -158,7 +232,22 @@ const exportToExcel = () => {
             <FadeLoader color={'#36D7B7'} loading={loading} />
         </div>
         ) : (
-        <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
+          <Box sx={{ width: '100%', typography: 'body1' }}>
+            <TabContext value={value}>
+              <Box sx={{ borderBottom: 1, borderColor: 'divider', background:'white' }}>
+                <TabList onChange={handleChange} aria-label="lab API tabs example">
+                  <Tab label="Liste des affectations" value="1" />
+                  <Tab label="Liste des affectations personnalisées" value="2" />
+                </TabList>
+              </Box>
+              <TabPanel value="1" sx={{background:'white' }}>
+                <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
+              </TabPanel>
+              <TabPanel value="2" sx={{background:'white' }}>
+                <DataGrid rows={tap1} columns={columns2} pageSize={10} checkboxSelection className="presenceTable" />
+              </TabPanel>
+            </TabContext>
+          </Box>
         )}
       </div>
     </>
