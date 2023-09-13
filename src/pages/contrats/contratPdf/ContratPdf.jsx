@@ -10,8 +10,6 @@ const ContratPdf = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [showSpinner, setShowSpinner] = useState(true);
-    const spinnerDuration = 2000;
   
     const styles = StyleSheet.create({
       page: {
@@ -78,7 +76,6 @@ const ContratPdf = () => {
             }
             fetchData()
          }, [])
-    const formattedDatSortant = moment(data?.end_date).format('DD/MM/YYYY');
   return (
     <>
         <div className="contratPdf">
