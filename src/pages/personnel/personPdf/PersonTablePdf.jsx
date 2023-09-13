@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import config from '../../../config';
 import axios from 'axios';
 import logo from '../../../assets/actionssarl.PNG'
+import moment from 'moment';
 
 const PersonTablePdf = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -14,13 +15,29 @@ const PersonTablePdf = () => {
   const styles = StyleSheet.create({
     page: {
       fontFamily: 'Helvetica',
-      padding: 10,
-      flex: 1,
+      padding: 20,
+    },
+    imgFlex: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      flexDirection: 'row',
+      marginBottom: 20,
+    },
+    img: {
+      width: '9%',
+    },
+    subTitle: {
+      fontSize: 10,
+      marginBottom: 10,
+      textAlign: 'right',
     },
     title: {
-      fontSize: 14,
+      fontSize: 15,
       marginBottom: 20,
-      textAlign: "center"
+      textAlign: 'center',
+      fontWeight: 'bold',
+      textDecoration: 'underline',
     },
     table: {
       width: '100%',
@@ -29,38 +46,33 @@ const PersonTablePdf = () => {
     },
     tableHeader: {
       backgroundColor: '#f2f2f2',
-      fontWeight: 200,
-      fontSize: 12,
+      fontSize: 10,
       padding: 5,
+      fontWeight: 'bold',
     },
     tableRow: {
       flexDirection: 'row',
-      borderBottom: "1px solid #c5c5c5"
+      borderBottomWidth: 1,
+      borderBottomColor: '#c5c5c5',
+      borderBottomStyle: 'solid',
     },
     tableCell: {
       padding: 10,
-      width: 100,
-      fontWeight: 200,
-      fontSize: 11,
-      width: '100%',
+      flex: 1,
+      fontSize: 10,
+      textAlign: 'center'
     },
     tableCells: {
-        padding: 10,
-        fontWeight: 200,
-        fontSize: 11,
-        width: '40%',
-      },
-      imgFlex:{
-        display: 'flex',
-      },
-      img:{
-        width: '9%',
-      },
-      textTitle:{
-        fontSize:11,
-        textAlign: 'right',
-      },
-  });
+      padding: 10,
+      fontSize: 11,
+    },
+    textTitle: {
+      fontSize: 15,
+      fontWeight: 'bold',
+      textAlign: 'right',
+      fontStyle: 'italic',
+    },
+  })
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,8 +95,8 @@ const PersonTablePdf = () => {
       <Document>
         <Page style={styles.page}>
           <View style={styles.imgFlex}>
-            <Image style={styles.img} src={logo} />
-            <Text style={styles.textTitle}>Le....septembre 2023</Text>
+              <Image style={styles.img} src={logo} />
+              <Text style={styles.subTitle}>Le {moment().format('DD/MM/YYYY')}</Text>
           </View>
           <Text style={styles.title}>Liste des personnels</Text>
           <View style={styles.table}>

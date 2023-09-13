@@ -38,7 +38,6 @@ import ContratView from './pages/contrats/view/ContratView';
 import { MissedVideoCallTwoTone } from '@mui/icons-material';
 import MissiAff from './pages/mission/missionAff/MissiAff';
 import MissionContrat from './pages/mission/missionContrat/MissionContrat';
-import PersonPdf from './pages/personnel/personPdf/PersonPdf';
 import PersonTablePdf from './pages/personnel/personPdf/PersonTablePdf';
 import ContratPdf from './pages/contrats/contratPdf/ContratPdf';
 import MissionPdf from './pages/mission/missionPdf/MissionPdf';
@@ -108,10 +107,6 @@ function App() {
         {
           path: '/personpdfTable',
           element: <PersonTablePdf />
-        },
-        {
-          path: '/personpdf/:id',
-          element: <PersonPdf />
         },
         {
           path: '/contrats',
