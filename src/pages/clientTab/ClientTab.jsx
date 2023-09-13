@@ -26,9 +26,9 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 900,
+  width: 840,
   bgcolor: 'background.paper',
-  p: 4,
+  p: 2,
   borderRadius: 2,
   outline: 'none'
 }
@@ -45,7 +45,7 @@ const ClientTab = () => {
 
 
   const columns = [
-    { field: 'company_name', headerName: "Compagnie", width: 140 },
+    { field: 'company_name', headerName: "Compagnie", width: 130 },
 
     {
       field: 'address',
@@ -205,7 +205,7 @@ const ClientTab = () => {
                 </Box>
               </Box>
             </Fade>
-          </Modal>
+            </Modal>
 
           </div>
           {loading ? (

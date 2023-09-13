@@ -115,16 +115,17 @@ const ClientForm = ({handleModalClose}) => {
   return (
     <>
         <div className="clientForm">
+          <h2 className="client-h2">Formulaire du client</h2>
             <div className="clientForm-wrapper">
               <form action="" className="form-center">
                 <div className="form-rows">
                     <div className="form-row">
                       <label htmlFor="" className="label-form">Nom de compagnie <span>*</span></label>
-                      <input type="text"  name='company_name'  className="input-form" onChange={handleChange} />
+                      <input type="text"  name='company_name' placeholder='Entrez le nom de la compagnie..'  className="input-form" onChange={handleChange} />
                     </div>
                     <div className="form-row">
                       <label htmlFor="" className="label-form">Adresse <span>*</span></label>
-                      <input type="text" name="address" className="input-form" onChange={handleChange}  />
+                      <input type="text" name="address" placeholder="Entrez l'adresse.."  className="input-form" onChange={handleChange}  />
                     </div>
                 </div>
 
@@ -135,34 +136,35 @@ const ClientForm = ({handleModalClose}) => {
                         type="tel"
                         name="phone_number"
                         className="input-form"
-                        onChange={handleChange}  
+                        onChange={handleChange}
+                        placeholder="Entrez le num de l'entreprise.." 
                     />
                   </div>
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Nom du contact principal<span>*</span></label>
-                    <input type="tel"  name='contact_name' className="input-form" onChange={handleChange} />
+                    <input type="tel"  name='contact_name' placeholder='Entrez le nom de contact principal..'  className="input-form" onChange={handleChange} />
                   </div>
                 </div>
 
                 <div className="form-rows">
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Email<span>*</span></label>
-                    <input type='email' pattern=".+@globex\.com" size="30" required name='contact_email' className="input-form" onChange={handleChange}  />
+                    <input type='email' placeholder='Entrez ton adresse Mail..'  pattern=".+@globex\.com" size="30" required name='contact_email' className="input-form" onChange={handleChange}  />
                   </div>
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Tel principal<span>*</span></label>
-                    <input type="tel" name='contact_phone' className="input-form" onChange={handleChange} />
+                    <input type="tel" name='contact_phone' className="input-form" placeholder='Entrez le num principal..'  onChange={handleChange} />
                   </div>
                 </div>
 
                 <div className="form-rows">
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Rccm<span>*</span></label>
-                    <input type="text" name='rccm' className="input-form" onChange={handleChange} />
+                    <input type="text" name='rccm' placeholder='Entrez le code Rccm..'  className="input-form" onChange={handleChange} />
                   </div>
                   <div className="form-row">
                     <label htmlFor="" className="label-form">Id nate<span>*</span></label>
-                    <input type="text" name='idnate' className="input-form" onChange={handleChange} />
+                    <input type="text" name='idnate' className="input-form" placeholder="Entrez le code l'Id nate.."  onChange={handleChange} />
                   </div>
                 </div>
                 <div className="form-rows">
@@ -186,7 +188,7 @@ const ClientForm = ({handleModalClose}) => {
                 <div className="form-rows">
                   <div className="form-row">
                     <label htmlFor="" className="label-form">APR<span>*</span></label>
-                    <input type="text" name='apr' className="input-form" onChange={handleChange} />
+                    <input type="text" name='apr' className="input-form" placeholder="Entrez le code APR.."  onChange={handleChange} />
                   </div>
                   <div className="form-row">
                   {!inputVisible ? (
@@ -209,6 +211,7 @@ const ClientForm = ({handleModalClose}) => {
                       name="nom_site"
                       className="input-form"
                       onChange={handleSiteChange}
+                      placeholder='Entrez le site..' 
                     />
                   )}
                 </div>

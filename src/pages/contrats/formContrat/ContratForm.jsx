@@ -107,7 +107,7 @@ const ContratForm = ({ handleClose }) => {
       <div className="contratForm">
         <div className="contrat-wrapper">
           <div className="edit-title">
-            <h2 className="edit-h2">Contrat</h2>
+            <h2 className="edit-h2">Créer un Contrat</h2>
           </div>
           <form action="" className="formulaire-edit">
             <div className="edit-rows">

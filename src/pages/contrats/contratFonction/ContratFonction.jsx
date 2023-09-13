@@ -71,7 +71,7 @@ const ContratFonction = ({handleModalClose}) => {
         icon: 'success',
         confirmButtonText: 'OK'
       });
-
+      window.location.reload();
       navigate('/fonction');
     } catch (err) {
       Swal.fire({

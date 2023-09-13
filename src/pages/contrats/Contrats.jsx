@@ -34,7 +34,7 @@ const style = {
     bgcolor: 'background.paper',
     border: '1px solid #FFF',
     boxShadow: 24,
-    p: 4,
+    p: 3,
     borderRadius: 2,
   }
 
@@ -58,30 +58,30 @@ const Contrats = () => {
 
   
     const columns = [
-      { field: 'company_name', headerName: 'Client', width: 160 },
-      { field: 'contract_type', headerName: 'Type de contrat', width: 160 },
+      { field: 'company_name', headerName: 'Client', width: 140 },
+      { field: 'contract_type', headerName: 'Type de contrat', width: 130 },
       {
         field: 'start_date',
         headerName: 'Date du debut',
-        width: 160,
+        width: 140,
         valueGetter: (params) => format(new Date(params.row.start_date), 'dd-MM-yyyy'),
       },
       {
         field: 'end_date',
         headerName: 'Date de la fin',
-        width: 160,
+        width: 130,
         valueGetter: (params) => format(new Date(params.row.end_date), 'dd-MM-yyyy'),
       },
       {
         field: 'duree',
         headerName: 'Durée',
-        width: 160,
+        width: 130,
         valueGetter: (params) => `${params.value} Mois`,
       },
       {
         field: 'status',
         headerName: 'Statut du contrat',
-        width: 160,
+        width: 130,
         renderCell: (params) => {
     
           switch (params.value) {
