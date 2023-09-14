@@ -54,7 +54,7 @@ const Topbar = () => {
           <img src={admin} alt="" className="topbar-img" />
           <div className="topbar-row" onClick={handleMenu}>
             <PowerSettingsNewIcon className='topbar-power'/>
-            <span className="span-logout">Logout</span>
+            <span className="span-logout">Déconnecter</span>
           </div>
         </div>
       </div>
