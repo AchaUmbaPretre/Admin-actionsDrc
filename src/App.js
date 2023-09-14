@@ -50,6 +50,7 @@ import FormAdd from './pages/contrats/addContrat/formAdd/FormAdd';
 import ContratFonction from './pages/contrats/contratFonction/ContratFonction';
 import Fonctions from './pages/fonctions/Fonctions';
 import AffView2 from './pages/affectation/affView.jsx/AffView2';
+import Page404 from './pages/page404/Page404';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -266,6 +267,10 @@ function App() {
     {
       path: '/register',
       element: <Register />
+    },
+    {
+      path: '/*',
+      element: <Page404 />
     }
   ]);
 

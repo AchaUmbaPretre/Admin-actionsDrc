@@ -93,14 +93,14 @@ const Mission = () => {
         );
       
         const groupedData = uniqueData.reduce((acc, row) => {
-          const { first_name, ...rest } = row;
-          if (!acc[first_name]) {
-            acc[first_name] = {
-              first_name,
+          const { idEmploye, ...rest } = row;
+          if (!acc[idEmploye]) {
+            acc[idEmploye] = {
+              idEmploye,
               rows: [rest],
             };
           } else {
-            acc[first_name].rows.push(rest);
+            acc[idEmploye].rows.push(rest);
           }
           return acc;
         }, {});

@@ -54,12 +54,12 @@ const Affectation = () => {
     {
       field: 'salaire',
       headerName: 'Salaire',
-      width: 120,renderCell: (params) => `${params.value} $`
+      width: 110,renderCell: (params) => `${params.value} $`
     },
     {
       field: 'prix',
       headerName: 'Prix',
-      width: 120,renderCell: (params) => `${params.value} $`
+      width: 110,renderCell: (params) => `${params.value} $`
     },
     {
       field: 'end_date',
@@ -68,7 +68,7 @@ const Affectation = () => {
       valueGetter: (params) =>
       format(new Date(params.row.end_date), 'dd-MM-yyyy', { locale: fr }),
     },
-    {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
+    {field: 'action', HeaderName: 'Action', width: 140, renderCell: (params) =>{
         return(
           <>
             <div className="table-icons-row">
@@ -76,7 +76,10 @@ const Affectation = () => {
                   <VisibilityOutlined className='userEye' onClick={() => navigate(`/affectations/${params.row.id}`)} />
                   <span className='userOvert'>détail</span>
                 </div>
-                <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
+                <div className="userOvert2">
+                  <DeleteOutline className="userListDelete" onClick={() => { handleDelete(params.row.id) }} />
+                  <span className='userOvert'>Supprimer</span>
+                </div>
             </div>
           </>
 
@@ -234,10 +237,10 @@ const exportToExcel = () => {
           <Box sx={{ width: '100%', typography: 'body1' }}>
             <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider', background:'white' }}>
-              <TabList onChange={handleChange} aria-label="lab API tabs example" sx={{ display: 'flex', gap: '10px' }}>
-                <Tab sx={{ display: 'flex', alignItems: 'center' }} icon={<AdsClickIcon />} label="Liste des affectations" value="1" />
-                <Tab sx={{ display: 'flex', alignItems: 'center' }} icon={<AdsClickIcon />} label="Liste des affectations personnalisées" value="2" />
-              </TabList>
+            <TabList onChange={handleChange} aria-label="lab API tabs example" sx={{ display: 'flex', gap: '10px' }}>
+                <Tab sx={{ display: 'flex', alignItems: 'center', fontSize: '12px' }} icon={<AdsClickIcon />} label="Liste des affectations" value="1" />
+                <Tab sx={{ display: 'flex', alignItems: 'center', fontSize: '12px' }} icon={<AdsClickIcon />} label="Liste des affectations personnalisées" value="2" />
+            </TabList>
             </Box>
               <TabPanel value="1" sx={{background:'white' }}>
                 <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />

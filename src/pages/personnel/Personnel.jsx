@@ -89,7 +89,6 @@ const handleDelete = async (id) => {
 };
 
 const columns = [
-        { field: 'ID',width: 10, headerRender: () => 'N°', valueGetter: (params) => params.row.id },
         { field: 'first_name', headerName: 'Nom', width: 120, renderCell: (params) =>{
           return <div className="userList">
                     <img src={params.row.source ? `../upload/${params.row.source}`: userImg} alt="" className="userImg" />
@@ -99,12 +98,12 @@ const columns = [
         {
           field: 'last_name',
           headerName: 'Postnom',
-          width: 100,
+          width: 110,
         },        
         {
           field: 'phone_number',
           headerName: 'Telephone',
-          width: 100,
+          width: 110,
         },
         {
             field: 'email',
@@ -119,7 +118,7 @@ const columns = [
             format(new Date(params.row.date_of_birth), 'dd-MM-yyyy'),
         },
         { field: 'gender', headerName: 'Genre', width: 50 },
-        { field: 'address', headerName: 'Adresse', width: 100 },
+        { field: 'address', headerName: 'Adresse', width: 110 },
         {
           field: 'skills',
           headerName: 'Competence',

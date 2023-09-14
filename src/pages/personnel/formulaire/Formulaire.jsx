@@ -10,7 +10,7 @@ import 'moment/locale/fr';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
 import config from '../../../config'
-
+import Cropper from 'react-easy-crop';
 moment.locale('fr');
 
 
@@ -26,6 +26,8 @@ const Formulaire = ({handleModalClose}) => {
     const [niveau, setNiveau] = useState([]);
     const [statusE, setStatusE] = useState([]);
     const webcamRef = useRef(null);
+    const [crop, setCrop] = useState({ x: 0, y: 0 });
+    const [zoom, setZoom] = useState(1);
   
     const handleFileChange = (event) => {
       setPhoto(event.target.files[0]);
@@ -88,14 +90,21 @@ const Formulaire = ({handleModalClose}) => {
 
       const upload = async () => {
         try {
-          const formData = new FormData();
-          formData.append('file', photo);
-          const res = await axios.post(`${DOMAIN}/api/upload`, formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          });
-          return res.data;
+          if (source === 'webcam') {
+            const screenshot = webcamRef.current.getScreenshot();
+            const base64Data = screenshot.replace('data:image/webp;base64,', ''); // Enlever le préfixe du type de contenu
+            const res = await axios.post(`${DOMAIN}/api/upload`, { source: base64Data });
+            return res.data;
+          } else {
+            const formData = new FormData();
+            formData.append('file', photo);
+            const res = await axios.post(`${DOMAIN}/api/upload`, formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            });
+            return res.data;
+          }
         } catch (error) {
           console.log(error);
         }
@@ -152,7 +161,6 @@ const Formulaire = ({handleModalClose}) => {
         fetchData();
       }, []);
 
-      console.log(data)
 
   return (
     <>
@@ -169,8 +177,34 @@ const Formulaire = ({handleModalClose}) => {
                             <input type="radio" name="source" value="webcam" checked={source === 'webcam'} onChange={handleSourceChange} className='radio-img' />
                             <span className="form-title-img">Prendre une photo avec la webcam</span>
                         </div>
-                        {source === 'import' && <input type="file" name="photo" onChange={handleFileChange} />}
-                        {source === 'webcam' && <Webcam audio={false} ref={webcamRef} className='pop-img' />}
+                        {source === 'import' && <div>
+                          <input type="file" name="photo" onChange={handleFileChange} />
+                          {photo && (
+                            <div className="crop-container">
+                              <Cropper
+                                image={URL.createObjectURL(photo)}
+                                crop={crop}
+                                zoom={zoom}
+                                aspect={1}
+                                onCropChange={setCrop}
+                                onZoomChange={setZoom}
+                              />
+                            </div>
+                          )}
+                        </div>  }
+                        {source === 'webcam' &&  <div>
+                          <Webcam audio={false} ref={webcamRef} className="pop-img" />
+                          <div className="crop-container">
+                            <Cropper
+                              image={webcamRef.current?.getScreenshot()}
+                              crop={crop}
+                              zoom={zoom}
+                              aspect={1}
+                              onCropChange={setCrop}
+                              onZoomChange={setZoom}
+                            />
+                          </div>
+                        </div>}
                     </div>
                 </div>
                 <div className="formulaire-right">
