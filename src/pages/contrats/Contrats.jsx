@@ -76,7 +76,7 @@ const Contrats = () => {
         field: 'duree',
         headerName: 'Durée',
         width: 130,
-        valueGetter: (params) => `${params.value} Mois`,
+        valueGetter: (params) => `${params.value} mois`,
       },
       {
         field: 'status',
