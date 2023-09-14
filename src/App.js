@@ -49,6 +49,7 @@ import AffView from './pages/affectation/affView.jsx/AffView';
 import FormAdd from './pages/contrats/addContrat/formAdd/FormAdd';
 import ContratFonction from './pages/contrats/contratFonction/ContratFonction';
 import Fonctions from './pages/fonctions/Fonctions';
+import AffView2 from './pages/affectation/affView.jsx/AffView2';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -139,6 +140,10 @@ function App() {
         {
           path: '/affectations/:id',
           element: <AffView />
+        },
+        {
+          path: '/affectationView/:id',
+          element: <AffView2 />
         },
         {
           path: '/fonction',

@@ -77,6 +77,8 @@ const Fonctions = () => {
     }},
   ];
 
+  
+
   useEffect(()=>{
 
     const fetchData = async ()=> {

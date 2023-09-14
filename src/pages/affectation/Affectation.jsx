@@ -29,8 +29,6 @@ const Affectation = () => {
   const [data, setData] = useState({});
   const [open, setOpen] = useState(false);
   const [tap1, setTap1] = useState({});
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const navigate = useNavigate();
  const [loading, setLoading] = useState(true);
 
@@ -75,7 +73,7 @@ const Affectation = () => {
           <>
             <div className="table-icons-row">
                 <div className="userOvert1">
-                    {/* <VisibilityOutlined className='userEye' onClick={() => navigate(`/affectations/${params.row.id}`)} /> */}
+                  <VisibilityOutlined className='userEye' onClick={() => navigate(`/affectations/${params.row.id}`)} />
                   <span className='userOvert'>détail</span>
                 </div>
                 <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
@@ -121,7 +119,7 @@ const Affectation = () => {
           <>
             <div className="table-icons-row">
                 <div className="userOvert1">
-                    {/* <VisibilityOutlined className='userEye' onClick={() => navigate(`/affectations/${params.row.id}`)} /> */}
+                    <VisibilityOutlined className='userEye' onClick={() => navigate(`/affectationView/${params.row.id}`)} />
                   <span className='userOvert'>détail</span>
                 </div>
                 <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
