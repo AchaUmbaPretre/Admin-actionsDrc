@@ -188,6 +188,8 @@ const Formulaire = ({handleModalClose}) => {
                                 aspect={1}
                                 onCropChange={setCrop}
                                 onZoomChange={setZoom}
+                                minCropWidth={300} // Définissez la largeur minimale du recadrage (en pixels)
+                                minCropHeight={400} 
                               />
                             </div>
                           )}
