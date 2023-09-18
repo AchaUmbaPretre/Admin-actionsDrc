@@ -12,13 +12,13 @@
         display: flex;
         flex-direction: column;
         width: 30%;
-        gap: 20px;
+        gap: 15px;
         .login-entete{
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 5px;
-            padding-top: 40px;
+            padding-top: 30px;
             .login-img{
                 height: 40px;
                 width: 40px;
@@ -35,7 +35,7 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            padding: 30px;
+            padding: 25px;
             .login-controle{
                 display: flex;
                 flex-direction: column;
@@ -49,7 +49,7 @@
                 .login-input{
                     border: 1px solid #e9e9e9;
                     background: #faf9f9;
-                    padding: 15px 10px;
+                    padding: 10px;
                     border-radius: 5px;
                     outline: none;
                     &:focus{
@@ -71,7 +71,7 @@
                     align-items: center;
                     justify-content: center;
                     gap: 5px;
-                    padding: 15px 10px;
+                    padding: 10px;
                     color: #fff;
                     background: royalblue;
                     border-radius: 5px;
@@ -89,7 +89,7 @@
         }
         .form-bottom{
             background: rgba(110, 138, 224, 0.034);
-            padding: 20px 30px;
+            padding: 20px 25px;
             display: flex;
             flex-direction: column;
             gap: 10px;
