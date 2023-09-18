@@ -2,8 +2,8 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../../mission/views/missionView.scss'
-import { format } from 'date-fns';
-import { CalendarMonth, Money, Person, Person3 } from '@mui/icons-material';
+import { CalendarMonth, Person, Person3 } from '@mui/icons-material';
+import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
 import config from '../../../config'
 import moment from 'moment';
@@ -58,11 +58,11 @@ const AffView = () => {
                         </div>
                         <div className="client-row">
                             <div className="client-sous">
-                                <span className="client-nom"><PsychologyOutlinedIcon/>  Prix :</span>
+                                <span className="client-nom"><MonetizationOnOutlinedIcon/>  Prix :</span>
                                 <span className="client-nom">{data?.prix} $</span>
                             </div>
                             <div className="client-sous">
-                                <span className="client-nom"><CalendarMonth/>  Salaire : </span>
+                                <span className="client-nom"><MonetizationOnOutlinedIcon/>  Salaire : </span>
                                 <span className="client-nom">{data?.salaire} $</span>
                             </div>
                         </div>

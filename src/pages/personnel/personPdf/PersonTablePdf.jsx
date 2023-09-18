@@ -64,10 +64,10 @@ const PersonTablePdf = () => {
     },
     tableCells: {
       padding: 10,
-      fontSize: 11,
+      fontSize: 10,
     },
     textTitle: {
-      fontSize: 15,
+      fontSize: 13,
       fontWeight: 'bold',
       textAlign: 'right',
       fontStyle: 'italic',
@@ -106,6 +106,8 @@ const PersonTablePdf = () => {
               <Text style={styles.tableCell}>Postnom</Text>
               <Text style={styles.tableCell}>Téléphone</Text>
               <Text style={styles.tableCell}>Email</Text>
+              <Text style={styles.tableCell}>Compétence</Text>
+              <Text style={styles.tableCell}>Status</Text>
             </View>
             {Array.isArray(data) &&
               data.map((row, index) => (
@@ -115,6 +117,8 @@ const PersonTablePdf = () => {
                   <Text style={styles.tableCell}>{row.last_name}</Text>
                   <Text style={styles.tableCell}>{row.phone_number}</Text>
                   <Text style={styles.tableCell}>{row.email}</Text>
+                  <Text style={styles.tableCell}>{row.skills}</Text>
+                  <Text style={styles.tableCell}>{row.employment_status}</Text>
                 </View>
               ))}
           </View>

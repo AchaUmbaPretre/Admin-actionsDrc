@@ -29,9 +29,7 @@ const Login = () => {
 
       navigate('/');
     } catch (error) {
-      toast.error(error.response.data, {
-        position: "top-right",
-      });
+      console.log(error)
 
       setError(error.response.data);
     }
