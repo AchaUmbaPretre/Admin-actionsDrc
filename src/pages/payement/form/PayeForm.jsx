@@ -29,6 +29,7 @@ const PayeForm = ({handleModalClose}) => {
       });
 
       const paymentId = response.data.payment_id;
+      window.location.reload();
       Swal.fire({
         icon: 'success',
         title: 'Facture créée avec succès',

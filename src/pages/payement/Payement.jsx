@@ -7,11 +7,9 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import axios from 'axios';
-import { DeleteOutline} from '@mui/icons-material';
 import { useNavigate } from "react-router-dom";
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { DeleteOutline, EditOutlined, AddCircleOutline, VisibilityOutlined } from '@mui/icons-material';
 import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
@@ -20,6 +18,7 @@ import config from '../../config'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
+import './payement.scss'
 
 const style = {
     position: 'absolute',
@@ -56,7 +55,6 @@ const Payement = () => {
      const columns = [
         { field: 'id', headerName: 'ID', width: 100 },
         { field: 'invoice_id', headerName: 'ID_facture', width: 180 },
-
         {
           field: 'payment_date',
           headerName: 'Date de payement',
@@ -74,16 +72,28 @@ const Payement = () => {
           headerName: "Methode de payement",
           width: 190,
       },
-        {field: 'action', HeaderName: 'Action', width: 190, renderCell: (params) =>{
-            return(
+      {field: 'action', HeaderName: 'Action', width: 190, renderCell: (params) =>{
+          return(
               <>
                 <div className="table-icons-row">
-                    <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
+                  <div className="userOvert0">
+                    <Link onClick={''}>
+                      <EditOutlined className="userListBtn" />
+                      <span className='userOvert'>Modifier</span>
+                    </Link>
+                  </div>
+                  <div className="userOvert1">
+                    <VisibilityOutlined className='userEye' onClick={() => navigate(`/payementView/${params.row.id}`)} />
+                    <span className='userOvert'>détail</span>
+                  </div>
+                  <div className="userOvert2">
+                    <DeleteOutline className="userListDelete" onClick={() => { handleDelete(params.row.id) }} />
+                    <span className='userOvert'>Supprimer</span>
+                  </div>
                 </div>
               </>
-    
             )
-        }},
+      }},
       ]; 
 
      useEffect(()=>{
@@ -139,7 +149,7 @@ const Payement = () => {
       });
   
       if (result.isConfirmed) {
-        await axios.delete(`${DOMAIN}/api/admin/payemen/${id}`);
+        await axios.delete(`${DOMAIN}/api/admin/payement/${id}`);
         window.location.reload();
       }
     } catch (err) {
@@ -154,8 +164,8 @@ const Payement = () => {
                 <div className="contrats-top">
                     <AttachMoneyIcon className='contrats-icon'/>
                     <div className="contrats-info">
-                        <h2 className="contrats-title">Payement</h2>
-                        <span className="contrats-span">Liste des payements</span>
+                        <h2 className="contrats-title">Paiement</h2>
+                        <span className="contrats-span">Liste des paiements</span>
                     </div>
                 </div>
                 <div className="personPdf">

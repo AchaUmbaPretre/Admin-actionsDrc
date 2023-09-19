@@ -13,6 +13,7 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { useState } from 'react';
 import actions from './../../assets/actionssarl.PNG'
 import FollowTheSignsOutlinedIcon from '@mui/icons-material/FollowTheSignsOutlined';
+import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
 
 const Sidebar = () => {
   const [activeItem, setActiveItem] = useState('Accueil');
@@ -33,7 +34,7 @@ const Sidebar = () => {
               <li className={`sidenav-li ${activeItem === 'Fonction' ? 'active' : ''}`}><FollowTheSignsOutlinedIcon className='sidebar-icon'/><Link to={"/fonction"} onClick={() => setActiveItem('Fonction')}>Fonctions</Link></li>
 {/*               <li className={`sidenav-li ${activeItem === 'Horaires de travail' ? 'active' : ''}`}><AccessTimeIcon className='sidebar-icon'/><Link to={"/horaireAll"} onClick={() => setActiveItem('Horaires de travail')}>Horaires de travail</Link></li> */}
               <li className={`sidenav-li ${activeItem === 'Presence' ? 'active' : ''}`}><ChecklistRtlIcon className='sidebar-icon'/><Link to={"/presence"} onClick={() => setActiveItem('Presence')}>Presence</Link></li>
-              <li className={`sidenav-li ${activeItem === 'Facturation' ? 'active' : ''}`}><FactCheckIcon className='sidebar-icon'/><Link to={"/facturation"} onClick={() => setActiveItem('Facturation')}>Facturation</Link></li>
+              <li className={`sidenav-li ${activeItem === 'Facturation' ? 'active' : ''}`}><FactCheckOutlinedIcon className='sidebar-icon'/><Link to={"/facturation"} onClick={() => setActiveItem('Facturation')}>Facturation</Link></li>
               <li className={`sidenav-li ${activeItem === 'Payement' ? 'active' : ''}`}><AttachMoneyIcon className='sidebar-icon'/><Link to={"/payement"} onClick={() => setActiveItem('Payement')}>Paiement</Link></li>
 {/*               <li className="sidenav-li"><FormatListNumberedIcon className='sidebar-icon'/><Link to={"/listeConge"}>Liste de congé</Link></li> */}
             </ul>

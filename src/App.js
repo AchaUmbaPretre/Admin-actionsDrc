@@ -52,6 +52,8 @@ import AffView2 from './pages/affectation/affView.jsx/AffView2';
 import Page404 from './pages/page404/Page404';
 import ContratFonction from './pages/fonctions/contratFonction/ContratFonction';
 import ContratFonctionEdit from './pages/fonctions/fonctionEdit/ContratFonctEdit';
+import FonctionView from './pages/fonctions/fonctionView/FonctionView';
+import PaiementView from './pages/payement/paiementView/PaiementView';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -150,6 +152,10 @@ function App() {
         {
           path: '/fonction',
           element: <Fonctions />
+        },
+        {
+          path: '/fonctionView/:id',
+          element: <FonctionView />
         },
         {
           path: '/presence',
@@ -254,6 +260,10 @@ function App() {
         {
           path: '/payement',
           element: <Payement />
+        },
+        {
+          path: '/payementView/:id',
+          element: <PaiementView />
         },
         {
           path: '/horaire',

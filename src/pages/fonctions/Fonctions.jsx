@@ -1,6 +1,6 @@
 import './../../pages/listeConge/listeConge.scss'
 import { DataGrid } from '@mui/x-data-grid'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import { DeleteOutline} from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -36,6 +36,7 @@ const Fonctions = () => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
+  const navigate = useNavigate();
 
   const columns = [
     {
@@ -68,7 +69,7 @@ const Fonctions = () => {
           <>
             <div className="table-icons-row">
                 <Link to={`/contratFonctionEdit/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
-                <VisibilityIcon className='userEye'/>
+                <VisibilityIcon className='userEye' onClick={() => navigate(`/fonctionView/${params.row.id}`)}/>
                 <DeleteOutline className="userListDelete" onClick={''} />
             </div>
           </>

@@ -83,8 +83,8 @@ const Facturation = () => {
   };
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'company_name', headerName: "client", width: 140 },
+    { field: 'id', headerName: 'Id de facture', width: 100 },
+    { field: 'company_name', headerName: "client", width: 130 },
 
     {
       field: 'invoice_date',
@@ -96,21 +96,21 @@ const Facturation = () => {
     {
         field: 'due_date',
         headerName: "Date d'échéance de la facture",
-        width: 160,
+        width: 150,
         valueGetter: (params) =>
         format(new Date(params.row.due_date), 'yyyy-MM-dd'),
     },
     {
         field: 'total_amount',
         headerName: "Montant total",
-        width: 140,renderCell: (params) => `${params.value} $`
+        width: 150,renderCell: (params) => `${params.value} $`
     },
     {
       field: 'status',
       headerName: 'Statut de la facture',
       width: 140 
     },
-    {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
+    {field: 'action', HeaderName: 'Action', width: 160, renderCell: (params) =>{
         return(
           <>
             <div className="table-icons-row">

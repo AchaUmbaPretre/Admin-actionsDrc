@@ -77,7 +77,7 @@ const FactureForm = ({handleModalClose}) => {
       });
 
       const invoiceId = response.data.invoice_id;
-
+      window.location.reload();
       navigate('/facturation')
       Swal.fire({
         icon: 'success',

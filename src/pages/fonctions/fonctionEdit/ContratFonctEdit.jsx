@@ -30,7 +30,7 @@ const ContratFonctionEdit = ({handleModalClose}) => {
     setData((prev) => ({ ...prev, [name]: formattedValue }));
   };
 
-  useEffect(()=>{
+useEffect(()=>{
     const fetchData = async ()=> {
         try{
             const res = await axios.get(`${DOMAIN}/api/admin/contratFonctionOne/${id}`);
@@ -43,7 +43,7 @@ const ContratFonctionEdit = ({handleModalClose}) => {
     fetchData()
 }, [id]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(()=>{
+useEffect(()=>{
 
             const fetchData = async ()=> {
                 try{
@@ -55,9 +55,9 @@ const ContratFonctionEdit = ({handleModalClose}) => {
                   };
             }
             fetchData()
-    }, [])
+  }, [])
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
  useEffect(() => {
           const fetchData = async () => {
             try {
