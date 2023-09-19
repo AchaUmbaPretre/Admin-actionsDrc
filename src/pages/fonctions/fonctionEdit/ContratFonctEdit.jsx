@@ -1,22 +1,24 @@
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import SendIcon from '@mui/icons-material/Send';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import config from './../../../config';
+import config from '../../../config';
 import Select from 'react-select';
 
-const ContratFonction = ({handleModalClose}) => {
+const ContratFonctionEdit = ({handleModalClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [clientEtat, setClientEtat] = useState([]);
   const [checkInTime, setCheckInTime] = useState('');
   const [checkOutTime, setCheckOutTime] = useState('');
-  const [data, setData] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const id = location.pathname.split("/")[2];
+  const [data, setData] = useState({});
   const [selectData, setSelectData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [competenceOption, setCompetenceOption] = useState([]);
-
-  const navigate = useNavigate();
+  const {avantages, contrat_id, prix, salaire, skills} = data;
 
   const handleChange = (value, name) => {
     let formattedValue = value;
@@ -28,6 +30,18 @@ const ContratFonction = ({handleModalClose}) => {
     setData((prev) => ({ ...prev, [name]: formattedValue }));
   };
 
+  useEffect(()=>{
+    const fetchData = async ()=> {
+        try{
+            const res = await axios.get(`${DOMAIN}/api/admin/contratFonctionOne/${id}`);
+            setData(res.data[0])
+    
+          }catch(error){
+            console.log(error)
+          };
+    }
+    fetchData()
+}, [id]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(()=>{
 
@@ -56,46 +70,43 @@ const ContratFonction = ({handleModalClose}) => {
           fetchData();
 }, []);
 
-  const handleClick = async (e) => {
-    e.preventDefault();
-    handleModalClose()
+const handleClick = async (e) => {
+  e.preventDefault();
 
-    try {
-        await axios.post(`${DOMAIN}/api/admin/ContratInfo`,{
-            ...data
-          });
+  try {
+    await axios.put(`${DOMAIN}/api/admin/contratFonctionUpdate/${id}`, data);
 
-      Swal.fire({
-        title: 'Success',
-        text: 'Contrat créé avec succès!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
-      window.location.reload();
-      navigate('/fonction');
-    } catch (err) {
-      Swal.fire({
-        title: 'Error',
-        text: err.message,
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
+    Swal.fire({
+      title: 'Success',
+      text: 'Fonction mis à jour avec succès !',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
 
-      console.log(err);
-    }
-   
-  };
+    navigate('/fonction');
+  } catch (err) {
+    Swal.fire({
+      title: 'Error',
+      text: err.message,
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+
+    console.log(err);
+  }
+};
 
   return (
     <>
-      <div className="clientForm">
-        <h2 className="client-h2">Formulaire de Fonction</h2>
+      <div className="ediitForm">
+        <h2 className="client-h2">Editer fonction</h2>
         <div className="clientForm-wrapper">
           <form action="" className="form-center">
             <div className="form-rows">
                 <div className="form-row">
                     <label htmlFor="" className="label-form">Contrat<span>*</span></label>
                     <Select
+                      value={contrat_id}
                         options={selectData.map((select) => ({
                             value: select.id,
                             label: select.company_name
@@ -111,6 +122,7 @@ const ContratFonction = ({handleModalClose}) => {
                 <label htmlFor="" className="label-form">Competence<span>*</span></label>
                 <Select
                   name="skills"
+                  value={skills}
                   onChange={(selectedOption) => handleChange(selectedOption.value, "skills")}
                   options={competenceOption.map((item) => ({
                     value: item.id,
@@ -120,18 +132,18 @@ const ContratFonction = ({handleModalClose}) => {
               </div>
               <div className="form-row">
                 <label htmlFor="" className="label-form">Avantages<span>*</span></label>
-                <input type="text" name='avantages' className="input-form" required onChange={(e) => handleChange(e.target.value, "avantages")} />
+                <input type="text" value={avantages} name='avantages' className="input-form" required onChange={(e) => handleChange(e.target.value, "avantages")} />
               </div>
             </div>
 
             <div className="form-rows">
               <div className="form-row">
                 <label htmlFor="" className="label-form">Prix<span>*</span></label>
-                <input type="number" name='prix' className="input-form" required onChange={(e) => handleChange(e.target.value, "prix")} />
+                <input type="number" name='prix' value={prix} className="input-form" required onChange={(e) => handleChange(e.target.value, "prix")} />
               </div>
               <div className="form-row">
                 <label htmlFor="" className="label-form">Salaire<span>*</span></label>
-                <input type="number" name='salaire' className="input-form" onChange={(e) => handleChange(e.target.value, "salaire")} />
+                <input type="number" name='salaire' value={salaire} className="input-form" onChange={(e) => handleChange(e.target.value, "salaire")} />
               </div>
             </div>
             <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>
@@ -142,4 +154,4 @@ const ContratFonction = ({handleModalClose}) => {
   );
 };
 
-export default ContratFonction;
+export default ContratFonctionEdit ;

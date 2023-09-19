@@ -47,10 +47,11 @@ import FaturationPdf from './pages/faturation/FaturationPdf';
 import Horaire from './pages/horaire/Horaire';
 import AffView from './pages/affectation/affView.jsx/AffView';
 import FormAdd from './pages/contrats/addContrat/formAdd/FormAdd';
-import ContratFonction from './pages/contrats/contratFonction/ContratFonction';
 import Fonctions from './pages/fonctions/Fonctions';
 import AffView2 from './pages/affectation/affView.jsx/AffView2';
 import Page404 from './pages/page404/Page404';
+import ContratFonction from './pages/fonctions/contratFonction/ContratFonction';
+import ContratFonctionEdit from './pages/fonctions/fonctionEdit/ContratFonctEdit';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -123,8 +124,8 @@ function App() {
           element: <FormAdd />
         },
         {
-          path: '/contratFonction/:id',
-          element: <ContratFonction />
+          path: '/contratFonctionEdit/:id',
+          element: <ContratFonctionEdit/>
         },
         {
           path: '/contratsPdf',

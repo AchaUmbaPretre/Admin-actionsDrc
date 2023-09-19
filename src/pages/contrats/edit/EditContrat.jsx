@@ -5,6 +5,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import moment from 'moment';
 import config from '../../../config'
+import Select from 'react-select';
 
 
 const EditContrat = () => {
@@ -15,12 +16,29 @@ const location = useLocation();
 const navigate = useNavigate();
 const id = location.pathname.split("/")[2];
 const [clientEtat, setClientEtat] = useState([]);
+const [typeContrat, setTypeContrat] = useState([]);
 
 
-const handleChange = (e) => {
-    setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+const handleChange = (name, value) => {
+  if (name === 'start_date' || name === 'end_date') {
+    const formattedDate = moment(value).format('YYYY-MM-DD');
+    setData((prev) => ({ ...prev, [name]: formattedDate }));
+  } else {
+    setData((prev) => ({ ...prev, [name]: value }));
+  }
+};
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${DOMAIN}/api/admin/contratType`);
+        setTypeContrat(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
   useEffect(()=>{
     const fetchData = async ()=> {
         try{
@@ -55,7 +73,7 @@ useEffect(() => {
 
       Swal.fire({
         title: 'Success',
-        text: 'Contract updated successfully!',
+        text: 'Contrat mis à jour avec succès !',
         icon: 'success',
         confirmButtonText: 'OK'
       });
@@ -85,27 +103,49 @@ useEffect(() => {
                     <div className="edit-rows">
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Type du contrat <span>*</span></label>
-                            <input type="text" value={contract_type} name='contract_type'  className="input-form" onChange={handleChange} />
+                            <Select
+                              value={contract_type}
+                              name='contract_type'
+                              options={typeContrat?.map((item) => ({
+                                value: item.nom,
+                                label: item.nom,
+                              }))}
+                              onChange={(selectedOption) =>
+                                handleChange('contract_type', selectedOption.value)
+                              }
+                              placeholder="Sélectionnez le type du contrat"
+                            />
                         </div>
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Client(e) <span>*</span></label>
-                            <select id="pet-select" value={client_id} name="client_id" className="input-form" onChange={handleChange}>
-                              <option >selectionnez un client</option>
-                              {clientEtat?.map(item =>( 
-                                  <option value={item.id}>{item.company_name}</option>
-                                ))}
-                            </select>
+                            <Select
+                              id="pet-select"
+                              value={client_id}
+                              name="client_id"
+                              options={clientEtat?.map(item => ({
+                                value: item.id,
+                                label: item.company_name
+                              }))}
+                              onChange={(selectedOption) =>
+                                handleChange('client_id', selectedOption.value)
+                              }
+                              placeholder="Sélectionnez un client"
+                            />
                         </div>
                     </div>
 
                     <div className="edit-rows">
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Date de début <span>*</span></label>
-                            <input type="date" value={moment(start_date).format('YYYY-MM-DD') || ''} name="start_date" className="input-form" onChange={handleChange} />
+                            <input type="date" value={moment(start_date).format('YYYY-MM-DD') || ''} name="start_date" className="input-form" onChange={(e) =>
+                              handleChange(e.target.name, e.target.value)
+                            } />
                         </div>
                         <div className="edit-row">
                             <label htmlFor="" className="label-edit">Date de la fin <span>*</span></label>
-                            <input type="date"  value={moment(end_date).format('YYYY-MM-DD') || ''} data-format="MM /jj/aaaa" name='end_date' className="input-form" onChange={handleChange} />
+                            <input type="date"  value={moment(end_date).format('YYYY-MM-DD') || ''} data-format="MM /jj/aaaa" name='end_date' className="input-form" onChange={(e) =>
+                    handleChange(e.target.name, e.target.value)
+                             } />
                         </div>
                     </div>
   

@@ -11,9 +11,9 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import { useEffect, useState } from 'react';
-import ContratFonction from '../contrats/contratFonction/ContratFonction';
 import config from './../../config'
 import axios from 'axios';
+import ContratFonction from './contratFonction/ContratFonction';
 
 const style = {
     position: 'absolute',
@@ -67,7 +67,7 @@ const Fonctions = () => {
         return(
           <>
             <div className="table-icons-row">
-                <Link to={`/users/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
+                <Link to={`/contratFonctionEdit/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
                 <VisibilityIcon className='userEye'/>
                 <DeleteOutline className="userListDelete" onClick={''} />
             </div>
