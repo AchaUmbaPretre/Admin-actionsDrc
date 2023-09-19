@@ -110,7 +110,7 @@
         
     }
     .cell-paid {
-        background-color: rgb(4, 180, 4);
+        background-color: rgba(4, 180, 4, 0.747);
         color: white;
         padding: 2px 8px;
         border-radius: 10px;
@@ -119,7 +119,7 @@
       }
 
     .cell-not-paid {
-        background-color: red;
+        background-color: rgba(255, 0, 0, 0.637);
         color: white;
         padding: 2px 8px;
         border-radius: 10px

@@ -47,9 +47,7 @@ const Topbar = () => {
             <Menu className='topbar-img-title' />
         </div>
         <div className="topbar-right">
-          <Badge badgeContent={4} color="error">
-            <MailOutlineIcon className='topbar-icon'/>
-          </Badge>
+          <MailOutlineIcon className='topbar-icon'/>
           <NotificationsNoneIcon className='topbar-icon'/>
           <img src={admin} alt="" className="topbar-img" />
           <div className="topbar-row" onClick={handleMenu}>
