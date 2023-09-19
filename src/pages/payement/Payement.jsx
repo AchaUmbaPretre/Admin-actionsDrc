@@ -70,7 +70,18 @@ const Payement = () => {
         {
           field: 'methode_paiement',
           headerName: "Methode de payement",
-          width: 190,
+          width: 190,       renderCell: (params) => {
+            const status = params.value || 'Non spécifié';
+            let cellClassName = '';
+        
+            if (status === 'Virement') {
+              cellClassName = 'cell-paid';
+            } else {
+              cellClassName = 'cell-not-paid';
+            }
+        
+            return <div className={cellClassName}>{status}</div>;
+          },
       },
       {field: 'action', HeaderName: 'Action', width: 190, renderCell: (params) =>{
           return(

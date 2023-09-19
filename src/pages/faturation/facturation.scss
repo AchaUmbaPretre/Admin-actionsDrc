@@ -99,18 +99,21 @@
         }
     }
     .cell-paid {
-        background-color: rgb(4, 180, 4);
+        background-color: rgba(4, 180, 4, 0.829);
         color: white;
         padding: 2px 8px;
         border-radius: 10px;
         cursor: pointer;
+        font-size: .8rem;
       }
       
       .cell-not-paid {
-        background-color: red;
+        background-color: rgba(247, 32, 32, 0.829);
         color: white;
         padding: 2px 8px;
-        border-radius: 10px
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: .8rem;
       }
     .table-icons-row{
         display: flex;

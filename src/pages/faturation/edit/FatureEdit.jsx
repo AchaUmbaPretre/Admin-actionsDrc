@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import SendIcon from '@mui/icons-material/Send';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -16,6 +17,9 @@ const FatureEdit = () => {
   const [optionsStatus, setOptionsStatus] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedOptionClient, setSelectedOptionClient] = useState(null);
+  const [invoiceDate, setInvoiceDate] = useState('');
+  const [dueDate, setDueDate] = useState('');
+  const [totalAmount, setTotalAmount] = useState('');
 
   const id = location.pathname.split('/')[2];
 
@@ -60,17 +64,19 @@ const FatureEdit = () => {
   }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const {data} = await axios.get(`${DOMAIN}/api/admin/status`);
-        setOptionsStatus(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
+  useEffect(()=>{
+    
+    const fetchData = async ()=> {
+      try{
+          const res = await axios.get(`${DOMAIN}/api/admin/statusFacture`);
+          setOptionsStatus(res.data)
+  
+        }catch(error){
+          console.log(error)
+        };
+  }
+  fetchData()
+  }, [])
 
   console.log(data)
 
@@ -102,92 +108,60 @@ const FatureEdit = () => {
 
   return (
     <>
-      <div className="edit">
-        <div className="edit-wrapper">
-          <div className="edit-title">
-            <h2 className="edit-h2">Editer Facture</h2>
-          </div>
-          <form action="" className="formulaire-edit">
-            <div className="edit-rows">
-              <div className="edit-row">
-                <label htmlFor="" className="label-edit">
-                  Client <span>*</span>
-                </label>
-                <Select
-                  value={selectedOption}
-                  onChange={handleSelectChange}
-                  options={optionsClient.map((item) => ({
-                    value: item.id,
-                    label: item.company_name,
-                  }))}
-                  placeholder="Selectionnez un client..."
-                  className=""
-                />
-              </div>
-              <div className="edit-row">
-                <label htmlFor="" className="label-edit">
-                  Date de la facture <span>*</span>
-                </label>
-                <input
-                  type="date"
-                  value={moment(invoice_date).format('YYYY-MM-DD') || ''}
-                  name="invoice_date"
-                  className="input-form"
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+          <div className="clientForm">
+            <div className="clientForm-wrapper">
+              <form action="" className="form-center">
+              <h2>Editer la Facture</h2>
+                <div className="form-rows">
+                    <div className="form-row">
+                      <label htmlFor="" className="label-form">Client <span>*</span></label>
+                      <Select
+                      value={selectedOption}
+                      onChange={handleSelectChange}
+                      options={optionsClient.map((item) => ({
+                        value: item.id,
+                        label: item.company_name
+                      }))}
+                      placeholder="Selectionnez un client..."
+                      className=""
+                    />
+                    </div>
+                    <div className="form-row">
+                      <label htmlFor="" className="label-form">Date de la facture <span>*</span></label>
+                      <input type="date" value={moment(invoice_date).format('YYYY-MM-DD') || ''}  name="invoice_date" className="input-form" onChange={handleChange} />
+                    </div>
+                </div>
 
-            <div className="edit-rows">
-              <div className="edit-row">
-                <label htmlFor="" className="label-edit">
-                  Date d'échéance de la facture <span>*</span>
-                </label>
-                <input
-                  type="date"
-                  value={moment(due_date).format('YYYY-MM-DD') || ''}
-                  name="due_date"
-                  className="input-form"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="edit-row">
-                <label htmlFor="" className="label-edit">
-                  Montant total de la facture <span>*</span>
-                </label>
-                <input
-                  type="number"
-                  value={total_amount || ''}
-                  name="total_amount"
-                  className="input-form"
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
+                <div className="form-rows">
+                    <div className="form-row">
+                        <label htmlFor="" className="label-form">Date d'échéance de la facture<span>*</span></label>
+                        <input type="date" value={moment(due_date).format('YYYY-MM-DD') || ''} name='due_date' className="input-form" onChange={handleChange}/>
+                    </div>
+                    <div className="form-row">
+                        <label htmlFor="" className="label-form">Montant total de la facture<span>*</span></label>
+                        <input type="number" value={total_amount}  name='total_amount' className="input-form" onChange={handleChange} />
+                    </div>
+                </div>
 
-            <div className="edit-rows">
-              <div className="edit-row">
-                <label htmlFor="" className="label-edit">
-                  Statut de la facture <span>*</span>
-                </label>
-                <Select
-                  value={selectedOptionClient}
-                  onChange={handleSelectChanges}
-                  options={optionsStatus.map((item) => ({
-                  value: item.id,
-                  label: item.nom_status
-                  }))}
-                  placeholder="Selectionnez un statut..."
-                  className=""
-                />
-              </div>
+                <div className="form-rows">
+                    <div className="form-row">
+                        <label htmlFor="" className="label-form">Statut de la facture<span>*</span></label>
+                        <Select
+                        value={selectedOptionClient}
+                        onChange={handleSelectChanges}
+                        options={optionsStatus.map((item) => ({
+                          value: item.status,
+                          label: item.status
+                        }))}
+                        placeholder="Selectionnez un status..."
+                      />
+                    </div>
+                </div>
+                        
+                <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>
+              </form>
             </div>
-            <button className="edit-btn" onClick={handleClick}>
-              Edit
-            </button>
-          </form>
         </div>
-      </div>
     </>
   );
 };

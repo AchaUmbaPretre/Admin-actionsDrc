@@ -109,6 +109,7 @@ const FactureForm = ({handleModalClose}) => {
         <div className="clientForm">
             <div className="clientForm-wrapper">
               <form action="" className="form-center">
+              <h2>Facture</h2>
                 <div className="form-rows">
                     <div className="form-row">
                       <label htmlFor="" className="label-form">Client <span>*</span></label>
@@ -136,7 +137,7 @@ const FactureForm = ({handleModalClose}) => {
                     </div>
                     <div className="form-row">
                         <label htmlFor="" className="label-form">Montant total de la facture<span>*</span></label>
-                        <input type="number"  name='contact_name' className="input-form" onChange={(e)=>setTotalAmount(e.target.value)} />
+                        <input type="number"  name='total_amount' className="input-form" onChange={(e)=>setTotalAmount(e.target.value)} />
                     </div>
                 </div>
 
