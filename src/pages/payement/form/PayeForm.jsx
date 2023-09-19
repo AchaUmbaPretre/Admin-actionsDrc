@@ -13,7 +13,7 @@ const PayeForm = ({handleModalClose}) => {
   const [invoiceIds, setInvoiceIds] = useState('');
   const [paymentDate, setPaymentDate] = useState('');
   const [amount, setAmount] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState([]);
   
 
   const handleClick = async (e) => {
@@ -29,7 +29,6 @@ const PayeForm = ({handleModalClose}) => {
       });
 
       const paymentId = response.data.payment_id;
-      window.location.reload();
       Swal.fire({
         icon: 'success',
         title: 'Facture créée avec succès',
@@ -44,7 +43,7 @@ const PayeForm = ({handleModalClose}) => {
       setPaymentMethod('');
 
       navigate('/payement')
-
+      window.location.reload();
     } catch (error) {
       console.error('Erreur lors de la création du payement :', error);
       Swal.fire({
@@ -54,7 +53,21 @@ const PayeForm = ({handleModalClose}) => {
       });
     }
   };
+  useEffect(()=>{
+    
+    const fetchData = async ()=> {
+      try{
+          const res = await axios.get(`${DOMAIN}/api/admin/paiementMethode`);
+          setPaymentMethod(res.data)
+  
+        }catch(error){
+          console.log(error)
+        };
+  }
+  fetchData()
+  }, [])
 
+  console.log(paymentMethod)
   return (
     <>
         <div className="clientForm">
@@ -94,12 +107,10 @@ const PayeForm = ({handleModalClose}) => {
                     <div className="form-row">
                         <label htmlFor="" className="label-form">Méthode de paiement <span>*</span></label>
                         <Select
-                          options={[
-                            { value: 'espèces', label: 'espèces' },
-                            { value: 'chèque', label: 'chèque' },
-                            { value: 'virement', label: 'virement' }
-                          ]}
-                          value={{ value: paymentMethod, label: paymentMethod }}
+                          options={paymentMethod && Array.isArray(paymentMethod) ? paymentMethod.map(item => ({
+                            value: item.id,
+                            label: item.nom
+                          })) : []}
                           onChange={(selectedOption) => setPaymentMethod(selectedOption.value)}
                         />
                     </div>

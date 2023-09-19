@@ -1,9 +1,12 @@
 import React from 'react'
+import './paiementView.scss'
 
 const PaiementView = () => {
   return (
     <>
-        aaaaaaaaaa
+        <div className="paiement">
+            
+        </div>
 
     </>
   )

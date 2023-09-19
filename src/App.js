@@ -54,6 +54,7 @@ import ContratFonction from './pages/fonctions/contratFonction/ContratFonction';
 import ContratFonctionEdit from './pages/fonctions/fonctionEdit/ContratFonctEdit';
 import FonctionView from './pages/fonctions/fonctionView/FonctionView';
 import PaiementView from './pages/payement/paiementView/PaiementView';
+import PaiementEdit from './pages/payement/paiementEdit/PaiementEdit';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -264,6 +265,10 @@ function App() {
         {
           path: '/payementView/:id',
           element: <PaiementView />
+        },
+        {
+          path: '/payementEdit/:id',
+          element: <PaiementEdit />
         },
         {
           path: '/horaire',

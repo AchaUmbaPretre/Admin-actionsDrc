@@ -60,6 +60,7 @@ const PaiementEdit = ({handleModalClose}) => {
         <div className="clientForm">
             <div className="clientForm-wrapper">
               <form action="" className="form-center">
+                <h2>Editer la facture</h2>
                 <div className="form-rows">
                     <div className="form-row">
                       <label htmlFor="" className="label-form">ID de la facture : <span>*</span></label>

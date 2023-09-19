@@ -68,7 +68,7 @@ const Payement = () => {
             width: 180,renderCell: (params) => `${params.value} $`
         },
         {
-          field: 'payment_method',
+          field: 'methode_paiement',
           headerName: "Methode de payement",
           width: 190,
       },
@@ -78,7 +78,7 @@ const Payement = () => {
                 <div className="table-icons-row">
                   <div className="userOvert0">
                     <Link onClick={''}>
-                      <EditOutlined className="userListBtn" />
+                      <EditOutlined className="userListBtn" onClick={() => navigate(`/payementEdit/${params.row.id}`)} />
                       <span className='userOvert'>Modifier</span>
                     </Link>
                   </div>
@@ -100,7 +100,7 @@ const Payement = () => {
 
         const fetchData = async ()=> {
             try{
-                const res = await axios.get(`${DOMAIN}/api/admin/payementAll`);
+                const res = await axios.get(`${DOMAIN}/api/admin/payement`);
                 setData(res.data)
                 setLoading(false);
               }catch(error){

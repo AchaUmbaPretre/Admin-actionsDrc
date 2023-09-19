@@ -108,9 +108,21 @@ const Facturation = () => {
     {
       field: 'status',
       headerName: 'Statut de la facture',
-      width: 140 
+      width: 140,
+      renderCell: (params) => {
+        const status = params.value || 'Non spécifié';
+        let cellClassName = '';
+    
+        if (status === 'Payée') {
+          cellClassName = 'cell-paid';
+        } else {
+          cellClassName = 'cell-not-paid';
+        }
+    
+        return <div className={cellClassName}>{status}</div>;
+      },
     },
-    {field: 'action', HeaderName: 'Action', width: 160, renderCell: (params) =>{
+    {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
         return(
           <>
             <div className="table-icons-row">
