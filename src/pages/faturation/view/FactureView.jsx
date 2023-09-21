@@ -7,6 +7,8 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import TroubleshootIcon from '@mui/icons-material/Troubleshoot';
 import config from '../../../config'
 import moment from 'moment';
+import "./../view/factureView.scss"
+import actions from '../../../assets/actionssarl.PNG'
 
 const FactureView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -32,34 +34,57 @@ const FactureView = () => {
 
   return (
     <>
-        <div className="contrat-View">
-            <div className="clientView-wrapper">
-                <h2 className="client-title">FACTURE N° {data?.id}</h2>
-                <div className="client-rows">
-                    <div className="client-row">
-                        <span className="client-nom"><Person2Outlined/> Client :</span>
-                        <span className="client-nom">{data?.company_name}</span>
+        <div className="facture-View">
+            <div className="facture-wrapper">
+                <div className="facture-title">
+                    <h1 className="facture-title-h1">Facture N° {data.id}</h1>
+                    <img src={actions} alt="" className="facture-logo" />
+                </div>
+                <div className="facture-center">
+                    <div className="facture-center-row">
+                        <h2 className="facture-h2">Client : </h2>
+                        <div className="facture-info">
+                            <h3 className="facture-h3">{data.company_name}</h3>
+                            <span className="facture-adress">33, C/Matete Q/mutoto</span>
+                        </div>
                     </div>
-                    <div className="client-row">
-                        <span className="client-nom"><CalendarMonth/>  Date de la facture :</span>
-                        <span className="client-nom">{formattedDateVoice}</span>
+                    <div className="facture-center-row1">
+                        <table>
+                            <tr>
+                                <th>Date de facturation</th>
+                                <th>Numéro de facture</th>
+                                <th>Date d'échéance</th>
+                                <th>Status</th>
+                                <th>Montant</th>
+                            </tr>
+                            <tr>
+                                <td>{formattedDateVoice}</td>
+                                <td>{data.id}</td>
+                                <td>{formattedDate}</td>
+                                <td>{data.status}</td>
+                                <td>{data.total_amount} $</td>
+                            </tr>
+                        </table>
                     </div>
-
-                    <div className="client-row">
-                        <span className="client-nom"><CalendarMonth/>  Date d'échéance :</span>
-                        <span className="client-nom">{formattedDate}</span>
+                    <div className="facture-right">
+                        <h3 className="facture-h4">Informations additionnelles :</h3>
                     </div>
-
-                    <div className="client-row">
-                        <span className="client-nom"><MonetizationOnIcon/>  Montant total :</span>
-                        <span className="client-nom">{data?.total_amount}$</span>
-                    </div>
-
-                    <div className="client-row">
-                        <span className="client-nom"><TroubleshootIcon/>  Statut de la facture :</span>
-                        <span className="client-nom">{data?.status}</span>
-                    </div>
-
+                </div>
+                <div className="facture-bottom">
+                    <table>
+                        <tr>
+                            <th>Prix unitaire HT</th>
+                            <th>% TVA</th>
+                            <th>Total TVA</th>
+                            <th>Total TTC</th>
+                        </tr>
+                        <tr>
+                            <td>Peter</td>
+                            <td>Griffin</td>
+                            <td>$100</td>
+                            <td>$100</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>

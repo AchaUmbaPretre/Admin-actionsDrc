@@ -80,9 +80,8 @@ const MissiAff = () => {
 
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 60 },
-    { field: 'first_name', headerName: "Employé(e)", width: 100 },
-    { field: 'last_name', headerName: 'Prenom', width: 100 },
+    { field: 'first_name', headerName: "Employé(e)", width: 125 },
+    { field: 'last_name', headerName: 'Prenom', width: 125 },
     {
       field: 'checkbox',
       headerName: 'Sélectionner',
@@ -113,12 +112,11 @@ const MissiAff = () => {
 
  
   const horaireTable = [
-    { field: 'id', headerName: 'ID', width: 50 },
-    { field: 'days', headerName: 'Jour de la semaine', width: 80 },
+    { field: 'days', headerName: 'Jour de la semaine', width: 100 },
     {
       field: 'start_time',
       headerName: 'Heure début',
-      width: 100,
+      width: 150,
       renderCell: (params) => {
         return (
           <input
@@ -133,7 +131,7 @@ const MissiAff = () => {
     {
       field: 'end_time',
       headerName: 'Heure fin',
-      width: 100,
+      width: 150,
       renderCell: (params) => {
         return (
           <input
@@ -148,7 +146,7 @@ const MissiAff = () => {
     {
       field: 'checkbox',
       headerName: 'Sélectionner',
-      width: 80,
+      width: 100,
       renderCell: (params) => {
         const isChecked = selectedIds1.includes(params.row.id);
         return (

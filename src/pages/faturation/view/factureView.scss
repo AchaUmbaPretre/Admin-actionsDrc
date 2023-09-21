@@ -1,0 +1,99 @@
+.facture-View{
+    
+    .facture-wrapper{
+        background: #fff;
+        padding: 40px;
+        .facture-title{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .facture-title-h1{
+                font-size: 2.5rem;
+                color: #253053;
+            }
+            .facture-logo{
+                width: 120px;
+                height: 120px;
+                border-radius: 10%;
+                object-fit: cover;
+            }
+        }
+        .facture-center{
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            .facture-center-row{
+                padding: 0px 10px;
+                width: 50%;
+                display: flex;
+                justify-content: space-between;
+                .facture-h2{
+                    font-size: 1.5rem;
+                    color: #253053;
+                }
+                .facture-info{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 5px;
+                    .facture-h3{
+                        font-size: 1rem;
+                        color: #555;
+                    }
+                    .facture-adress{
+                        font-size: .7rem;
+                        color: #555;
+                    }
+                }
+            }
+            .facture-center-row1{
+                table{
+                    border-collapse: collapse;
+                    width: 100%;
+                    tr{
+                        th{
+                            padding: 10px 0;
+                            text-align: left;
+                            border-bottom: 1px solid #ddd;
+                            color: #253053;
+                            font-weight: 600;
+                        }
+                        td{
+                            padding: 10px 0;
+                            text-align: left;
+                            color: #253053;
+                            font-size: .9rem;
+                        } 
+                    } 
+                }
+            }
+            .facture-right{
+                .facture-h4{
+                    color: #253053;
+                }
+            }
+        }
+        .facture-bottom{
+            margin-top: 40px;
+            table{
+                border-collapse: collapse;
+                width: 100%;
+                tr{
+                    th{
+                        padding: 10px 8px;
+                        text-align: left;
+                        background: #253053;
+                        color: #fff;
+                        font-weight: 300;
+                    }
+                    td{
+                        padding: 10px 8px;
+                        text-align: left;
+                        border-bottom: 1px solid #ddd;
+                        color: #253053;
+                        font-size: .9rem;
+                    } 
+                } 
+            }
+        }
+    }
+}
