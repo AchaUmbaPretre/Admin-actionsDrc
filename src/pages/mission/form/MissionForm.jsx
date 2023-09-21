@@ -113,18 +113,6 @@ const MissionForm = ({handleModalClose}) => {
           </div>
           <form action="" className="formulaire-edit">
             <div className="edit-rows">
-              {/* <div className="edit-row">
-                <label htmlFor="" className="label-edit">Contrat<span>*</span></label>
-                <Select
-                  name="agent_id"
-                  onChange={(selectedOption) => handleChange(selectedOption, "contrat_id")}
-                  options={options.map((item) => ({
-                    value: item.id,
-                    label: item.contract_type
-                  }))}
-                  
-                />
-              </div> */}
               <div className="edit-row">
                 <label htmlFor="" className="label-edit">Client <span>*</span></label>
                 <Select
@@ -134,45 +122,9 @@ const MissionForm = ({handleModalClose}) => {
                     value: item.id,
                     label: item.company_name
                   }))}
-                  
                 />
               </div>
             </div>
-
-{/*             <div className="edit-rows">
-              <div className="edit-row">
-                <label htmlFor="" className="label-edit">Date de début<span>*</span></label>
-                <input
-                  type="date"
-                  name="dateEntrant"
-                  onChange={(e) => handleDateChange(e.target.value, "dateEntrant")}
-                  className="input-form"
-                />
-              </div>
-              <div className="edit-row">
-                <label htmlFor="" className="label-edit">Date de fin <span>*</span></label>
-                <input
-                  type="date"
-                  name="dateSortant"
-                  onChange={(e) => handleDateChange(e.target.value, "dateSortant")}
-                  className="input-form"
-                />
-              </div>
-            </div> */}
-
-            {/* <div className="edit-rows">
-              <div className="edit-row">
-                <label htmlFor="" className="label-edit">Sites <span>*</span></label>
-                <Select
-                  name="nom_site"
-                  onChange={(selectedOption) => handleChange(selectedOption, "nom_site")}
-                  options={sites.map((item) => ({
-                    value: item.id,
-                    label: item.nom_site
-                  }))}
-                />
-              </div>
-            </div> */}
             <button className="edit-btn" onClick={handleClick}>Recherche</button>
           </form>
         </div>
