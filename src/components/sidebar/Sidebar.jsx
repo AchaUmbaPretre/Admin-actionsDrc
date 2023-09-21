@@ -1,5 +1,5 @@
 import './sidebar.scss'
-import {Link} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 import HomeIcon from '@mui/icons-material/Home';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
@@ -16,6 +16,8 @@ import FollowTheSignsOutlinedIcon from '@mui/icons-material/FollowTheSignsOutlin
 import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
 
 const Sidebar = () => {
+  const  location = useLocation();
+  console.log(location.pathname);
   const [activeItem, setActiveItem] = useState('Accueil');
   return (
     <>
@@ -25,17 +27,17 @@ const Sidebar = () => {
               <img src={actions} alt="" className='sidenav-img'/>
             </div>
             <ul className="sidebar-ul">
-              <li className={`sidenav-li ${activeItem === 'Accueil' ? 'active' : ''}`}><HomeIcon className='sidebar-icon'/><Link to="/" onClick={() => setActiveItem('Accueil')}>Accueil</Link></li>
-              <li className={`sidenav-li ${activeItem === 'Personnel' ? 'active' : ''}`}><PersonOutlineIcon className='sidebar-icon'/><Link to={"/personnel"} onClick={() => setActiveItem('Personnel')}>Personnel</Link></li>
-              <li className={`sidenav-li ${activeItem === 'Contrats' ? 'active' : ''}`}><FlakyIcon className='sidebar-icon'/><Link to={"/contrats"} onClick={() => setActiveItem('Contrats')}>Contrats</Link></li>
-              <li className={`sidenav-li ${activeItem === 'Affectation' ? 'active' : ''}`}><ShowChartIcon className='sidebar-icon'/><Link to={"/affectation"} onClick={() => setActiveItem('Affectation')}>Affectation</Link></li>
-              <li className={`sidenav-li ${activeItem === 'Mission' ? 'active' : ''}`}><AssignmentIndIcon className='sidebar-icon'/><Link to={"/mission"} onClick={() => setActiveItem('Mission')}>Mission</Link></li>
-              <li className={`sidenav-li ${activeItem === 'Client' ? 'active' : ''}`}><GroupsIcon className='sidebar-icon'/><Link to={"/client"} onClick={() => setActiveItem('Client')}>Client</Link></li>
-              <li className={`sidenav-li ${activeItem === 'Fonction' ? 'active' : ''}`}><FollowTheSignsOutlinedIcon className='sidebar-icon'/><Link to={"/fonction"} onClick={() => setActiveItem('Fonction')}>Fonctions</Link></li>
+              <li className={`sidenav-li ${location.pathname === '/' ? 'active' : ''}`}><HomeIcon className='sidebar-icon'/><Link to="/">Accueil</Link></li>
+              <li className={`sidenav-li ${location.pathname === '/personnel' ? 'active' : ''}`}><PersonOutlineIcon className='sidebar-icon'/><Link to={"/personnel"}>Personnel</Link></li>
+              <li className={`sidenav-li ${location.pathname === '/contrats' ? 'active' : ''}`}><FlakyIcon className='sidebar-icon'/><Link to={"/contrats"} >Contrats</Link></li>
+              <li className={`sidenav-li ${location.pathname === '/affectation' ? 'active' : ''}`}><ShowChartIcon className='sidebar-icon'/><Link to={"/affectation"}>Affectation</Link></li>
+              <li className={`sidenav-li ${location.pathname  === '/mission' ? 'active' : ''}`}><AssignmentIndIcon className='sidebar-icon'/><Link to={"/mission"} >Mission</Link></li>
+              <li className={`sidenav-li ${location.pathname  === '/client' ? 'active' : ''}`}><GroupsIcon className='sidebar-icon'/><Link to={"/client"} >Client</Link></li>
+              <li className={`sidenav-li ${location.pathname  === '/fonction' ? 'active' : ''}`}><FollowTheSignsOutlinedIcon className='sidebar-icon'/><Link to={"/fonction"}>Fonctions</Link></li>
 {/*               <li className={`sidenav-li ${activeItem === 'Horaires de travail' ? 'active' : ''}`}><AccessTimeIcon className='sidebar-icon'/><Link to={"/horaireAll"} onClick={() => setActiveItem('Horaires de travail')}>Horaires de travail</Link></li> */}
-              <li className={`sidenav-li ${activeItem === 'Presence' ? 'active' : ''}`}><ChecklistRtlIcon className='sidebar-icon'/><Link to={"/presence"} onClick={() => setActiveItem('Presence')}>Presence</Link></li>
-              <li className={`sidenav-li ${activeItem === 'Facturation' ? 'active' : ''}`}><FactCheckOutlinedIcon className='sidebar-icon'/><Link to={"/facturation"} onClick={() => setActiveItem('Facturation')}>Facturation</Link></li>
-              <li className={`sidenav-li ${activeItem === 'Payement' ? 'active' : ''}`}><AttachMoneyIcon className='sidebar-icon'/><Link to={"/payement"} onClick={() => setActiveItem('Payement')}>Paiement</Link></li>
+              <li className={`sidenav-li ${location.pathname  === '/presence' ? 'active' : ''}`}><ChecklistRtlIcon className='sidebar-icon'/><Link to={"/presence"} >Presence</Link></li>
+              <li className={`sidenav-li ${location.pathname  === '/facturation' ? 'active' : ''}`}><FactCheckOutlinedIcon className='sidebar-icon'/><Link to={"/facturation"}>Facturation</Link></li>
+              <li className={`sidenav-li ${location.pathname  === '/payement' ? 'active' : ''}`}><AttachMoneyIcon className='sidebar-icon'/><Link to={"/payement"}>Paiement</Link></li>
 {/*               <li className="sidenav-li"><FormatListNumberedIcon className='sidebar-icon'/><Link to={"/listeConge"}>Liste de congé</Link></li> */}
             </ul>
           </div>

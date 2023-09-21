@@ -41,6 +41,7 @@ const MissiAff = () => {
     { id: 5, start_time: '', end_time: '' },
     { id: 6, start_time: '', end_time: '' },
     { id: 7, start_time: '', end_time: '' },
+    { id: 8, start_time: '', end_time: '' },
   ])
   const clientId = searchParams.get('client_id');
 
@@ -50,8 +51,8 @@ const MissiAff = () => {
         item.id === id ? { ...item, [field]: value } : item
       )
     );
-  };  
-  console.log(horaireTables)
+  };
+  
   
   const handleCheckboxChange = (id) => {
     if (selectedIds.includes(id)) {
@@ -213,12 +214,6 @@ const MissiAff = () => {
   
     fetchAgentsAffectes();
   }, []);
-
-  console.log(datas, 'rrrr')
-  console.log(selectedIds1)
-  console.log(selectedIds)
-  console.log(heureDebut,heureFin)
-
 
 
   const handleClick = async (e) => {

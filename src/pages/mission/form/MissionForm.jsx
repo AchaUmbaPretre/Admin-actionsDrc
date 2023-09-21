@@ -173,7 +173,7 @@ const MissionForm = ({handleModalClose}) => {
                 />
               </div>
             </div> */}
-            <button className="edit-btn" onClick={handleClick}>Envoyer</button>
+            <button className="edit-btn" onClick={handleClick}>Recherche</button>
           </form>
         </div>
       </div>

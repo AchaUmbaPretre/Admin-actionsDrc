@@ -44,7 +44,6 @@ const Mission = () => {
 
 
      useEffect(()=>{
-
       const fetchData = async ()=> {
           try{
               const {data} = await axios.get(`${DOMAIN}/api/admin/allmission`);
@@ -93,14 +92,14 @@ const Mission = () => {
         );
       
         const groupedData = uniqueData.reduce((acc, row) => {
-          const { idEmploye, ...rest } = row;
-          if (!acc[idEmploye]) {
-            acc[idEmploye] = {
-              idEmploye,
+          const { agent_id, ...rest } = row;
+          if (!acc[agent_id]) {
+            acc[agent_id] = {
+              agent_id,
               rows: [rest],
             };
           } else {
-            acc[idEmploye].rows.push(rest);
+            acc[agent_id].rows.push(rest);
           }
           return acc;
         }, {});
@@ -144,7 +143,7 @@ const Mission = () => {
                 </Box>
               </TableCell>
               <TableCell>{group.rows[0].company_name}</TableCell>
-              <TableCell>{group.first_name}</TableCell>
+              <TableCell>{group.rows[0].first_name}</TableCell>
               <TableCell>{group.rows[0].days}</TableCell>
               <TableCell>{group.rows[0].heureEntrant.substring(0, 5)}</TableCell>
               <TableCell>{group.rows[0].heureSortant.substring(0, 5)}</TableCell>
@@ -156,7 +155,7 @@ const Mission = () => {
                   <DeleteOutline
                     className="userListDelete"
                     onClick={() => {
-                      handleDelete(group.rows[0].id);
+                      handleDelete(group.agent_id);
                     }}
                   />
                 </div>
@@ -168,18 +167,22 @@ const Mission = () => {
                   <TableContainer>
                     <Table>
                       <TableHead>
-                        <TableRow>
-                          <TableCell>Jour</TableCell>
-                          <TableCell>Heure de début</TableCell>
-                          <TableCell>Heure fin</TableCell>
+                        <TableRow style={{ background: "#253053"}}>
+                          <TableCell style={{color: "white"}}>Jour du travail</TableCell>
+                          <TableCell style={{color: "white"}}>Heure de début</TableCell>
+                          <TableCell style={{color: "white"}}>Heure fin</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {group.rows.map((row) => (
                           <TableRow key={row.id}>
                             <TableCell>{row.days}</TableCell>
-                            <TableCell>{row.heureEntrant.substring(0, 5)}</TableCell>
-                            <TableCell>{row.heureSortant.substring(0, 5)}</TableCell>
+                            <TableCell style={{ background: row.heureEntrant.substring(0, 5) === "Fermé" ? "#eeeeee" : "transparent", color: row.heureEntrant.substring(0, 5) === "Fermé" ? "black" : "black" }}>
+                              {row.heureEntrant.substring(0, 5)}
+                            </TableCell>
+                            <TableCell style={{ background: row.heureSortant.substring(0, 5) === "Fermé" ? "#eeeeee" : "transparent", color: row.heureSortant.substring(0, 5) === "Fermé" ? "black" : "black" }}>
+                              {row.heureSortant.substring(0, 5)}
+                            </TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
