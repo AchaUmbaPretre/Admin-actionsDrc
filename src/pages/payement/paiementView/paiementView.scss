@@ -7,4 +7,51 @@
     flex-direction: column;
     gap: 20px;
     border-radius: 5px;
+    background: #fff;
+    .paiement-wrapper{
+        padding: 30px;
+        width: 100%;
+        .paiement-tete{
+            .paiement-logo{
+                width: 130px;
+                height: 130px;
+            }
+        }
+        .paiement-row-title{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 40px 0px;
+            .span-paiement-color{
+                display: block;
+                background: #253053;
+                width: 300px;
+                height: 25px;
+            }
+            .paiement-h2{
+                text-align: center;
+                font-size: 2.5rem;
+                color: #253053;
+            }
+        }
+        .paiement-form{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            .paiement-form-row{
+                display: flex;
+                align-items: center;
+                gap: 30px;
+                .paiement-h3{
+                    font-size: 1.5rem;
+                    color: #253053;
+                }
+                .paiement-span{
+                    flex: 1;
+                    color: #253053;
+                }
+            }
+        }
+    }
 }
