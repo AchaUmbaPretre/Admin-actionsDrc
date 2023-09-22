@@ -33,8 +33,6 @@ const style = {
     borderRadius: 2,
   }
 
-
-
 const Payement = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const navigate = useNavigate();
@@ -44,8 +42,7 @@ const Payement = () => {
 
     const handleSelectionChange = (newSelection) => {
       setSelected(newSelection.selectionModel);
-    };
-    
+    }; 
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -53,24 +50,23 @@ const Payement = () => {
 
   
      const columns = [
-        { field: 'id', headerName: 'ID', width: 100 },
-        { field: 'invoice_id', headerName: 'ID_facture', width: 180 },
+        { field: 'invoice_id', headerName: 'Id de facture', width: 190 },
         {
           field: 'payment_date',
           headerName: 'Date de payement',
-          width: 180,
+          width: 200,
           valueGetter: (params) =>
           format(new Date(params.row.payment_date), 'yyyy-MM-dd'),
         },
         {
             field: 'amount',
             headerName: 'Montant',
-            width: 180,renderCell: (params) => `${params.value} $`
+            width: 200,renderCell: (params) => `${params.value} $`
         },
         {
           field: 'methode_paiement',
           headerName: "Methode de payement",
-          width: 190,       renderCell: (params) => {
+          width: 200,       renderCell: (params) => {
             const status = params.value || 'Non spécifié';
             let cellClassName = '';
         
@@ -83,7 +79,7 @@ const Payement = () => {
             return <div className={cellClassName}>{status}</div>;
           },
       },
-      {field: 'action', HeaderName: 'Action', width: 190, renderCell: (params) =>{
+      {field: 'action', HeaderName: 'Action', width: 200, renderCell: (params) =>{
           return(
               <>
                 <div className="table-icons-row">
@@ -108,7 +104,6 @@ const Payement = () => {
       ]; 
 
      useEffect(()=>{
-
         const fetchData = async ()=> {
             try{
                 const res = await axios.get(`${DOMAIN}/api/admin/payement`);
