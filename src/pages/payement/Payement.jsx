@@ -176,7 +176,7 @@ const Payement = () => {
                 </div>
                 <div className="personPdf">
                   <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
-                  <Link className="personnel-btn-pdf" onClick={() => navigate('/personpdfTable')}><PictureAsPdfIcon/>Pdf</Link>
+                  <Link className="personnel-btn-pdf" onClick={() => navigate('/payementPdf')}><PictureAsPdfIcon/>Pdf</Link>
                   <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
                 </div>
                 <Modal
