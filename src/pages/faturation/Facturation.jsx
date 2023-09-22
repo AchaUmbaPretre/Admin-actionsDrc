@@ -1,6 +1,6 @@
 import { DataGrid } from '@mui/x-data-grid'
 import { Link, useNavigate } from 'react-router-dom';
-import { DeleteOutline} from '@mui/icons-material';
+import { DeleteOutline, EditOutlined, VisibilityOutlined} from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
@@ -20,6 +20,7 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import config from '../../config'
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
+import Visibility from '@mui/icons-material/Visibility';
 
 const style = {
   position: 'absolute',
@@ -123,12 +124,39 @@ const Facturation = () => {
       },
     },
     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
+      const handleEdit = () => {
+        Swal.fire({
+          title: 'Confirmation',
+          text: 'Voulez-vous vraiment modifier ?',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Oui',
+          cancelButtonText: 'Non',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate(`/facturationPut/${params.row.id}`);
+          }
+        });
+      }
         return(
           <>
             <div className="table-icons-row">
-                <Link to={`/facturationPut/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
-                <VisibilityIcon className='userEye' onClick={() => navigate(`/facturationView/${params.row.id}`)}/>
-                <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
+            <div className="userOvert0">
+                    <Link>
+                      <EditOutlined className="userListBtn" onClick={handleEdit} />
+                      <span className='userOvert'>Modifier</span>
+                    </Link>
+                  </div>
+                  <div className="userOvert1">
+                    <VisibilityOutlined className='userEye' onClick={() => navigate(`/facturationView/${params.row.id}`)} />
+                    <span className='userOvert'>détail</span>
+                  </div>
+                  <div className="userOvert2">
+                    <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
+                    <span className='userOvert'>Supprimer</span>
+                  </div>
             </div>
           </>
 
@@ -171,7 +199,7 @@ const Facturation = () => {
               <FactCheckIcon className='contrats-icon'/>
               <div className="contrats-info">
                   <h2 className="contrats-title">Facturation</h2>
-                  <span className="contrats-span">Liste des facturation</span>
+                  <span className="contrats-span">Liste des facturations</span>
               </div>
           </div>
           <div className="personPdf">
@@ -179,7 +207,7 @@ const Facturation = () => {
             <Link className="personnel-btn-pdf" onClick={() => navigate('/facturationPdf')}><PictureAsPdfIcon/>Pdf</Link>
             <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
           </div>
-          <Modal
+            <Modal
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"
                     open={open}

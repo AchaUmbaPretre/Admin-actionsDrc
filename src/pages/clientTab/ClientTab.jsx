@@ -3,7 +3,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { DataGrid } from '@mui/x-data-grid'
 import { Link } from 'react-router-dom';
-import { AddCircleOutline, DeleteOutline} from '@mui/icons-material';
+import { DeleteOutline, EditOutlined, AddCircleOutline, VisibilityOutlined } from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { useEffect, useState } from 'react';
@@ -92,9 +92,20 @@ const ClientTab = () => {
         return(
           <>
             <div className="table-icons-row">
-                <Link onClick={handleEdit}><ModeEditOutlineIcon className='userListBtn'/></Link>
-                <VisibilityIcon className='userEye' onClick={() => navigate(`/viewsClient/${params.row.id}`)}/>
-                <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
+                <div className="userOvert0">
+                  <Link onClick={handleEdit}>
+                    <ModeEditOutlineIcon className='userListBtn'/>
+                    <span className='userOvert'>Modifier</span>
+                  </Link>
+                </div>
+                <div className="userOvert1">
+                  <VisibilityOutlined className='userEye' onClick={() => navigate(`/viewsClient/${params.row.id}`)} />
+                  <span className='userOvert'>détail</span>
+                </div>
+                <div className="userOvert2">
+                  <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
+                  <span className='userOvert'>Supprimer</span>
+                </div>
             </div>
           </>
         )

@@ -68,6 +68,7 @@ const FactureView = () => {
                     </div>
                     <div className="facture-right">
                         <h3 className="facture-h4">Informations additionnelles :</h3>
+                        <span>Merci d'avoir choisi notre entreprise pour nos services </span>
                     </div>
                 </div>
                 <div className="facture-bottom">

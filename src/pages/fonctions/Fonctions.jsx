@@ -2,7 +2,7 @@ import './../../pages/listeConge/listeConge.scss'
 import { DataGrid } from '@mui/x-data-grid'
 import { Link, useNavigate } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
-import { DeleteOutline} from '@mui/icons-material';
+import { DeleteOutline, EditOutlined, AddCircleOutline, VisibilityOutlined} from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import config from './../../config'
 import axios from 'axios';
 import ContratFonction from './contratFonction/ContratFonction';
+import Swal from 'sweetalert2';
 
 const style = {
     position: 'absolute',
@@ -65,23 +66,47 @@ const Fonctions = () => {
         width: 150, renderCell: (params) => `${params.value} $`
     },
     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
+      const handleEdit = () => {
+        Swal.fire({
+          title: 'Confirmation',
+          text: 'Voulez-vous vraiment modifier ?',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Oui',
+          cancelButtonText: 'Non',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate(`/contratFonctionEdit/${params.row.id}`);
+          }
+        });
+      }
         return(
           <>
             <div className="table-icons-row">
-                <Link to={`/contratFonctionEdit/${params.row.id}`}><ModeEditOutlineIcon className='userListBtn'/></Link>
-                <VisibilityIcon className='userEye' onClick={() => navigate(`/fonctionView/${params.row.id}`)}/>
-                <DeleteOutline className="userListDelete" onClick={''} />
+                <div className="userOvert0">
+                  <Link onClick={handleEdit}>
+                    <ModeEditOutlineIcon className='userListBtn'/>
+                    <span className='userOvert'>Modifier</span>
+                  </Link>
+                </div>
+                <div className="userOvert1">
+                  <VisibilityOutlined className='userEye' onClick={() => navigate(`/fonctionView/${params.row.id}`)} />
+                  <span className='userOvert'>détail</span>
+                </div>
+                <div className="userOvert2">
+                  <DeleteOutline className="userListDelete" onClick={() => { handleDelete(params.row.id) }} />
+                  <span className='userOvert'>Supprimer</span>
+                </div>
             </div>
           </>
-
         )
     }},
   ];
 
   
-
   useEffect(()=>{
-
     const fetchData = async ()=> {
         try{
             const {data} = await axios.get(`${DOMAIN}/api/admin/contratInfo`);
@@ -93,6 +118,29 @@ const Fonctions = () => {
     }
     fetchData()
  }, [])
+
+ const handleDelete = async (id) => {
+  try {
+    const result = await Swal.fire({
+      title: 'Es-tu sûr?',
+      text: "Vous ne pourrez pas revenir en arrière !",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, supprimez-le!'
+    });
+
+    if (result.isConfirmed) {
+      await axios.delete(`${DOMAIN}/api/admin/contratInfo/${id}`);
+      window.location.reload();
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
 
   return (
     <>

@@ -67,8 +67,15 @@
                 }
             }
             .facture-right{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
                 .facture-h4{
                     color: #253053;
+                }
+                span{
+                    color: #253053;
+                    font-size: .9rem;
                 }
             }
         }

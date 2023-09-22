@@ -44,11 +44,11 @@ const PaiementView = () => {
               </div>
               <div className="paiement-form-row">
                 <span className="paiement-span">Nom : </span>
-                <span className="paiement-span">Kilolo</span>
+                <span className="paiement-span">{data.company_name}</span>
               </div>
               <div className="paiement-form-row">
                 <span className="paiement-span">Adresse : </span>
-                <span className="paiement-span">Kilolo</span>
+                <span className="paiement-span">{data.address}</span>
               </div>
               <div className="paiement-form-row">
                 <span className="paiement-span">Date : </span>

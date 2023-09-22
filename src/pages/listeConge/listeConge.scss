@@ -100,6 +100,21 @@
     .table-icons-row{
         display: flex;
         gap: 10px;
+        .userOvert0{
+            position: relative;
+            &:hover .userOvert{
+                transform: scale(1.1);
+                opacity: 1.1;
+            }
+            .userOvert{
+                color: #3bb077;
+                position: absolute;
+                top: -15px;
+                left: -10px;
+                right: 0;
+                opacity: 0;
+            }
+        }
         .userOvert1{
             position: relative;
             &:hover .userOvert{

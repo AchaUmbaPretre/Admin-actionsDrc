@@ -141,12 +141,10 @@ const Mission = () => {
 {/*                   <Link to={`/missionEdite/${group.rows[0].id}`}>
                     <ModeEditOutlineIcon className='userListBtn' />
                   </Link> */}
-                  <DeleteOutline
-                    className="userListDelete"
-                    onClick={() => {
-                      handleDelete(group.agent_id);
-                    }}
-                  />
+                  <div className="userOvert2">
+                    <DeleteOutline className="userListDelete" onClick={() => { handleDelete(group.agent_id) }} />
+                    <span className='userOvert'>Supprimer</span>
+                  </div>
                 </div>
               </TableCell>
             </TableRow>

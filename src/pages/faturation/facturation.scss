@@ -126,6 +126,84 @@
                 transform: scale(1.1);
             }
         }
+        .userOvert0{
+            position: relative;
+            &:hover .userOvert{
+                transform: scale(1.1);
+                opacity: 1.1;
+            }
+            .userOvert{
+                color: #3bb077;
+                position: absolute;
+                top: -15px;
+                left: -10px;
+                right: 0;
+                opacity: 0;
+            }
+        }
+        .userOvert1{
+            position: relative;
+            &:hover .userOvert{
+                transform: scale(1.1);
+                opacity: 1.1;
+            }
+            .userEye{
+                color: rgba(21, 50, 136, 0.801);
+                cursor: pointer;
+            }
+            .userOvert{
+                color: royalblue;
+                position: absolute;
+                top: -15px;
+                left: 0;
+                right: 0;
+                opacity: 0;
+            }
+        }
+        .userOvert2{
+            position: relative;
+            &:hover .userOvert{
+                transform: scale(1.1);
+                opacity: 1.1;
+            }
+            .userListDelete{
+                color: red;
+                cursor: pointer;
+                &:hover{
+                    transform: scale(1.1);
+                }
+            }
+            .userOvert{
+                color: red;
+                position: absolute;
+                top: -15px;
+                left: -25px;
+                right: 0;
+                opacity: 0;
+            }
+        }
+        .userOvert3{
+            position: relative;
+            &:hover .userOvert{
+                transform: scale(1.1);
+                opacity: 1.1;
+            }
+            .userListAjout{
+                color: royalblue;
+                cursor: pointer;
+                &:hover{
+                    transform: scale(1.1);
+                }
+            }
+            .userOvert{
+                color: royalblue;
+                position: absolute;
+                top: -15px;
+                left: -10px;
+                right: 0;
+                opacity: 0;
+            }
+        }
         .userEye{
             color: rgba(21, 50, 136, 0.801);
             cursor: pointer;
