@@ -1,8 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom';
 import './paiementView.scss'
 import action from './../../../assets/actionssarl.PNG'
+import config from '../../../config'
+import axios from 'axios';
+import moment from 'moment';
 
 const PaiementView = () => {
+
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
+    const [data, setData] = useState({});
+    const {pathname} = useLocation();
+    const id = pathname.split('/')[2]
+
+    useEffect(()=>{
+      const fetchData = async ()=> {
+          try{
+              const res = await axios.get(`${DOMAIN}/api/admin/payementView/${id}`);
+              setData(res.data[0])
+      
+            }catch(error){
+              console.log(error)
+            };
+      }
+      fetchData()
+  }, [id])
+
   return (
     <>
         <div className="paiement">
@@ -29,11 +52,11 @@ const PaiementView = () => {
               </div>
               <div className="paiement-form-row">
                 <span className="paiement-span">Date : </span>
-                <span className="paiement-span">Kilolo</span>
+                <span className="paiement-span">{moment(data.payment_date).format('DD/MM/YYYY')}</span>
               </div>
               <div className="paiement-form-row">
                 <span className="paiement-span">Méthode de paiement : </span>
-                <span className="paiement-span">Kilolo</span>
+                <span className="paiement-span">{data.methode_paiement}</span>
               </div>
             </div>
           </div>
