@@ -45,7 +45,7 @@ const FactureView = () => {
                         <h2 className="facture-h2">Client : </h2>
                         <div className="facture-info">
                             <h3 className="facture-h3">{data.company_name}</h3>
-                            <span className="facture-adress">33, C/Matete Q/mutoto</span>
+                            <span className="facture-adress">{data.address}</span>
                         </div>
                     </div>
                     <div className="facture-center-row1">
@@ -73,16 +73,14 @@ const FactureView = () => {
                 <div className="facture-bottom">
                     <table>
                         <tr>
-                            <th>Prix unitaire HT</th>
                             <th>% TVA</th>
                             <th>Total TVA</th>
                             <th>Total TTC</th>
                         </tr>
                         <tr>
-                            <td>Peter</td>
-                            <td>Griffin</td>
-                            <td>$100</td>
-                            <td>$100</td>
+                            <td>0 %</td>
+                            <td>0 %</td>
+                            <td>{data.total_amount} $</td>
                         </tr>
                     </table>
                 </div>
