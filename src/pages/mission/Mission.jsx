@@ -79,19 +79,8 @@ const Mission = () => {
       };
 
       const MyTable = ({ data }) => {
-        
-        const uniqueData = data.filter(
-          (row, index, self) =>
-            index ===
-            self.findIndex(
-              (r) =>
-                r.days === row.days &&
-                r.heureEntrant === row.heureEntrant &&
-                r.heureSortant === row.heureSortant
-            )
-        );
       
-        const groupedData = uniqueData.reduce((acc, row) => {
+        const groupedData = data.reduce((acc, row) => {
           const { agent_id, ...rest } = row;
           if (!acc[agent_id]) {
             acc[agent_id] = {
@@ -120,7 +109,7 @@ const Mission = () => {
               </TableHead>
               <TableBody>
                 {Object.values(groupedData).map((group) => (
-                  <CollapsibleRow key={group.first_name} group={group} />
+                  <CollapsibleRow key={group.agent_id} group={group} />
                 ))}
               </TableBody>
             </Table>
