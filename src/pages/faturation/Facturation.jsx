@@ -84,7 +84,7 @@ const Facturation = () => {
   };
 
   const columns = [
-    { field: 'id', headerName: 'Id de facture', width: 100 },
+    { field: 'id', headerName: 'Numero de facture', width: 130 },
     { field: 'company_name', headerName: "client", width: 130 },
 
     {
@@ -97,14 +97,14 @@ const Facturation = () => {
     {
         field: 'due_date',
         headerName: "Date d'échéance de la facture",
-        width: 150,
+        width: 140,
         valueGetter: (params) =>
         format(new Date(params.row.due_date), 'yyyy-MM-dd'),
     },
     {
         field: 'total_amount',
         headerName: "Montant total",
-        width: 150,renderCell: (params) => `${params.value} $`
+        width: 140,renderCell: (params) => `${params.value} $`
     },
     {
       field: 'status',

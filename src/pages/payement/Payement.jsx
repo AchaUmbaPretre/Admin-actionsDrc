@@ -50,7 +50,7 @@ const Payement = () => {
 
   
      const columns = [
-        { field: 'invoice_id', headerName: 'Id de facture', width: 190 },
+        { field: 'invoice_id', headerName: 'Numero de facture', width: 190 },
         {
           field: 'payment_date',
           headerName: 'Date de payement',

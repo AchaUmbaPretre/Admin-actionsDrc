@@ -1,12 +1,10 @@
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 import './personnel.scss'
-import { DeleteOutline} from '@mui/icons-material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import { DeleteOutline, EditOutlined, VisibilityOutlined } from '@mui/icons-material';
 import { useState } from 'react';
 import * as React from 'react';
 import axios from 'axios';
@@ -145,11 +143,11 @@ const columns = [
               <>
                 <div className="table-icons-row">
                     <div className="userOvert0">
-                      <Link onClick={handleEdit}><ModeEditOutlineIcon className='userListBtn'/></Link>
+                      <Link onClick={handleEdit}><EditOutlined className='userListBtn'/></Link>
                       <span className='userOvert'>Modifier</span>
                     </div>
                     <div className="userOvert1">
-                      <VisibilityIcon className='userEye' onClick={() => navigate(`/views/${params.row.id}`)} />
+                      <VisibilityOutlined className='userEye' onClick={() => navigate(`/views/${params.row.id}`)} />
                       <span className='userOvert'>détail</span>
                     </div>
                     <div className="userOvert2">

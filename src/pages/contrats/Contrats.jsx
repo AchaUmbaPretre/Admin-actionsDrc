@@ -37,7 +37,6 @@ const style = {
   }
 
 
-
 const Contrats = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const navigate = useNavigate();
