@@ -43,12 +43,12 @@ const Fonctions = () => {
     {
       field: 'nom_client',
       headerName: 'Client',
-      width: 150 
+      width: 160 
     },
     {
         field: 'nom',
         headerName: "Competence",
-        width: 150 
+        width: 160 
     },
     {
       field: 'avantages',
@@ -58,12 +58,12 @@ const Fonctions = () => {
     {
         field: 'prix',
         headerName: "Prix",
-        width: 150,renderCell: (params) => `${params.value} $`
+        width: 160,renderCell: (params) => `${params.value} $`
     },
     {
         field: 'salaire',
         headerName: "Salaire",
-        width: 150, renderCell: (params) => `${params.value} $`
+        width: 160, renderCell: (params) => `${params.value} $`
     },
     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
       const handleEdit = () => {
@@ -119,6 +119,7 @@ const Fonctions = () => {
     fetchData()
  }, [])
 
+ 
  const handleDelete = async (id) => {
   try {
     const result = await Swal.fire({
