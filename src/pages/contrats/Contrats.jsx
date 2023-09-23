@@ -55,12 +55,13 @@ const Contrats = () => {
 
   
     const columns = [
-      { field: 'company_name', headerName: 'Client', width: 140 },
-      { field: 'contract_type', headerName: 'Type de contrat', width: 130 },
+      { field: 'id', headerName: 'N° du contrat', width: 80 },
+      { field: 'company_name', headerName: 'Client', width: 130 },
+      { field: 'contract_type', headerName: 'Type de contrat', width: 120 },
       {
         field: 'start_date',
         headerName: 'Date du debut',
-        width: 140,
+        width: 130,
         valueGetter: (params) => format(new Date(params.row.start_date), 'dd-MM-yyyy'),
       },
       {
@@ -72,15 +73,14 @@ const Contrats = () => {
       {
         field: 'duree',
         headerName: 'Durée',
-        width: 130,
+        width: 100,
         valueGetter: (params) => `${params.value} mois`,
       },
       {
         field: 'status',
         headerName: 'Statut du contrat',
-        width: 130,
+        width: 120,
         renderCell: (params) => {
-    
           switch (params.value) {
             case 'Résilié':
               return (
@@ -111,7 +111,7 @@ const Contrats = () => {
       {
         field: 'action',
         headerName: 'Action',
-        width: 160,
+        width: 150,
         renderCell: (params) => {
           const handleEdit = () => {
             Swal.fire({

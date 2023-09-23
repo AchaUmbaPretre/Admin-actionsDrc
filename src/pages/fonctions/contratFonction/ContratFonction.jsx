@@ -98,7 +98,7 @@ const ContratFonction = ({handleModalClose}) => {
                     <Select
                         options={selectData.map((select) => ({
                             value: select.id,
-                            label: select.company_name
+                            label: select.company_name + ' / '+ select.contract_type +" / N° du contrat : "+select.id
                         }))}
                         onChange={(selectedOption) =>
                             handleChange(selectedOption.value, "contrat_id")
