@@ -3,7 +3,6 @@ import { DataGrid } from '@mui/x-data-grid'
 import { Link, useNavigate } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import { DeleteOutline, EditOutlined, AddCircleOutline, VisibilityOutlined} from '@mui/icons-material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import Backdrop from '@mui/material/Backdrop';
@@ -105,7 +104,6 @@ const Fonctions = () => {
     }},
   ];
 
-  
   useEffect(()=>{
     const fetchData = async ()=> {
         try{
@@ -119,7 +117,7 @@ const Fonctions = () => {
     fetchData()
  }, [])
 
- 
+
  const handleDelete = async (id) => {
   try {
     const result = await Swal.fire({
@@ -140,8 +138,6 @@ const Fonctions = () => {
     console.log(err);
   }
 };
-
-
 
   return (
     <>
