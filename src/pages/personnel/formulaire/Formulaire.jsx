@@ -161,6 +161,8 @@ const Formulaire = ({handleModalClose}) => {
         fetchData();
       }, []);
 
+      console.log(data)
+
   return (
     <>
         <div className="formulaire-person">
@@ -255,7 +257,7 @@ const Formulaire = ({handleModalClose}) => {
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Telephone <span>*</span></label>
-                                <input type="tel" name='phone_number' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero de tel.."  />
+                                <input type="tel" name='phone_number' className="input-form" onChange={handleChange} placeholder="Entrez votre numero de tel.."  />
                             </div>
 
                             <div className="form-row">
@@ -275,11 +277,11 @@ const Formulaire = ({handleModalClose}) => {
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">N° INPP <span>*</span></label>
-                                <input type="text"  name='number_inpp' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero inpp.." />
+                                <input type="text"  name='number_inpp' className="input-form" onChange={handleChange} placeholder="Entrez votre numero inpp.." />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">CNSS <span>*</span></label>
-                                <input type="text" name='number_cnss' required className="input-form" onChange={handleChange} placeholder="Entrez votre numero cnss.." />
+                                <input type="text" name='number_cnss' className="input-form" onChange={handleChange} placeholder="Entrez votre numero cnss.." />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Numero du pièce <span>*</span></label>
@@ -324,7 +326,6 @@ const Formulaire = ({handleModalClose}) => {
                             </div>
                         </div>
                         <div className="form-rows">
-
                             <div className="form-row">
                                 <label htmlFor="pet-select" className="label-form">Status <span>*</span></label>
                                 <Select

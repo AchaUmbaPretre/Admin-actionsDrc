@@ -15,6 +15,7 @@ import config from '../../../config'
 import FormAdd from './formAdd/FormAdd';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import DoDisturbOutlinedIcon from '@mui/icons-material/DoDisturbOutlined';
+import { Table } from 'antd';
 
 const style = {
   position: 'absolute',
@@ -52,7 +53,7 @@ const AddContrat = () => {
     setSelectedFunction(e.target.value);
   }; */
 
-  const columns = [
+/*   const columns = [
     {
       field: 'id',
       headerName: 'ID',
@@ -85,7 +86,45 @@ const AddContrat = () => {
         />
       ),
     },
-  ];
+  ]; */
+
+const columns = [
+  {
+    dataIndex: 'id',
+    title: 'Code',
+    width: 70,
+  },
+  { dataIndex: 'first_name', title: 'Nom', width: 110 },
+  { dataIndex: 'last_name', title: 'Prénom', width: 110 },
+  {
+    dataIndex: 'skills',
+    title: 'Compétence',
+    width: 110,
+  },
+  {
+    dataIndex: 'availability',
+    title: 'Disponibilité',
+    width: 80,
+    render: (text, record) =>
+      record.contrat_id ? (
+        <DoDisturbOutlinedIcon style={{ color: 'red' }} />
+      ) : (
+        <CheckCircleOutlinedIcon style={{ color: 'green' }} />
+      ),
+  },
+  {
+    dataIndex: '',
+    title: 'Sélectionnez',
+    width: 100,
+    render: (_, record) => (
+      <Checkbox
+          checked={selected.includes(record.id)}
+          onChange={(event) => handleSelectionChange(event, record.id)}
+          inputProps={{ 'aria-label': 'controlled' }}
+        />
+    ),
+  },
+];
 
 
   const handleSelectionChange = (event, id) => {
@@ -221,7 +260,7 @@ const handleSubmit = async (e) => {
         </div>
         <div className="add-rows">
           <div className="add-row1">
-            <DataGrid rows={filteredEmployees} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
+            <Table columns={columns} dataSource={filteredEmployees} />
           </div>
           <Modal
                     aria-labelledby="transition-modal-title"

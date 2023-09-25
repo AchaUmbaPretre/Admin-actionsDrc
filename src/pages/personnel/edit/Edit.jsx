@@ -281,7 +281,7 @@ const handleClick = async (e) => {
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Date de naissace <span>*</span></label>
-                                <input type="date" value={date_of_birth} name="date_of_birth" required className="input-form" onChange={handleChange} />
+                                <input type="date" value={moment(date_of_birth).format('YYYY-MM-DD') || ''} name="date_of_birth" required className="input-form" onChange={handleChange} />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Etat civil <span>*</span></label>

@@ -1,6 +1,6 @@
 import './affectation.scss'
 import { DataGrid } from '@mui/x-data-grid'
-import { DeleteOutline, Domain, VisibilityOutlined} from '@mui/icons-material';
+import { DeleteOutline, EditOutlined, VisibilityOutlined} from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import Swal from 'sweetalert2'
@@ -9,7 +9,6 @@ import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { FadeLoader } from 'react-spinners';
 import config from '../../config';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { Link, useNavigate } from "react-router-dom";
 import { saveAs } from 'file-saver';
@@ -72,6 +71,12 @@ const Affectation = () => {
         return(
           <>
             <div className="table-icons-row">
+                <div className="userOvert0">
+                  <Link onClick={handleEdit}>
+                    <EditOutlined className="userListBtn" />
+                    <span className='userOvert'>Modifier</span>
+                  </Link>
+                </div>
                 <div className="userOvert1">
                   <VisibilityOutlined className='userEye' onClick={() => navigate(`/affectations/${params.row.id}`)} />
                   <span className='userOvert'>détail</span>
@@ -121,11 +126,21 @@ const Affectation = () => {
         return(
           <>
             <div className="table-icons-row">
+                <div className="userOvert0">
+                  <Link onClick={handleEdit}>
+                    <EditOutlined className="userListBtn" />
+                    <span className='userOvert'>Modifier</span>
+                  </Link>
+                </div>
                 <div className="userOvert1">
                     <VisibilityOutlined className='userEye' onClick={() => navigate(`/affectationView/${params.row.id}`)} />
-                  <span className='userOvert'>détail</span>
+                    <span className='userOvert'>détail</span>
                 </div>
-                <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
+                <div className="userOvert2">
+                  <DeleteOutline className="userListDelete" onClick={() => { handleDelete(params.row.id) }} />
+                  <span className='userOvert'>Supprimer</span>
+                </div>
+                
             </div>
           </>
 
@@ -133,7 +148,9 @@ const Affectation = () => {
     }},
   ];
 
+const handleEdit = () => {
 
+}
   useEffect(() => {
 
     const fetchDatas = async () => {

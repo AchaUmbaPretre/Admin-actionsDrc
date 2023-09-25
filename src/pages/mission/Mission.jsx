@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { DeleteOutline} from '@mui/icons-material';
 import PeopleIcon from '@mui/icons-material/People';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import { IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useState } from 'react';
 import * as React from 'react';
@@ -18,6 +18,8 @@ import Backdrop from '@mui/material/Backdrop';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import IconButton from '@mui/material/IconButton';
 
 const style = {
   position: 'absolute',
@@ -125,10 +127,13 @@ const Mission = () => {
             <TableRow>
               <TableCell>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <KeyboardArrowDownIcon
+                  <IconButton
+                    aria-label="expand row"
+                    size="small"
                     onClick={() => setOpen(!open)}
-                    sx={{ cursor: 'pointer' }}
-                  />
+                    >
+                  {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                  </IconButton>
                 </Box>
               </TableCell>
               <TableCell>{group.rows[0].company_name}</TableCell>
