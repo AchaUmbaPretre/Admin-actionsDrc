@@ -9,18 +9,24 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex-direction: row-reverse;
         gap: 20px;
         .formulaire-left{
+            position: relative;
             flex: 2;
             display: flex;
             flex-direction: column;
             gap: 10px;
-            position: relative;
             .form-img{
+                height: auto;
+                max-width: 100%;
+                object-fit: cover;
                 
             }
             .form-img2{
-                width: 100%;
+                max-width: 100%;
+                max-height: 280px;
+                object-fit: cover;
             }
             .form-img-rows{
                 padding-left: 20px;
@@ -59,6 +65,16 @@
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
+                .form-h2{
+                    padding : 5px 0;
+                    color: #5a5959;
+                    font-weight: 300;
+                    font-size: 1.1rem;
+                    span{
+                        color: red;
+                        font-size: 1.1rem;
+                    }
+                }
                 .form-rows{
                     display: flex;
                     align-items: center;
@@ -90,6 +106,10 @@
                             outline: none;
                             &:focus{
                                 border: 1px solid rgba(58, 88, 180, 0.781);
+                            }
+                            &::placeholder{
+                                font-size: .7rem;
+                                color: #949393;
                             }
                         }
                         .form-radio{

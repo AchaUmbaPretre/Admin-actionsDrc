@@ -161,8 +161,6 @@ const Formulaire = ({handleModalClose}) => {
         fetchData();
       }, []);
 
-      console.log(data)
-
   return (
     <>
         <div className="formulaire-person">
@@ -253,7 +251,7 @@ const Formulaire = ({handleModalClose}) => {
 
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Nombre d'enfant <span>*</span></label>
-                                <input type="number"  name='nombre_enfant' required className="input-form" onChange={handleChange} placeholder="Entrez votre nombre d'enfant.." />
+                                <input type="number"  name='nombre_enfant' className="input-form" onChange={handleChange} placeholder="Entrez votre nombre d'enfant.." />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Telephone <span>*</span></label>
@@ -285,7 +283,7 @@ const Formulaire = ({handleModalClose}) => {
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Numero du pièce <span>*</span></label>
-                                <input type="number"  name='identification_number' required className="input-form" onChange={handleChange} placeholder='Entrez votre numero du pièce..' />
+                                <input type="text"  name='identification_number' className="input-form" onChange={handleChange} placeholder='Entrez votre numero du pièce..' />
                             </div>
                         </div>
 
