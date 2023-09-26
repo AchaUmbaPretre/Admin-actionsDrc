@@ -17,6 +17,7 @@ const EditeClient = () => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+
 useEffect(()=>{
     const fetchData = async ()=> {
         try{

@@ -116,6 +116,19 @@
                         display: flex;
                         align-items: center;
                         gap: 20px;
+                        .btn-edite{
+                            display: flex;
+                            align-items: center;
+                            background: #3bb077;
+                            color: #fff;
+                            padding: 5px 15px;
+                            font-size: .8rem;
+                            border-radius: 10px;
+                            transition: .5s;
+                            &:hover{
+                                background: green;
+                            }
+                        }
                         .view-label{
                             font-weight: 600;
                             padding: 10px 0;

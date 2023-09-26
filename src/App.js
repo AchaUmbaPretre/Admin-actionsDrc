@@ -10,7 +10,6 @@ import Presence from './pages/presence/Presence';
 import Facturation from './pages/faturation/Facturation';
 import ListeConge from './pages/listeConge/ListeConge';
 import Affectation from './pages/affectation/Affectation';
-import Views from './pages/views/Views';
 import Edit from './pages/personnel/edit/Edit';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
@@ -56,6 +55,8 @@ import FonctionView from './pages/fonctions/fonctionView/FonctionView';
 import PaiementView from './pages/payement/paiementView/PaiementView';
 import PaiementEdit from './pages/payement/paiementEdit/PaiementEdit';
 import PaiementPdf from './pages/payement/PaiementPdf';
+import Views from './pages/personnel/views/Views';
+import AffEdite from './pages/affectation/edite/AffEdite';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -150,6 +151,10 @@ function App() {
         {
           path: '/affectationView/:id',
           element: <AffView2 />
+        },
+        {
+          path: '/affectationEdit/:id',
+          element: <AffEdite />
         },
         {
           path: '/fonction',

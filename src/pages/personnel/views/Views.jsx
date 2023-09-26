@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import './views.scss'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios';
-import userImg from './../../assets/user.png'
+import userImg from './../../../assets/user.png'
 import moment from 'moment';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
@@ -14,8 +14,9 @@ import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import EventIcon from '@mui/icons-material/Event';
 import WysiwygIcon from '@mui/icons-material/Wysiwyg';
 import WcIcon from '@mui/icons-material/Wc';
-import config from '../../config'
+import config from '../../../config'
 import ShowChartIcon from '@mui/icons-material/ShowChart';
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 
 const Views = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -143,6 +144,9 @@ const Views = () => {
                             <div className="views-left">
                                 <span className="view-label"><ShowChartIcon  className="icon-person"/>Affectation : </span>
                                 <span className="view-result">{data.nom_client}</span>
+                            </div>
+                            <div className="views-right">
+                                <Link to={`/edit/${id}`} className='btn-edite'><BorderColorOutlinedIcon />Modifer</Link>
                             </div>
                         </div>
                     </div>

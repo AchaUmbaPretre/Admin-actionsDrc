@@ -60,11 +60,12 @@ const PersonTablePdf = () => {
       padding: 10,
       flex: 1,
       fontSize: 10,
-      textAlign: 'center'
+      textAlign: 'left'
     },
     tableCells: {
       padding: 10,
       fontSize: 10,
+      textAlign: 'left'
     },
     textTitle: {
       fontSize: 13,

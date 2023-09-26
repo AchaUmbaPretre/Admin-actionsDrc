@@ -20,6 +20,10 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import AdsClickIcon from '@mui/icons-material/AdsClick';
+import { SearchOutlined } from '@ant-design/icons';
+import Highlighter from 'react-highlight-words';
+import { Button, Input, Space, Table } from 'antd';
+import moment from 'moment';
 
 const Affectation = () => {
 
@@ -30,14 +34,124 @@ const Affectation = () => {
   const [tap1, setTap1] = useState({});
   const navigate = useNavigate();
  const [loading, setLoading] = useState(true);
-
  const [value, setValue] = React.useState('1');
+ const [searchText, setSearchText] = useState('');
+ const [searchedColumn, setSearchedColumn] = useState('');
+ const searchInput = React.useRef(null);
+ const scroll = { x: 400 };
 
  const handleChange = (event, newValue) => {
    setValue(newValue);
  };
 
-  const columns = [
+
+const handleSearch = (selectedKeys, confirm, dataIndex) => {
+  confirm();
+  setSearchText(selectedKeys[0]);
+  setSearchedColumn(dataIndex);
+};
+
+const handleReset = (clearFilters) => {
+  clearFilters();
+  setSearchText('');
+};
+
+const getColumnSearchProps = (dataIndex) => ({
+  filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
+    <div
+      style={{
+        padding: 8,
+      }}
+      onKeyDown={(e) => e.stopPropagation()}
+    >
+      <Input
+        ref={searchInput}
+        placeholder={`Recherche...`}
+        value={selectedKeys[0]}
+        onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+        onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+        style={{
+          marginBottom: 8,
+          display: 'block',
+        }}
+      />
+      <Space>
+        <Button
+          type="primary"
+          onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          icon={<SearchOutlined />}
+          size="small"
+          style={{
+            width: 100,
+          }}
+        >
+          Recherche
+        </Button>
+        <Button
+          onClick={() => clearFilters && handleReset(clearFilters)}
+          size="small"
+          style={{
+            width: 90,
+          }}
+        >
+          supprimer
+        </Button>
+        <Button
+          type="link"
+          size="small"
+          onClick={() => {
+            confirm({
+              closeDropdown: false,
+            });
+            setSearchText(selectedKeys[0]);
+            setSearchedColumn(dataIndex);
+          }}
+        >
+          Filtre
+        </Button>
+        <Button
+          type="link"
+          size="small"
+          onClick={() => {
+            close();
+          }}
+        >
+          Fermer
+        </Button>
+      </Space>
+    </div>
+  ),
+  filterIcon: (filtered) => (
+    <SearchOutlined
+      style={{
+        color: filtered ? '#1677ff' : undefined,
+      }}
+    />
+  ),
+  onFilter: (value, record) =>
+    record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+  onFilterDropdownOpenChange: (visible) => {
+    if (visible) {
+      setTimeout(() => searchInput.current?.select(), 100);
+    }
+  },
+  render: (text) =>
+    searchedColumn === dataIndex ? (
+      <Highlighter
+        highlightStyle={{
+          backgroundColor: '#ffc069',
+          padding: 0,
+        }}
+        searchWords={[searchText]}
+        autoEscape
+        textToHighlight={text ? text.toString() : ''}
+      />
+    ) : (
+      text
+    ),
+});
+
+/*   const columns = [
     { field: 'client_nom', headerName: "Client", width: 120 },
     { field: 'first_name', headerName: "Nom", width: 120 },
     {
@@ -90,7 +204,7 @@ const Affectation = () => {
 
         )
     }},
-  ];
+  ]; */
 
   const columns2 = [
     { field: 'company2', headerName: "Client", width: 130 },
@@ -181,6 +295,124 @@ const handleEdit = () => {
     fetchDatas()
   }, [])
 
+  const columns = [
+    {
+      title: 'Code',
+      dataIndex: 'id',
+      key: 'id',
+      width: '2%',
+    },
+    {
+      title: 'Client',
+      dataIndex: 'client_nom',
+      key: 'client_nom',
+      width: '10%',
+      ...getColumnSearchProps('client_nom'),
+    },
+    {
+      title: 'Nom',
+      dataIndex: 'first_name',
+      key: 'last_name',
+      width: '10%',
+      ...getColumnSearchProps('first_name'),
+    },
+    {
+      title: 'Prénom',
+      dataIndex: 'last_name',
+      key: 'last_name',
+      width: '10%',
+      ...getColumnSearchProps('last_name'),
+    },
+    {
+      title: 'Compétence',
+      dataIndex: 'skills',
+      key: 'skills',
+      width: '10%',
+      ...getColumnSearchProps('skills'),
+    },
+    {
+      title: 'Salaire',
+      dataIndex: 'salaire',
+      key: 'salaire',
+      width: '10%',
+      ...getColumnSearchProps('salaire'),
+      sorter: (a, b) => a.salaire - b.salaire,
+      sortDirections: ['descend', 'ascend'],
+      render: (text) => `${text} $`, // Ajoute le symbole "$" lors de l'affichage
+    },
+    {
+      title: 'Prix',
+      dataIndex: 'prix',
+      key: 'prix',
+      width: '10%',
+      ...getColumnSearchProps('prix'),
+      sorter: (a, b) => a.prix - b.prix,
+      sortDirections: ['descend', 'ascend'],
+      render: (text) => `${text} $`, 
+    },
+    {
+      title: "Date d'affectation",
+      dataIndex: 'created_at',
+      key: 'created_at',
+      width: '15%',
+      ...getColumnSearchProps('created_at'),
+      sorter: (a, b) => moment(a.created_at) - moment(b.created_at),
+      sortDirections: ['descend', 'ascend'],
+      render: (text) => moment(text).locale('fr').format('DD/MM/YYYY')
+    },
+    {
+      title: 'Date fin',
+      dataIndex: 'end_date',
+      key: 'end_date',
+      width: '15%',
+      ...getColumnSearchProps('end_date'),
+      sorter: (a, b) => moment(a.end_date) - moment(b.end_date),
+      sortDirections: ['descend', 'ascend'],
+      render: (text) => moment(text).locale('fr').format('DD/MM/YYYY')
+    },
+    {
+      title: 'Action',
+      dataIndex: 'action',
+      render: (text, record) => {
+        const handleEdit = () => {
+          Swal.fire({
+            title: 'Confirmation',
+            text: 'Voulez-vous vraiment modifier ?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui',
+            cancelButtonText: 'Non',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate(`/affectationEdit/${record.id}`);
+            }
+          });
+        };
+    
+        return (
+          <>
+            <div className="table-icons-row">
+              <EditOutlined className="userListBtn" onClick={handleEdit} />
+              <VisibilityOutlined
+                className="userEye"
+                onClick={() => navigate(`/affectationView/${record.id}`)}
+              />
+              <DeleteOutline
+                className="userListDelete"
+                onClick={() => {
+                  handleDelete(record.id);
+                }}
+              />
+            </div>
+          </>
+        );
+      },
+    },
+
+  ];
+
   const handleDelete = async (id) => {
   try {
     const result = await Swal.fire({
@@ -231,7 +463,6 @@ const exportToExcel = () => {
 
   return (
     <>
-
       <div className="listeConge">
         <div className="liste-wrapper">
           <div className="contrats-top">
@@ -260,7 +491,7 @@ const exportToExcel = () => {
             </TabList>
             </Box>
               <TabPanel value="1" sx={{background:'white' }}>
-                <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
+                <Table columns={columns} dataSource={data} className="presenceTable" scroll={scroll} pagination={{ pageSize: 7}}/>
               </TabPanel>
               <TabPanel value="2" sx={{background:'white' }}>
                 <DataGrid rows={tap1} columns={columns2} pageSize={10} checkboxSelection className="presenceTable" />
