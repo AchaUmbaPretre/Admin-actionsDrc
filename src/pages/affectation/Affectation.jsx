@@ -206,7 +206,7 @@ const getColumnSearchProps = (dataIndex) => ({
     }},
   ]; */
 
-  const columns2 = [
+/*   const columns2 = [
     { field: 'company2', headerName: "Client", width: 130 },
     { field: 'first2', headerName: "Nom", width: 130},
     {
@@ -261,7 +261,7 @@ const getColumnSearchProps = (dataIndex) => ({
         )
     }},
   ];
-
+ */
 const handleEdit = () => {
 
 }
@@ -413,6 +413,117 @@ const handleEdit = () => {
 
   ];
 
+  const columns2 = [
+    {
+      title: 'Code',
+      dataIndex: 'id',
+      key: 'company2',
+      width: '2%',
+    },
+    {
+      title: 'Client',
+      dataIndex: 'company2',
+      key: 'company2',
+      width: '10%',
+    },
+    {
+      title: 'Nom',
+      dataIndex: 'first2',
+      key: 'first2',
+      width: '10%',
+      ...getColumnSearchProps('first2'),
+    },
+    {
+      title: 'Prenom',
+      dataIndex: 'last2',
+      key: 'first2',
+      width: '10%',
+      ...getColumnSearchProps('first2'),
+    },
+    {
+      title: 'Competence',
+      dataIndex: 'skills2',
+      key: 'skills2',
+      width: '10%',
+      ...getColumnSearchProps('skills2'),
+    },
+    {
+      title: 'Salaire',
+      dataIndex: 'salaire2',
+      key: 'salaire2',
+      width: '10%',
+      ...getColumnSearchProps('salaire2'),
+    },
+    {
+      title: 'Prix',
+      dataIndex: 'prix2',
+      key: 'prix2',
+      width: '10%',
+      ...getColumnSearchProps('prix2'),
+    },
+    {
+      title: "Date d'affectation",
+      dataIndex: 'created_at',
+      key: 'created_at',
+      width: '15%',
+      ...getColumnSearchProps('created_at'),
+      sorter: (a, b) => moment(a.created_at) - moment(b.created_at),
+      sortDirections: ['descend', 'ascend'],
+      render: (text) => moment(text).locale('fr').format('DD/MM/YYYY')
+    },
+    {
+      title: 'Date fin',
+      dataIndex: 'date2',
+      key: 'date2',
+      width: '15%',
+      ...getColumnSearchProps('end_date'),
+      sorter: (a, b) => moment(a.date2) - moment(b.date2),
+      sortDirections: ['descend', 'ascend'],
+      render: (text) => moment(text).locale('fr').format('DD/MM/YYYY')
+    },
+    {
+      title: 'Action',
+      dataIndex: 'action',
+      render: (text, record) => {
+        const handleEdit = () => {
+          Swal.fire({
+            title: 'Confirmation',
+            text: 'Voulez-vous vraiment modifier ?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui',
+            cancelButtonText: 'Non',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate(`/affectationEdit/${record.id}`);
+            }
+          });
+        };
+    
+        return (
+          <>
+            <div className="table-icons-row">
+              <EditOutlined className="userListBtn" onClick={handleEdit} />
+              <VisibilityOutlined
+                className="userEye"
+                onClick={() => navigate(`/affectationView/${record.id}`)}
+              />
+              <DeleteOutline
+                className="userListDelete"
+                onClick={() => {
+                  handleDelete(record.id);
+                }}
+              />
+            </div>
+          </>
+        );
+      },
+    },
+
+  ];
+
   const handleDelete = async (id) => {
   try {
     const result = await Swal.fire({
@@ -494,7 +605,7 @@ const exportToExcel = () => {
                 <Table columns={columns} dataSource={data} className="presenceTable" scroll={scroll} pagination={{ pageSize: 7}}/>
               </TabPanel>
               <TabPanel value="2" sx={{background:'white' }}>
-                <DataGrid rows={tap1} columns={columns2} pageSize={10} checkboxSelection className="presenceTable" />
+                <Table columns={columns2} dataSource={tap1} className="presenceTable" scroll={scroll} pagination={{ pageSize: 7}}/>
               </TabPanel>
             </TabContext>
           </Box>
