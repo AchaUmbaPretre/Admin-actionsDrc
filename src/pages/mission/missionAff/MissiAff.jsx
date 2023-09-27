@@ -14,7 +14,11 @@ import './missioAff.scss'
 import Swal from 'sweetalert2';
 import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 import ToggleOnIcon from '@mui/icons-material/ToggleOn';
-
+import { SearchOutlined } from '@ant-design/icons';
+import Highlighter from 'react-highlight-words';
+import { Button, Input, Space, Table } from 'antd';
+import moment from 'moment'
+import * as React from 'react';
 
 
 const MissiAff = () => {
@@ -35,15 +39,129 @@ const MissiAff = () => {
   const [heureFin, setHeureFin] = useState('');
   const [missionWeek, setMissionWeek] = useState([])
   const [horaireTables, setHoraireTables] = useState( [
-    { id: 2, start_time: '', end_time: '' },
-    { id: 3, start_time: '', end_time: '' },
-    { id: 4, start_time: '', end_time: '' },
-    { id: 5, start_time: '', end_time: '' },
-    { id: 6, start_time: '', end_time: '' },
-    { id: 7, start_time: '', end_time: '' },
-    { id: 8, start_time: '', end_time: '' },
+    { id: 2, start_time: '00:00', end_time: '00:00' },
+    { id: 3, start_time: '00:00', end_time: '00:00' },
+    { id: 4, start_time: '00:00', end_time: '00:00' },
+    { id: 5, start_time: '00:00', end_time: '00:00' },
+    { id: 6, start_time: '00:00', end_time: '00:00' },
+    { id: 7, start_time: '00:00', end_time: '00:00' },
+    { id: 8, start_time: '00:00', end_time: '00:00' },
   ])
   const clientId = searchParams.get('client_id');
+  const [value, setValue] = React.useState('1');
+  const [searchText, setSearchText] = useState('');
+  const [searchedColumn, setSearchedColumn] = useState('');
+  const searchInput = React.useRef(null);
+  const scroll = { x: 400 };
+  const scrollY = { y: 200 };
+ 
+ 
+ const handleSearch = (selectedKeys, confirm, dataIndex) => {
+   confirm();
+   setSearchText(selectedKeys[0]);
+   setSearchedColumn(dataIndex);
+ };
+ 
+ const handleReset = (clearFilters) => {
+   clearFilters();
+   setSearchText('');
+ };
+ 
+ const getColumnSearchProps = (dataIndex) => ({
+   filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
+     <div
+       style={{
+         padding: 8,
+       }}
+       onKeyDown={(e) => e.stopPropagation()}
+     >
+       <Input
+         ref={searchInput}
+         placeholder={`Recherche...`}
+         value={selectedKeys[0]}
+         onChange={(e) => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+         onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+         style={{
+           marginBottom: 8,
+           display: 'block',
+         }}
+       />
+       <Space>
+         <Button
+           type="primary"
+           onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+           icon={<SearchOutlined />}
+           size="small"
+           style={{
+             width: 100,
+           }}
+         >
+           Recherche
+         </Button>
+         <Button
+           onClick={() => clearFilters && handleReset(clearFilters)}
+           size="small"
+           style={{
+             width: 90,
+           }}
+         >
+           supprimer
+         </Button>
+         <Button
+           type="link"
+           size="small"
+           onClick={() => {
+             confirm({
+               closeDropdown: false,
+             });
+             setSearchText(selectedKeys[0]);
+             setSearchedColumn(dataIndex);
+           }}
+         >
+           Filtre
+         </Button>
+         <Button
+           type="link"
+           size="small"
+           onClick={() => {
+             close();
+           }}
+         >
+           Fermer
+         </Button>
+       </Space>
+     </div>
+   ),
+   filterIcon: (filtered) => (
+     <SearchOutlined
+       style={{
+         color: filtered ? '#1677ff' : undefined,
+       }}
+     />
+   ),
+   onFilter: (value, record) =>
+     record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+   onFilterDropdownOpenChange: (visible) => {
+     if (visible) {
+       setTimeout(() => searchInput.current?.select(), 100);
+     }
+   },
+   render: (text) =>
+     searchedColumn === dataIndex ? (
+       <Highlighter
+         highlightStyle={{
+           backgroundColor: '#ffc069',
+           padding: 0,
+         }}
+         searchWords={[searchText]}
+         autoEscape
+         textToHighlight={text ? text.toString() : ''}
+       />
+     ) : (
+       text
+     ),
+ });
+
 
   const handleTimeChange = (id, field, value) => {
     setHoraireTables((prevData) =>
@@ -79,7 +197,7 @@ const MissiAff = () => {
   };
 
 
-  const columns = [
+/*   const columns = [
     { field: 'first_name', headerName: "Employé(e)", width: 125 },
     { field: 'last_name', headerName: 'Prenom', width: 125 },
     {
@@ -108,10 +226,52 @@ const MissiAff = () => {
         );
       },
     },
+  ]; */
+
+  const columns = [
+    {
+      title: 'Code',
+      dataIndex: 'id',
+      key: 'id',
+      width: '2%',
+    },
+    {
+      title: 'Employé(e)',
+      dataIndex: 'first_name',
+      key: 'first_name',
+      width: '20%',
+      ...getColumnSearchProps('start_date'),
+    },
+    {
+      title: 'Sélectionner',
+      dataIndex: 'checkbox',
+      width: '20%',
+      render: (text, record) => {
+        const isChecked = selectedIds.includes(record.id);
+        return (
+          <>
+            {isChecked ? (
+              <ToggleOnIcon
+                color="primary"
+                style={{ fontSize: '40px', cursor: 'pointer' }}
+                onClick={() => handleCheckboxChange(record.id)}
+              />
+            ) : (
+              <ToggleOffIcon
+                color="disabled"
+                style={{ fontSize: '40px', cursor: 'pointer' }}
+                onClick={() => handleCheckboxChange(record.id)}
+              />
+            )}
+          </>
+        );
+      },
+    },
+
   ];
 
  
-  const horaireTable = [
+/*   const horaireTable = [
     { field: 'days', headerName: 'Jour de la semaine', width: 100 },
     {
       field: 'start_time',
@@ -168,7 +328,76 @@ const MissiAff = () => {
         );
       },
     },
+  ]; */
+
+  const horaireTable = [
+    {
+      title: 'Jour de la semaine',
+      dataIndex: 'days',
+      key: 'id',
+      width: '30%',
+    },
+    {
+      title: 'Heure début',
+      dataIndex: 'start_time',
+      key: 'start_time',
+      width: '25%',
+      render: (text, record) =>{
+        return (
+          <input
+            type="time"
+            className='input-time'
+            value={record.start_time}
+            onChange={(e) => handleTimeChange(record.id, 'start_time', e.target.value)}
+          />
+        );
+      }
+    },
+    {
+      title: 'Heure fin',
+      dataIndex: 'end_time',
+      key: 'end_time',
+      width: '20%',
+      render: (text, record) =>{
+        return (
+          <input
+            type="time"
+            className='input-time'
+            value={record.end_time}
+            onChange={(e) => handleTimeChange(record.id, 'end_time', e.target.value)}
+          />
+        );
+      }
+    },
+    {
+      title: 'Sélectionner',
+      dataIndex: 'checkbox',
+      width: '25%',
+      render: (text, record) => {
+        const isChecked = selectedIds1.includes(record.id);
+        return (
+          <>
+            {isChecked ? (
+              <ToggleOnIcon
+                color="primary"
+                style={{ fontSize: '40px', cursor: 'pointer' }}
+                onClick={() => handleCheckboxChange1(record.id)}
+              />
+            ) : (
+              <ToggleOffIcon
+                color="disabled"
+                style={{ fontSize: '40px', cursor: 'pointer' }}
+                onClick={() => handleCheckboxChange1(record.id)}
+              />
+            )}
+          </>
+        );
+      },
+    },
+
   ];
+
+
 
   useEffect(()=>{
     
@@ -274,7 +503,7 @@ const MissiAff = () => {
               <FadeLoader color={'#36D7B7'} loading={loading} />
           </div>
           ) : (
-          <DataGrid rows={agentsAffectes} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
+            <Table columns={columns} dataSource={agentsAffectes} className="presenceTable" scroll={scroll} pagination={{ pageSize: 7}}/>
           )}
           <div className="personnel-aff-bottom">
             <div className="personnel-bottom">
@@ -293,7 +522,7 @@ const MissiAff = () => {
                   <div className="personnel-date">
                     <h2 className='personnel-bottom-title'>Jour de la semaine<span>*</span></h2>
                     <div className="person-scroll-tab">
-                      <DataGrid rows={missionWeek} columns={horaireTable} pageSize={10} checkboxSelection />
+                      <Table columns={horaireTable} dataSource={missionWeek} className="presenceTable" scroll={scrollY} pagination={{ pageSize: 7}}/>
                     </div>
                   </div>
                   <button className="person-btn" onClick={handleClick} >Envoyer</button>

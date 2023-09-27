@@ -15,7 +15,6 @@ const MissionForm = ({handleModalClose}) => {
   const [optionsClient, setOptionsClient] = useState([]);
   const [duration, setDuration] = useState([]);
   const [salaires, setSalaires] = useState([]);
-  const [sites, SetSites] = useState([]);
 
   const handleChange = (selectedOption, name) => {
     if (name === 'montant') {
@@ -27,11 +26,6 @@ const MissionForm = ({handleModalClose}) => {
   };
 
   console.log(data)
-
-  const handleDateChange = (selectedDate, name) => {
-    const formattedDate = moment(selectedDate).format('YYYY-MM-DD');
-    setData((prev) => ({ ...prev, [name]: formattedDate }));
-  };
 
   useEffect(() => {
     const fetchData = async () => {

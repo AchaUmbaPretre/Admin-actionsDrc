@@ -17,6 +17,7 @@ import WcIcon from '@mui/icons-material/Wc';
 import config from '../../../config'
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
+import BabyChangingStationOutlinedIcon from '@mui/icons-material/BabyChangingStationOutlined';
 
 const Views = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -101,7 +102,7 @@ const Views = () => {
                                         <span className="view-result">{data.etat_civil}</span>
                                     </div>
                                     <div className="views-right">
-                                        <span className="view-label"><EngineeringIcon className="icon-person"/>Nombre d'enfant : </span>
+                                        <span className="view-label"><BabyChangingStationOutlinedIcon className="icon-person"/>Nombre d'enfant : </span>
                                         <span className="view-result">{data.nombre_enfant}</span>
                                     </div>
                                 </div>

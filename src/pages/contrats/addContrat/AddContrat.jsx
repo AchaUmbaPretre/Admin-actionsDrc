@@ -427,7 +427,7 @@ const columns = [
           <div className="contrats-top">
             <ChecklistRtlIcon className='contrats-icon' />
             <div className="contrats-info">
-              <h2 className="contrats-title">Contrat de {title.company_name}</h2>
+              <h2 className="contrats-title">Client : {title.company_name}</h2>
               <span className="contrats-span"></span>
             </div>
           </div>
