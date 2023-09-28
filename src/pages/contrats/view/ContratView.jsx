@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './../../clientTab/clientView/clientView.scss'
-import { CalendarMonth, CodeOffOutlined, ContactPage, EmailOutlined, LoginOutlined, MapsHomeWorkOutlined, PasswordOutlined, Person2Outlined, PhoneAndroidOutlined } from '@mui/icons-material';
+import { CalendarMonth, Person2Outlined } from '@mui/icons-material';
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import config from '../../../config'
 import moment from 'moment';
 import './../view/contratView.scss'
@@ -51,6 +52,9 @@ const ContratView = () => {
                     <div className="client-row">
                         <span className="client-nom"><CalendarMonth/> Date de la fin :</span>
                         <span className="client-nom">{formattedDatSortant}</span>
+                    </div>
+                    <div className="clientR-right">
+                        <Link to={`/editContrat/${data?.id}`} className='btn-edite'><BorderColorOutlinedIcon className='client-btn-icon' />Modifer</Link>
                     </div>
                 </div>
             </div>

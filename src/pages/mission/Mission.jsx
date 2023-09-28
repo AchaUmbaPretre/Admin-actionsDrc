@@ -20,6 +20,7 @@ import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import IconButton from '@mui/material/IconButton';
+import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 
 const style = {
   position: 'absolute',
@@ -44,7 +45,6 @@ const Mission = () => {
 
     const navigate = useNavigate();
 
-
      useEffect(()=>{
       const fetchData = async ()=> {
           try{
@@ -58,6 +58,23 @@ const Mission = () => {
       }
       fetchData()
    }, [])
+
+   const handleEdit = (id) => {
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Voulez-vous vraiment modifier ?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui',
+      cancelButtonText: 'Non',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate(`/missionEdite/${id}`);
+      }
+    });
+  }
 
       const handleDelete = async (id) => {
         try {
@@ -163,6 +180,7 @@ const Mission = () => {
                           <TableCell style={{color: "white"}}>Jour du travail</TableCell>
                           <TableCell style={{color: "white"}}>Heure de début</TableCell>
                           <TableCell style={{color: "white"}}>Heure fin</TableCell>
+                          <TableCell style={{color: "white"}}>Action</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -174,6 +192,9 @@ const Mission = () => {
                             </TableCell>
                             <TableCell style={{ background: row.heureSortant.substring(0, 5) === "Fermé" ? "#eeeeee" : "transparent", color: row.heureSortant.substring(0, 5) === "Fermé" ? "black" : "black" }}>
                               {row.heureSortant.substring(0, 5)}
+                            </TableCell>
+                            <TableCell>
+                              <DriveFileRenameOutlineOutlinedIcon className='mission-icon' onClick={() => { handleEdit(row.mission_id) }} />
                             </TableCell>
                           </TableRow>
                         ))}

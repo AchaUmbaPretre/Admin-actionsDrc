@@ -9,7 +9,7 @@ import config from '../../../config'
 const MissionEdit = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState([]);
-  const {first_name,company_name,dateEntrant,dateSortant,duree,montant} = data;
+  const { heureEntrant, heureSortant } = data;
   const navigate = useNavigate();
   const [options, setOptions] = useState([]);
   const [optionsClient, setOptionsClient] = useState([]);
@@ -20,12 +20,7 @@ const MissionEdit = () => {
 
 
   const handleChange = (selectedOption, name) => {
-    if (name === 'montant') {
-      const amount = parseFloat(selectedOption);
-      setData((prev) => ({ ...prev, [name]: isNaN(amount) ? null : amount }));
-    } else {
-      setData((prev) => ({ ...prev, [name]: selectedOption.value }));
-    }
+      setData((prev) => ({ ...prev, [name]: selectedOption }));
   };
 
   console.log(data)
@@ -35,12 +30,13 @@ const MissionEdit = () => {
     setData((prev) => ({ ...prev, [name]: formattedDate }));
   };
 
+  console.log(data)
+
   useEffect(()=>{
     const fetchData = async ()=> {
         try{
             const res = await axios.get(`${DOMAIN}/api/admin/missionAllView/${id}`);
             setData(res.data[0])
-    
           }catch(error){
             console.log(error)
           };
@@ -48,7 +44,7 @@ const MissionEdit = () => {
     fetchData()
 }, [id]);
 
-  useEffect(() => {
+/*   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`${DOMAIN}/api/admin`);
@@ -58,10 +54,10 @@ const MissionEdit = () => {
       }
     };
     fetchData();
-  }, []);
+  }, []); */
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
+/*   useEffect(() => {
     const fetchData = async () => {
       try {
         const {data} = await axios.get(`${DOMAIN}/api/admin/client`);
@@ -71,10 +67,10 @@ const MissionEdit = () => {
       }
     };
     fetchData();
-  }, []);
+  }, []); */
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
+/*   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`${DOMAIN}/api/admin/duration`);
@@ -84,10 +80,10 @@ const MissionEdit = () => {
       }
     };
     fetchData();
-  }, []);
+  }, []); */
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
+/*   useEffect(() => {
     const fetchDatas = async () => {
       try {
         const {data} = await axios.get(`${DOMAIN}/api/admin/salaireMission`);
@@ -97,14 +93,14 @@ const MissionEdit = () => {
       }
     };
     fetchDatas();
-  }, []);
+  }, []); */
 
   const handleClick = async (e) => {
     e.preventDefault();
 
     try {
       await axios.put(`${DOMAIN}/api/admin/updateMission/${id}`, data);
-      navigate("/");
+      navigate("/mission");
       Swal.fire({
         title: 'Success',
         text: 'Mission a été modifiée avec succès!',
@@ -128,11 +124,11 @@ const MissionEdit = () => {
       <div className="contratForm">
         <div className="contrat-wrapper">
           <div className="edit-title">
-            <h2 className="edit-h2">Mission edite</h2>
+            <h2 className="edit-h2">Modifier l'horaire</h2>
           </div>
           <form action="" className="formulaire-edit">
             <div className="edit-rows">
-              <div className="edit-row">
+              {/* <div className="edit-row">
                 <label htmlFor="" className="label-edit">Agent <span>*</span></label>
                 <Select
                   name="agent_id"
@@ -142,10 +138,9 @@ const MissionEdit = () => {
                     label: item.first_name
                   }))}
                   value={first_name}
-                  
                 />
-              </div>
-              <div className="edit-row">
+              </div> */}
+{/*               <div className="edit-row">
                 <label htmlFor="" className="label-edit">Client <span>*</span></label>
                 <Select
                   name="client_id"
@@ -156,33 +151,33 @@ const MissionEdit = () => {
                   }))}
                   value={company_name}
                 />
-              </div>
+              </div> */}
             </div>
 
             <div className="edit-rows">
               <div className="edit-row">
-                <label htmlFor="" className="label-edit">Date de début<span>*</span></label>
+                <label htmlFor="" className="label-edit">Heure de début<span>*</span></label>
                 <input
-                  type="date"
-                  name="dateEntrant"
-                  onChange={(e) => handleDateChange(e.target.value, "dateEntrant")}
+                  type="time"
+                  name="heureEntrant"
+                  onChange={(e) => handleChange(e.target.value, "heureEntrant")}
                   className="input-form"
-                  value={dateEntrant}
+                  value={heureEntrant}
                 />
               </div>
               <div className="edit-row">
-                <label htmlFor="" className="label-edit">Date de fin <span>*</span></label>
+                <label htmlFor="" className="label-edit">Heure de fin <span>*</span></label>
                 <input
-                  type="date"
-                  name="dateSortant"
-                  onChange={(e) => handleDateChange(e.target.value, "dateSortant")}
+                  type="time"
+                  name="heureSortant"
+                  onChange={(e) => handleChange(e.target.value, "heureSortant")}
                   className="input-form"
-                  value={dateSortant}
+                  value={heureSortant}
                 />
               </div>
             </div>
 
-            <div className="edit-rows">
+{/*             <div className="edit-rows">
               <div className="edit-row">
                 <label htmlFor="" className="label-edit">Montant <span>*</span></label>
                 <input
@@ -193,7 +188,7 @@ const MissionEdit = () => {
                   value={montant}
                 />
               </div>
-            </div>
+            </div> */}
             <button className="edit-btn" onClick={handleClick}>Envoyer</button>
           </form>
         </div>

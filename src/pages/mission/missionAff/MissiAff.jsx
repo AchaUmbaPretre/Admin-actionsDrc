@@ -47,6 +47,7 @@ const MissiAff = () => {
     { id: 7, start_time: '00:00', end_time: '00:00' },
     { id: 8, start_time: '00:00', end_time: '00:00' },
   ])
+  const [title, setTitle] = useState({});
   const clientId = searchParams.get('client_id');
   const [value, setValue] = React.useState('1');
   const [searchText, setSearchText] = useState('');
@@ -397,7 +398,19 @@ const MissiAff = () => {
 
   ];
 
-
+  useEffect(()=>{
+    const fetchDatas = async ()=> {
+        try{
+            const clientId = searchParams.get('client_id');
+            const {data} = await axios.get(`${DOMAIN}/api/admin/missionContratTitle/${clientId}`);
+            setTitle(data[0])
+            
+          }catch(error){
+            console.log(error)
+          };
+    }
+    fetchDatas()
+  }, [clientId])
 
   useEffect(()=>{
     
@@ -491,11 +504,10 @@ const MissiAff = () => {
           <div className="contrats-top">
               <AccessTimeIcon className='contrats-icon'/>
               <div className="contrats-info">
-                  <h2 className="contrats-title">Liste des agents  qui sont affectés dans ce contrat</h2>
-                  <span className="contrats-span">Liste des agents affectés</span>
+                  <h2 className="contrats-title">Client : {title.company_name}</h2>
+                  <span className="contrats-span">Liste des agents qui sont affectés à {title.company_name}</span>
               </div>
           </div>
-          <button className="personnel-btn" onClick={''}><PersonAddAlt1Icon/>Ajouter</button>
         </div>
         <div className="personnel-aff">
           {loading ? (

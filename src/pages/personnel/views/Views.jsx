@@ -147,7 +147,7 @@ const Views = () => {
                                 <span className="view-result">{data.nom_client}</span>
                             </div>
                             <div className="views-right">
-                                <Link to={`/edit/${id}`} className='btn-edite'><BorderColorOutlinedIcon />Modifer</Link>
+                                <Link to={`/edit/${id}`} className='btn-edite'><BorderColorOutlinedIcon className='client-btn-icon' />Modifer</Link>
                             </div>
                         </div>
                     </div>

@@ -262,9 +262,7 @@ const getColumnSearchProps = (dataIndex) => ({
     }},
   ];
  */
-const handleEdit = () => {
 
-}
   useEffect(() => {
 
     const fetchDatas = async () => {
@@ -287,7 +285,6 @@ const handleEdit = () => {
         const res = await axios.get(`${DOMAIN}/api/admin/contratEmploie`);
         setTap1(res.data)
         setLoading(false);
-
       } catch (error) {
         console.log(error)
       };
@@ -297,10 +294,10 @@ const handleEdit = () => {
 
   const columns = [
     {
-      title: 'Code',
-      dataIndex: 'id',
-      key: 'id',
-      width: '2%',
+      title: 'N° du contrat',
+      dataIndex: 'contrat_id',
+      key: 'contrat_id',
+      width: '10%',
     },
     {
       title: 'Client',
@@ -308,6 +305,13 @@ const handleEdit = () => {
       key: 'client_nom',
       width: '10%',
       ...getColumnSearchProps('client_nom'),
+    },
+    {
+      title: 'Type contrat',
+      dataIndex: 'contract_type',
+      key: 'contract_type',
+      width: '20%',
+      ...getColumnSearchProps('contract_type'),
     },
     {
       title: 'Nom',
@@ -397,7 +401,7 @@ const handleEdit = () => {
               <EditOutlined className="userListBtn" onClick={handleEdit} />
               <VisibilityOutlined
                 className="userEye"
-                onClick={() => navigate(`/affectationView/${record.id}`)}
+                onClick={() => navigate(`/affectations/${record.id}`)}
               />
               <DeleteOutline
                 className="userListDelete"
@@ -415,16 +419,24 @@ const handleEdit = () => {
 
   const columns2 = [
     {
-      title: 'Code',
-      dataIndex: 'id',
-      key: 'company2',
-      width: '2%',
+      title: 'N° du contrat',
+      dataIndex: 'contrat_ID',
+      key: 'contrat_ID',
+      width: '10%',
     },
     {
       title: 'Client',
       dataIndex: 'company2',
       key: 'company2',
       width: '10%',
+      ...getColumnSearchProps('company2'),
+    },
+    {
+      title: 'Type contrat',
+      dataIndex: 'contract_type',
+      key: 'contract_type',
+      width: '20%',
+      ...getColumnSearchProps('contract_type'),
     },
     {
       title: 'Nom',
@@ -453,6 +465,9 @@ const handleEdit = () => {
       key: 'salaire2',
       width: '10%',
       ...getColumnSearchProps('salaire2'),
+      sorter: (a, b) => a.salaire - b.salaire,
+      sortDirections: ['descend', 'ascend'],
+      render: (text) => `${text} $`, 
     },
     {
       title: 'Prix',
@@ -460,12 +475,15 @@ const handleEdit = () => {
       key: 'prix2',
       width: '10%',
       ...getColumnSearchProps('prix2'),
+      sorter: (a, b) => a.prix - b.prix,
+      sortDirections: ['descend', 'ascend'],
+      render: (text) => `${text} $`,
     },
     {
       title: "Date d'affectation",
       dataIndex: 'created_at',
       key: 'created_at',
-      width: '20%',
+      width: '25%',
       ...getColumnSearchProps('created_at'),
       sorter: (a, b) => moment(a.created_at) - moment(b.created_at),
       sortDirections: ['descend', 'ascend'],
@@ -602,10 +620,10 @@ const exportToExcel = () => {
             </TabList>
             </Box>
               <TabPanel value="1" sx={{background:'white' }}>
-                <Table columns={columns} dataSource={data} className="presenceTable" scroll={scroll} pagination={{ pageSize: 7}}/>
+                <Table columns={columns} dataSource={data} scroll={scroll} pagination={{ pageSize: 5}}/>
               </TabPanel>
               <TabPanel value="2" sx={{background:'white' }}>
-                <Table columns={columns2} dataSource={tap1} className="presenceTable" scroll={scroll} pagination={{ pageSize: 7}}/>
+                <Table columns={columns2} dataSource={tap1} scroll={scroll} pagination={{ pageSize: 5}}/>
               </TabPanel>
             </TabContext>
           </Box>

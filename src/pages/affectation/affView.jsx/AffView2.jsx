@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import '../../mission/views/missionView.scss'
 import { format } from 'date-fns';
 import { CalendarMonth, Money, Person, Person3 } from '@mui/icons-material';
@@ -10,6 +10,7 @@ import moment from 'moment';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import CurrencyExchangeOutlinedIcon from '@mui/icons-material/CurrencyExchangeOutlined';
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 
 const AffView2 = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -50,17 +51,17 @@ const AffView2 = () => {
     <>
         <div className="clientView">
             <div className="clientView-wrapper">
-                <h2 className="client-title">INFORMATION D'AFFECTATION</h2>
+                <h2 className="client-title">INFORMATION D'AFFECTATION 2</h2>
                 <div className="client-rows">
                     <div className="client-row1">
                         <div className="client-row">
                             <div className="client-sous">
                                 <span className="client-nom"><PersonOutlineOutlinedIcon /> Agent :</span>
-                                <span className="client-nom">{data?.first_name}</span>
+                                <span className="client-nom">{data?.first_name} {data?.last_name}</span>
                             </div>
                             <div className="client-sous">
                                 <span className="client-nom"><PeopleAltOutlinedIcon /> Client :</span>
-                                <span className="client-nom">{data?.client_nom}</span>
+                                <span className="client-nom">{data?.company_name}</span>
                             </div>
                         </div>
                         <div className="client-row">
@@ -83,6 +84,9 @@ const AffView2 = () => {
                                 <span className="client-nom">{data?.salaire} $</span>
                             </div>
                         </div>
+                    </div>
+                    <div className="clientR-right">
+                        <Link to={`/affectationEdit/${data?.id}`} className='btn-edite'><BorderColorOutlinedIcon className='client-btn-icon' />Modifer</Link>
                     </div>
                 </div>
             </div>

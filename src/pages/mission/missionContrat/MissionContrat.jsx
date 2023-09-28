@@ -294,7 +294,7 @@ const MissionContrat = () => {
           };
     }
     fetchDatas()
-  }, [])
+  }, [clientId])
 
   const handleClick = async (e) => {
     e.preventDefault();

@@ -245,7 +245,7 @@ const AddContrat = () => {
       ),
   });
 
-  useEffect(() => {
+useEffect(() => {
 
     const fetchData = async () => {
       try {
@@ -259,15 +259,7 @@ const AddContrat = () => {
     fetchData()
   }, [])
 
-
-    const filteredEmployees = data.filter((employee) => {
-      if (selectedFunctionDetails) {
-        return employee.skills === selectedFunctionDetails[0]?.nom;
-      }
-      return true;
-    });
-
-  useEffect(()=>{
+useEffect(()=>{
     const fetchDatas = async ()=> {
         try{
             const {data} = await axios.get(`${DOMAIN}/api/admin/ContratInfo/${id}`);
@@ -292,6 +284,14 @@ const AddContrat = () => {
   }
   fetchDatas()
 }, [id])
+
+
+    const filteredEmployees = data.filter((employee) => {
+      if (selectedFunctionDetails) {
+        return employee.skills === selectedFunctionDetails[0]?.nom;
+      }
+      return true;
+    });
 
 
  const handleSelectionInformation = (informationId) => {
@@ -434,7 +434,7 @@ const columns = [
         </div>
         <div className="add-rows">
           <div className="add-row1">
-            <Table columns={columns} dataSource={data}  pagination={{ pageSize: 7}}/>
+            <Table columns={columns} dataSource={data}  pagination={{ pageSize: 6}}/>
           </div>
           <Modal
                     aria-labelledby="transition-modal-title"

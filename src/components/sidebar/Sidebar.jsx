@@ -14,6 +14,7 @@ import { useState } from 'react';
 import actions from './../../assets/actionssarl.PNG'
 import FollowTheSignsOutlinedIcon from '@mui/icons-material/FollowTheSignsOutlined';
 import FactCheckOutlinedIcon from '@mui/icons-material/FactCheckOutlined';
+import AddHomeOutlinedIcon from '@mui/icons-material/AddHomeOutlined';
 
 const Sidebar = () => {
   const  location = useLocation();
@@ -33,6 +34,7 @@ const Sidebar = () => {
               <li className={`sidenav-li ${location.pathname === '/affectation' ? 'active' : ''}`}><ShowChartIcon className='sidebar-icon'/><Link to={"/affectation"}>Affectation</Link></li>
               <li className={`sidenav-li ${location.pathname  === '/mission' ? 'active' : ''}`}><AssignmentIndIcon className='sidebar-icon'/><Link to={"/mission"} >Horaires</Link></li>
               <li className={`sidenav-li ${location.pathname  === '/client' ? 'active' : ''}`}><GroupsIcon className='sidebar-icon'/><Link to={"/client"} >Client</Link></li>
+              <li className={`sidenav-li`}><AddHomeOutlinedIcon className='sidebar-icon'/><Link to={"/mission"} >Lieu du travail</Link></li>
               <li className={`sidenav-li ${location.pathname  === '/fonction' ? 'active' : ''}`}><FollowTheSignsOutlinedIcon className='sidebar-icon'/><Link to={"/fonction"}>Fonctions</Link></li>
 {/*               <li className={`sidenav-li ${activeItem === 'Horaires de travail' ? 'active' : ''}`}><AccessTimeIcon className='sidebar-icon'/><Link to={"/horaireAll"} onClick={() => setActiveItem('Horaires de travail')}>Horaires de travail</Link></li> */}
               <li className={`sidenav-li ${location.pathname  === '/presence' ? 'active' : ''}`}><ChecklistRtlIcon className='sidebar-icon'/><Link to={"/presence"} >Presence</Link></li>
