@@ -186,12 +186,19 @@ const FactureCalcul = () => {
       width: '2%',
     },
     {
-      title: 'Employé(e)',
+      title: 'Nom',
       dataIndex: 'first_name',
       key: 'first_name',
       width: '20%',
       ...getColumnSearchProps('start_date'),
     },
+    {
+        title: 'Prenom',
+        dataIndex: 'last_name',
+        key: 'last_name',
+        width: '20%',
+        ...getColumnSearchProps('last_name'),
+      },
     {
         title: 'Prix',
         dataIndex: 'prix',

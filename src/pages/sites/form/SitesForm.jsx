@@ -8,7 +8,7 @@ import moment from 'moment';
 import 'moment/locale/fr';
 import './sitesForm.scss'
 
-const SitesForm = ({ handleClose }) => {
+const SitesForm = ({ handleModalClose }) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
 
   const [data, setData] = useState({});
@@ -18,25 +18,29 @@ const SitesForm = ({ handleClose }) => {
   const [statusContrat, setStatusContrat] = useState([]);
   const [typeContrat, setTypeContrat] = useState([]);
 
-  const handleChange = (name, value) => {
-    if (name === 'start_date' || name === 'end_date') {
-      const formattedDate = moment(value).format('YYYY-MM-DD');
-      setData((prev) => ({ ...prev, [name]: formattedDate }));
-    } else {
-      setData((prev) => ({ ...prev, [name]: value }));
+
+  const handleChange = (value, name) => {
+    let formattedValue = value;
+  
+    if (typeof value === 'string' && value.length > 0) {
+      formattedValue = value.charAt(0).toUpperCase() + value.slice(1);
     }
+  
+    setData((prev) => ({ ...prev, [name]: formattedValue }));
   };
+
+  console.log(data)
 
   const handleClick = async (e) => {
     e.preventDefault();
-    handleClose();
+    handleModalClose()
 
     try {
-      await axios.post(`${DOMAIN}/api/admin/contrat`, data);
+      await axios.post(`${DOMAIN}/api/admin/sites`, data);
 
       Swal.fire({
         title: 'Success',
-        text: 'Contrat créé avec succès!',
+        text: 'Site créé avec succès!',
         icon: 'success',
         confirmButtonText: 'OK',
       });
@@ -121,34 +125,36 @@ const SitesForm = ({ handleClose }) => {
                     label: item.company_name,
                   }))}
                   onChange={(selectedOption) =>
-                    handleChange('client_id', selectedOption.value)
+                    handleChange(selectedOption.value, 'client_id')
                   }
                   placeholder="Sélectionnez un client"
                 />
               </div>
               <div className="edit-row">
                 <label htmlFor="" className="label-edit">Avenue <span>*</span></label>
-                <input type="text" className="input-form" placeholder="Entrez le nom de l'avenue" />
+                <input type="text" name='avenue' className="input-form" onChange={(e) =>handleChange(e.target.value, 'avenue')} placeholder="Entrez le nom de l'avenue" />
               </div>
             </div>
             <div className="edit-rows">
               <div className="edit-row">
                 <label htmlFor="" className="label-edit">Quartier <span>*</span></label>
-                <input type="text" className="input-form" placeholder="Entrez le nom du quartier" />
+                <input type="text" name="quartier" className="input-form" onChange={(e) =>handleChange(e.target.value, 'quartier')} placeholder="Entrez le nom du quartier" />
               </div>
               <div className="edit-row">
                 <label htmlFor="" className="label-edit">Commune <span>*</span></label>
-                <input type="text" className="input-form" placeholder="Entrez le nom de votre commune" />
+                <input type="text" name='commune' className="input-form" onChange={(e) =>handleChange(e.target.value, 'commune')} placeholder="Entrez le nom de votre commune" />
               </div>  
             </div>
             <div className="edit-rows">
               <div className="edit-row">
                 <label htmlFor="number" className="label-edit">N° <span>*</span></label>
-                <input type="text" className="input-form" placeholder='Entrez le N° du parcelle' />
+                <input type="text" name='numero' className="input-form" onChange={(e) =>
+                    handleChange(e.target.value, 'numero')
+                  } placeholder='Entrez le N° du parcelle' />
               </div>
               <div className="edit-row">
                 <label htmlFor="" className="label-edit">Description <span>*</span></label>
-                <input type="text" className="input-form" placeholder='Entrez la description' />
+                <input type="text" name='description' className="input-form" onChange={(e) =>handleChange(e.target.value, 'description')} placeholder='Entrez la description' />
               </div>  
             </div>
             <button className="edit-btn" onClick={handleClick}>

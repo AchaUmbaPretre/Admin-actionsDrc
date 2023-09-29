@@ -42,7 +42,7 @@ const Sites = () => {
 
   const columns = [
     {
-        field: 'client',
+        field: 'client_id',
         headerName: 'Client',
         width: 120 
     },
@@ -52,7 +52,7 @@ const Sites = () => {
       width: 120 
     },
     {
-        field: 'nom',
+        field: 'quartier',
         headerName: "Quartier",
         width: 120 
     },
@@ -64,12 +64,12 @@ const Sites = () => {
     {
         field: 'numero',
         headerName: "Numero de parcelle",
-        width: 150,renderCell: (params) => `${params.value} $`
+        width: 150,
     },
     {
         field: 'description',
         headerName: "Description",
-        width: 150, renderCell: (params) => `${params.value} $`
+        width: 150,
     },
     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
       const handleEdit = () => {
@@ -114,7 +114,7 @@ const Sites = () => {
   useEffect(()=>{
     const fetchData = async ()=> {
         try{
-            const {data} = await axios.get(`${DOMAIN}/api/admin/contratInfo`);
+            const {data} = await axios.get(`${DOMAIN}/api/admin/sites`);
             setData(data)
             setLoading(false);
           }catch(error){
@@ -180,7 +180,7 @@ const Sites = () => {
             </Fade>
           </Modal>
         </div>
-        <DataGrid rows={""} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
+        <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
       </div>
     </>
   )
