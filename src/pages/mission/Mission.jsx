@@ -21,6 +21,7 @@ import * as XLSX from 'xlsx';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import IconButton from '@mui/material/IconButton';
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 const style = {
   position: 'absolute',
@@ -57,9 +58,9 @@ const Mission = () => {
             };
       }
       fetchData()
-   }, [])
+    }, [])
 
-   const handleEdit = (id) => {
+    const handleEdit = (id) => {
     Swal.fire({
       title: 'Confirmation',
       text: 'Voulez-vous vraiment modifier ?',
@@ -74,9 +75,9 @@ const Mission = () => {
         navigate(`/missionEdite/${id}`);
       }
     });
-  }
+    }
 
-      const handleDelete = async (id) => {
+    const handleDelete = async (id) => {
         try {
           const result = await Swal.fire({
             title: 'Es-tu sûr?',
@@ -95,9 +96,9 @@ const Mission = () => {
         } catch (err) {
           console.log(err);
         }
-      };
+    };
 
-      const MyTable = ({ data }) => {
+    const MyTable = ({ data }) => {
       
         const groupedData = data.reduce((acc, row) => {
           const { agent_id, ...rest } = row;
@@ -136,7 +137,7 @@ const Mission = () => {
         );
       };
       
-      const CollapsibleRow = ({ group }) => {
+    const CollapsibleRow = ({ group }) => {
         const [open, setOpen] = React.useState(false);
       
         return (
@@ -210,7 +211,7 @@ const Mission = () => {
 
 
 
-      const exportToExcel = () => {
+    const exportToExcel = () => {
         
         const excelData = data.map(row => ({
           Client: row.company_name,
@@ -241,10 +242,10 @@ const Mission = () => {
         <div className="personnel">
             <div className="personnel-rows">
                 <div className="personnel-top">
-                    <PeopleIcon className='personnel-icon'/>
+                    <AccessTimeIcon className='personnel-icon'/>
                     <div className="personnel-info">
-                        <h2 className="personnel-title">Mission</h2>
-                        <span className="personnel-span">liste des missions</span>
+                        <h2 className="personnel-title">Horaires</h2>
+                        <span className="personnel-span">liste des horaires</span>
                     </div>
                 </div>
                 <div className="personPdf">

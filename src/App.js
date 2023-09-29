@@ -57,6 +57,7 @@ import PaiementEdit from './pages/payement/paiementEdit/PaiementEdit';
 import PaiementPdf from './pages/payement/PaiementPdf';
 import Views from './pages/personnel/views/Views';
 import AffEdite from './pages/affectation/edite/AffEdite';
+import Sites from './pages/sites/Sites';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -139,6 +140,10 @@ function App() {
         {
           path: '/client',
           element: <ClientTab />
+        },
+        {
+          path: '/sites',
+          element: <Sites />
         },
         {
           path: '/affectation',

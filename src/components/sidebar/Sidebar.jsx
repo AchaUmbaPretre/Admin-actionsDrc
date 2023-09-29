@@ -32,9 +32,9 @@ const Sidebar = () => {
               <li className={`sidenav-li ${location.pathname === '/personnel' ? 'active' : ''}`}><PersonOutlineIcon className='sidebar-icon'/><Link to={"/personnel"}>Personnel</Link></li>
               <li className={`sidenav-li ${location.pathname === '/contrats' ? 'active' : ''}`}><FlakyIcon className='sidebar-icon'/><Link to={"/contrats"} >Contrats</Link></li>
               <li className={`sidenav-li ${location.pathname === '/affectation' ? 'active' : ''}`}><ShowChartIcon className='sidebar-icon'/><Link to={"/affectation"}>Affectation</Link></li>
-              <li className={`sidenav-li ${location.pathname  === '/mission' ? 'active' : ''}`}><AssignmentIndIcon className='sidebar-icon'/><Link to={"/mission"} >Horaires</Link></li>
               <li className={`sidenav-li ${location.pathname  === '/client' ? 'active' : ''}`}><GroupsIcon className='sidebar-icon'/><Link to={"/client"} >Client</Link></li>
-              <li className={`sidenav-li`}><AddHomeOutlinedIcon className='sidebar-icon'/><Link to={"/mission"} >Lieu du travail</Link></li>
+              <li className={`sidenav-li ${location.pathname  === '/sites' ? 'active' : ''}`}><AddHomeOutlinedIcon className='sidebar-icon'/><Link to={"/sites"} >Lieu du travail</Link></li>
+              <li className={`sidenav-li ${location.pathname  === '/mission' ? 'active' : ''}`}><AccessTimeIcon className='sidebar-icon'/><Link to={"/mission"} >Horaires</Link></li>
               <li className={`sidenav-li ${location.pathname  === '/fonction' ? 'active' : ''}`}><FollowTheSignsOutlinedIcon className='sidebar-icon'/><Link to={"/fonction"}>Fonctions</Link></li>
 {/*               <li className={`sidenav-li ${activeItem === 'Horaires de travail' ? 'active' : ''}`}><AccessTimeIcon className='sidebar-icon'/><Link to={"/horaireAll"} onClick={() => setActiveItem('Horaires de travail')}>Horaires de travail</Link></li> */}
               <li className={`sidenav-li ${location.pathname  === '/presence' ? 'active' : ''}`}><ChecklistRtlIcon className='sidebar-icon'/><Link to={"/presence"} >Presence</Link></li>

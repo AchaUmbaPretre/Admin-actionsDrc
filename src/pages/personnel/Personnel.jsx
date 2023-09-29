@@ -241,7 +241,7 @@ const exportToExcel = () => {
             <FadeLoader color={'#36D7B7'} loading={loading} />
           </div>
         ) : (
-          <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="userTable" />
+          <DataGrid rows={data} columns={columns} pageSize={6} checkboxSelection className="userTable" />
           
         )}
         </div>
