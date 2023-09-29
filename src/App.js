@@ -58,6 +58,8 @@ import PaiementPdf from './pages/payement/PaiementPdf';
 import Views from './pages/personnel/views/Views';
 import AffEdite from './pages/affectation/edite/AffEdite';
 import Sites from './pages/sites/Sites';
+import FactureContrat from './pages/faturation/factureAgent/FactureContrat';
+import FactureCalcul from './pages/faturation/factureCalcule/FactureCalcul';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -196,6 +198,14 @@ function App() {
         {
           path: '/facturationPut/:id',
           element: <FatureEdit />
+        },
+        {
+          path: '/factureContrat',
+          element: <FactureContrat />
+        },
+        {
+          path: '/factureCalcul',
+          element: <FactureCalcul />
         },
         {
           path: '/listeConge',

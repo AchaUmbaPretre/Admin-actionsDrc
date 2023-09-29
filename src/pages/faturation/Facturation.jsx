@@ -21,13 +21,15 @@ import config from '../../config'
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import Visibility from '@mui/icons-material/Visibility';
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
+import FactureSearch from './factureSearch/FactureSearch';
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 900,
+  width: 700,
   bgcolor: 'background.paper',
   border: '1px solid #FFF',
   boxShadow: 24,
@@ -203,7 +205,7 @@ const Facturation = () => {
               </div>
           </div>
           <div className="personPdf">
-            <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
+            <Link className="personnel-btn" onClick={handleOpen}><PersonSearchIcon/>Selectionnez un client</Link>
             <Link className="personnel-btn-pdf" onClick={() => navigate('/facturationPdf')}><PictureAsPdfIcon/>Pdf</Link>
             <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
           </div>
@@ -223,7 +225,7 @@ const Facturation = () => {
                     <Fade in={open}>
                         <Box sx={style}>
                             <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
-                              <FactureForm handleModalClose={handleClose} />
+                              <FactureSearch handleModalClose={handleClose} />
                             </Box>
                         </Box>
                     </Fade>
