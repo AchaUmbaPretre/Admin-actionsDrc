@@ -370,15 +370,15 @@ console.log(title)
           )}
           <div className="personnel-aff-bottom">
             <div className="personnel-row">
-                <h2 className="personnel-total-title"><span>Facture à </span><span>{title.company_name}</span></h2>
+                <h2 className="personnel-total-title"><span>Facture à </span><span className='facture-color'>{title.company_name}</span></h2>
                 <span className="ligne"></span>
-                <h2 className="personnel-total-title"><span>Contrat N° : </span><span>{contratId}</span></h2>
+                <h2 className="personnel-total-title"><span>Contrat N° : </span><span className='facture-color'>{contratId}</span></h2>
                 <span className="ligne"></span>
-                <h2 className="personnel-total-title"><span>Type du contrat : </span><span>{title.contract_type}</span></h2>
+                <h2 className="personnel-total-title"><span>Type du contrat : </span><span className='facture-color'>{title.contract_type}</span></h2>
                 <span className="ligne"></span>
-                <h2 className="personnel-total-title"><span>Nombre d'agents : </span><span>{factureContratCount.total} Agents</span></h2>
+                <h2 className="personnel-total-title"><span>Nombre d'agents : </span><span className='facture-color'>{factureContratCount.total} Agent(s)</span></h2>
                 <span className="ligne"></span>
-                <h2 className="personnel-total-title"><span>Prix total : </span><span><input type="text" value={montantTotal} className="form-input-montant"/>Dollars</span></h2>
+                <h2 className="personnel-total-title"><span>Prix total : </span><span><input type="text" value={montantTotal} className="form-input-montant"/>$</span></h2>
             </div>
             <div className="personnel-row-input">
                 <div className="form-row">
