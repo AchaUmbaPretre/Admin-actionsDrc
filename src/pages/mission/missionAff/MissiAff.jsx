@@ -432,6 +432,8 @@ const MissiAff = () => {
       try {
         const {data} = await axios.get(`${DOMAIN}/api/admin/sites/${clientId}`);
         SetSites(data);
+
+        console.log(data)
       } catch (error) {
         console.log(error);
       }
@@ -526,7 +528,7 @@ const MissiAff = () => {
                   onChange={(selectedOption) =>handleChange({ target: { name: 'site', value: selectedOption.value } })}
                   options={sites.map((item) => ({
                     value: item.id,
-                    label: item.nom_site
+                    label:`Av/ ${item.avenue} Q/${item.quartier} C/${item.commune} N°${item.numero}`
                   }))}
                 />
             </div>

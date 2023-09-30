@@ -29,8 +29,6 @@ const SitesForm = ({ handleModalClose }) => {
     setData((prev) => ({ ...prev, [name]: formattedValue }));
   };
 
-  console.log(data)
-
   const handleClick = async (e) => {
     e.preventDefault();
     handleModalClose()

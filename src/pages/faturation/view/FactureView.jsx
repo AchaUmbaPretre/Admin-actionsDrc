@@ -20,8 +20,7 @@ const FactureView = () => {
         const fetchData = async ()=> {
             try{
                 const res = await axios.get(`${DOMAIN}/api/admin/factureAllView/${id}`);
-                setData(res.data[0])
-        
+                setData(res.data)
               }catch(error){
                 console.log(error)
               };
@@ -29,8 +28,7 @@ const FactureView = () => {
         fetchData()
     }, [id]);
 
-    const formattedDate = moment(data?.due_date).format('DD/MM/YYYY');
-    const formattedDateVoice = moment(data?.invoice_date).format('DD/MM/YYYY');
+    const formattedDateVoice = moment(data?.created_at).format('DD/MM/YYYY');
 
   return (
     <>
@@ -45,7 +43,12 @@ const FactureView = () => {
                         <h2 className="facture-h2">Client : </h2>
                         <div className="facture-info">
                             <h3 className="facture-h3">{data.company_name}</h3>
-                            <span className="facture-adress">{data.address}</span>
+                            <div className="facture-cm">
+                                <span className="facture-adress">C/ {data.commune}</span>
+                                <span className="facture-adress">Av/ {data.avenue}</span>
+                                <span className="facture-adress">Q/ {data.quartier}</span>
+                                <span className="facture-adress">N° {data.numero}</span>
+                            </div>
                         </div>
                     </div>
                     <div className="facture-center-row1">
@@ -53,14 +56,12 @@ const FactureView = () => {
                             <tr>
                                 <th>Date de facturation</th>
                                 <th>Numéro de facture</th>
-                                <th>Date d'échéance</th>
                                 <th>Status</th>
                                 <th>Montant</th>
                             </tr>
                             <tr>
                                 <td>{formattedDateVoice}</td>
                                 <td>{data.id}</td>
-                                <td>{formattedDate}</td>
                                 <td>{data.status}</td>
                                 <td>{data.total_amount} $</td>
                             </tr>
@@ -79,9 +80,9 @@ const FactureView = () => {
                             <th>Total TTC</th>
                         </tr>
                         <tr>
-                            <td>0 %</td>
-                            <td>0 %</td>
-                            <td>{data.total_amount} $</td>
+                            <td>16 %</td>
+                            <td>{data.montant_tva} $</td>
+                            <td>{data.montant_total} $</td>
                         </tr>
                     </table>
                 </div>

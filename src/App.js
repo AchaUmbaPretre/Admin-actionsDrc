@@ -60,6 +60,8 @@ import AffEdite from './pages/affectation/edite/AffEdite';
 import Sites from './pages/sites/Sites';
 import FactureContrat from './pages/faturation/factureAgent/FactureContrat';
 import FactureCalcul from './pages/faturation/factureCalcule/FactureCalcul';
+import PresenceAgent from './pages/presence/presenceAgent/PresenceAgent';
+import PresenceList from './pages/presence/presenceListe/PresenceList';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -182,6 +184,14 @@ function App() {
         {
           path: "/presenceView/:emp1_id/:rowId",
           element: <PresenceView />
+        },
+        {
+          path: '/presenceAgent',
+          element: <PresenceAgent />
+        },
+        {
+          path: '/presenceList',
+          element: <PresenceList />
         },
         {
           path: '/facturation',

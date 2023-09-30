@@ -18,6 +18,7 @@ import config from '../../config'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
+import PresenceSearch from './presenceSearch/PresenceSearch';
 
 const style = {
   position: 'absolute',
@@ -144,7 +145,7 @@ const Presence = () => {
               </div>
           </div>
           <div className="personPdf">
-            <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
+            <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Presence</Link>
             <Link className="personnel-btn-pdf" onClick={() => navigate('/presencePdf')}><PictureAsPdfIcon/>Pdf</Link>
             <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
           </div>
@@ -164,7 +165,7 @@ const Presence = () => {
                     <Fade in={open}>
                         <Box sx={style}>
                             <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
-                              <PresenceForm handleClose={handleClose}/>
+                              <PresenceSearch handleClose={handleClose}/>
                             </Box>
                         </Box>
                     </Fade>

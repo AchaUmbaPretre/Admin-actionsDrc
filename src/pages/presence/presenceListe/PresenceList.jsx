@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useEffect, useState } from 'react';
-import './facureCalcul.scss'
+import './presenceList.scss'
 import axios from 'axios';
 import { FadeLoader } from 'react-spinners';
 import config from '../../../config'
@@ -14,9 +14,11 @@ import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table } from 'antd';
 import * as React from 'react';
 import Select from 'react-select';
+import { DatePicker } from 'antd'
 
 
-const FactureCalcul = () => {
+
+const PresenceList = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState({});
   const [datas, setDatas] = useState({});
@@ -50,9 +52,10 @@ const FactureCalcul = () => {
   const contratId = searchParams.get('contrat_id');
   const [factureContratCount, setFactureContratCount] = useState ([]);
 
-  useEffect(() => {
-    setMontantTotal(montantTotals);
-  }, [montantTotals]);
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
+
 
  const handleSearch = (selectedKeys, confirm, dataIndex) => {
    confirm();
@@ -184,7 +187,6 @@ const FactureCalcul = () => {
     setData((prev) => ({ ...prev, [name]: formattedValue }));
   };
 
-  console.log(montantTotal)
 
   const columns = [
     {
@@ -272,34 +274,6 @@ const FactureCalcul = () => {
     fetchAgentsAffectes();
   }, []);
 
-  useEffect(()=>{
-    
-    const fetchData = async ()=> {
-      try{
-          const res = await axios.get(`${DOMAIN}/api/admin/statusFacture`);
-          setOptionsStatus(res.data)
-  
-        }catch(error){
-          console.log(error)
-        };
-  }
-  fetchData()
-  }, [])
-
-  useEffect(() => {
-    const fetchAgentsAffectes = async () => {
-      try {
-        const contratId = searchParams.get('contrat_id');
-  
-        const response = await axios.get(`${DOMAIN}/api/admin/factureCalculTotal/${contratId}`);
-  
-        setTotal(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchAgentsAffectes();
-  }, []);
 
   useEffect(() => {
     const factureCount = async () => {
@@ -353,8 +327,8 @@ console.log(title)
           <div className="contrats-top">
               <AccessTimeIcon className='contrats-icon'/>
               <div className="contrats-info">
-                  <h2 className="contrats-title">Client : {title.company_name}</h2>
-                  <span className="contrats-span">Liste des agents qui sont affectés à {title.company_name}</span>
+                  <h2 className="contrats-title">Presence des agents de {title.company_name}</h2>
+                  <span className="contrats-span">Liste des presence des agents qui sont affectés à {title.company_name}</span>
               </div>
           </div>
         </div>
@@ -368,32 +342,14 @@ console.log(title)
           )}
           <div className="personnel-aff-bottom">
             <div className="personnel-row">
-                <h2 className="personnel-total-title"><span>Facture à </span><span className='facture-color'>{title.company_name}</span></h2>
-                <span className="ligne"></span>
-                <h2 className="personnel-total-title"><span>Contrat N° : </span><span className='facture-color'>{contratId}</span></h2>
-                <span className="ligne"></span>
-                <h2 className="personnel-total-title"><span>Type du contrat : </span><span className='facture-color'>{title.contract_type}</span></h2>
-                <span className="ligne"></span>
-                <h2 className="personnel-total-title"><span>Nombre d'agents : </span><span className='facture-color'>{factureContratCount.total} Agent(s)</span></h2>
-                <span className="ligne"></span>
-                <h2 className="personnel-total-title"><span>Prix total : </span><span><input type="text" name='total_amount	' value={montantTotal} onChange={(e)=>setMontantTotal(e.target.value)} className="form-input-montant"/>$</span></h2>
-            </div>
-            <div className="personnel-row-input">
-                <div className="form-row">
-                    <label htmlFor="" className="label-form">Statut de la facture<span>*</span></label>
-                    <Select
-                        onChange={(selectedOption) =>
-                      handleChange(selectedOption.value, 'status')
-                      }
-                        options={optionsStatus.map((item) => ({
-                            value: item.status,
-                            label: item.status
-                        }))}
-                        placeholder="Selectionnez un status..."
-                    />
+                <h2 className='personnel-h2'>Formulaire de presence</h2>
+                <div className="presence-control">
+                    <label htmlFor="">Date <span>*</span></label>
+                    <DatePicker onChange={onChange} />
                 </div>
-                <button className="person-btn" onClick={handleClick} >Envoyer</button>
+                <button className="presence-btn">Envoyer</button>
             </div>
+
           </div>
         </div>
       </div>
@@ -401,4 +357,4 @@ console.log(title)
   )
 }
 
-export default FactureCalcul
+export default PresenceList

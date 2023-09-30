@@ -19,6 +19,7 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import './payement.scss'
+import moment from 'moment';
 
 const style = {
     position: 'absolute',
@@ -56,7 +57,7 @@ const Payement = () => {
           headerName: 'Date de payement',
           width: 200,
           valueGetter: (params) =>
-          format(new Date(params.row.payment_date), 'yyyy-MM-dd'),
+          moment(params.row.payment_date).format('DD-MM-yyyy'),
         },
         {
             field: 'amount',

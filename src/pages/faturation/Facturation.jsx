@@ -23,6 +23,7 @@ import * as XLSX from 'xlsx';
 import Visibility from '@mui/icons-material/Visibility';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import FactureSearch from './factureSearch/FactureSearch';
+import moment from 'moment';
 
 const style = {
   position: 'absolute',
@@ -87,31 +88,23 @@ const Facturation = () => {
 
   const columns = [
     { field: 'id', headerName: 'Numero de facture', width: 130 },
-    { field: 'company_name', headerName: "client", width: 130 },
-
+    { field: 'company_name', headerName: "client", width: 160 },
     {
-      field: 'invoice_date',
+      field: 'created_at',
       headerName: 'Date de la facture',
-      width: 140,
+      width: 160,
       valueGetter: (params) =>
-      format(new Date(params.row.invoice_date), 'yyyy-MM-dd'),
-    },
-    {
-        field: 'due_date',
-        headerName: "Date d'échéance de la facture",
-        width: 140,
-        valueGetter: (params) =>
-        format(new Date(params.row.due_date), 'yyyy-MM-dd'),
+      moment(params.row.created_at).format('DD-MM-yyyy'),
     },
     {
         field: 'total_amount',
         headerName: "Montant total",
-        width: 140,renderCell: (params) => `${params.value} $`
+        width: 160,renderCell: (params) => `${params.value} $`
     },
     {
       field: 'status',
       headerName: 'Statut de la facture',
-      width: 140,
+      width: 150,
       renderCell: (params) => {
         const status = params.value || 'Non spécifié';
         let cellClassName = '';
@@ -146,10 +139,10 @@ const Facturation = () => {
           <>
             <div className="table-icons-row">
             <div className="userOvert0">
-                    <Link>
+{/*                     <Link>
                       <EditOutlined className="userListBtn" onClick={handleEdit} />
                       <span className='userOvert'>Modifier</span>
-                    </Link>
+                    </Link> */}
                   </div>
                   <div className="userOvert1">
                     <VisibilityOutlined className='userEye' onClick={() => navigate(`/facturationView/${params.row.id}`)} />
