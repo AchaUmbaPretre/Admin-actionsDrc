@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../../mission/views/missionView.scss'
 import { CalendarMonth, Edit, Person, Person3 } from '@mui/icons-material';
+import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
@@ -27,9 +28,7 @@ const AffView = () => {
         fetchData()
     }, [id]);
 
-    console.log("gggg", data)
-
-    const formattedDatSortant = moment(data?.end_date).format('DD/MM/YYYY');
+    const formattedDatSortant = moment(data?.end_date).format('DD-MM-YYYY');
 
   return (
     <>
@@ -40,12 +39,22 @@ const AffView = () => {
                     <div className="client-row1">
                         <div className="client-row">
                             <div className="client-sous">
-                                <span className="client-nom"><Person/> Agent :</span>
-                                <span className="client-nom">{data?.first_name} {data?.last_name}</span>
+                                <span className="client-nom"><Person2OutlinedIcon/> Agent :</span>
+                                <span className="client-nom">{data?.first_name}</span>
                             </div>
                             <div className="client-sous">
-                                <span className="client-nom"><Person3/> Client :</span>
+                                <span className="client-nom"><Person2OutlinedIcon/> Client :</span>
+                                <span className="client-nom">{data?.last_name}</span>
+                            </div>
+                        </div>
+                        <div className="client-row">
+                            <div className="client-sous">
+                                <span className="client-nom"><Person2OutlinedIcon/> Agent :</span>
                                 <span className="client-nom">{data?.client_nom}</span>
+                            </div>
+                            <div className="client-sous">
+                                <span className="client-nom"><Person2OutlinedIcon/> Client :</span>
+                                <span className="client-nom">{data?.contract_type}</span>
                             </div>
                         </div>
                         <div className="client-row">

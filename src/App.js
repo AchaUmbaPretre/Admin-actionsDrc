@@ -62,6 +62,7 @@ import FactureContrat from './pages/faturation/factureAgent/FactureContrat';
 import FactureCalcul from './pages/faturation/factureCalcule/FactureCalcul';
 import PresenceAgent from './pages/presence/presenceAgent/PresenceAgent';
 import PresenceList from './pages/presence/presenceListe/PresenceList';
+import SitesEdit from './pages/sites/sitesEdite/SitesEdit';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -148,6 +149,14 @@ function App() {
         {
           path: '/sites',
           element: <Sites />
+        },
+        {
+          path: '/sitesEdit/:id',
+          element: <SitesEdit/>
+        },
+        {
+          path: '/sitesView/:id',
+          element: <SitesEdit/>
         },
         {
           path: '/affectation',

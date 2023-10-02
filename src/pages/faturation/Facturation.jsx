@@ -139,10 +139,10 @@ const Facturation = () => {
           <>
             <div className="table-icons-row">
             <div className="userOvert0">
-{/*                     <Link>
+                     <Link>
                       <EditOutlined className="userListBtn" onClick={handleEdit} />
                       <span className='userOvert'>Modifier</span>
-                    </Link> */}
+                    </Link>
                   </div>
                   <div className="userOvert1">
                     <VisibilityOutlined className='userEye' onClick={() => navigate(`/facturationView/${params.row.id}`)} />

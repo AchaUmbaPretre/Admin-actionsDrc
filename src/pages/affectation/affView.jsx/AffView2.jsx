@@ -11,6 +11,7 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import CurrencyExchangeOutlinedIcon from '@mui/icons-material/CurrencyExchangeOutlined';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
+import WrapTextIcon from '@mui/icons-material/WrapText';
 
 const AffView2 = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -56,12 +57,22 @@ const AffView2 = () => {
                     <div className="client-row1">
                         <div className="client-row">
                             <div className="client-sous">
-                                <span className="client-nom"><PersonOutlineOutlinedIcon /> Agent :</span>
-                                <span className="client-nom">{data?.first_name} {data?.last_name}</span>
+                                <span className="client-nom"><PersonOutlineOutlinedIcon /> Nom :</span>
+                                <span className="client-nom">{data?.first_name}</span>
                             </div>
                             <div className="client-sous">
-                                <span className="client-nom"><PeopleAltOutlinedIcon /> Client :</span>
+                                <span className="client-nom"><PersonOutlineOutlinedIcon  /> Prenom :</span>
+                                <span className="client-nom">{data?.last_name}</span>
+                            </div>
+                        </div>
+                        <div className="client-row">
+                            <div className="client-sous">
+                                <span className="client-nom"><PersonOutlineOutlinedIcon /> Client :</span>
                                 <span className="client-nom">{data?.company_name}</span>
+                            </div>
+                            <div className="client-sous">
+                                <span className="client-nom"><WrapTextIcon/> Type du contrat : </span>
+                                <span className="client-nom">{data?.contract_type}</span>
                             </div>
                         </div>
                         <div className="client-row">

@@ -84,7 +84,7 @@ const Sites = () => {
           cancelButtonText: 'Non',
         }).then((result) => {
           if (result.isConfirmed) {
-            navigate(`/contratFonctionEdit/${params.row.id}`);
+            navigate(`/sitesEdit/${params.row.id}`);
           }
         });
       }

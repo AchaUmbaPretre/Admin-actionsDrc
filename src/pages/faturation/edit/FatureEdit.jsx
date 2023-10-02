@@ -10,7 +10,6 @@ import config from '../../../config'
 const FatureEdit = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState({});
-  const { client_id, invoice_date, due_date, total_amount, status } = data;
   const location = useLocation();
   const navigate = useNavigate();
   const [optionsClient, setOptionsClient] = useState([]);
@@ -42,7 +41,7 @@ const FatureEdit = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`${DOMAIN}/api/admin/factureAllView/${id}`);
-        setData(res.data[0]);
+        setData(res.data);
       } catch (error) {
         console.log(error);
       }
@@ -116,30 +115,25 @@ const FatureEdit = () => {
                     <div className="form-row">
                       <label htmlFor="" className="label-form">Client <span>*</span></label>
                       <Select
-                      value={selectedOption}
+                      value={data?.client_id}
                       onChange={handleSelectChange}
                       options={optionsClient.map((item) => ({
                         value: item.id,
                         label: item.company_name
                       }))}
-                      placeholder="Selectionnez un client..."
                       className=""
                     />
                     </div>
                     <div className="form-row">
                       <label htmlFor="" className="label-form">Date de la facture <span>*</span></label>
-                      <input type="date" value={moment(invoice_date).format('YYYY-MM-DD') || ''}  name="invoice_date" className="input-form" onChange={handleChange} />
+                      <input type="date" value={moment(data?.created_at).format('YYYY-MM-DD') || ''}  name="created_at" className="input-form" onChange={handleChange} />
                     </div>
                 </div>
 
                 <div className="form-rows">
                     <div className="form-row">
-                        <label htmlFor="" className="label-form">Date d'échéance de la facture<span>*</span></label>
-                        <input type="date" value={moment(due_date).format('YYYY-MM-DD') || ''} name='due_date' className="input-form" onChange={handleChange}/>
-                    </div>
-                    <div className="form-row">
                         <label htmlFor="" className="label-form">Montant total de la facture<span>*</span></label>
-                        <input type="number" value={total_amount}  name='total_amount' className="input-form" onChange={handleChange} />
+                        <input type="TEXT" value={data?.total_amount}  name='total_amount' className="input-form" onChange={handleChange} />
                     </div>
                 </div>
 
