@@ -56,7 +56,6 @@ const SitesEdit = ({ handleModalClose }) => {
       console.log(err);
     }
   };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -131,17 +130,18 @@ const SitesEdit = ({ handleModalClose }) => {
                 <label htmlFor="" className="label-edit">
                   Client(e) <span>*</span>
                 </label>
-                <Select
+                <select
                     value={data?.client_id}
-                  options={clientEtat?.map((item) => ({
-                    value: item.id,
-                    label: item.company_name,
-                  }))}
-                  onChange={(selectedOption) =>
-                    handleChange(selectedOption.value, 'client_id')
-                  }
-                  placeholder="Sélectionnez un client"
-                />
+                    onChange={(event) => handleChange(event.target.value, 'client_id')}
+                    className="input-form"
+                    >
+                    <option value="">Sélectionnez un client</option>
+                    {clientEtat?.map((item) => (
+                        <option key={item.id} value={item.id}>
+                        {item.company_name}
+                        </option>
+                    ))}
+                    </select>
               </div>
               <div className="edit-row">
                 <label htmlFor="" className="label-edit">Avenue <span>*</span></label>

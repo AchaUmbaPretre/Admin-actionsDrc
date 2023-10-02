@@ -42,7 +42,7 @@ const Sites = () => {
 
   const columns = [
     {
-        field: 'client_id',
+        field: 'company_name',
         headerName: 'Client',
         width: 120 
     },
@@ -98,7 +98,7 @@ const Sites = () => {
                   </Link>
                 </div>
                 <div className="userOvert1">
-                  <VisibilityOutlined className='userEye' onClick={() => navigate(`/fonctionView/${params.row.id}`)} />
+                  <VisibilityOutlined className='userEye' onClick={() => navigate(`/sitesView/${params.row.id}`)} />
                   <span className='userOvert'>détail</span>
                 </div>
                 <div className="userOvert2">
@@ -138,7 +138,7 @@ const Sites = () => {
     });
 
     if (result.isConfirmed) {
-      await axios.delete(`${DOMAIN}/api/admin/contratInfo/${id}`);
+      await axios.delete(`${DOMAIN}/api/admin/siteDelete/${id}`);
       window.location.reload();
     }
   } catch (err) {

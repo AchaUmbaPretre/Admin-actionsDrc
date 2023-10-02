@@ -268,7 +268,7 @@ const getColumnSearchProps = (dataIndex) => ({
     const fetchDatas = async () => {
       try {
         const res = await axios.get(`${DOMAIN}/api/admin/allaffectation`);
-        setData(res.data)
+        setData(res?.data)
         setLoading(false);
 
       } catch (error) {
@@ -283,7 +283,7 @@ const getColumnSearchProps = (dataIndex) => ({
     const fetchDatas = async () => {
       try {
         const res = await axios.get(`${DOMAIN}/api/admin/contratEmploie`);
-        setTap1(res.data)
+        setTap1(res?.data)
         setLoading(false);
       } catch (error) {
         console.log(error)
@@ -321,28 +321,11 @@ const getColumnSearchProps = (dataIndex) => ({
       ...getColumnSearchProps('first_name'),
     },
     {
-      title: 'Prénom',
-      dataIndex: 'last_name',
-      key: 'last_name',
-      width: '10%',
-      ...getColumnSearchProps('last_name'),
-    },
-    {
       title: 'Compétence',
       dataIndex: 'skills',
       key: 'skills',
       width: '10%',
       ...getColumnSearchProps('skills'),
-    },
-    {
-      title: 'Salaire',
-      dataIndex: 'salaire',
-      key: 'salaire',
-      width: '10%',
-      ...getColumnSearchProps('salaire'),
-      sorter: (a, b) => a.salaire - b.salaire,
-      sortDirections: ['descend', 'ascend'],
-      render: (text) => `${text} $`, // Ajoute le symbole "$" lors de l'affichage
     },
     {
       title: 'Prix',
@@ -358,17 +341,17 @@ const getColumnSearchProps = (dataIndex) => ({
       title: "Date d'affectation",
       dataIndex: 'created_at',
       key: 'created_at',
-      width: '15%',
+      width: '20%',
       ...getColumnSearchProps('created_at'),
       sorter: (a, b) => moment(a.created_at) - moment(b.created_at),
       sortDirections: ['descend', 'ascend'],
-      render: (text) => moment(text).locale('fr').format('DD-MM-YYYY')
+      render: (text) => moment(text).locale('fr').format('DD/MM/YYYY')
     },
     {
       title: 'Date fin',
       dataIndex: 'end_date',
       key: 'end_date',
-      width: '15%',
+      width: '20%',
       ...getColumnSearchProps('end_date'),
       sorter: (a, b) => moment(a.end_date) - moment(b.end_date),
       sortDirections: ['descend', 'ascend'],
@@ -446,28 +429,11 @@ const getColumnSearchProps = (dataIndex) => ({
       ...getColumnSearchProps('first2'),
     },
     {
-      title: 'Prenom',
-      dataIndex: 'last2',
-      key: 'first2',
-      width: '10%',
-      ...getColumnSearchProps('first2'),
-    },
-    {
       title: 'Competence',
       dataIndex: 'skills2',
       key: 'skills2',
-      width: '15%',
-      ...getColumnSearchProps('skills2'),
-    },
-    {
-      title: 'Salaire',
-      dataIndex: 'salaire2',
-      key: 'salaire2',
       width: '10%',
-      ...getColumnSearchProps('salaire2'),
-      sorter: (a, b) => a.salaire - b.salaire,
-      sortDirections: ['descend', 'ascend'],
-      render: (text) => `${text} $`, 
+      ...getColumnSearchProps('skills2'),
     },
     {
       title: 'Prix',
@@ -483,7 +449,7 @@ const getColumnSearchProps = (dataIndex) => ({
       title: "Date d'affectation",
       dataIndex: 'created_at',
       key: 'created_at',
-      width: '25%',
+      width: '20%',
       ...getColumnSearchProps('created_at'),
       sorter: (a, b) => moment(a.created_at) - moment(b.created_at),
       sortDirections: ['descend', 'ascend'],

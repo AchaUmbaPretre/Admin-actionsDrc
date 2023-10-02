@@ -63,6 +63,7 @@ import FactureCalcul from './pages/faturation/factureCalcule/FactureCalcul';
 import PresenceAgent from './pages/presence/presenceAgent/PresenceAgent';
 import PresenceList from './pages/presence/presenceListe/PresenceList';
 import SitesEdit from './pages/sites/sitesEdite/SitesEdit';
+import SitesViews from './pages/sites/sitesViews/SitesViews';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -156,7 +157,7 @@ function App() {
         },
         {
           path: '/sitesView/:id',
-          element: <SitesEdit/>
+          element: <SitesViews/>
         },
         {
           path: '/affectation',
