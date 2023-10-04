@@ -378,14 +378,14 @@ const columns = [
     title: 'Nom',
     dataIndex: 'first_name',
     key: 'first_name',
-    width: '20%',
+    width: '17%',
     ...getColumnSearchProps('first_name'),
   },
   {
     title: 'Prénom',
     dataIndex: 'last_name',
     key: 'last_name',
-    width: '20%',
+    width: '17%',
     ...getColumnSearchProps('last_name'),
   },
   {
@@ -398,12 +398,16 @@ const columns = [
   {
     dataIndex: 'availability',
     title: 'Disponibilité',
-    width: 80,
+    width: 150,
     render: (text, record) =>
       record.contrat_id ? (
+        <div className="indisponible">Indisponible
         <DoDisturbOutlinedIcon style={{ color: 'red' }} />
+        </div>
       ) : (
+        <div className="disponible">Disponible
         <CheckCircleOutlinedIcon style={{ color: 'green' }} />
+        </div>
       ),
   },
   {

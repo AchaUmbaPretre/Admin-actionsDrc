@@ -11,7 +11,7 @@ import ToggleOffIcon from '@mui/icons-material/ToggleOff';
 import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table } from 'antd';
+import { Button, Input, Space, Table, TimePicker } from 'antd';
 import * as React from 'react';
 import Select from 'react-select';
 import { DatePicker } from 'antd'
@@ -40,22 +40,15 @@ const PresenceList = () => {
   const [total, setTotal] = useState({});
   const searchInput = React.useRef(null);
   const scroll = { x: 400 };
-  const scrollY = { y: 200 };
-
-  const [invoiceDate, setInvoiceDate] = useState('');
-  const [dueDate, setDueDate] = useState('');
-  const [totalAmount, setTotalAmount] = useState('');
-  const [status, setStatus] = useState([]);
-  const [optionsStatus, setOptionsStatus] = useState([]);
-  const montantTotals = total[0]?.montant_total;
-  const [montantTotal, setMontantTotal] = useState('')
+  const [checkTime, setCheckTime] = useState('');
+  const [checkout, setCheckout] = useState('');
+  const [date, setdate] = useState('');
   const contratId = searchParams.get('contrat_id');
   const [factureContratCount, setFactureContratCount] = useState ([]);
 
   const onChange = (date, dateString) => {
-    console.log(date, dateString);
+    setdate(dateString);
   };
-
 
  const handleSearch = (selectedKeys, confirm, dataIndex) => {
    confirm();
@@ -172,20 +165,17 @@ const PresenceList = () => {
     }
   };
 
-  const handleSelectChanges = (selectedOptionClient) => {
-    setStatus(selectedOptionClient.value);
-  };
 
 
-  const handleChange = (value, name) => {
-    let formattedValue = value;
+  const handleChange = (e) => {
+/*     let formattedValue = value;
   
     if (typeof value === 'string' && value.length > 0) {
       formattedValue = value.charAt(0).toUpperCase() + value.slice(1);
-    }
+    } */
   
-    setData((prev) => ({ ...prev, [name]: formattedValue }));
-  };
+    setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }
 
 
   const columns = [
@@ -208,14 +198,6 @@ const PresenceList = () => {
         key: 'last_name',
         width: '20%',
         ...getColumnSearchProps('last_name'),
-      },
-    {
-        title: 'Prix',
-        dataIndex: 'prix',
-        key: 'prix',
-        width: '20%',
-        ...getColumnSearchProps('prix'),
-        render: (text) => `${text} $`,
       },
     {
       title: 'Sélectionner',
@@ -275,6 +257,7 @@ const PresenceList = () => {
   }, []);
 
 
+
   useEffect(() => {
     const factureCount = async () => {
       try {
@@ -291,35 +274,41 @@ const PresenceList = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-
+  
     try {
-      const response = await axios.post(`${DOMAIN}/api/admin/factures`, {
-        status : data.status,
-        client_id: clientId,
-        total_amount: montantTotal,
-      });
 
-      const invoiceId = response.data.invoice_id;
-      navigate('/facturation')
+      await Promise.all(
+        selectedIds.map(async (dd) => {
+          await axios.post(`${DOMAIN}/api/admin/presences`, {
+            employee_id: dd,
+            client_id : clientId,
+            date: date,
+            check_in_time: checkTime,
+            check_out_time: checkout
+          });
+        })
+      );
+  
       Swal.fire({
+        title: 'Success',
+        text: 'Presence créé avec succès!',
         icon: 'success',
-        title: 'Facture créée avec succès',
-        text: `ID de la facture : ${invoiceId}`,
-      }).then(() => {
-        Swal.close(); 
+        confirmButtonText: 'OK',
       });
-
-    } catch (error) {
-      console.error('Erreur lors de la création de la facture :', error);
+  
+      navigate('/presence');
+    } catch (err) {
       Swal.fire({
+        title: 'Error',
+        text: err.message,
         icon: 'error',
-        title: 'Erreur',
-        text: 'Une erreur s\'est produite lors de la création de la facture.',
+        confirmButtonText: 'OK',
       });
+  
+      console.log(err);
     }
   };
 
-console.log(title)
   return (
     <>
       <div className="factureCalcul">
@@ -328,7 +317,7 @@ console.log(title)
               <AccessTimeIcon className='contrats-icon'/>
               <div className="contrats-info">
                   <h2 className="contrats-title">Presence des agents de {title.company_name}</h2>
-                  <span className="contrats-span">Liste des presence des agents qui sont affectés à {title.company_name}</span>
+                  <span className="contrats-span">Liste de presence des agents qui sont affectés à {title.company_name}</span>
               </div>
           </div>
         </div>
@@ -345,9 +334,22 @@ console.log(title)
                 <h2 className='personnel-h2'>Formulaire de presence</h2>
                 <div className="presence-control">
                     <label htmlFor="">Date <span>*</span></label>
-                    <DatePicker onChange={onChange} />
+                    <DatePicker name={date} onChange={onChange}/>
                 </div>
-                <button className="presence-btn">Envoyer</button>
+                <div className="presence-control">
+                    <div className="presence-rows-heure">
+                      <div className="presence-rows">
+                        <label htmlFor="">Heure début <span>*</span></label>
+                        <input type="time" name='check_in_time' className="presence-input" onChange={(e)=>{setCheckTime(e.target.value)}}/>
+                      </div>
+                      <div className="presence-rows">
+                        <label htmlFor="">Heure fin <span>*</span></label>
+                        <input type="time" name='check_out_time' className="presence-input" onChange={(e)=>{setCheckout(e.target.value)}} />
+                      </div>
+                    </div>
+                     
+                </div>
+                <button className="presence-btn" onClick={handleClick}>Envoyer</button>
             </div>
 
           </div>

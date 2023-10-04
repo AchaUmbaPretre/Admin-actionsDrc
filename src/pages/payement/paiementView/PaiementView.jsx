@@ -17,7 +17,7 @@ const PaiementView = () => {
       const fetchData = async ()=> {
           try{
               const res = await axios.get(`${DOMAIN}/api/admin/payementView/${id}`);
-              setData(res.data[0])
+              setData(res.data)
       
             }catch(error){
               console.log(error)
@@ -25,6 +25,8 @@ const PaiementView = () => {
       }
       fetchData()
   }, [id])
+
+
 
   return (
     <>

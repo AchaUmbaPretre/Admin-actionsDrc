@@ -7,13 +7,9 @@ import { useEffect, useState } from 'react';
 import './../../horaire/horaireAll.scss'
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import config from '../../../config'
 import { useLocation } from 'react-router-dom';
-import CancelIcon from '@mui/icons-material/Cancel';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import PendingIcon from '@mui/icons-material/Pending';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table } from 'antd';
@@ -168,7 +164,7 @@ const PresenceAgent = ({}) => {
       ...getColumnSearchProps('start_date'),
       sorter: (a, b) => moment(a.start_date) - moment(b.start_date),
       sortDirections: ['descend', 'ascend'],
-      render: (text) => moment(text).locale('fr').format('DD/MM/YYYY')
+      render: (text) => moment(text).locale('fr').format('DD-MM-YYYY')
     },
     {
       title: 'Date de la fin',
@@ -178,7 +174,7 @@ const PresenceAgent = ({}) => {
       ...getColumnSearchProps('end_date'),
       sorter: (a, b) => moment(a.end_date) - moment(b.end_date),
       sortDirections: ['descend', 'ascend'],
-      render: (text) => moment(text).locale('fr').format('DD/MM/YYYY')
+      render: (text) => moment(text).locale('fr').format('DD-MM-YYYY')
     },
     {
       title: 'Type du contrat',

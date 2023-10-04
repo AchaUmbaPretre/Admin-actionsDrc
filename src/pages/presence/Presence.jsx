@@ -2,7 +2,7 @@ import { DataGrid } from '@mui/x-data-grid'
 import { Link, useNavigate } from 'react-router-dom';
 import './presence.scss'
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
-import { DeleteOutline} from '@mui/icons-material';
+import { DeleteOutline, EditOutlined, VisibilityOutlined} from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useEffect, useState } from 'react';
@@ -18,6 +18,7 @@ import config from '../../config'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
+import Swal from 'sweetalert2';
 import PresenceSearch from './presenceSearch/PresenceSearch';
 
 const style = {
@@ -40,11 +41,6 @@ const Presence = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  const HandleDelete = (id) =>{
-    const dataFilter = data.filter(item=> item.id !== id)
-    setData(dataFilter)
-  }
-
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -64,6 +60,27 @@ const Presence = () => {
   }
   fetchData()
 }, [])
+
+const handleDelete = async (id) => {
+  try {
+    const result = await Swal.fire({
+      title: 'Es-tu sûr?',
+      text: "Vous ne pourrez pas revenir en arrière !",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, supprimez-le!'
+    });
+
+    if (result.isConfirmed) {
+      await axios.delete(`${DOMAIN}/api/admin/payement/${id}`);
+      window.location.reload();
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -96,10 +113,29 @@ const Presence = () => {
     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
         return(
           <>
-            <div className="table-icons-row">
+
+<>
+                <div className="table-icons-row">
+                  <div className="userOvert0">
+                    <Link onClick={''}>
+                      <EditOutlined className="userListBtn" onClick={() => navigate(`/payementEdit/${params.row.id}`)} />
+                      <span className='userOvert'>Modifier</span>
+                    </Link>
+                  </div>
+                  <div className="userOvert1">
+                    <VisibilityOutlined className='userEye' onClick={() => navigate(`/presenceView/${params.row.emp1_id}/${params.row.id}`)} />
+                    <span className='userOvert'>détail</span>
+                  </div>
+                  <div className="userOvert2">
+                    <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
+                    <span className='userOvert'>Supprimer</span>
+                  </div>
+                </div>
+              </>
+           {/*  <div className="table-icons-row">
                 <VisibilityIcon className='userEye' onClick={() => navigate(`/presenceView/${params.row.emp1_id}/${params.row.id}`)} />
-                <DeleteOutline className="userListDelete" onClick={()=>{HandleDelete(params.row.id)}} />
-            </div>
+                <DeleteOutline className="userListDelete"  />
+            </div> */}
           </>
 
         )

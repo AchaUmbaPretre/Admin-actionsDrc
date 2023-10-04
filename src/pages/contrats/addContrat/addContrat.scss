@@ -89,6 +89,18 @@
             width: 100%;
             position: relative;
             overflow-x: scroll;
+            .disponible {
+                color: green;
+                width: 20px;
+                display: flex;
+                gap: 5px;
+              }
+              
+            .indisponible {
+                color: red;
+                display: flex;
+                gap: 5px;
+              }
             .presenceTable{
                 background: #fff;
                 padding: 10px;

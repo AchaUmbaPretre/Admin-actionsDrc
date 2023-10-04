@@ -29,9 +29,9 @@ const Affectation = () => {
 
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
-  const [tap1, setTap1] = useState({});
+  const [tap1, setTap1] = useState([]);
   const navigate = useNavigate();
  const [loading, setLoading] = useState(true);
  const [value, setValue] = React.useState('1');
@@ -294,30 +294,30 @@ const getColumnSearchProps = (dataIndex) => ({
 
   const columns = [
     {
-      title: 'N° du contrat',
+      title: 'Code',
       dataIndex: 'contrat_id',
       key: 'contrat_id',
-      width: '10%',
+      width: '5%',
     },
     {
       title: 'Client',
       dataIndex: 'client_nom',
       key: 'client_nom',
-      width: '10%',
+      width: '13%',
       ...getColumnSearchProps('client_nom'),
     },
     {
       title: 'Type contrat',
       dataIndex: 'contract_type',
       key: 'contract_type',
-      width: '20%',
+      width: '14%',
       ...getColumnSearchProps('contract_type'),
     },
     {
       title: 'Nom',
       dataIndex: 'first_name',
       key: 'last_name',
-      width: '10%',
+      width: '13%',
       ...getColumnSearchProps('first_name'),
     },
     {
@@ -331,7 +331,7 @@ const getColumnSearchProps = (dataIndex) => ({
       title: 'Prix',
       dataIndex: 'prix',
       key: 'prix',
-      width: '10%',
+      width: '13%',
       ...getColumnSearchProps('prix'),
       sorter: (a, b) => a.prix - b.prix,
       sortDirections: ['descend', 'ascend'],
@@ -344,16 +344,6 @@ const getColumnSearchProps = (dataIndex) => ({
       width: '20%',
       ...getColumnSearchProps('created_at'),
       sorter: (a, b) => moment(a.created_at) - moment(b.created_at),
-      sortDirections: ['descend', 'ascend'],
-      render: (text) => moment(text).locale('fr').format('DD/MM/YYYY')
-    },
-    {
-      title: 'Date fin',
-      dataIndex: 'end_date',
-      key: 'end_date',
-      width: '20%',
-      ...getColumnSearchProps('end_date'),
-      sorter: (a, b) => moment(a.end_date) - moment(b.end_date),
       sortDirections: ['descend', 'ascend'],
       render: (text) => moment(text).locale('fr').format('DD/MM/YYYY')
     },

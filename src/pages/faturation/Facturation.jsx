@@ -104,7 +104,7 @@ const Facturation = () => {
     {
       field: 'status',
       headerName: 'Statut de la facture',
-      width: 150,
+      width: 160,
       renderCell: (params) => {
         const status = params.value || 'Non spécifié';
         let cellClassName = '';
@@ -118,7 +118,7 @@ const Facturation = () => {
         return <div className={cellClassName}>{status}</div>;
       },
     },
-    {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
+    {field: 'action', HeaderName: 'Action', width: 160, renderCell: (params) =>{
       const handleEdit = () => {
         Swal.fire({
           title: 'Confirmation',

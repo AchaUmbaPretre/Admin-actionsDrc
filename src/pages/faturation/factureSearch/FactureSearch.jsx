@@ -101,7 +101,7 @@ const FactureSearch = ({handleModalClose}) => {
       <div className="factureSearch">
         <div className="contrat-wrapper">
           <div className="edit-title">
-            <h2 className="edit-h2">Client</h2>
+            <h2 className="edit-h2">Selectionnez un Client</h2>
           </div>
           <form action="" className="formulaire-edit">
             <div className="edit-rows">

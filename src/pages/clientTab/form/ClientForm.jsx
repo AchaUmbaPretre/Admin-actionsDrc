@@ -190,31 +190,6 @@ const ClientForm = ({handleModalClose}) => {
                     <label htmlFor="" className="label-form">APR<span>*</span></label>
                     <input type="text" name='apr' className="input-form" placeholder="Entrez le code APR.."  onChange={handleChange} />
                   </div>
-                  <div className="form-row">
-                  {!inputVisible ? (
-                    <label
-                      htmlFor=""
-                      className="label-form"
-                      onClick={handleLabelClick}
-                      style={{ cursor: "pointer" }}
-                    >
-                      Cliquez ici pour ajouter des Sites<span>*</span>
-                    </label>
-                  ) : (
-                    <label htmlFor="" className="label-form">
-                      Sites<span>*</span>
-                    </label>
-                  )}
-                  {inputVisible && (
-                    <input
-                      type="text"
-                      name="nom_site"
-                      className="input-form"
-                      onChange={handleSiteChange}
-                      placeholder='Entrez le site..' 
-                    />
-                  )}
-                </div>
                 </div>  
                 <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>
               </form>
