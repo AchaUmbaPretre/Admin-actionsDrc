@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { DeleteOutline} from '@mui/icons-material';
-import PeopleIcon from '@mui/icons-material/People';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';

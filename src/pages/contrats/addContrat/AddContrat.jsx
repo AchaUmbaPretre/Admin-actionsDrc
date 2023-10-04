@@ -378,14 +378,14 @@ const columns = [
     title: 'Nom',
     dataIndex: 'first_name',
     key: 'first_name',
-    width: '17%',
+    width: '10%',
     ...getColumnSearchProps('first_name'),
   },
   {
     title: 'Prénom',
     dataIndex: 'last_name',
     key: 'last_name',
-    width: '17%',
+    width: '15%',
     ...getColumnSearchProps('last_name'),
   },
   {

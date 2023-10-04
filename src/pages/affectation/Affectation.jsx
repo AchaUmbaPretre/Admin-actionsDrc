@@ -345,7 +345,7 @@ const getColumnSearchProps = (dataIndex) => ({
       ...getColumnSearchProps('created_at'),
       sorter: (a, b) => moment(a.created_at) - moment(b.created_at),
       sortDirections: ['descend', 'ascend'],
-      render: (text) => moment(text).locale('fr').format('DD/MM/YYYY')
+      render: (text) => moment(text).locale('fr').format('DD-M-YYYY')
     },
     {
       title: 'Action',

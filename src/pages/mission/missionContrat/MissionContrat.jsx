@@ -1,19 +1,12 @@
-import { DataGrid } from '@mui/x-data-grid'
 import { useNavigate } from 'react-router-dom';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useEffect, useState } from 'react';
 import './../../horaire/horaireAll.scss'
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import config from '../../../config'
 import { useLocation } from 'react-router-dom';
-import CancelIcon from '@mui/icons-material/Cancel';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import PendingIcon from '@mui/icons-material/Pending';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table } from 'antd';
@@ -154,8 +147,6 @@ const MissionContrat = () => {
     }
   };
 
-  console.log(selectedIds)
-
 
   const columns = [
     {
@@ -211,7 +202,6 @@ const MissionContrat = () => {
           icon = <StopOutlined />;
           color = 'red';
         }
-        
         return (
           <span style={{ color }}>
             {icon} {text}
