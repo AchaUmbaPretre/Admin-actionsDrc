@@ -1,9 +1,6 @@
 import { DataGrid } from '@mui/x-data-grid'
 import { Link, useNavigate } from 'react-router-dom';
 import { DeleteOutline, EditOutlined, VisibilityOutlined} from '@mui/icons-material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -12,15 +9,12 @@ import { useEffect, useState } from 'react';
 import './facturation.scss'
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import FactureForm from './form/FactureForm';
-import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import config from '../../config'
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
-import Visibility from '@mui/icons-material/Visibility';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import FactureSearch from './factureSearch/FactureSearch';
 import moment from 'moment';

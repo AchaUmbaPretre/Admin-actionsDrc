@@ -1,26 +1,22 @@
-import { DataGrid } from '@mui/x-data-grid'
 import { useNavigate } from 'react-router-dom';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useEffect, useState } from 'react';
 import './../../horaire/horaireAll.scss'
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import config from '../../../config'
 import { useLocation } from 'react-router-dom';
-import CancelIcon from '@mui/icons-material/Cancel';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import PendingIcon from '@mui/icons-material/Pending';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table } from 'antd';
+import { Button, Input, Space, Table, Tag } from 'antd';
+import { UserOutlined, SolutionOutlined, CloseOutlined } from '@ant-design/icons';
+import { CheckCircleOutlined, ClockCircleOutlined, StopOutlined } from '@ant-design/icons';
+import { Switch } from 'antd';
 import moment from 'moment'
 import * as React from 'react';
 
-const FactureContrat = () => {
+const PaiementContrat = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);;
@@ -185,33 +181,69 @@ const FactureContrat = () => {
       dataIndex: 'contract_type',
       key: 'contract_type',
       width: '20%',
-      ...getColumnSearchProps('contract_type'),
+      render: (text) => {
+        let color = '';
+        let icon = null;
+  
+        if (text === 'Journalier') {
+          color = 'green';
+        } else if (text === 'Interim') {
+          color = 'blue';
+        } else if (text === 'Resilié') {
+          color = 'red';
+        }
+  
+        return (
+          <Space>
+            <Tag color={color}>{text}</Tag>
+          </Space>
+        );
+      },
     },
     {
-      title: 'status du contrat',
+      title: 'Statut du contrat',
       dataIndex: 'status',
       key: 'status',
       width: '20%',
       ...getColumnSearchProps('status'),
+      render: (text) => {
+        let icon = null;
+        let color = '';
+        
+        if (text === 'En attente') {
+          icon = <ClockCircleOutlined />;
+          color = 'blue';
+        } else if (text === 'En cours') {
+          icon = <CheckCircleOutlined />;
+          color = 'green';
+        } else if (text === 'Résilié') {
+          icon = <StopOutlined />;
+          color = 'red';
+        }
+        return (
+          <span style={{ color }}>
+            {icon} {text}
+          </span>
+        );
+      },
     },
     {
       title: 'Sélectionner',
       dataIndex: 'checkbox',
       render: (text, record) => {
-    
         return (
           <>
             <div className="table-icons-row">
-              <input
-                type="checkbox"
+              <Switch
                 checked={selectedIds.includes(record.id)}
                 onChange={() => handleCheckboxChange(record.id)}
+                size="small"
               />
             </div>
           </>
         );
       },
-    },
+    }
 
   ];
 
@@ -325,7 +357,7 @@ const FactureContrat = () => {
         client_id: clientId
       });
   
-      navigate(`/factureCalcul?${params.toString()}`);
+      navigate(`/missions?${params.toString()}`);
     } catch (err) {
       Swal.fire({
         title: 'Error',
@@ -362,4 +394,4 @@ const FactureContrat = () => {
   )
 }
 
-export default FactureContrat
+export default PaiementContrat

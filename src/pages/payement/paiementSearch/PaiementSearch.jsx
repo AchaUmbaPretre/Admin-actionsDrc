@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Select from 'react-select';
-import './missionForm.scss';
 import Swal from 'sweetalert2';
 import moment from 'moment';
 import config from '../../../config'
 
-const MissionForm = ({handleModalClose}) => {
+const PaiementSearch = ({handleModalClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState([]);
   const navigate = useNavigate();
@@ -24,8 +23,6 @@ const MissionForm = ({handleModalClose}) => {
       setData((prev) => ({ ...prev, [name]: selectedOption.value }));
     }
   };
-
-  console.log(data)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,7 +59,7 @@ const MissionForm = ({handleModalClose}) => {
       });
   
       
-      navigate(`/missionContrat?${params.toString()}`);
+      navigate(`/paiementContrat?${params.toString()}`);
     } catch (err) {
       Swal.fire({
         title: 'Error',
@@ -100,10 +97,10 @@ const MissionForm = ({handleModalClose}) => {
 
   return (
     <>
-      <div className="contratForm">
+      <div className="factureSearch">
         <div className="contrat-wrapper">
           <div className="edit-title">
-            <h2 className="edit-h2">Selectionnez le Client</h2>
+            <h2 className="edit-h2">Selectionnez un Client</h2>
           </div>
           <form action="" className="formulaire-edit">
             <div className="edit-rows">
@@ -127,4 +124,4 @@ const MissionForm = ({handleModalClose}) => {
   );
 };
 
-export default MissionForm;
+export default PaiementSearch;

@@ -16,10 +16,12 @@ import { FadeLoader } from 'react-spinners';
 import PayeForm from './form/PayeForm';
 import config from '../../config'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import './payement.scss'
 import moment from 'moment';
+import PaiementSearch from './paiementSearch/PaiementSearch';
 
 const style = {
     position: 'absolute',
@@ -176,7 +178,8 @@ const Payement = () => {
                     </div>
                 </div>
                 <div className="personPdf">
-                  <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
+                  <Link className="personnel-btn" onClick={handleOpen}><PersonSearchIcon/>Selectionnez un client</Link>
+{/*                   <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link> */}
                   <Link className="personnel-btn-pdf" onClick={() => navigate('/payementPdf')}><PictureAsPdfIcon/>Pdf</Link>
                   <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
                 </div>
@@ -196,7 +199,7 @@ const Payement = () => {
                     <Fade in={open}>
                         <Box sx={style}>
                             <Box component="form" sx={{'& > :not(style)': { m: 1, width: '250ch' }, display:'flex', flexWrap:'wrap'}} noValidate autoComplete="off">
-                              <PayeForm handleModalClose={handleClose} />
+                              <PaiementSearch handleModalClose={handleClose} />
                             </Box>
                         </Box>
                     </Fade>

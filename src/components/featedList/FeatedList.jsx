@@ -83,7 +83,12 @@ const FeatedList = () => {
                     <FadeLoader color={'#36D7B7'} loading={loading} />
                 </div>
                 ) : (
-                    <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="userTable" />
+                    <DataGrid rows={data} columns={columns} initialState={{
+                      pagination: {
+                        paginationModel: { page: 0, pageSize: 5 },
+                        },
+                      }} checkboxSelection className="userTable" 
+                    />
                 )}
             </div>
         </div>
