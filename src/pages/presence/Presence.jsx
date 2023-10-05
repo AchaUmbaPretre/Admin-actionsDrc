@@ -20,6 +20,7 @@ import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import Swal from 'sweetalert2';
 import PresenceSearch from './presenceSearch/PresenceSearch';
+import moment from 'moment';
 
 const style = {
   position: 'absolute',
@@ -96,7 +97,7 @@ const handleDelete = async (id) => {
         headerName: 'Date de la présence',
         width: 150,
         valueGetter: (params) =>
-        format(new Date(params.row.date), 'yyyy-MM-dd'),
+        moment(params.row.date).format('DD-MM-yyyy'),
     },
     {
         field: 'check_in_time',

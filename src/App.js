@@ -64,7 +64,7 @@ import PresenceAgent from './pages/presence/presenceAgent/PresenceAgent';
 import PresenceList from './pages/presence/presenceListe/PresenceList';
 import SitesEdit from './pages/sites/sitesEdite/SitesEdit';
 import SitesViews from './pages/sites/sitesViews/SitesViews';
-import PaiementAgent from './pages/payement/paiementContrat/PaiementContrat';
+import PaiementAgent from './pages/payement/paiementAgent/PaiementAgent';
 import PaiementContrat from './pages/payement/paiementContrat/PaiementContrat';
 
 function App() {
@@ -316,6 +316,10 @@ function App() {
         {
           path: '/paiementContrat',
           element: <PaiementContrat />
+        },
+        {
+          path: '/paiementAgent',
+          element: <PaiementAgent />
         },
         {
           path: '/payementPdf',

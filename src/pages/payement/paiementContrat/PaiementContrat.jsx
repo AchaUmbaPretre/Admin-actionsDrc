@@ -306,7 +306,7 @@ const PaiementContrat = () => {
         client_id: clientId
       });
   
-      navigate(`/missions?${params.toString()}`);
+      navigate(`/paiementAgent?${params.toString()}`);
     } catch (err) {
       Swal.fire({
         title: 'Error',
@@ -337,7 +337,7 @@ const PaiementContrat = () => {
         ) : (
           <Table columns={columns} dataSource={agentsAffectes} className="presenceTable" scroll={scroll} pagination={{ pageSize: 7}}/>
         )}
-            <button className="personnel-btn" onClick={handleClick}>voir les agents du contrat..</button>
+            <button className="personnel-btn" onClick={handleClick}>Voir les agents du contrat..</button>
       </div>
     </>
   )
