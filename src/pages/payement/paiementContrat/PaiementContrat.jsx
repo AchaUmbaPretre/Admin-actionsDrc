@@ -10,8 +10,8 @@ import { useLocation } from 'react-router-dom';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Tag } from 'antd';
-import { UserOutlined, SolutionOutlined, CloseOutlined } from '@ant-design/icons';
 import { CheckCircleOutlined, ClockCircleOutlined, StopOutlined } from '@ant-design/icons';
+import { EyeOutlined } from '@ant-design/icons';
 import { Switch } from 'antd';
 import moment from 'moment'
 import * as React from 'react';
@@ -246,57 +246,6 @@ const PaiementContrat = () => {
     }
 
   ];
-
- /*  const columns = [
-    { field: 'id', headerName: 'ID', width: 60 },
-    { field: 'start_date', headerName: "Date de debut", width: 160 , valueGetter: (params) =>
-    format(new Date(params.row.start_date), 'yyyy-MM-dd'), },
-    { field: 'end_date', headerName: 'Date de la fin', width: 160,  valueGetter: (params) =>
-    format(new Date(params.row.end_date), 'yyyy-MM-dd')},
-    { field: 'contract_type', headerName: "Type du contrat", width: 160 },
-    { field: 'status', headerName: "status du contrat", width: 150, renderCell: (params) => {
-    
-      switch (params.value) {
-        case 'Résilié':
-          return (
-            <span style={{ color: 'red', display: 'flex', alignItems: 'center', justifyContent: 'space-between',gap: "5px"}}>
-              Résilié
-              <CancelIcon style={{ fontSize: '16px' }} />
-            </span>
-          );
-        case 'En attente':
-          return (
-            <span style={{ color: 'green', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: "5px" }}>
-              En attente
-              <CheckCircleIcon style={{ fontSize: '16px' }} />
-            </span>
-          );
-        case 'En cours':
-          return (
-            <span style={{ color: 'blue', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: "5px" }}>
-              En cours
-              <PendingIcon style={{ fontSize: '16px' }} />
-            </span>
-          );
-        default:
-          return null;
-      }
-    }, },
-    {
-      field: 'checkbox',
-      headerName: 'Sélectionner',
-      width: 120,
-      renderCell: (params) => {
-        return (
-          <input
-            type="checkbox"
-            checked={selectedIds.includes(params.row.id)}
-            onChange={() => handleCheckboxChange(params.row.id)}
-          />
-        );
-      },
-    },
-  ]; */
 
   useEffect(() => {
     const fetchAgentsAffectes = async () => {
