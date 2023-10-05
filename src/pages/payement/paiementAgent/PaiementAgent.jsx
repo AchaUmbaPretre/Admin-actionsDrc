@@ -390,6 +390,9 @@ console.log(totalCount)
                             <span className="paiement-name">Salaire :</span>
                             <span className="paiement-name1">{data.paie.toFixed(2)} $</span>
                         </div>
+                        <div className="personnel-paiement-row">
+                           <button className="btn-paiement">Envoyer</button>
+                        </div>
                     </React.Fragment>
                     ))}
                 </React.Fragment>
