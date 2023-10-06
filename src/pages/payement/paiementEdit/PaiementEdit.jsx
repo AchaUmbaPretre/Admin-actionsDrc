@@ -1,32 +1,45 @@
 import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Select from 'react-select';
 import config from '../../../config'
+import moment from 'moment';
 
 
 const PaiementEdit = ({handleModalClose}) => {
-  const DOMAIN = config.REACT_APP_SERVER_DOMAIN
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const navigate = useNavigate();
+  const location = useLocation();
+  const [data, setData] = useState({});
   const [invoiceIds, setInvoiceIds] = useState('');
   const [paymentDate, setPaymentDate] = useState('');
-  const [amount, setAmount] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('');
-  
+  const [amounts, setAmounts] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState({});
+  const id = location.pathname.split('/')[2];
+  const {amount,methode_paiement,payment_date,payment_method} = data;
 
+
+  const handleChange = (e) => {
+    const fieldName = e.target.name;
+    const fieldValue = e.target.value;
+  
+    if (fieldName === "email") {
+      const lowercaseValue = fieldValue.charAt(0).toLowerCase() + fieldValue.slice(1);
+      setData((prev) => ({ ...prev, [fieldName]: lowercaseValue }));
+    } else if (Number.isNaN(Number(fieldValue))) {
+      const capitalizedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
+      setData((prev) => ({ ...prev, [fieldName]: capitalizedValue }));
+    } else {
+      setData((prev) => ({ ...prev, [fieldName]: fieldValue }));
+    }
+  }
   const handleClick = async (e) => {
     e.preventDefault();
-    handleModalClose();
 
     try {
-      const response = await axios.post(`${DOMAIN}/api/admin/payementPost`,{
-        invoice_id: invoiceIds,
-        payment_date: paymentDate,
-        amount: amount,
-        payment_method	: paymentMethod,
-      });
+      const response = await axios.post(`${DOMAIN}/api/admin/payementPut${id}`,data);
 
       const paymentId = response.data.payment_id;
       window.location.reload();
@@ -37,11 +50,6 @@ const PaiementEdit = ({handleModalClose}) => {
       }).then(() => {
         Swal.close(); 
       });
-
-      setInvoiceIds('');
-      setPaymentDate('');
-      setAmount('');
-      setPaymentMethod('');
 
       navigate('/payement')
 
@@ -55,6 +63,31 @@ const PaiementEdit = ({handleModalClose}) => {
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${DOMAIN}/api/admin/payementView/${id}`);
+        setData(res.data[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [id]);
+
+/*   useEffect(()=>{
+    const fetchData = async ()=> {
+      try{
+          const res = await axios.get(`${DOMAIN}/api/admin/paiementMethode`);
+          setPaymentMethod(res.data)
+  
+        }catch(error){
+          console.log(error)
+        };
+  }
+  fetchData()
+  }, []) */
+console.log(data)
   return (
     <>
         <div className="clientForm">
@@ -63,19 +96,11 @@ const PaiementEdit = ({handleModalClose}) => {
                 <h2>Modifier le paiement</h2>
                 <div className="form-rows">
                     <div className="form-row">
-                      <label htmlFor="" className="label-form">ID de la facture : <span>*</span></label>
-                      <input
-                        type="text"
-                        value={invoiceIds}
-                        onChange={(e) => setInvoiceIds(e.target.value)}
-                        className="input-form"
-                      />
-                    </div>
-                    <div className="form-row">
                       <label htmlFor="" className="label-form">Date du paiement <span>*</span></label>
-                      <input type="date" name="" className="input-form"  
-                        value={paymentDate}
-                        onChange={(e) => setPaymentDate(e.target.value)}  />
+                      <input type="date" className="input-form" 
+                        name='payment_date' 
+                        value={moment(payment_date).format('YYYY-MM-DD') || ''}
+                        onChange={handleChange}  />
                     </div>
                 </div>
 
@@ -85,26 +110,27 @@ const PaiementEdit = ({handleModalClose}) => {
                         <input
                           type="number"
                           value={amount}
-                          onChange={(e) => setAmount(e.target.value)}
+                          name='amount'
+                          onChange={handleChange}
                           className="input-form"
                         />
                     </div>
                 </div>
 
-                <div className="form-rows">
+{/*                 <div className="form-rows">
                     <div className="form-row">
-                        <label htmlFor="" className="label-form">Méthode de paiement <span>*</span></label>
-                        <Select
-                          options={[
-                            { value: 'espèces', label: 'espèces' },
-                            { value: 'chèque', label: 'chèque' },
-                            { value: 'virement', label: 'virement' }
-                          ]}
-                          value={{ value: paymentMethod, label: paymentMethod }}
-                          onChange={(selectedOption) => setPaymentMethod(selectedOption.value)}
-                        />
+                        <div className="personnel-paiement-row">
+                              <label htmlFor="" className="label-form">Méthode de paiement :</label>
+                              <Select
+                                options={ paymentMethod?.map(item => ({
+                                  value: item.id,
+                                  label: item.nom
+                                }))}
+                                onChange={(selectedOption) => handleChange(selectedOption.value, 'payment_method')}
+                              />
+                          </div>
                     </div>
-                </div>
+                </div> */}
                         
                 <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>
               </form>

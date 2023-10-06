@@ -324,8 +324,6 @@ const PaiementAgent = () => {
     fetchDatas();
   }, [selectedIds]);
 
-  console.log('employee :', employeeId)
-
   useEffect(()=>{
     const fetchData = async ()=> {
       try{
@@ -370,10 +368,9 @@ const PaiementAgent = () => {
       });
     }
   };
-  
+
   return (
     <>
-    {JSON.stringify(total)}
       <div className="paiementAgent">
         <div className="facturation-wrapper">
           <div className="contrats-top">

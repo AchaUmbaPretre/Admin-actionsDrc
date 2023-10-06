@@ -1,0 +1,89 @@
+.personnel-aff-bottom{
+    background: #fff;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .personnel-row{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .personnel-h2{
+            margin: 0 auto;
+            color: #555;
+            font-size: 1.4rem;
+            font-weight: 500;
+            padding: 10px 0;
+            text-align: center;
+            border-bottom: 1px solid #cacaca;
+            width: max-content;
+        }
+        .presence-control{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            color: #555;
+            font-size: .899rem;
+                span{
+                    color: red;
+                }
+        }
+        .presence-control{
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            label{
+                color: #555;
+                font-size: .899rem;
+                span{
+                    color: red;
+                }
+            }
+            .input-date{
+                border: 1px solid #ebe9e9;
+                padding: 10px ;
+                border-radius: 5px;
+            }
+            .presence-rows-heure{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                margin-top: 20px;
+                .presence-rows{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    label{
+                        color: #555;
+                        font-size: .899rem;
+                        span{
+                            color: red;
+                        }
+                    }
+                    .presence-input{
+                        border: 1px solid #e0e0e0;
+                        padding: 8px 20px;
+                        width: 300px;
+                        outline: rgba(199, 199, 235, 0.486);
+                        border-radius: 10px;
+                    }
+                    
+                }
+            }
+        }
+        .presence-btn{
+            margin-top: 10px;
+            border: none;
+            padding: 10px 15px;
+            background: royalblue;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: .6s;
+            &:hover{
+                background: rgb(28, 68, 187);
+            }
+        }
+    }
+}

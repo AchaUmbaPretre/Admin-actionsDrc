@@ -23,14 +23,11 @@ const MissionEdit = () => {
       setData((prev) => ({ ...prev, [name]: selectedOption }));
   };
 
-  console.log(data)
-
   const handleDateChange = (selectedDate, name) => {
     const formattedDate = moment(selectedDate).format('YYYY-MM-DD');
     setData((prev) => ({ ...prev, [name]: formattedDate }));
   };
 
-  console.log(data)
 
   useEffect(()=>{
     const fetchData = async ()=> {

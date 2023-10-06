@@ -52,7 +52,7 @@ const PresenceView = () => {
     <>
         <div className="contrat-View">
             <div className="clientView-wrapper">
-                <h2 className="client-title">PRESENCE</h2>
+                <h2 className="client-title">DETAIL DE PRESENCE</h2>
                 <div className="client-rows">
                     <div className="client-row">
                         <span className="client-nom"><Person2Outlined/> Agent :</span>
@@ -82,7 +82,6 @@ const PresenceView = () => {
                         <span className="client-nom"><AccessTimeIcon/> Nombre de presence  :</span>
                         <span className="client-nom">{attendanceCount}</span>
                     </div>
-
                 </div>
             </div>
         </div>

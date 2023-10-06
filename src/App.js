@@ -66,6 +66,7 @@ import SitesEdit from './pages/sites/sitesEdite/SitesEdit';
 import SitesViews from './pages/sites/sitesViews/SitesViews';
 import PaiementAgent from './pages/payement/paiementAgent/PaiementAgent';
 import PaiementContrat from './pages/payement/paiementContrat/PaiementContrat';
+import PresentEdit from './pages/presence/presenceEdit/PresentEdit';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -196,6 +197,10 @@ function App() {
         {
           path: "/presenceView/:emp1_id/:rowId",
           element: <PresenceView />
+        },
+        {
+          path: '/presenceEdit/:id',
+          element: <PresentEdit />
         },
         {
           path: '/presenceAgent',
