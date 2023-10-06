@@ -184,7 +184,6 @@ const FactureCalcul = () => {
     setData((prev) => ({ ...prev, [name]: formattedValue }));
   };
 
-  console.log(montantTotal)
 
   const columns = [
     {

@@ -10,8 +10,6 @@ const PaiementPdf = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [showSpinner, setShowSpinner] = useState(true);
-    const spinnerDuration = 2000;
 
 
     const styles = StyleSheet.create({
@@ -30,12 +28,12 @@ const PaiementPdf = () => {
           width: '9%',
         },
         subTitle: {
-          fontSize: 10,
+          fontSize: 11,
           marginBottom: 10,
           textAlign: 'right',
         },
         title: {
-          fontSize: 17,
+          fontSize: 16,
           marginBottom: 20,
           textAlign: 'center',
           fontWeight: 'bold',
@@ -48,8 +46,8 @@ const PaiementPdf = () => {
         },
         tableHeader: {
           backgroundColor: '#f2f2f2',
-          fontSize: 12,
-          padding: 5,
+          fontSize: 11,
+          padding: 3,
           fontWeight: 'bold',
         },
         tableRow: {
@@ -65,7 +63,7 @@ const PaiementPdf = () => {
           textAlign: 'center'
         },
         tableCells: {
-          padding: 10,
+          padding: 8,
           fontSize: 10,
         },
         textTitle: {
@@ -96,13 +94,14 @@ const PaiementPdf = () => {
                 <Page style={styles.page}>
                     <View style={styles.imgFlex}>
                         <Image style={styles.img} src={logo} />
-                        <Text style={styles.subTitle}>Le {moment().format('DD/MM/YYYY')}</Text>
+                        <Text style={styles.subTitle}>Le {moment().format('DD-MM-YYYY')}</Text>
                     </View>
                     <Text style={styles.title}>Liste des Paiements</Text>
                     <View style={styles.table}>
                         <View style={[styles.tableRow, styles.tableHeader]}>
                             <Text style={styles.tableCells}>N°</Text>
-                            <Text style={styles.tableCell}>Id de facture</Text>
+                            <Text style={styles.tableCell}>Nom</Text>
+                            <Text style={styles.tableCell}>Prenom</Text>
                             <Text style={styles.tableCell}>Date de paiement</Text>
                             <Text style={styles.tableCell}>Montant</Text>
                             <Text style={styles.tableCell}>Méthode de paiement</Text>
@@ -111,8 +110,9 @@ const PaiementPdf = () => {
                         data.map((row, index) => (
                             <View key={index} style={styles.tableRow}>
                                 <Text style={styles.tableCells}>{index + 1}</Text>
-                                <Text style={styles.tableCell}>{row.invoice_id}</Text>
-                                <Text style={styles.tableCell}>{moment(row.payment_date).format('DD/MM/YYYY')}</Text>
+                                <Text style={styles.tableCell}>{row.first_name}</Text>
+                                <Text style={styles.tableCell}>{row.last_name}</Text>
+                                <Text style={styles.tableCell}>{moment(row.payment_date).format('DD-MM-YYYY')}</Text>
                                 <Text style={styles.tableCell}>{row.amount} $</Text>
                                 <Text style={styles.tableCell}>{row.methode_paiement}</Text>
                             </View>

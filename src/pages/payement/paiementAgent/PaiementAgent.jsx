@@ -18,12 +18,12 @@ import CardTravelIcon from '@mui/icons-material/CardTravel';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
 import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
 import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
+import Select from 'react-select';
 
 
 const PaiementAgent = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState({});
-  const [datas, setDatas] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,10 +33,9 @@ const PaiementAgent = () => {
   const [totalCount, setTotalCount] = useState([])
   const [title, setTitle] = useState({});
   const clientId = searchParams.get('client_id');
-  const [value, setValue] = React.useState('1');
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
-  const [total, setTotal] = useState({});
+  const [total, setTotal] = useState([]);
   const searchInput = React.useRef(null);
   const scroll = { x: 400 };
   const [status, setStatus] = useState([]);
@@ -44,6 +43,9 @@ const PaiementAgent = () => {
   const [montantTotal, setMontantTotal] = useState('')
   const contratId = searchParams.get('contrat_id');
   const [factureContratCount, setFactureContratCount] = useState ([]);
+  const [invoiceIds, setInvoiceIds] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState([]);
+  const [employeeId, setEmployeeId] = useState([]);
 
  const handleSearch = (selectedKeys, confirm, dataIndex) => {
    confirm();
@@ -175,6 +177,11 @@ const PaiementAgent = () => {
     setData((prev) => ({ ...prev, [name]: formattedValue }));
   };
 
+  const handleInputChange = (e) => {
+    const inputValue = parseFloat(e.target.value);
+    setTotal(inputValue);
+  };
+
   const columns = [
     {
       title: 'Code',
@@ -297,8 +304,18 @@ const PaiementAgent = () => {
           );
           const responses = await Promise.all(requests);
           const totalCountData = responses.map(response => response.data);
+
+          const paieValues = totalCountData.map((innerArray) => {
+            return innerArray.map((item) => item.paie);
+          });
+
+          const paieId = totalCountData.map((innerArray) => {
+            return innerArray.map((item) => item.id);
+          });
   
           setTotalCount(totalCountData);
+          setTotal(paieValues);
+          setEmployeeId(paieId);
         }
       } catch (error) {
         console.log(error);
@@ -307,37 +324,56 @@ const PaiementAgent = () => {
     fetchDatas();
   }, [selectedIds]);
 
-console.log(totalCount)
+  console.log('employee :', employeeId)
+
+  useEffect(()=>{
+    const fetchData = async ()=> {
+      try{
+          const res = await axios.get(`${DOMAIN}/api/admin/paiementMethode`);
+          setPaymentMethod(res.data)
+  
+        }catch(error){
+          console.log(error)
+        };
+  }
+  fetchData()
+  }, [])
+
 
   const handleClick = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${DOMAIN}/api/admin/factures`, {
-        status : data.status,
-        client_id: clientId,
-        total_amount: montantTotal,
-      });
-      navigate('/payement')
+      await Promise.all(employeeId.map(async (dd) => {
+        const response = await axios.post(`${DOMAIN}/api/admin/payementPost`, {
+          employeId: dd,
+          amount: total,
+          payment_method: data.payment_method,
+        });
+
+      const paymentId = response.data.payment_id;
       Swal.fire({
         icon: 'success',
-        title: 'Paiement créée avec succès',
+        title: 'Facture créée avec succès',
+        text: `ID du paiement : ${paymentId}`,
       }).then(() => {
         Swal.close(); 
       });
 
+      navigate('/payement')  }));
     } catch (error) {
-      console.error('Erreur lors de la création du paiement :', error);
+      console.error('Erreur lors de la création du payement :', error);
       Swal.fire({
         icon: 'error',
         title: 'Erreur',
-        text: 'Une erreur s\'est produite lors de la création du paiement.',
+        text: 'Une erreur s\'est produite lors de la création de la facture.',
       });
     }
   };
-
+  
   return (
     <>
+    {JSON.stringify(total)}
       <div className="paiementAgent">
         <div className="facturation-wrapper">
           <div className="contrats-top">
@@ -388,10 +424,24 @@ console.log(totalCount)
                         <hr />
                         <div className="personnel-paiement-row">
                             <span className="paiement-name">Salaire :</span>
-                            <span className="paiement-name1">{data.paie.toFixed(2)} $</span>
+                            <div className="paiement-name1">
+                              <input type="number" value={total} onChange={handleInputChange} className="paiement-name1-input" />
+                              <span className="paiement-name1"> $</span>
+                            </div>
                         </div>
                         <div className="personnel-paiement-row">
-                           <button className="btn-paiement">Envoyer</button>
+                          <label htmlFor="" className="label-form">Méthode de paiement :</label>
+                          <Select
+                            options={ paymentMethod?.map(item => ({
+                              value: item.id,
+                              label: item.nom
+                            }))}
+                            onChange={(selectedOption) => handleChange(selectedOption.value, 'payment_method')}
+                          />
+                        </div>
+
+                        <div className="personnel-paiement-row">
+                           <button className="btn-paiement" onClick={handleClick}>Envoyer</button>
                         </div>
                     </React.Fragment>
                     ))}

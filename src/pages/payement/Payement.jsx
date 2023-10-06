@@ -53,23 +53,30 @@ const Payement = () => {
 
   
      const columns = [
-        { field: 'invoice_id', headerName: 'Numero de facture', width: 190 },
+        { field: 'id', headerName: 'N°', width: 50},
+        { field: 'first_name', headerName: 'Employe(é)', width: 170,
+          renderCell: (params) =>{
+            return <div>
+                      {params.row.first_name}  {params.row.last_name}
+                  </div>
+          }
+       },
         {
           field: 'payment_date',
-          headerName: 'Date de payement',
-          width: 200,
+          headerName: 'Date de paiement',
+          width: 185,
           valueGetter: (params) =>
           moment(params.row.payment_date).format('DD-MM-yyyy'),
         },
         {
             field: 'amount',
             headerName: 'Montant',
-            width: 200,renderCell: (params) => `${params.value} $`
+            width: 185,renderCell: (params) => `${params.value} $`
         },
         {
           field: 'methode_paiement',
           headerName: "Methode de payement",
-          width: 200,       renderCell: (params) => {
+          width: 190,       renderCell: (params) => {
             const status = params.value || 'Non spécifié';
             let cellClassName = '';
         
@@ -78,7 +85,6 @@ const Payement = () => {
             } else {
               cellClassName = 'cell-not-paid';
             }
-        
             return <div className={cellClassName}>{status}</div>;
           },
       },
