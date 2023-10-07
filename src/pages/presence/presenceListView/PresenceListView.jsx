@@ -1,9 +1,7 @@
 import { DataGrid } from '@mui/x-data-grid'
-import { Link, useNavigate } from 'react-router-dom';
-import './presence.scss'
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import { DeleteOutline, EditOutlined, VisibilityOutlined} from '@mui/icons-material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useEffect, useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
@@ -11,16 +9,13 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import axios from 'axios';
-import PresenceForm from './form/PresenceForm';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
-import config from '../../config'
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import Swal from 'sweetalert2';
-import PresenceSearch from './presenceSearch/PresenceSearch';
 import moment from 'moment';
+import config from '../../../config';
 
 const style = {
   position: 'absolute',
@@ -36,14 +31,16 @@ const style = {
   outline: 'none'
 }
 
-const Presence = () => {
+const PresenceListView = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const {pathname} = useLocation();
+  const id = pathname.split('/')[2]
+  const [name, setName] = useState('');
 
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
 
@@ -51,8 +48,10 @@ const Presence = () => {
 
   const fetchData = async ()=> {
       try{
-          const {data} = await axios.get(`${DOMAIN}/api/admin/presenceAll`);
-          setData(data)
+          const {data} = await axios.get(`${DOMAIN}/api/admin/presenceOneView/${id}`);
+          setData(data);
+          const paieValues = data.map((item) => item.first_name)
+          setName(paieValues[0])
           setLoading(false);
   
         }catch(error){
@@ -62,60 +61,43 @@ const Presence = () => {
   fetchData()
 }, [])
 
-const handleDelete = async (id) => {
-  try {
-    const result = await Swal.fire({
-      title: 'Es-tu sûr?',
-      text: "Vous ne pourrez pas revenir en arrière !",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui, supprimez-le!'
-    });
-
-    if (result.isConfirmed) {
-      await axios.delete(`${DOMAIN}/api/admin/payement/${id}`);
-      window.location.reload();
-    }
-  } catch (err) {
-    console.log(err);
-  }
-};
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'first_name', headerName: 'employé(e)', width: 150 },
-
-    {
-      field: 'company_name',
-      headerName: 'Client',
-      width: 150 
+    { field: 'first_name', headerName: 'employé(e)', width: 250,
+        renderCell: (params) =>{
+        return <div className="userList" style={{display: "flex", gap: "5px"}}>
+                    <div>
+                        {params.row.first_name}
+                    </div>
+                    <div>
+                        {params.row.last_name}
+                    </div>
+               </div>
+      }
     },
     {
         field: 'date',
         headerName: 'Date de la présence',
-        width: 150,
+        width: 230,
         valueGetter: (params) =>
         moment(params.row.date).format('DD-MM-yyyy'),
     },
     {
         field: 'check_in_time',
         headerName: "Heure d'arrivée",
-        width: 150,
+        width: 240,
         valueGetter: (params) => params.row.check_in_time.substring(0, 5)
     },
     {
       field: 'check_out_time',
       headerName: 'Heure de départ',
-      width: 150,
+      width: 240,
       valueGetter: (params) => params.row.check_out_time.substring(0, 5)
     },
-    {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
+/*     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
         return(
           <>
-
-<>
+            <>
                 <div className="table-icons-row">
                   <div className="userOvert0">
                     <Link onClick={''}>
@@ -123,12 +105,8 @@ const handleDelete = async (id) => {
                       <span className='userOvert'>Modifier</span>
                     </Link>
                   </div>
-{/*                   <div className="userOvert1">
-                    <VisibilityOutlined className='userEye' onClick={() => navigate(`/presenceView/${params.row.emp1_id}/${params.row.id}`)} />
-                    <span className='userOvert'>détail</span>
-                  </div> */}
                   <div className="userOvert1">
-                    <VisibilityOutlined className='userEye' onClick={() => navigate(`/presenceListView/${params.row.emp1_id}`)} />
+                    <VisibilityOutlined className='userEye' onClick={() => navigate(`/presenceView/${params.row.emp1_id}/${params.row.id}`)} />
                     <span className='userOvert'>détail</span>
                   </div>
                   <div className="userOvert2">
@@ -136,15 +114,11 @@ const handleDelete = async (id) => {
                     <span className='userOvert'>Supprimer</span>
                   </div>
                 </div>
-              </>
-           {/*  <div className="table-icons-row">
-                <VisibilityIcon className='userEye' onClick={() => navigate(`/presenceView/${params.row.emp1_id}/${params.row.id}`)} />
-                <DeleteOutline className="userListDelete"  />
-            </div> */}
-          </>
+            </>
+        </>
 
         )
-    }},
+    }}, */
   ];
 
   const exportToExcel = () => {
@@ -182,14 +156,13 @@ const handleDelete = async (id) => {
               <ChecklistRtlIcon className='contrats-icon'/>
               <div className="contrats-info">
                   <h2 className="contrats-title">Presence</h2>
-                  <span className="contrats-span">Liste des presences</span>
+                  <span className="contrats-span">Liste des presences de l'agent {name}</span>
               </div>
           </div>
-          <div className="personPdf">
+{/*           <div className="personPdf">
             <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Presence</Link>
-            <Link className="personnel-btn-pdf" onClick={() => navigate('/presencePdf')}><PictureAsPdfIcon/>Pdf</Link>
             <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
-          </div>
+          </div> */}
           <Modal
                     aria-labelledby="transition-modal-title"
                     aria-describedby="transition-modal-description"
@@ -206,7 +179,6 @@ const handleDelete = async (id) => {
                     <Fade in={open}>
                         <Box sx={style}>
                             <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
-                              <PresenceSearch handleClose={handleClose}/>
                             </Box>
                         </Box>
                     </Fade>
@@ -225,4 +197,4 @@ const handleDelete = async (id) => {
   )
 }
 
-export default Presence
+export default PresenceListView
