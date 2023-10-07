@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './clientView.scss'
-import { CodeOffOutlined, ContactPage, EmailOutlined, LoginOutlined, MapsHomeWorkOutlined, PasswordOutlined, Person2Outlined, PhoneAndroidOutlined } from '@mui/icons-material';
+import {  EmailOutlined, LoginOutlined, MapsHomeWorkOutlined, PasswordOutlined, Person2Outlined, PhoneAndroidOutlined } from '@mui/icons-material';
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import config from '../../../config'
 
 const ClientView = () => {
@@ -27,7 +28,7 @@ const ClientView = () => {
     <>
         <div className="clientView">
             <div className="clientView-wrapper">
-                <h2 className="client-title">INFORMATION DU CLIENT</h2>
+                <h2 className="client-title">DETAIL DU CLIENT</h2>
                 <div className="client-rows">
                     <div className="client-row1">
                         <h2 className="client-row-title">Raison sociale <span>*</span></h2>
@@ -81,6 +82,10 @@ const ClientView = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="clientR-right">
+                        <Link to={`/clientUpdate/${data?.id}`} className='btn-edite'><BorderColorOutlinedIcon className='client-btn-icon' />Modifer</Link>
+                    </div>
+
                 </div>
             </div>
         </div>

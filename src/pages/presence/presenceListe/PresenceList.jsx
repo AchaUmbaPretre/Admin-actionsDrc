@@ -311,7 +311,7 @@ const PresenceList = () => {
 
   return (
     <>
-      <div className="factureCalcul">
+      <div className="presenceList">
         <div className="facturation-wrapper">
           <div className="contrats-top">
               <AccessTimeIcon className='contrats-icon'/>
@@ -329,7 +329,7 @@ const PresenceList = () => {
           ) : (
             <Table columns={columns} dataSource={agentsAffectes} className="presenceTable" scroll={scroll} pagination={{ pageSize: 5}}/>
           )}
-          <div className="personnel-aff-bottom">
+          <div className="presentList-aff-bottom">
             <div className="personnel-row">
                 <h2 className='personnel-h2'>Formulaire de presence</h2>
                 <div className="presence-control">

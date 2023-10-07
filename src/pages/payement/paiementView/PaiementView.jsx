@@ -17,7 +17,7 @@ const PaiementView = () => {
       const fetchData = async ()=> {
           try{
               const res = await axios.get(`${DOMAIN}/api/admin/payementView/${id}`);
-              setData(res.data)
+              setData(res.data[0])
       
             }catch(error){
               console.log(error)
@@ -46,7 +46,7 @@ const PaiementView = () => {
               </div>
               <div className="paiement-form-row">
                 <span className="paiement-span">Nom : </span>
-                <span className="paiement-span">{data.company_name}</span>
+                <span className="paiement-span">{data.first_name}</span>
               </div>
               <div className="paiement-form-row">
                 <span className="paiement-span">Adresse : </span>
@@ -55,6 +55,10 @@ const PaiementView = () => {
               <div className="paiement-form-row">
                 <span className="paiement-span">Date : </span>
                 <span className="paiement-span">{moment(data.payment_date).format('DD/MM/YYYY')}</span>
+              </div>
+              <div className="paiement-form-row">
+                <span className="paiement-span">Montant : </span>
+                <span className="paiement-span">{data.amount} $</span>
               </div>
               <div className="paiement-form-row">
                 <span className="paiement-span">Méthode de paiement : </span>

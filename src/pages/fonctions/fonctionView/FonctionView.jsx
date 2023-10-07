@@ -33,7 +33,7 @@ const FonctionView = () => {
     <>
         <div className="contrat-View">
             <div className="clientView-wrapper">
-                <h2 className="client-title">INFORMATION DE FONCTION</h2>
+                <h2 className="client-title">DETAIL DE FONCTION</h2>
                 <div className="client-rows">
                     <div className="client-row">
                         <span className="client-nom"><Person2Outlined/> Client :</span>

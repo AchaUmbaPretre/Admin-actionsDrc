@@ -31,7 +31,7 @@ const SitesViews = () => {
     <>
         <div className="clientView">
             <div className="clientView-wrapper">
-                <h2 className="client-title">INFORMATION DU SITE</h2>
+                <h2 className="client-title">DETAIL DU SITE</h2>
                 <div className="client-rows">
                     <div className="client-row1">
                         <div className="client-row">

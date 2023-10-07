@@ -51,7 +51,7 @@ const handleClick = async (e) => {
         <div className="ediitForm">
             <div className="clientForm-wrapper">
               <form action="" className="form-center">
-              <h1 className="title-h1">Edite</h1>
+              <h1 className="title-h1">Modifier le client</h1>
                 <div className="form-rows">
                     <div className="form-row">
                       <label htmlFor="" className="label-form">Nom de compagnie <span>*</span></label>

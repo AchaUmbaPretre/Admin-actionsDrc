@@ -99,7 +99,7 @@ const handleClick = async (e) => {
   return (
     <>
       <div className="ediitForm">
-        <h2 className="client-h2">Editer fonction</h2>
+        <h2 className="client-h2">Modifier la fonction</h2>
         <div className="clientForm-wrapper">
           <form action="" className="form-center">
             <div className="form-rows">

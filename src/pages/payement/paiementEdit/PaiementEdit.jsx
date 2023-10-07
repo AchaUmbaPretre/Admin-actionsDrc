@@ -13,10 +13,6 @@ const PaiementEdit = ({handleModalClose}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [data, setData] = useState({});
-  const [invoiceIds, setInvoiceIds] = useState('');
-  const [paymentDate, setPaymentDate] = useState('');
-  const [amounts, setAmounts] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState({});
   const id = location.pathname.split('/')[2];
   const {amount,methode_paiement,payment_date,payment_method} = data;
 
@@ -39,18 +35,14 @@ const PaiementEdit = ({handleModalClose}) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${DOMAIN}/api/admin/payementPut${id}`,data);
-
-      const paymentId = response.data.payment_id;
-      window.location.reload();
+      const response = await axios.put(`${DOMAIN}/api/admin/payementPut/${id}`,data);
       Swal.fire({
         icon: 'success',
-        title: 'Facture créée avec succès',
-        text: `ID du paiement : ${paymentId}`,
+        title: 'Paiement Modifié avec succès',
+        text: `Succès`,
       }).then(() => {
         Swal.close(); 
       });
-
       navigate('/payement')
 
     } catch (error) {
@@ -75,19 +67,6 @@ const PaiementEdit = ({handleModalClose}) => {
     fetchData();
   }, [id]);
 
-/*   useEffect(()=>{
-    const fetchData = async ()=> {
-      try{
-          const res = await axios.get(`${DOMAIN}/api/admin/paiementMethode`);
-          setPaymentMethod(res.data)
-  
-        }catch(error){
-          console.log(error)
-        };
-  }
-  fetchData()
-  }, []) */
-console.log(data)
   return (
     <>
         <div className="clientForm">

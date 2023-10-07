@@ -237,11 +237,18 @@ const MissiAff = () => {
       width: '2%',
     },
     {
-      title: 'Employé(e)',
+      title: 'Nom',
       dataIndex: 'first_name',
       key: 'first_name',
       width: '20%',
-      ...getColumnSearchProps('start_date'),
+      ...getColumnSearchProps('first_name'),
+    },
+    {
+      title: 'Post-nom',
+      dataIndex: 'last_name',
+      key: 'last_name',
+      width: '20%',
+      ...getColumnSearchProps('last_name'),
     },
     {
       title: 'Sélectionner',
