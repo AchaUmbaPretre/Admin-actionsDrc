@@ -60,6 +60,16 @@ const ContratFonction = ({handleModalClose}) => {
     e.preventDefault();
     handleModalClose()
 
+    if (!data?.contrat_id || !data?.client_id || !data?.skills || !data?.avantages || !data?.prix || !data?.salaire ) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Veuillez remplir tous les champs requis',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+      return;
+    }
+
     try {
         await axios.post(`${DOMAIN}/api/admin/ContratInfo`,{
             ...data

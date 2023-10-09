@@ -73,6 +73,16 @@ const ClientForm = ({handleModalClose}) => {
   const handleClick = async (e) => {
     e.preventDefault();
     handleModalClose();
+
+    if (!data.company_name || !data.address || !data.phone_number || !data.contact_name || !data.contact_email || !data.contact_phone || !data.province || !data.pays ) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Veuillez remplir tous les champs requis',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+      return;
+    }
   
     try {
       const clientResponse = await axios.post(`${DOMAIN}/api/admin/clientPost`, data);

@@ -18,7 +18,6 @@ import AddHomeOutlinedIcon from '@mui/icons-material/AddHomeOutlined';
 
 const Sidebar = () => {
   const  location = useLocation();
-  console.log(location.pathname);
   const [activeItem, setActiveItem] = useState('Accueil');
   return (
     <>
