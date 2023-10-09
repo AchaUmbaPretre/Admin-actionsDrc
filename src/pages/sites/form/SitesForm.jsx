@@ -31,7 +31,17 @@ const SitesForm = ({ handleModalClose }) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    handleModalClose()
+    handleModalClose();
+
+    if (!data.client_id || !data.avenue || !data.quartier || !data.commune || !data.numero || !data.description) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Veuillez remplir tous les champs requis',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+      return;
+    }
 
     try {
       await axios.post(`${DOMAIN}/api/admin/sites`, data);
@@ -129,19 +139,19 @@ const SitesForm = ({ handleModalClose }) => {
                 />
               </div>
               <div className="edit-row">
+                <label htmlFor="" className="label-edit">Nom du site <span>*</span></label>
+                <input type="text" name='description' className="input-form" onChange={(e) =>handleChange(e.target.value, 'description')} placeholder='Entrez la description' />
+              </div>  
+            </div>
+            <div className="edit-rows">
+              <div className="edit-row">
                 <label htmlFor="" className="label-edit">Avenue <span>*</span></label>
                 <input type="text" name='avenue' className="input-form" onChange={(e) =>handleChange(e.target.value, 'avenue')} placeholder="Entrez le nom de l'avenue" />
               </div>
-            </div>
-            <div className="edit-rows">
               <div className="edit-row">
                 <label htmlFor="" className="label-edit">Quartier <span>*</span></label>
                 <input type="text" name="quartier" className="input-form" onChange={(e) =>handleChange(e.target.value, 'quartier')} placeholder="Entrez le nom du quartier" />
               </div>
-              <div className="edit-row">
-                <label htmlFor="" className="label-edit">Commune <span>*</span></label>
-                <input type="text" name='commune' className="input-form" onChange={(e) =>handleChange(e.target.value, 'commune')} placeholder="Entrez le nom de votre commune" />
-              </div>  
             </div>
             <div className="edit-rows">
               <div className="edit-row">
@@ -151,8 +161,8 @@ const SitesForm = ({ handleModalClose }) => {
                   } placeholder='Entrez le N° du parcelle' />
               </div>
               <div className="edit-row">
-                <label htmlFor="" className="label-edit">Description <span>*</span></label>
-                <input type="text" name='description' className="input-form" onChange={(e) =>handleChange(e.target.value, 'description')} placeholder='Entrez la description' />
+                <label htmlFor="" className="label-edit">Commune <span>*</span></label>
+                <input type="text" name='commune' className="input-form" onChange={(e) =>handleChange(e.target.value, 'commune')} placeholder="Entrez le nom de votre commune" />
               </div>  
             </div>
             <button className="edit-btn" onClick={handleClick}>

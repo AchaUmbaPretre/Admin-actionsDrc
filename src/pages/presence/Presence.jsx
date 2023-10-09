@@ -186,7 +186,7 @@ const handleDelete = async (id) => {
               </div>
           </div>
           <div className="personPdf">
-            <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Presence</Link>
+            <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Nouveau</Link>
             <Link className="personnel-btn-pdf" onClick={() => navigate('/presencePdf')}><PictureAsPdfIcon/>Pdf</Link>
             <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
           </div>

@@ -192,7 +192,7 @@ const ClientTab = () => {
               </div>
             </div>
             <div className="personPdf">
-              <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link>
+              <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Nouveau</Link>
               <Link className="personnel-btn-pdf" onClick={() => navigate('/clientPdf')}><PictureAsPdfIcon/>Pdf</Link>
               <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
             </div>

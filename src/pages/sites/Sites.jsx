@@ -157,7 +157,7 @@ const Sites = () => {
                   <span className="contrats-span"></span>
               </div>
           </div>
-          <button className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</button>
+          <button className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Nouveau</button>
           <Modal
             aria-labelledby="transition-modal-title"
             aria-describedby="transition-modal-description"

@@ -31,6 +31,17 @@ const ContratForm = ({ handleClose }) => {
     e.preventDefault();
     handleClose();
 
+    if (!data.contract_type || !data.client_id || !data.start_date || !data.end_date) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Veuillez remplir tous les champs requis',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+      return;
+    }
+    
+
     try {
       await axios.post(`${DOMAIN}/api/admin/contrat`, data);
 
