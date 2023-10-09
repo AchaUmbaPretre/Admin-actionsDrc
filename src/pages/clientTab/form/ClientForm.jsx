@@ -28,7 +28,6 @@ const ClientForm = ({handleModalClose}) => {
       const trimmedValue = value.trim();
       return trimmedValue.charAt(0).toUpperCase() + trimmedValue.slice(1);
     });
-
     setSite(formattedSites);
   };
 
@@ -48,7 +47,6 @@ const ClientForm = ({handleModalClose}) => {
   };
 
   useEffect(()=>{
-
     const fetchData = async ()=> {
         try{
             const {data} = await axios.get(`${DOMAIN}/api/admin/province`);
@@ -61,7 +59,6 @@ const ClientForm = ({handleModalClose}) => {
  }, [])
 
  useEffect(()=>{
-
   const fetchData = async ()=> {
       try{
           const {data} = await axios.get(`${DOMAIN}/api/admin/pays`);
@@ -79,16 +76,6 @@ const ClientForm = ({handleModalClose}) => {
   
     try {
       const clientResponse = await axios.post(`${DOMAIN}/api/admin/clientPost`, data);
-      const { clientId } = clientResponse.data;
-      console.log(clientId)
-        await Promise.all(
-        site.map((item) =>
-          axios.post(`${DOMAIN}/api/admin/sites`, {
-            client_id: clientId,
-            nom_site: item.trim()
-          })
-        )
-      );
 
       await Swal.fire({
         title: 'Success',
@@ -97,7 +84,6 @@ const ClientForm = ({handleModalClose}) => {
         confirmButtonText: 'OK'
       });
       window.location.reload();
-  
       navigate('/client');
     } catch (error) {
       await Swal.fire({

@@ -40,7 +40,6 @@ const ContratForm = ({ handleClose }) => {
       });
       return;
     }
-    
 
     try {
       await axios.post(`${DOMAIN}/api/admin/contrat`, data);

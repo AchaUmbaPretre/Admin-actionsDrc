@@ -57,6 +57,16 @@ const Formulaire = ({handleModalClose}) => {
       const handlePhotoSubmit = async () => {
 
         handleModalClose()
+        if (!data.first_name || !data.last_name || !data.date_of_birth || !data.gender || !data.address || !data.etat_civil || !data.identification_type || !data.skills || !data.certifications || !data.employment_status) {
+          Swal.fire({
+            title: 'Error',
+            text: 'Veuillez remplir tous les champs requis',
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+          return;
+        }
+
         try {
           let photoSrc;
           if (source === 'import') {
@@ -161,7 +171,6 @@ const Formulaire = ({handleModalClose}) => {
         fetchData();
       }, []);
 
-      console.log(data)
 
   return (
     <>
