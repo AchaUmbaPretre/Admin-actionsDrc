@@ -150,7 +150,7 @@ const handleDelete = async (id) => {
                   </Link>
                 </div>
                 <div className="userOvert1">
-                  <VisibilityOutlined className='userEye' onClick={() => navigate(`/presenceView/${id}`)} />
+                  <VisibilityOutlined className='userEye' onClick={() => navigate(`/presenceView/${params.row.id}`)} />
                   <span className='userOvert'>détail</span>
                 </div>
                 <div className="userOvert2">
