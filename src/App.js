@@ -196,7 +196,7 @@ function App() {
           element: <PresencePdf />
         },
         {
-          path: "/presenceView/:emp1_id/:rowId",
+          path: "/presenceView/:id",
           element: <PresenceView />
         },
         {

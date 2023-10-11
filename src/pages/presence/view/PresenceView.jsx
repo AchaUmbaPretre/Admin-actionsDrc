@@ -14,12 +14,12 @@ const PresenceView = () => {
     const emp1Id = id[2];
     const rowId = id[3]
 
-    const [attendanceCount, setAttendanceCount] = useState(0);
+    const [attendanceCount, setAttendanceCount] = useState([]);
 
     useEffect(()=>{
         const fetchData = async ()=> {
             try{
-                const res = await axios.get(`${DOMAIN}/api/admin/presenceAllView/${rowId}`);
+                const res = await axios.get(`${DOMAIN}/api/admin/presenceAllView/${emp1Id}`);
                 setData(res.data[0])
         
               }catch(error){
@@ -27,24 +27,20 @@ const PresenceView = () => {
               };
         }
         fetchData()
-    }, [id]);
+    }, [emp1Id]);
 
-    useEffect(()=>{
-        const fetchData = async ()=> {
-            try{
-                const res = await axios.get(`${DOMAIN}/api/admin/presenceCount/${emp1Id}`);
-
-                const employeeAttendanceCount = res.data.attendanceCount;
-      
-                setAttendanceCount(employeeAttendanceCount);
-                console.log(attendanceCount)
-        
-              }catch(error){
-                console.log(error)
-              };
-        }
-        fetchData()
-    }, []);
+/*     useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const res = await axios.get(`${DOMAIN}/api/admin/presenceCount/${rowId}`);
+            const employeeAttendanceCount = res.data.attendanceCount;
+            setAttendanceCount(employeeAttendanceCount);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, [rowId]); */
 
     const formattedDatPresence = moment(data?.date).format('DD/MM/YYYY');
 
@@ -76,11 +72,6 @@ const PresenceView = () => {
                     <div className="client-row">
                         <span className="client-nom"><AccessTimeIcon/> Heure de départ  :</span>
                         <span className="client-nom">{data && data.check_out_time && data.check_out_time.substring(0, 5)}</span>
-                    </div>
-
-                    <div className="client-row">
-                        <span className="client-nom"><AccessTimeIcon/> Nombre de presence  :</span>
-                        <span className="client-nom">{attendanceCount}</span>
                     </div>
                 </div>
             </div>

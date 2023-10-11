@@ -75,7 +75,7 @@ const handleDelete = async (id) => {
     });
 
     if (result.isConfirmed) {
-      await axios.delete(`${DOMAIN}/api/admin/payement/${id}`);
+      await axios.delete(`${DOMAIN}/api/admin/presence/${id}`);
       window.location.reload();
     }
   } catch (err) {

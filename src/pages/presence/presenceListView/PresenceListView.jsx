@@ -1,6 +1,7 @@
 import { DataGrid } from '@mui/x-data-grid'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
+import { DeleteOutline, EditOutlined, VisibilityOutlined} from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
@@ -13,6 +14,7 @@ import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import moment from 'moment';
 import config from '../../../config';
+import Swal from 'sweetalert2';
 
 const style = {
   position: 'absolute',
@@ -58,9 +60,28 @@ const PresenceListView = () => {
   fetchData()
 }, [])
 
+const handleDelete = async (id) => {
+  try {
+    const result = await Swal.fire({
+      title: 'Es-tu sûr?',
+      text: "Vous ne pourrez pas revenir en arrière !",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, supprimez-le!'
+    });
 
+    if (result.isConfirmed) {
+      await axios.delete(`${DOMAIN}/api/admin/presence/${id}`);
+      window.location.reload();
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
   const columns = [
-    { field: 'first_name', headerName: 'employé(e)', width: 250,
+    { field: 'first_name', headerName: 'employé(e)', width: 200,
         renderCell: (params) =>{
         return <div className="userList" style={{display: "flex", gap: "5px"}}>
                     <div>
@@ -75,20 +96,20 @@ const PresenceListView = () => {
     {
         field: 'date',
         headerName: 'Date de la présence',
-        width: 230,
+        width: 190,
         valueGetter: (params) =>
         moment(params.row.date).format('DD-MM-yyyy'),
     },
     {
         field: 'check_in_time',
         headerName: "Heure d'arrivée",
-        width: 240,
+        width: 190,
         valueGetter: (params) => params.row.check_in_time.substring(0, 5)
     },
     {
       field: 'check_out_time',
       headerName: 'Heure de départ',
-      width: 240,
+      width: 180,
       valueGetter: (params) => params.row.check_out_time.substring(0, 5)
     },
 /*     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
@@ -116,6 +137,36 @@ const PresenceListView = () => {
 
         )
     }}, */
+    {field: 'action', HeaderName: 'Action', width: 180, renderCell: (params) =>{
+      return(
+        <>
+
+<>
+              <div className="table-icons-row">
+                <div className="userOvert0">
+                  <Link onClick={''}>
+                    <EditOutlined className="userListBtn" onClick={() => navigate(`/presenceEdit/${params.row.id}`)} />
+                    <span className='userOvert'>Modifier</span>
+                  </Link>
+                </div>
+                <div className="userOvert1">
+                  <VisibilityOutlined className='userEye' onClick={() => navigate(`/presenceView/${id}`)} />
+                  <span className='userOvert'>détail</span>
+                </div>
+                <div className="userOvert2">
+                  <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
+                  <span className='userOvert'>Supprimer</span>
+                </div>
+              </div>
+            </>
+         {/*  <div className="table-icons-row">
+              <VisibilityIcon className='userEye' onClick={() => navigate(`/presenceView/${params.row.emp1_id}/${params.row.id}`)} />
+              <DeleteOutline className="userListDelete"  />
+          </div> */}
+        </>
+
+      )
+  }},
   ];
 
   const exportToExcel = () => {
