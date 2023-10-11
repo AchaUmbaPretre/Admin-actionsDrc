@@ -9,7 +9,7 @@ import config from '../../../config'
 import { useLocation } from 'react-router-dom';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table } from 'antd';
+import { Button, Input, Space, Table, Tag } from 'antd';
 import { CheckCircleOutlined, ClockCircleOutlined, StopOutlined } from '@ant-design/icons';
 import { Switch } from 'antd';
 import moment from 'moment'
@@ -180,7 +180,24 @@ const MissionContrat = () => {
       dataIndex: 'contract_type',
       key: 'contract_type',
       width: '20%',
-      ...getColumnSearchProps('contract_type'),
+      render: (text) => {
+        let color = '';
+        let icon = null;
+  
+        if (text === 'Journalier') {
+          color = 'green';
+        } else if (text === 'Interim') {
+          color = 'blue';
+        } else if (text === 'Resilié') {
+          color = 'red';
+        }
+  
+        return (
+          <Space>
+            <Tag color={color}>{text}</Tag>
+          </Space>
+        );
+      },
     },
     {
       title: 'Statut du contrat',
