@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../../mission/views/missionView.scss'
-import { CalendarMonth, Edit, Person, Person3 } from '@mui/icons-material';
+import { CalendarMonth, ContrastOutlined, ContrastRounded, Edit, Person, Person3, TypeSpecimenOutlined } from '@mui/icons-material';
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
@@ -39,21 +39,21 @@ const AffView = () => {
                     <div className="client-row1">
                         <div className="client-row">
                             <div className="client-sous">
-                                <span className="client-nom"><Person2OutlinedIcon/> Agent :</span>
+                                <span className="client-nom"><Person2OutlinedIcon/> Nom :</span>
                                 <span className="client-nom">{data?.first_name}</span>
                             </div>
                             <div className="client-sous">
-                                <span className="client-nom"><Person2OutlinedIcon/> Client :</span>
+                                <span className="client-nom"><Person2OutlinedIcon/> Prenom :</span>
                                 <span className="client-nom">{data?.last_name}</span>
                             </div>
                         </div>
                         <div className="client-row">
                             <div className="client-sous">
-                                <span className="client-nom"><Person2OutlinedIcon/> Agent :</span>
+                                <span className="client-nom"><Person2OutlinedIcon/> Client :</span>
                                 <span className="client-nom">{data?.client_nom}</span>
                             </div>
                             <div className="client-sous">
-                                <span className="client-nom"><Person2OutlinedIcon/> Client :</span>
+                                <span className="client-nom"><TypeSpecimenOutlined/> Type du contrat :</span>
                                 <span className="client-nom">{data?.contract_type}</span>
                             </div>
                         </div>

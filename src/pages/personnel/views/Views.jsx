@@ -54,55 +54,55 @@ const Views = () => {
                                 <h2 className="view-h2"><span>*</span> Detail Personnel :</h2>
                                 <div className="views-rows">
                                     <div className="views-left">
-                                        <span className="view-label"><AccountCircleIcon className="icon-person"/>Nom : </span>
+                                        <span className="view-label">Nom : </span>
                                         <span className="view-result">{data.first_name}</span>
                                     </div>
                                     <div className="views-right">
-                                        <span className="view-label"><AccountCircleIcon className="icon-person"/>Prenom : </span>
+                                        <span className="view-label">Prenom : </span>
                                         <span className="view-result">{data.last_name}</span>
                                     </div>
                                 </div>
 
                                 <div className="views-rows">
                                     <div className="views-left">
-                                        <span className="view-label"><EventIcon className="icon-person"/>Date de naissance : </span>
+                                        <span className="view-label">Date de naissance : </span>
                                         <span className="view-result">{formattedDateOfBirth}</span>
                                     </div>
                                     <div className="views-right">
-                                        <span className="view-label"><WcIcon className="icon-person"/> Genre : </span>
+                                        <span className="view-label">Genre : </span>
                                         <span className="view-result">{data.gender}</span>
                                     </div>
                                 </div>
 
                                 <div className="views-rows">
                                     <div className="views-left">
-                                        <span className="view-label"><AddLocationAltIcon className="icon-person"/>Adresse : </span>
+                                        <span className="view-label">Adresse : </span>
                                         <span className="view-result">{data.address}</span>
                                     </div>
                                     <div className="views-right">
-                                        <span className="view-label"><AddIcCallIcon className="icon-person"/>Téléphone : </span>
+                                        <span className="view-label">Téléphone : </span>
                                         <span className="view-result">{data.phone_number}</span>
                                     </div>
                                 </div>
 
                                 <div className="views-rows">
                                     <div className="views-left">
-                                        <span className="view-label"><MailOutlineIcon className="icon-person"/>Email : </span>
+                                        <span className="view-label">Email : </span>
                                         <span className="view-result">{data.email}</span>
                                     </div>
                                     <div className="views-right">
-                                        <span className="view-label"><ContactEmergencyIcon className="icon-person"/>Numero du pièce : </span>
+                                        <span className="view-label">Numero du pièce : </span>
                                         <span className="view-result">{data.identification_number}</span>
                                     </div>
                                 </div>
 
                                 <div className="views-rows">
                                     <div className="views-left">
-                                        <span className="view-label"><RecentActorsIcon className="icon-person"/>Etat civil : </span>
+                                        <span className="view-label">Etat civil : </span>
                                         <span className="view-result">{data.etat_civil}</span>
                                     </div>
                                     <div className="views-right">
-                                        <span className="view-label"><BabyChangingStationOutlinedIcon className="icon-person"/>Nombre d'enfant : </span>
+                                        <span className="view-label">Nombre d'enfant : </span>
                                         <span className="view-result">{data.nombre_enfant}</span>
                                     </div>
                                 </div>

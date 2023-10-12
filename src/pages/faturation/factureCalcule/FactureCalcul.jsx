@@ -214,31 +214,6 @@ const FactureCalcul = () => {
         ...getColumnSearchProps('prix'),
         render: (text) => `${text} $`,
       },
-    {
-      title: 'Sélectionner',
-      dataIndex: 'checkbox',
-      width: '20%',
-      render: (text, record) => {
-        const isChecked = selectedIds.includes(record.id);
-        return (
-          <>
-            {isChecked ? (
-              <ToggleOnIcon
-                color="primary"
-                style={{ fontSize: '40px', cursor: 'pointer' }}
-                onClick={() => handleCheckboxChange(record.id)}
-              />
-            ) : (
-              <ToggleOffIcon
-                color="disabled"
-                style={{ fontSize: '40px', cursor: 'pointer' }}
-                onClick={() => handleCheckboxChange(record.id)}
-              />
-            )}
-          </>
-        );
-      },
-    },
 
   ];
 
@@ -344,7 +319,6 @@ const FactureCalcul = () => {
     }
   };
 
-console.log(title)
   return (
     <>
       <div className="factureCalcul">

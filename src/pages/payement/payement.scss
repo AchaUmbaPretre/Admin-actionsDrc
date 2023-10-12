@@ -110,19 +110,22 @@
         
     }
     .cell-paid {
-        background-color: rgba(4, 180, 4, 0.747);
+        border: 1px solid green;
+        background-color: rgba(4, 180, 4, 0.555);
         color: white;
         padding: 2px 8px;
         border-radius: 10px;
         cursor: pointer;
-        font-size: .8rem;
+        font-size: .765rem;
       }
 
     .cell-not-paid {
-        background-color: rgba(255, 0, 0, 0.637);
+        border: 1px solid red;
+        background-color: rgba(255, 0, 0, 0.521);
         color: white;
         padding: 2px 8px;
-        border-radius: 10px
+        border-radius: 10px;
+        font-size: .765rem;
       }
     .table-icons-row{
         display: flex;

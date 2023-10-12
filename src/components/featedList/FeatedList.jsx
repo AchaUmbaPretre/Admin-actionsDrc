@@ -76,7 +76,7 @@ const FeatedList = () => {
   return (
     <>
         <div className="featedList">
-            <h2 className="title-h2"><PersonOutlineIcon className='icon-title'/>Employé(e)</h2>
+            <h2 className="title-h2" onClick={() => navigate(`/personnel`)}><PersonOutlineIcon className='icon-title'/>Employé(e)</h2>
             <div className="feated-container">
                 {loading ? (
                 <div className="spinner-container">

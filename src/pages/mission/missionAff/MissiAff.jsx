@@ -38,7 +38,7 @@ const MissiAff = () => {
   const [heureDebut, setHeureDebut] = useState('');
   const [heureFin, setHeureFin] = useState('');
   const [missionWeek, setMissionWeek] = useState([])
-  const [horaireTables, setHoraireTables] = useState( [
+  const [horaireTables, setHoraireTables] = useState([
     { id: 2, start_time: '00:00', end_time: '00:00' },
     { id: 3, start_time: '00:00', end_time: '00:00' },
     { id: 4, start_time: '00:00', end_time: '00:00' },
@@ -253,7 +253,7 @@ const MissiAff = () => {
     {
       title: 'Sélectionner',
       dataIndex: 'checkbox',
-      width: '20%',
+      width: '10%',
       render: (text, record) => {
         const isChecked = selectedIds.includes(record.id);
         return (
@@ -340,10 +340,10 @@ const MissiAff = () => {
 
   const horaireTable = [
     {
-      title: 'Jour de la semaine',
+      title: 'Jour',
       dataIndex: 'days',
       key: 'id',
-      width: '30%',
+      width: '25%',
     },
     {
       title: 'Heure début',
@@ -365,7 +365,7 @@ const MissiAff = () => {
       title: 'Heure fin',
       dataIndex: 'end_time',
       key: 'end_time',
-      width: '20%',
+      width: '25%',
       render: (text, record) =>{
         return (
           <input
@@ -446,7 +446,7 @@ const MissiAff = () => {
       }
     };
     fetchDatas();
-  }, []);
+  }, [clientId]);
 
   useEffect(() => {
     const fetchAgentsAffectes = async () => {
@@ -467,18 +467,20 @@ const MissiAff = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    const sortedHoraireTables = horaireTables.sort((a, b) => a.id - b.id)
   
     try {
       const requestDataArray = [];
   
-      for (let i = 0; i < horaireTables.length; i++) {
+      for (let i = 0; i < sortedHoraireTables.length; i++){
+        const table = sortedHoraireTables[i];
         const requestData = {
           agent_id: selectedIds,
           client_id: clientId,
-          jour: horaireTables[i].id,
+          jour: table.id,
           site: datas.site,
-          heureEntrant: horaireTables[i].start_time,
-          heureSortant: horaireTables[i].end_time
+          heureEntrant: table.start_time,
+          heureSortant: table.end_time,
         };
   
         requestDataArray.push(requestData);
@@ -504,7 +506,6 @@ const MissiAff = () => {
       console.log(err);
     }
   };
-
 
   return (
     <>
@@ -535,7 +536,7 @@ const MissiAff = () => {
                   onChange={(selectedOption) =>handleChange({ target: { name: 'site', value: selectedOption.value } })}
                   options={sites.map((item) => ({
                     value: item.id,
-                    label:`Av/ ${item.avenue} Q/${item.quartier} C/${item.commune} N°${item.numero}`
+                    label:`Nom du site : ${item.description} Av/ ${item.avenue} Q/${item.quartier} C/${item.commune} N°${item.numero}`
                   }))}
                 />
             </div>
@@ -550,7 +551,6 @@ const MissiAff = () => {
             </div>
           </div>
         </div>
-        
       </div>
     </>
   )

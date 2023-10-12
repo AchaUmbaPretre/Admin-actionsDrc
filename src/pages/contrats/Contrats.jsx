@@ -57,7 +57,36 @@ const Contrats = () => {
     const columns = [
       { field: 'id', headerName: 'N° du contrat', width: 80 },
       { field: 'company_name', headerName: 'Client', width: 130 },
-      { field: 'contract_type', headerName: 'Type de contrat', width: 120 },
+      { field: 'contract_type', headerName: 'Type de contrat', width: 120,         renderCell: (params) => {
+        switch (params.value) {
+          case 'Journalier':
+            return (
+              <span style={{ color: 'green', border: '1px solid green', padding: '4px 10px',borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: "12px"}}>
+                Journalier
+              </span>
+            );
+          case 'Interim':
+            return (
+              <span style={{ color: 'blue', border: '1px solid navy', padding: '4px 10px',borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: "12px"}}>
+                Interim
+              </span>
+            );
+          case 'CDI':
+            return (
+              <span style={{ color: 'orange', border: '1px solid orange', padding: '4px 10px',borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: "12px"}}>
+                CDI
+              </span>
+            );
+          case 'CDD':
+            return (
+              <span style={{ color: 'navy', border: '1px solid navy', padding: '4px 10px',borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: "12px"}}>
+                CDD
+              </span>
+            );
+          default:
+            return null;
+        }
+      },},
       {
         field: 'start_date',
         headerName: 'Date du debut',
@@ -93,14 +122,14 @@ const Contrats = () => {
               return (
                 <span style={{ color: 'green', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: "5px" }}>
                   En attente
-                  <CheckCircleIcon style={{ fontSize: '16px' }} />
+                  <PendingIcon style={{ fontSize: '16px' }} />
                 </span>
               );
             case 'En cours':
               return (
                 <span style={{ color: 'blue', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: "5px" }}>
                   En cours
-                  <PendingIcon style={{ fontSize: '16px' }} />
+                  <CheckCircleIcon style={{ fontSize: '16px' }} />
                 </span>
               );
             default:

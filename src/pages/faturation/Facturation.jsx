@@ -81,7 +81,7 @@ const Facturation = () => {
   };
 
   const columns = [
-    { field: 'id', headerName: 'Numero de facture', width: 130 },
+    { field: 'id', headerName: 'N° de facture', width: 130 },
     { field: 'company_name', headerName: "client", width: 160 },
     {
       field: 'created_at',

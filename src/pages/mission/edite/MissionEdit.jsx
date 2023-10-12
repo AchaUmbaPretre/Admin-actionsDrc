@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Select from 'react-select';
+import './missionEdit.scss';
 import Swal from 'sweetalert2';
 import moment from 'moment';
 import config from '../../../config'
@@ -118,7 +118,7 @@ const MissionEdit = () => {
 
   return (
     <>
-      <div className="contratForm">
+      <div className="missionEdite">
         <div className="contrat-wrapper">
           <div className="edit-title">
             <h2 className="edit-h2">Modifier l'horaire</h2>

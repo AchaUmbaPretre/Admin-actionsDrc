@@ -40,28 +40,28 @@ const SitesViews = () => {
                                 <span className="client-nom">{data.company_name}</span>
                             </div>
                             <div className="client-sous">
-                                <span className="client-nom"><CottageOutlinedIcon/> Avenue :</span>
-                                <span className="client-nom">{data.avenue}</span>
+                                <span className="client-nom"><PsychologyOutlinedIcon/> Nom du site :</span>
+                                <span className="client-nom">{data.description}</span>
                             </div>
                         </div>
                         <div className="client-row">
+                            <div className="client-sous">
+                                <span className="client-nom"><CottageOutlinedIcon/> Avenue :</span>
+                                <span className="client-nom">{data.avenue}</span>
+                            </div>
                             <div className="client-sous">
                                 <span className="client-nom"><CottageOutlinedIcon/> Quartier :</span>
                                 <span className="client-nom">{data.quartier}</span>
                             </div>
+                        </div>
+                        <div className="client-row">
                             <div className="client-sous">
                                 <span className="client-nom"><FormatListNumberedOutlinedIcon /> N° :</span>
                                 <span className="client-nom">{data.numero}</span>
                             </div>
-                        </div>
-                        <div className="client-row">
                             <div className="client-sous">
                                 <span className="client-nom"><CottageOutlinedIcon/> Commune :</span>
                                 <span className="client-nom">{data.commune}</span>
-                            </div>
-                            <div className="client-sous">
-                                <span className="client-nom"><PsychologyOutlinedIcon/> Description :</span>
-                                <span className="client-nom">{data.description}</span>
                             </div>
                         </div>
                     </div>

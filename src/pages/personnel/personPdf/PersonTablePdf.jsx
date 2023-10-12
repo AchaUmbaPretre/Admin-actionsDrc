@@ -28,7 +28,7 @@ const PersonTablePdf = () => {
       width: '9%',
     },
     subTitle: {
-      fontSize: 10,
+      fontSize: 9,
       marginBottom: 10,
       textAlign: 'right',
     },
@@ -59,12 +59,12 @@ const PersonTablePdf = () => {
     tableCell: {
       padding: 10,
       flex: 1,
-      fontSize: 10,
+      fontSize: 8,
       textAlign: 'left'
     },
     tableCells: {
       padding: 10,
-      fontSize: 10,
+      fontSize: 8,
       textAlign: 'left'
     },
     textTitle: {

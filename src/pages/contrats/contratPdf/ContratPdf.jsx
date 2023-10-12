@@ -57,11 +57,11 @@ const ContratPdf = () => {
     tableCell: {
       padding: 10,
       flex: 1,
-      fontSize: 10,
+      fontSize: 9,
     },
     tableCells: {
       padding: 10,
-      fontSize: 10,
+      fontSize: 9,
     },
     textTitle: {
       fontSize: 15,

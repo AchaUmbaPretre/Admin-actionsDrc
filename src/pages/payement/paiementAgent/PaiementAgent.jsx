@@ -341,6 +341,15 @@ const PaiementAgent = () => {
   const handleClick = async (e) => {
     e.preventDefault();
 
+    if (!data.payment_method) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Veuillez selectionner une methode de paiement',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+      return;
+    }
     try {
       await Promise.all(employeeId.map(async (dd) => {
         const response = await axios.post(`${DOMAIN}/api/admin/payementPost`, {
@@ -450,7 +459,7 @@ const PaiementAgent = () => {
                 <AccountBalanceWalletOutlinedIcon className='personnel-icons'/>
                 <span className="personnel-title-icon">Money</span>
               </div>
-              <div className="personnel-money" onClick={()=> navigate('/personnel')}>
+              <div className="personnel-money">
                 <BadgeOutlinedIcon  className='personnel-icons'/>
                 <span className="personnel-title-icon">Agent</span>
               </div>

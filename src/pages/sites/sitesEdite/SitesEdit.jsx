@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import Select from 'react-select';
+import './siiteEdit.scss';
 import config from '../../../config';
 import moment from 'moment';
 import 'moment/locale/fr';
@@ -119,7 +119,7 @@ const SitesEdit = ({ handleModalClose }) => {
 
   return (
     <>
-      <div className="sitesForm">
+      <div className="sitesEdit">
         <div className="contrat-wrapper">
           <div className="edit-title">
             <h2 className="edit-h2">Modifier le lieu du travail</h2>
@@ -144,19 +144,19 @@ const SitesEdit = ({ handleModalClose }) => {
                     </select>
               </div>
               <div className="edit-row">
-                <label htmlFor="" className="label-edit">Avenue <span>*</span></label>
-                <input type="text" value={data?.avenue} name='avenue' className="input-form" onChange={(e) =>handleChange(e.target.value, 'avenue')} placeholder="Entrez le nom de l'avenue" />
-              </div>
+                <label htmlFor="" className="label-edit">Nom du site <span>*</span></label>
+                <input type="text" value={data?.description} name='description' className="input-form" onChange={(e) =>handleChange(e.target.value, 'description')} placeholder='Entrez la description' />
+              </div> 
             </div>
             <div className="edit-rows">
               <div className="edit-row">
-                <label htmlFor="" className="label-edit">Quartier <span>*</span></label>
-                <input type="text" value={data?.quartier} name="quartier" className="input-form" onChange={(e) =>handleChange(e.target.value, 'quartier')} placeholder="Entrez le nom du quartier" />
+                <label htmlFor="" className="label-edit">Avenue <span>*</span></label>
+                <input type="text" value={data?.avenue} name='avenue' className="input-form" onChange={(e) =>handleChange(e.target.value, 'avenue')} placeholder="Entrez le nom de l'avenue" />
               </div>
               <div className="edit-row">
-                <label htmlFor="" className="label-edit">Commune <span>*</span></label>
-                <input type="text" value={data?.commune} name='commune' className="input-form" onChange={(e) =>handleChange(e.target.value, 'commune')} placeholder="Entrez le nom de votre commune" />
-              </div>  
+                <label htmlFor="" className="label-edit">Quartier <span>*</span></label>
+                <input type="text" value={data?.quartier} name="quartier" className="input-form" onChange={(e) =>handleChange(e.target.value, 'quartier')} placeholder="Entrez le nom du quartier" />
+              </div> 
             </div>
             <div className="edit-rows">
               <div className="edit-row">
@@ -166,9 +166,9 @@ const SitesEdit = ({ handleModalClose }) => {
                   } placeholder='Entrez le N° du parcelle' />
               </div>
               <div className="edit-row">
-                <label htmlFor="" className="label-edit">Description <span>*</span></label>
-                <input type="text" value={data?.description} name='description' className="input-form" onChange={(e) =>handleChange(e.target.value, 'description')} placeholder='Entrez la description' />
-              </div>  
+                <label htmlFor="" className="label-edit">Commune <span>*</span></label>
+                <input type="text" value={data?.commune} name='commune' className="input-form" onChange={(e) =>handleChange(e.target.value, 'commune')} placeholder="Entrez le nom de votre commune" />
+              </div> 
             </div>
             <button className="edit-btn" onClick={handleClick}>
               Envoyer

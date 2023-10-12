@@ -27,7 +27,7 @@ const Sidebar = () => {
               <img src={actions} alt="" className='sidenav-img'/>
             </div>
             <ul className="sidebar-ul">
-              <li className={`sidenav-li ${location.pathname === '/' ? 'active'  : ''}`}><HomeIcon className='sidebar-icon'/><Link to="/">Accueil</Link></li>
+              <li className={`sidenav-li ${location.pathname === '/' ? 'active' : ''}`}><HomeIcon className='sidebar-icon'/><Link to="/">Accueil</Link></li>
               <li className={`sidenav-li ${location.pathname === '/personnel' ? 'active' : ''}`}><PersonOutlineIcon className='sidebar-icon'/><Link to={"/personnel"}>Personnel</Link></li>
               <li className={`sidenav-li ${location.pathname === '/contrats' ? 'active' : ''}`}><FlakyIcon className='sidebar-icon'/><Link to={"/contrats"} >Contrats</Link></li>
               <li className={`sidenav-li ${location.pathname === '/affectation' ? 'active' : ''}`}><ShowChartIcon className='sidebar-icon'/><Link to={"/affectation"}>Affectation</Link></li>

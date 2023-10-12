@@ -42,36 +42,36 @@ const Sites = () => {
 
   const columns = [
     {
+      field: 'description',
+      headerName: "Nom du site",
+      width: 150,
+    },
+    {
         field: 'company_name',
         headerName: 'Client',
-        width: 120 
+        width: 140 
     },
     {
       field: 'avenue',
       headerName: 'Avenue',
-      width: 120 
+      width: 130 
     },
     {
         field: 'quartier',
         headerName: "Quartier",
-        width: 120 
+        width: 130 
     },
     {
       field: 'commune',
       headerName: 'Commune',
-      width: 120 
+      width: 130 
     },
     {
         field: 'numero',
-        headerName: "Numero de parcelle",
-        width: 150,
+        headerName: "N° de parcelle",
+        width: 130,
     },
-    {
-        field: 'description',
-        headerName: "Description",
-        width: 150,
-    },
-    {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
+    {field: 'Action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
       const handleEdit = () => {
         Swal.fire({
           title: 'Confirmation',

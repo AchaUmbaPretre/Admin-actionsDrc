@@ -5,7 +5,7 @@ import axios from 'axios';
 import moment from 'moment';
 import logo from '../../../assets/actionssarl.PNG'
 
-const MissionPdf = () => {
+const AffectationPdf = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -57,11 +57,11 @@ const MissionPdf = () => {
       tableCell: {
         padding: 10,
         flex: 1,
-        fontSize: 10,
+        fontSize: 9,
       },
       tableCells: {
         padding: 10,
-        fontSize: 10,
+        fontSize: 9,
       },
       textTitle: {
         fontSize: 15,
@@ -71,20 +71,19 @@ const MissionPdf = () => {
       },
     });
 
-      useEffect(()=>{
-
-        const fetchData = async ()=> {
-            try{
-                const {data} = await axios.get(`${DOMAIN}/api/admin/allmission`);
-                setData(data)
-                setLoading(false);
-        
-              }catch(error){
-                console.log(error)
-              };
+    useEffect(() => {
+        const fetchDatas = async () => {
+          try {
+            const res = await axios.get(`${DOMAIN}/api/admin/allaffectation`);
+            setData(res?.data)
+            setLoading(false);
+    
+          } catch (error) {
+            console.log(error)
+          };
         }
-        fetchData()
-     }, [])
+        fetchDatas()
+    }, [])
   
   return (
     <>
@@ -95,25 +94,29 @@ const MissionPdf = () => {
                     <Image style={styles.img} src={logo} />
                     <Text style={styles.subTitle}>Le {moment().format('DD/MM/YYYY')}</Text>
                   </View>
-                    <Text style={styles.title}>Liste des missions</Text>
+                    <Text style={styles.title}>Liste des affectations</Text>
                     <View style={styles.table}>
                         <View style={[styles.tableRow, styles.tableHeader]}>
                             <Text style={styles.tableCells}>N°</Text>
+                            <Text style={styles.tableCell}>Nom</Text>
                             <Text style={styles.tableCell}>Client</Text>
                             <Text style={styles.tableCell}>Type de contrat</Text>
-                            <Text style={styles.tableCell}>Jour</Text>
-                            <Text style={styles.tableCell}>Heure de debut</Text>
-                            <Text style={styles.tableCell}>Heure de la fin</Text>
+                            <Text style={styles.tableCell}>Compétence</Text>
+                            <Text style={styles.tableCell}>Prix</Text>
+                            <Text style={styles.tableCell}>Salaire</Text>
+                            <Text style={styles.tableCell}>Date d'affectation</Text>
                         </View>
                         {Array.isArray(data) &&
                         data.map((row, index) => (
                             <View key={index} style={styles.tableRow}>
                                 <Text style={styles.tableCells}>{index + 1}</Text>
-                                <Text style={styles.tableCell}>{row.company_name}</Text>
                                 <Text style={styles.tableCell}>{row.first_name}</Text>
-                                <Text style={styles.tableCell}>{row.days}</Text>
-                                <Text style={styles.tableCell}>{row.heureEntrant.substring(0, 5)}</Text>
-                                <Text style={styles.tableCell}>{row.heureSortant.substring(0, 5)}</Text>
+                                <Text style={styles.tableCell}>{row.client_nom}</Text>
+                                <Text style={styles.tableCell}>{row.contract_type}</Text>
+                                <Text style={styles.tableCell}>{row.skills}</Text>
+                                <Text style={styles.tableCell}>{row.prix} $</Text>
+                                <Text style={styles.tableCell}>{row.salaire}</Text>
+                                <Text style={styles.tableCell}>{moment(row.created_at).format('DD-MM-YYYY')}</Text>
                             </View>
                         ))}
                     </View>
@@ -124,4 +127,4 @@ const MissionPdf = () => {
   )
 }
 
-export default MissionPdf
+export default AffectationPdf

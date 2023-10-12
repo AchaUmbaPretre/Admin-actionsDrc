@@ -54,7 +54,7 @@ const Payement = () => {
   
      const columns = [
         { field: 'id', headerName: 'N°', width: 50},
-        { field: 'first_name', headerName: 'Employe(é)', width: 170,
+        { field: 'first_name', headerName: 'Employe(é)', width: 175,
           renderCell: (params) =>{
             return <div>
                       {params.row.first_name}  {params.row.last_name}
@@ -64,19 +64,19 @@ const Payement = () => {
         {
           field: 'payment_date',
           headerName: 'Date de paiement',
-          width: 185,
+          width: 180,
           valueGetter: (params) =>
           moment(params.row.payment_date).format('DD-MM-yyyy'),
         },
         {
             field: 'amount',
             headerName: 'Montant',
-            width: 185,renderCell: (params) => `${params.value} $`
+            width: 180,renderCell: (params) => `${params.value} $`
         },
         {
           field: 'methode_paiement',
           headerName: "Methode de payement",
-          width: 190,       renderCell: (params) => {
+          width: 180,       renderCell: (params) => {
             const status = params.value || 'Non spécifié';
             let cellClassName = '';
         

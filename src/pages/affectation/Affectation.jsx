@@ -22,7 +22,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import AdsClickIcon from '@mui/icons-material/AdsClick';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table } from 'antd';
+import { Button, Input, Space, Table, Tag } from 'antd';
 import moment from 'moment';
 
 const Affectation = () => {
@@ -300,6 +300,13 @@ const getColumnSearchProps = (dataIndex) => ({
       width: '5%',
     },
     {
+      title: 'Nom',
+      dataIndex: 'first_name',
+      key: 'last_name',
+      width: '13%',
+      ...getColumnSearchProps('first_name'),
+    },
+    {
       title: 'Client',
       dataIndex: 'client_nom',
       key: 'client_nom',
@@ -307,18 +314,28 @@ const getColumnSearchProps = (dataIndex) => ({
       ...getColumnSearchProps('client_nom'),
     },
     {
-      title: 'Type contrat',
+      title: 'Type du contrat',
       dataIndex: 'contract_type',
       key: 'contract_type',
       width: '14%',
-      ...getColumnSearchProps('contract_type'),
-    },
-    {
-      title: 'Nom',
-      dataIndex: 'first_name',
-      key: 'last_name',
-      width: '13%',
-      ...getColumnSearchProps('first_name'),
+      render: (text) => {
+        let color = '';
+        let icon = null;
+  
+        if (text === 'Journalier') {
+          color = 'green';
+        } else if (text === 'Interim') {
+          color = 'blue';
+        } else if (text === 'Resilié') {
+          color = 'red';
+        }
+  
+        return (
+          <Space>
+            <Tag color={color}>{text}</Tag>
+          </Space>
+        );
+      },
     },
     {
       title: 'Compétence',
@@ -558,7 +575,7 @@ const exportToExcel = () => {
               </div>
           </div>
           <div className="personPdf">
-            <Link className="personnel-btn-pdf" onClick={() => navigate('')}><PictureAsPdfIcon/>Pdf</Link>
+            <Link className="personnel-btn-pdf" onClick={() => navigate('/affectationPdf')}><PictureAsPdfIcon/>Pdf</Link>
             <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
           </div>
         </div>

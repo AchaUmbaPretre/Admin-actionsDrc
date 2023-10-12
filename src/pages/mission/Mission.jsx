@@ -160,9 +160,6 @@ const Mission = () => {
               <TableCell>{group.rows[0].heureSortant.substring(0, 5)}</TableCell>
               <TableCell>
                 <div className="table-icons-row">
-{/*                   <Link to={`/missionEdite/${group.rows[0].id}`}>
-                    <ModeEditOutlineIcon className='userListBtn' />
-                  </Link> */}
                   <div className="userOvert2">
                     <DeleteOutline className="userListDelete" onClick={() => { handleDelete(group.agent_id) }} />
                     <span className='userOvert'>Supprimer</span>
@@ -207,8 +204,6 @@ const Mission = () => {
           </>
         );
       };
-
-
 
     const exportToExcel = () => {
         
