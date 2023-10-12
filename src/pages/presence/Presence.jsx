@@ -85,30 +85,30 @@ const handleDelete = async (id) => {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'first_name', headerName: 'employé(e)', width: 150 },
-
+    { field: 'first_name', headerName: 'Nom', width: 120 },
+    { field: 'last_name', headerName: 'Nom', width: 120 },
     {
       field: 'company_name',
       headerName: 'Client',
-      width: 150 
+      width: 120 
     },
     {
         field: 'date',
         headerName: 'Date de la présence',
-        width: 150,
+        width: 120,
         valueGetter: (params) =>
         moment(params.row.date).format('DD-MM-yyyy'),
     },
     {
         field: 'check_in_time',
         headerName: "Heure d'arrivée",
-        width: 150,
+        width: 130,
         valueGetter: (params) => params.row.check_in_time.substring(0, 5)
     },
     {
       field: 'check_out_time',
       headerName: 'Heure de départ',
-      width: 150,
+      width: 130,
       valueGetter: (params) => params.row.check_out_time.substring(0, 5)
     },
     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
