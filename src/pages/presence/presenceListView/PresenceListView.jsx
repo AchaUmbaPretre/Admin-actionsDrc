@@ -81,18 +81,8 @@ const handleDelete = async (id) => {
   }
 };
   const columns = [
-    { field: 'first_name', headerName: 'employé(e)', width: 200,
-        renderCell: (params) =>{
-        return <div className="userList" style={{display: "flex", gap: "5px"}}>
-                    <div>
-                        {params.row.first_name}
-                    </div>
-                    <div>
-                        {params.row.last_name}
-                    </div>
-               </div>
-      }
-    },
+    { field: 'first_name', headerName: 'Nom', width: 120 },
+    { field: 'last_name', headerName: 'Nom', width: 120 },
     {
         field: 'date',
         headerName: 'Date de la présence',

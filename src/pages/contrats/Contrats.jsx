@@ -61,25 +61,25 @@ const Contrats = () => {
         switch (params.value) {
           case 'Journalier':
             return (
-              <span style={{ color: 'green', border: '1px solid green', padding: '4px 10px',borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: "12px"}}>
+              <span style={{ color: 'green', border: '1px solid green', padding: '3px 10px',borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: "12px"}}>
                 Journalier
               </span>
             );
           case 'Interim':
             return (
-              <span style={{ color: 'blue', border: '1px solid navy', padding: '4px 10px',borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: "12px"}}>
+              <span style={{ color: 'blue', border: '1px solid navy', padding: '3px 10px',borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: "12px"}}>
                 Interim
               </span>
             );
           case 'CDI':
             return (
-              <span style={{ color: 'orange', border: '1px solid orange', padding: '4px 10px',borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: "12px"}}>
+              <span style={{ color: 'orange', border: '1px solid orange', padding: '3px 10px',borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: "12px"}}>
                 CDI
               </span>
             );
           case 'CDD':
             return (
-              <span style={{ color: 'navy', border: '1px solid navy', padding: '4px 10px',borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: "12px"}}>
+              <span style={{ color: 'navy', border: '1px solid navy', padding: '3px 10px',borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: "12px"}}>
                 CDD
               </span>
             );
