@@ -347,11 +347,9 @@ const PresenceList = () => {
                         <input type="time" name='check_out_time' className="presence-input" onChange={(e)=>{setCheckout(e.target.value)}} />
                       </div>
                     </div>
-                     
                 </div>
                 <button className="presence-btn" onClick={handleClick}>Envoyer</button>
             </div>
-
           </div>
         </div>
       </div>

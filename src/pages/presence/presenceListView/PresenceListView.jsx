@@ -17,6 +17,7 @@ import * as XLSX from 'xlsx';
 import moment from 'moment';
 import config from '../../../config';
 import Swal from 'sweetalert2';
+import './presenceListView.scss'
 
 const style = {
   position: 'absolute',
@@ -41,8 +42,43 @@ const PresenceListView = () => {
   const id = pathname.split('/')[2]
   const [name, setName] = useState('');
 
+  const months = [
+    { value: 1, label: 'Janvier' },
+    { value: 2, label: 'Février' },
+    { value: 3, label: 'Mars' },
+    { value: 4, label: 'Avril' },
+    { value: 5, label: 'Mai' },
+    { value: 6, label: 'Juin' },
+    { value: 7, label: 'Juillet' },
+    { value: 8, label: 'Août' },
+    { value: 9, label: 'Septembre' },
+    { value: 10, label: 'Octobre' },
+    { value: 11, label: 'Novembre' },
+    { value: 12, label: 'Décembre' },
+  ];
+
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
+
+  const [totalJours, setTotalJours] = useState(0);
+  const [selectedMonth, setSelectedMonth] = useState(1);
+
+  const handleMonthChange = (event) => {
+    setSelectedMonth(parseInt(event.target.value, 10));
+  };
+
+  useEffect(() => {
+    const fetchTotalJours = async () => {
+      try {
+        const {data} = await axios.get(`${DOMAIN}/api/admin/presenceAllViewCounter?month=${selectedMonth}&AgentId=${id}`);
+        setTotalJours(data[0]?.total_jours);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchTotalJours();
+  }, [selectedMonth]);
 
 
  useEffect(()=>{
@@ -81,6 +117,7 @@ const handleDelete = async (id) => {
     console.log(err);
   }
 };
+
   const columns = [
     { field: 'first_name', headerName: 'Nom', width: 110 },
     { field: 'last_name', headerName: 'Post-nom', width: 110 },
@@ -200,7 +237,7 @@ const handleDelete = async (id) => {
 
   return (
     <>
-      <div className="presence">
+      <div className="presenceListView">
         <div className="presence-wrapper">
           <div className="contrats-top">
               <ChecklistRtlIcon className='contrats-icon'/>
@@ -209,30 +246,22 @@ const handleDelete = async (id) => {
                   <span className="contrats-span">Liste des presences de l'agent {name}</span>
               </div>
           </div>
+          <div className="contrats-rows-counter">
+              <h2 className='contrat-h2'>Total de jours de présence de l'employé : {totalJours}</h2>
+              <div className="contrat-month">
+                <label htmlFor="month">Sélectionnez un mois : </label>
+                <select id="month" value={selectedMonth} onChange={handleMonthChange}>
+                  <option disabled >selectionnez un mois </option>
+                  {months.map((month) => (
+                  <option key={month.value} value={month.value}>{month.label}</option>
+                ))}
+                </select>
+              </div>
+          </div>
 {/*           <div className="personPdf">
             <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Presence</Link>
             <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
           </div> */}
-          <Modal
-                    aria-labelledby="transition-modal-title"
-                    aria-describedby="transition-modal-description"
-                    open={open}
-                    onClose={handleClose}
-                    closeAfterTransition
-                    slots={{ backdrop: Backdrop }}
-                    slotProps={{
-                    backdrop: {
-                        timeout: 500,
-                    },
-                    }} 
-                >
-                    <Fade in={open}>
-                        <Box sx={style}>
-                            <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
-                            </Box>
-                        </Box>
-                    </Fade>
-          </Modal>
         </div>
         {loading ? (
         <div className="spinner-container">
