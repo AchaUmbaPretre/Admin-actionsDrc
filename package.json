@@ -24,6 +24,7 @@
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
     "react": "^18.2.0",
+    "react-avatar-editor": "^13.0.0",
     "react-dom": "^18.2.0",
     "react-easy-crop": "^5.0.2",
     "react-google-recaptcha": "^3.1.0",

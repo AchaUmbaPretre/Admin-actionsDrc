@@ -56,7 +56,7 @@ const Formulaire = ({handleModalClose}) => {
 
       const handlePhotoSubmit = async () => {
 
-        handleModalClose()
+/*         handleModalClose() */
         if (!data.first_name || !data.last_name || !data.date_of_birth || !data.gender || !data.address || !data.etat_civil || !data.identification_type || !data.skills || !data.certifications || !data.employment_status) {
           Swal.fire({
             title: 'Error',
@@ -75,7 +75,7 @@ const Formulaire = ({handleModalClose}) => {
             photoSrc = webcamRef.current.getScreenshot();
           }
           
-          await axios.post(`${DOMAIN}/api/admin/employe`, { ...data, source: photoSrc });
+          await axios.post(`${DOMAIN}/api/admin/employe`, { ...data});
         
           await Swal.fire({
             title: 'Success',
@@ -84,7 +84,6 @@ const Formulaire = ({handleModalClose}) => {
             confirmButtonText: 'OK'
           });
           window.location.reload();
-          navigate("/personnel")
          
         } catch (error) {
           await Swal.fire({

@@ -11,6 +11,8 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import axios from 'axios';
+import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import PresenceForm from './form/PresenceForm';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
@@ -84,38 +86,90 @@ const handleDelete = async (id) => {
 };
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'first_name', headerName: 'Nom', width: 120 },
-    { field: 'last_name', headerName: 'Nom', width: 120 },
+    { field: 'first_name', headerName: 'Nom', width: 90 },
+    { field: 'last_name', headerName: 'Post-nom', width: 90 },
     {
       field: 'company_name',
       headerName: 'Client',
-      width: 120 
+      width: 90 
     },
     {
         field: 'date',
         headerName: 'Date de la présence',
-        width: 120,
+        width: 90,
         valueGetter: (params) =>
         moment(params.row.date).format('DD-MM-yyyy'),
     },
     {
-        field: 'check_in_time',
-        headerName: "Heure d'arrivée",
-        width: 130,
-        valueGetter: (params) => params.row.check_in_time.substring(0, 5)
+      field: 'month_name',
+      headerName: 'Mois',
+      width: 90,
+    },
+    {
+      field: 'check_in_time',
+      headerName: "Heure d'arrivée",
+      width: 100,
+      valueGetter: (params) => params.row.check_in_time.substring(0, 5)
     },
     {
       field: 'check_out_time',
-      headerName: 'Heure de départ',
-      width: 130,
+      headerName: 'Heure de sortie',
+      width: 100,
       valueGetter: (params) => params.row.check_out_time.substring(0, 5)
     },
-    {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
+    {
+      field: 'presence_status',
+      headerName: 'Statut',
+      width: 90,
+      renderCell: (params) => {
+        let backgroundColor, color, icon;
+    
+        if (params.value === 'Présent') {
+          backgroundColor = '#4caf50'; // Vert
+          color = 'white';
+          icon = <CheckCircleOutlinedIcon style={{ fontSize: '16px' }} />;
+        } else {
+          backgroundColor = '#f44336'; // Rouge
+          color = 'white';
+          icon = <ClearOutlinedIcon style={{ fontSize: '16px' }} />;
+        }
+    
+        return (
+          <span
+            style={{
+              backgroundColor: backgroundColor,
+              color: color,
+              borderRadius: '50px',
+              padding: '4px 8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '12px',
+            }}
+          >
+            {icon}
+            <span style={{ marginLeft: '4px' }}>{params.value}</span>
+          </span>
+        );
+      }
+    },
+    {
+      field: 'total_presence',
+      headerName: 'Nombre de présence',
+      width: 80,
+      valueFormatter: (params) => {
+        const totalPresence = params.value;
+        if (totalPresence === 1) {
+          return '1 jour';
+        } else {
+          return `${totalPresence} jours`;
+        }
+      }
+    },
+    {field: 'action', HeaderName: 'Action', width: 140, renderCell: (params) =>{
         return(
           <>
-
-<>
+              <>
                 <div className="table-icons-row">
                   <div className="userOvert0">
                     <Link onClick={''}>

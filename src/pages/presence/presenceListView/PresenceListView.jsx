@@ -7,6 +7,8 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
+import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import axios from 'axios';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
@@ -49,8 +51,7 @@ const PresenceListView = () => {
       try{
           const {data} = await axios.get(`${DOMAIN}/api/admin/presenceOneView/${id}`);
           setData(data);
-          const paieValues = data.map((item) => item.first_name)
-          setName(paieValues[0])
+          setName(data[0].first_name)
           setLoading(false);
   
         }catch(error){
@@ -81,53 +82,64 @@ const handleDelete = async (id) => {
   }
 };
   const columns = [
-    { field: 'first_name', headerName: 'Nom', width: 120 },
-    { field: 'last_name', headerName: 'Nom', width: 120 },
+    { field: 'first_name', headerName: 'Nom', width: 110 },
+    { field: 'last_name', headerName: 'Post-nom', width: 110 },
     {
         field: 'date',
         headerName: 'Date de la présence',
-        width: 190,
+        width: 150,
         valueGetter: (params) =>
         moment(params.row.date).format('DD-MM-yyyy'),
     },
     {
         field: 'check_in_time',
         headerName: "Heure d'arrivée",
-        width: 190,
+        width: 150,
         valueGetter: (params) => params.row.check_in_time.substring(0, 5)
     },
     {
       field: 'check_out_time',
       headerName: 'Heure de départ',
-      width: 180,
+      width: 150,
       valueGetter: (params) => params.row.check_out_time.substring(0, 5)
     },
-/*     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
-        return(
-          <>
-            <>
-                <div className="table-icons-row">
-                  <div className="userOvert0">
-                    <Link onClick={''}>
-                      <EditOutlined className="userListBtn" onClick={() => navigate(`/presenceEdit/${params.row.id}`)} />
-                      <span className='userOvert'>Modifier</span>
-                    </Link>
-                  </div>
-                  <div className="userOvert1">
-                    <VisibilityOutlined className='userEye' onClick={() => navigate(`/presenceView/${params.row.emp1_id}/${params.row.id}`)} />
-                    <span className='userOvert'>détail</span>
-                  </div>
-                  <div className="userOvert2">
-                    <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
-                    <span className='userOvert'>Supprimer</span>
-                  </div>
-                </div>
-            </>
-        </>
-
-        )
-    }}, */
-    {field: 'action', HeaderName: 'Action', width: 180, renderCell: (params) =>{
+    {
+      field: 'presence_status',
+      headerName: 'Status',
+      width: 140,
+      renderCell: (params) => {
+        let backgroundColor, color, icon;
+    
+        if (params.value === 'Présent') {
+          backgroundColor = '#4caf50'; // Vert
+          color = 'white';
+          icon = <CheckCircleOutlinedIcon style={{ fontSize: '16px' }} />;
+        } else {
+          backgroundColor = '#f44336'; // Rouge
+          color = 'white';
+          icon = <ClearOutlinedIcon style={{ fontSize: '16px' }} />;
+        }
+    
+        return (
+          <span
+            style={{
+              backgroundColor: backgroundColor,
+              color: color,
+              borderRadius: '50px',
+              padding: '4px 8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '12px',
+            }}
+          >
+            {icon}
+            <span style={{ marginLeft: '4px' }}>{params.value}</span>
+          </span>
+        );
+      }
+    },
+    {field: 'action', HeaderName: 'Action', width: 160, renderCell: (params) =>{
       return(
         <>
 

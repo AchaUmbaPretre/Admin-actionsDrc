@@ -12,6 +12,8 @@ import axios from 'axios';
 import { FadeLoader } from 'react-spinners';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import config from '../../config'
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
@@ -108,7 +110,6 @@ const Facturation = () => {
         } else {
           cellClassName = 'cell-not-paid';
         }
-    
         return <div className={cellClassName}>{status}</div>;
       },
     },

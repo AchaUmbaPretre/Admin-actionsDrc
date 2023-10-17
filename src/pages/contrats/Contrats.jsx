@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import config from '../../config'
+import { FileOutlined, UserOutlined, BankOutlined, SolutionOutlined } from '@ant-design/icons';
 import { DeleteOutline, EditOutlined, AddCircleOutline, VisibilityOutlined } from '@mui/icons-material';
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -57,36 +58,42 @@ const Contrats = () => {
     const columns = [
       { field: 'id', headerName: 'N° du contrat', width: 80 },
       { field: 'company_name', headerName: 'Client', width: 130 },
-      { field: 'contract_type', headerName: 'Type de contrat', width: 120,         renderCell: (params) => {
-        switch (params.value) {
-          case 'Journalier':
-            return (
-              <span style={{ color: 'green', border: '1px solid green', padding: '3px 10px',borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: "12px"}}>
-                Journalier
-              </span>
-            );
-          case 'Interim':
-            return (
-              <span style={{ color: 'blue', border: '1px solid navy', padding: '3px 10px',borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: "12px"}}>
-                Interim
-              </span>
-            );
-          case 'CDI':
-            return (
-              <span style={{ color: 'orange', border: '1px solid orange', padding: '3px 10px',borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: "12px"}}>
-                CDI
-              </span>
-            );
-          case 'CDD':
-            return (
-              <span style={{ color: 'navy', border: '1px solid navy', padding: '3px 10px',borderRadius: "10px", display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: "12px"}}>
-                CDD
-              </span>
-            );
-          default:
-            return null;
-        }
-      },},
+      {
+        field: 'contract_type',
+        headerName: 'Type de contrat',
+        width: 120,
+        renderCell: (params) => {
+          let color, icon, backgroundColor;
+          
+          switch (params.value) {
+            case 'Journalier':
+              backgroundColor = '#4caf50'; // Vert
+              icon = <FileOutlined style={{ fontSize: '16px', marginRight: '5px' }} />;
+              break;
+            case 'Interim':
+              backgroundColor = '#2196f3'; // Bleu
+              icon = <UserOutlined style={{ fontSize: '16px', marginRight: '5px' }} />;
+              break;
+            case 'CDI':
+              backgroundColor = '#ff9800'; // Orange
+              icon = <BankOutlined style={{ fontSize: '16px', marginRight: '5px' }} />;
+              break;
+            case 'CDD':
+              backgroundColor = '#9c27b0'; // Violet
+              icon = <SolutionOutlined style={{ fontSize: '16px', marginRight: '5px' }} />;
+              break;
+            default:
+              return null;
+          }
+      
+          return (
+            <span style={{ backgroundColor: backgroundColor, color: 'white', border: `1px solid ${backgroundColor}`, padding: '3px 10px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '12px' }}>
+              {icon}
+              {params.value}
+            </span>
+          );
+        },
+      },
       {
         field: 'start_date',
         headerName: 'Date du debut',

@@ -72,13 +72,7 @@ import AffectationPdf from './pages/affectation/affectationPdf/AffectationPdf';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
+  const [loading, setLoading] = useState(false);
 
   const Layout = () => {
     return (
@@ -127,6 +121,10 @@ function App() {
         {
           path: '/personpdfTable',
           element: <PersonTablePdf />
+        },
+        {
+          path: '/formulaire',
+          element: <Formulaire />
         },
         {
           path: '/contrats',
