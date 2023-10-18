@@ -7,7 +7,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useState } from 'react';
-import {listeData} from './../../data'
+/* import {listeData} from './../../data' */
 
 const ListeConge = () => {
 
@@ -15,7 +15,7 @@ const ListeConge = () => {
     const dataFilter = data.filter(item=> item.id !== id)
     setData(dataFilter)
   }
-  const [data, setData] = useState(listeData);
+  const [data, setData] = useState();
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
