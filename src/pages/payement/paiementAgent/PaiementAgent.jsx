@@ -46,6 +46,25 @@ const PaiementAgent = () => {
   const [invoiceIds, setInvoiceIds] = useState('');
   const [paymentMethod, setPaymentMethod] = useState([]);
   const [employeeId, setEmployeeId] = useState([]);
+  const [selectedMonth, setSelectedMonth] = useState(1);
+  const months = [
+    { value: 1, label: 'Janvier' },
+    { value: 2, label: 'Février' },
+    { value: 3, label: 'Mars' },
+    { value: 4, label: 'Avril' },
+    { value: 5, label: 'Mai' },
+    { value: 6, label: 'Juin' },
+    { value: 7, label: 'Juillet' },
+    { value: 8, label: 'Août' },
+    { value: 9, label: 'Septembre' },
+    { value: 10, label: 'Octobre' },
+    { value: 11, label: 'Novembre' },
+    { value: 12, label: 'Décembre' },
+  ];
+
+  const handleMonthChange = (event) => {
+    setSelectedMonth(parseInt(event.target.value, 10));
+  };
 
  const handleSearch = (selectedKeys, confirm, dataIndex) => {
    confirm();
@@ -296,8 +315,42 @@ const PaiementAgent = () => {
   }, []);
 
   useEffect(() => {
+    const factureCount = async () => {
+      try {
+
+        const requests = selectedIds.map(async (id) => {
+          const { data } = await axios.get(`${DOMAIN}/api/admin/payementTotalSelect/${id}/${selectedMonth}`);
+          return data;
+
+        });
+        Promise.all(requests)
+          .then((results) => {
+            console.log("bonjour", results)
+            setTotalCount(results);
+          })
+          .catch((error) => {
+            console.error('Une erreur s\'est produite:', error);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    factureCount();
+  }, [selectedMonth]);
+
+  useEffect(() => {
     const fetchDatas = async () => {
       try {
+        if (selectedIds.length > 1) {
+          setSelectedIds([])
+          Swal.fire({
+            icon: 'warning',
+            title: 'Sélectionnez un employé',
+            text: 'Veuillez sélectionner un seul employé à la fois.'
+          });
+          return;
+        }
+
         if (selectedIds.length > 0) {
           const requests = selectedIds.map(id =>
             axios.get(`${DOMAIN}/api/admin/payementTotal/${id}`)
@@ -406,6 +459,15 @@ const PaiementAgent = () => {
             <Table columns={columns} dataSource={agentsAffectes} className="presenceTable" scroll={scroll} pagination={{ pageSize: 5}}/>
           )}
           <div className="personnel-aff-bottom">
+            <div className="paiement-row-select">
+              <label htmlFor="">Selectionnez le mois</label>
+              <select id="month" value={selectedMonth} onChange={handleMonthChange}>
+                  <option disabled >selectionnez un mois </option>
+                  {months.map((month) => (
+                  <option key={month.value} value={month.value}>{month.label}</option>
+                ))}
+              </select>
+            </div>
           {totalCount.length > 0 ? <div className="personnel-row">
             {totalCount.map((innerArray, index) => (
                 <React.Fragment key={index}>
