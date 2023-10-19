@@ -156,6 +156,8 @@ const handleChange = (e) => {
     fetchData()
 }, [id]);
 
+console.log(data)
+
 const handleClick = async (e) => {
     e.preventDefault();
 
@@ -332,61 +334,82 @@ const handleClick = async (e) => {
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Numero du pièce <span>*</span></label>
-                                <input type="number" value={identification_number}  name='identification_number' required className="input-form" onChange={handleChange} placeholder='Entrez votre numero du pièce..' />
+                                <input type="text" value={identification_number}  name='identification_number' required className="input-form" onChange={handleChange} placeholder='Entrez votre numero du pièce..' />
                             </div>
                         </div>
 
                         <div className="form-rows">
                             <div className="form-row">
-                                <label htmlFor="" className="label-form">Type du pièce <span>*</span></label>
-                                <Select
-                                    name="identification_type"
-                                    value={identification_type}
-                                    onChange={(selectedOption) => handleSelectChange(selectedOption, "identification_type")}
-                                    options={type.map((item) => ({
-                                        value: item.nom_type,
-                                        label: item.nom_type
-                                    }))}
-                                />
+                              <label htmlFor="" className="label-form">
+                                Type du pièce <span>*</span>
+                              </label>
+                              <select
+                                className="input-form"
+                                name="identification_type"
+                                value={identification_type}
+                                onChange={handleChange}
+                              >
+                                {type.map((item) => (
+                                  <option key={item.nom_type} value={item.nom_type}>
+                                    {item.nom_type}
+                                  </option>
+                                ))}
+                              </select>
                             </div>
                             <div className="form-row">
-                                <label htmlFor="" className="label-form">Competence <span>*</span></label>
-                                <Select
-                                    name="skills"
-                                    value={skills}
-                                    onChange={(selectedOption) => handleSelectChange(selectedOption, "skills")}
-                                    options={competenceOption.map((item) => ({
-                                        value: item.nom,
-                                        label: item.nom
-                                    }))}
-                                />
+                              <label htmlFor="" className="label-form">
+                                Domaine <span>*</span>
+                              </label>
+                              <select
+                                className="input-form"
+                                name="skills"
+                                value={skills}
+                                onChange={handleChange}
+                              >
+                                <option disabled value="">Selectionnez un domaine</option>
+                                {competenceOption.map((item) => (
+                                  <option key={item.nom} value={item.nom}>
+                                    {item.nom}
+                                  </option>
+                                ))}
+                              </select>
                             </div>
                             <div className="form-row">
-                                <label htmlFor="" className="label-form">Niveau d'étude <span>*</span></label>
-                                <Select
-                                    name="certifications"
-                                    value={certifications}
-                                    onChange={(selectedOption) => handleSelectChange(selectedOption, "certifications")}
-                                    options={niveau.map((item) => ({
-                                        value: item.titre,
-                                        label: item.titre
-                                    }))}
-                                />
+                              <label htmlFor="" className="label-form">
+                                Niveau d'étude <span>*</span>
+                              </label>
+                              <select
+                                className="input-form"
+                                name="certifications"
+                                value={certifications}
+                                onChange={handleChange}
+                              >
+                                {niveau.map((item) => (
+                                  <option key={item.titre} value={item.titre}>
+                                    {item.titre}
+                                  </option>
+                                ))}
+                              </select>
                             </div>
                         </div>
                         <div className="form-rows">
-                            <div className="form-row">
-                                <label htmlFor="pet-select" className="label-form">Status <span>*</span></label>
-                                <Select
-                                    name="employment_status"
-                                    value={employment_status}
-                                    onChange={(selectedOption) => handleSelectChange(selectedOption, "employment_status")}
-                                    options={statusE.map((item) => ({
-                                        value: item.nom_status,
-                                        label: item.nom_status
-                                    }))}
-                                />
-                            </div>
+                          <div className="form-row">
+                            <label htmlFor="pet-select" className="label-form">
+                              Status <span>*</span>
+                            </label>
+                            <select
+                              className="input-form"
+                              name="employment_status"
+                              value={employment_status}
+                              onChange={handleChange}
+                            >
+                              {statusE.map((item) => (
+                                <option key={item.nom_status} value={item.nom_status}>
+                                  {item.nom_status}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
                         </div>
                         <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>
                     </form>

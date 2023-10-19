@@ -95,7 +95,7 @@ const columns = [
         }},
         {
           field: 'last_name',
-          headerName: 'Postnom',
+          headerName: 'Prenom',
           width: 110,
         },        
         {
@@ -119,7 +119,7 @@ const columns = [
         { field: 'address', headerName: 'Adresse', width: 110 },
         {
           field: 'skills',
-          headerName: 'Competence',
+          headerName: 'Domaine',
           width: 110,
         },
         {field: 'action', HeaderName: 'Action', width: 130, renderCell: (params) =>{

@@ -321,7 +321,6 @@ const getColumnSearchProps = (dataIndex) => ({
       render: (text) => {
         let color = '';
         let icon = null;
-  
         if (text === 'Journalier') {
           color = 'green';
         } else if (text === 'Interim') {
@@ -329,7 +328,6 @@ const getColumnSearchProps = (dataIndex) => ({
         } else if (text === 'Resilié') {
           color = 'red';
         }
-  
         return (
           <Space>
             <Tag color={color}>{text}</Tag>
@@ -338,7 +336,7 @@ const getColumnSearchProps = (dataIndex) => ({
       },
     },
     {
-      title: 'Compétence',
+      title: 'Domaine',
       dataIndex: 'skills',
       key: 'skills',
       width: '10%',
@@ -409,34 +407,51 @@ const getColumnSearchProps = (dataIndex) => ({
 
   const columns2 = [
     {
-      title: 'N° du contrat',
+      title: 'Code',
       dataIndex: 'contrat_ID',
       key: 'contrat_ID',
-      width: '10%',
-    },
-    {
-      title: 'Client',
-      dataIndex: 'company2',
-      key: 'company2',
-      width: '10%',
-      ...getColumnSearchProps('company2'),
-    },
-    {
-      title: 'Type contrat',
-      dataIndex: 'contract_type',
-      key: 'contract_type',
-      width: '20%',
-      ...getColumnSearchProps('contract_type'),
+      width: '5%',
     },
     {
       title: 'Nom',
       dataIndex: 'first2',
       key: 'first2',
-      width: '10%',
+      width: '13%',
       ...getColumnSearchProps('first2'),
     },
     {
-      title: 'Competence',
+      title: 'Client',
+      dataIndex: 'company2',
+      key: 'company2',
+      width: '13%',
+      ...getColumnSearchProps('company2'),
+    },
+    {
+      title: 'Type du contrat',
+      dataIndex: 'contract_type',
+      key: 'contract_type',
+      width: '14%',
+      render: (text) => {
+        let color = '';
+        let icon = null;
+  
+        if (text === 'Journalier') {
+          color = 'green';
+        } else if (text === 'Interim') {
+          color = 'blue';
+        } else if (text === 'Resilié') {
+          color = 'red';
+        }
+  
+        return (
+          <Space>
+            <Tag color={color}>{text}</Tag>
+          </Space>
+        );
+      },
+    },
+    {
+      title: 'Domaine',
       dataIndex: 'skills2',
       key: 'skills2',
       width: '10%',
@@ -446,7 +461,7 @@ const getColumnSearchProps = (dataIndex) => ({
       title: 'Prix',
       dataIndex: 'prix2',
       key: 'prix2',
-      width: '10%',
+      width: '13%',
       ...getColumnSearchProps('prix2'),
       sorter: (a, b) => a.prix - b.prix,
       sortDirections: ['descend', 'ascend'],
@@ -459,16 +474,6 @@ const getColumnSearchProps = (dataIndex) => ({
       width: '20%',
       ...getColumnSearchProps('created_at'),
       sorter: (a, b) => moment(a.created_at) - moment(b.created_at),
-      sortDirections: ['descend', 'ascend'],
-      render: (text) => moment(text).locale('fr').format('DD/MM/YYYY')
-    },
-    {
-      title: 'Date fin',
-      dataIndex: 'date2',
-      key: 'date2',
-      width: '20%',
-      ...getColumnSearchProps('end_date'),
-      sorter: (a, b) => moment(a.date2) - moment(b.date2),
       sortDirections: ['descend', 'ascend'],
       render: (text) => moment(text).locale('fr').format('DD/MM/YYYY')
     },

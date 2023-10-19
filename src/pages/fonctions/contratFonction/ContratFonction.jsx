@@ -60,7 +60,7 @@ const ContratFonction = ({handleModalClose}) => {
     e.preventDefault();
     handleModalClose()
 
-    if (!data?.contrat_id || !data?.client_id || !data?.skills || !data?.avantages || !data?.prix || !data?.salaire ) {
+    if (!data?.contrat_id || !data?.skills || !data?.avantages || !data?.prix || !data?.salaire ) {
       Swal.fire({
         title: 'Error',
         text: 'Veuillez remplir tous les champs requis',
