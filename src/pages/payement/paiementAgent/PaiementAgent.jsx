@@ -317,7 +317,6 @@ const PaiementAgent = () => {
   useEffect(() => {
     const factureCount = async () => {
       try {
-
         const requests = selectedIds.map(async (id) => {
           const { data } = await axios.get(`${DOMAIN}/api/admin/payementTotalSelect/${id}/${selectedMonth}`);
           return data;
@@ -325,7 +324,10 @@ const PaiementAgent = () => {
         });
         Promise.all(requests)
           .then((results) => {
-            console.log("bonjour", results)
+            const paieValues = results.map((innerArray) => {
+              return innerArray.map((item) => item.paie);
+            });
+            setTotal(paieValues)
             setTotalCount(results);
           })
           .catch((error) => {
@@ -459,15 +461,15 @@ const PaiementAgent = () => {
             <Table columns={columns} dataSource={agentsAffectes} className="presenceTable" scroll={scroll} pagination={{ pageSize: 5}}/>
           )}
           <div className="personnel-aff-bottom">
-            <div className="paiement-row-select">
-              <label htmlFor="">Selectionnez le mois</label>
+            {selectedIds > 1 &&  <div className="paiement-row-select">
+              <label htmlFor="">Selectionnez le mois <span>*</span></label>
               <select id="month" value={selectedMonth} onChange={handleMonthChange}>
                   <option disabled >selectionnez un mois </option>
                   {months.map((month) => (
                   <option key={month.value} value={month.value}>{month.label}</option>
                 ))}
               </select>
-            </div>
+            </div> }
           {totalCount.length > 0 ? <div className="personnel-row">
             {totalCount.map((innerArray, index) => (
                 <React.Fragment key={index}>
@@ -519,11 +521,11 @@ const PaiementAgent = () => {
           : <div className="personnel-row2">
               <div className="personnel-money">
                 <AccountBalanceWalletOutlinedIcon className='personnel-icons'/>
-                <span className="personnel-title-icon">Money</span>
-              </div>
-              <div className="personnel-money">
-                <BadgeOutlinedIcon  className='personnel-icons'/>
                 <span className="personnel-title-icon">Agent</span>
+              </div>
+              <div className="personnel-money" onClick={() => navigate(`/personnel`)}>
+                <BadgeOutlinedIcon  className='personnel-icons'/>
+                <span className="personnel-title-icon">Agents</span>
               </div>
               <div className="personnel-money">
                 <InsertChartOutlinedIcon className='personnel-icons'/>

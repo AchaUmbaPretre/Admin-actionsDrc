@@ -111,6 +111,31 @@
             background: #fff;
             display: flex;
             flex-direction: column;
+            .paiement-row-select{
+                display: flex;
+                align-items: center;
+                background: #fafafa;
+                gap: 10px;
+                margin-bottom: 20px;
+                padding: 20px;
+                border-radius: 5px;
+                label{
+                    color: #555;
+                    font-size: .9rem;
+                    span{
+                        color: red;
+                    }
+                }
+                select{
+                    border: 1px solid #e2e0e0;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    outline: none;
+                    &:focus{
+                        border: 1px solid rgba(36, 86, 236, 0.63)
+                    }
+                }
+            }
             .personnel-row{
                 display: flex;
                 flex-direction: column;
