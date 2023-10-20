@@ -59,7 +59,7 @@ const AffView = () => {
                         </div>
                         <div className="client-row">
                             <div className="client-sous">
-                                <span className="client-nom"><PsychologyOutlinedIcon/>  Compétence :</span>
+                                <span className="client-nom"><PsychologyOutlinedIcon/> Domaine :</span>
                                 <span className="client-nom">{data?.skills}</span>
                             </div>
                             <div className="client-sous">

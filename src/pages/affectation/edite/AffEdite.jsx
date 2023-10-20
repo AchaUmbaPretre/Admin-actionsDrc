@@ -4,7 +4,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
-import Select from 'react-select';
+import './affEdite.scss';
 
 const AffEdite = ({handleModalClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -87,37 +87,30 @@ const AffEdite = ({handleModalClose}) => {
 
   return (
     <>
-      <div className="clientForm">
+      <div className="affEdite">
         <h2 className="client-h2">Modifier l'affectation</h2>
         <div className="clientForm-wrapper">
           <form action="" className="form-center">
             <div className="form-rows">
-                <div className="form-row">
-                    <label htmlFor="" className="label-form">Contrat<span>*</span></label>
-                    <Select
-                        value={contrat_id}
-                        options={selectData.map((select) => ({
-                            value: select.id,
-                            label: select.company_name + ' / '+ select.contract_type +" / N° du contrat : "+select.id
-                        }))}
-                        onChange={(selectedOption) =>
-                            handleChange(selectedOption.value, "contrat_id")
-                        }
-                    />
-                </div>
+              <div class="form-row">
+                <label for="" class="label-form">Contrat<span>*</span></label>
+                <select value={contrat_id} name='contrat_id' onchange={(e)=>handleChange(e.target.name, e.target.value)} className='input-form'>
+                    <option disabled>Sélectionnez un contrat</option>
+                  {selectData.map(select => (
+                    <option value="{select.id}">{select.company_name} / {select.contract_type} / N° du contrat : {select.id}</option>
+                  ))}
+                </select>
+              </div>
             </div>
             <div className="form-rows">
-              <div className="form-row">
-                <label htmlFor="" className="label-form">Agent<span>*</span></label>
-                <Select
-                    value={skills}
-                  name="skills"
-                  onChange={(selectedOption) => handleChange(selectedOption.value, "skills")}
-                  options={competenceOption.map((item) => ({
-                    value: item.id,
-                    label: item.first_name
-                    }))}
-                />
+              <div class="form-row">
+                <label for="" class="label-form">Agent<span>*</span></label>
+                <select value="{skills}" name="skills" onchange={(e)=>handleChange(e.target.name, e.target.value)} className='input-form'>
+                  <option disabled>Sélectionnez un agent</option>
+                  {competenceOption.map(item => (
+                    <option value="{item.id}">{item.first_name}</option>
+                  ))}
+                </select>
               </div>
             </div>
             <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>

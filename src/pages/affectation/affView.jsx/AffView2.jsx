@@ -52,7 +52,7 @@ const AffView2 = () => {
     <>
         <div className="clientView">
             <div className="clientView-wrapper">
-                <h2 className="client-title">INFORMATION D'AFFECTATION 2</h2>
+                <h2 className="client-title">INFORMATION D'AFFECTATION PERSONNALISEE</h2>
                 <div className="client-rows">
                     <div className="client-row1">
                         <div className="client-row">
@@ -77,7 +77,7 @@ const AffView2 = () => {
                         </div>
                         <div className="client-row">
                             <div className="client-sous">
-                                <span className="client-nom"><PsychologyOutlinedIcon/>  Compétence :</span>
+                                <span className="client-nom"><PsychologyOutlinedIcon/> Domaine :</span>
                                 <span className="client-nom">{data?.skills}</span>
                             </div>
                             <div className="client-sous">

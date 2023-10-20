@@ -28,6 +28,8 @@ const handleChange = (name, value) => {
   }
 };
 
+console.log(data)
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -102,35 +104,35 @@ useEffect(() => {
                 <form action="" className="formulaire-edit">
                     <div className="edit-rows">
                         <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Type du contrat <span>*</span></label>
-                            <Select
-                              value={contract_type}
-                              name='contract_type'
-                              options={typeContrat?.map((item) => ({
-                                value: item.nom,
-                                label: item.nom,
-                              }))}
-                              onChange={(selectedOption) =>
-                                handleChange('contract_type', selectedOption.value)
-                              }
-                              placeholder="Sélectionnez le type du contrat"
-                            />
+                          <label htmlFor="contract_type" className="label-edit">Type du contrat <span>*</span></label>
+                          <select
+                            value={contract_type}
+                            name="contract_type"
+                            onChange={(e) => handleChange(e.target.name, e.target.value)}
+                            placeholder="Sélectionnez le type du contrat"
+                            className="input-form"
+                          >
+                            <option value="">Sélectionnez le type du contrat</option>
+                            {typeContrat?.map((item) => (
+                              <option key={item.nom} value={item.nom}>{item.nom}</option>
+                            ))}
+                          </select>
                         </div>
                         <div className="edit-row">
-                            <label htmlFor="" className="label-edit">Client(e) <span>*</span></label>
-                            <Select
-                              id="pet-select"
-                              value={client_id}
-                              name="client_id"
-                              options={clientEtat?.map(item => ({
-                                value: item.id,
-                                label: item.company_name
-                              }))}
-                              onChange={(selectedOption) =>
-                                handleChange('client_id', selectedOption.value)
-                              }
-                              placeholder="Sélectionnez un client"
-                            />
+                          <label htmlFor="client_id" className="label-edit">Client(e) <span>*</span></label>
+                          <select
+                            id="client_id"
+                            value={client_id}
+                            name="client_id"
+                            onChange={(e) => handleChange(e.target.name, e.target.value)}
+                            placeholder="Sélectionnez un client"
+                            className="input-form"
+                          >
+                            <option value="">Sélectionnez un client</option>
+                            {clientEtat?.map((item) => (
+                              <option key={item.id} value={item.id}>{item.company_name}</option>
+                            ))}
+                          </select>
                         </div>
                     </div>
 
@@ -149,7 +151,7 @@ useEffect(() => {
                         </div>
                     </div>
   
-                    <button className="edit-btn" onClick={handleClick}>Edit</button>
+                    <button className="edit-btn" onClick={handleClick}>Envoyer</button>
                 </form>
             </div>
         </div>

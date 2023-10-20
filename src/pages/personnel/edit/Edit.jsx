@@ -33,6 +33,7 @@ const [zoom, setZoom] = useState(1);
 const handleFileChange = (event) => {
   setPhoto(event.target.files[0]);
 };
+
 const handleSourceChange = (event) => {
     setSources(event.target.value);
   };
@@ -56,11 +57,6 @@ const handleChange = (e) => {
     setData((prev) => ({ ...prev, [fieldName]: selectedOption.value }));
   };
   
-/*   const capture = () => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    console.log(imageSrc);
-  }; */
-
   const upload = async () => {
     try {
       if (source === 'webcam') {
@@ -82,15 +78,6 @@ const handleChange = (e) => {
       console.log(error);
     }
   };
-
-  const handlePhotoSubmit = () => {
-    if (source === 'import') {
-      const formData = new FormData();
-      formData.append('photo', photo);
-    } else if (source === 'webcam') {
-      const photoSrc = webcamRef.current.getScreenshot();
-    }
-  }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
         useEffect(() => {
@@ -156,8 +143,6 @@ const handleChange = (e) => {
     fetchData()
 }, [id]);
 
-console.log(data)
-
 const handleClick = async (e) => {
     e.preventDefault();
 
@@ -195,9 +180,7 @@ const handleClick = async (e) => {
           icon: 'success',
           confirmButtonText: 'OK'
         });
-
-        navigate("/personnel")
-       
+        navigate('/personnel');
       } catch (error) {
         await Swal.fire({
           title: 'Error',
@@ -209,6 +192,19 @@ const handleClick = async (e) => {
         console.log(error);
       }
   }
+
+  useEffect(() => {
+    if (photo) {
+      updateCropper();
+    }
+  }, [photo]);
+
+  const updateCropper = () => {
+    // Réinitialiser le recadrage et le zoom
+    setCrop({ aspectRatio: 1 });
+    setZoom(1);
+  };
+
 
 
   return (
@@ -222,11 +218,7 @@ const handleClick = async (e) => {
                             <input type="radio" name="source" value="import" checked={source === 'import'} onChange={handleSourceChange} className='radio-img' />
                             <span className="form-title-img">Importer une photo</span>
                         </div>
-                        <div className="form-img-row">
-                            <input type="radio" name="source" value="webcam" checked={source === 'webcam'} onChange={handleSourceChange} className='radio-img' />
-                            <span className="form-title-img">Prendre une photo avec la webcam</span>
-                        </div>
-                        {source === 'import' && <div>
+                        <div>
                           <input type="file" name="photo" onChange={handleFileChange} />
                           {photo && (
                             <div className="crop-container">
@@ -242,20 +234,7 @@ const handleClick = async (e) => {
                               />
                             </div>
                           )}
-                        </div>  }
-                        {source === 'webcam' &&  <div>
-                          <Webcam audio={false} ref={webcamRef} className="pop-img" />
-                          <div className="crop-container">
-                            <Cropper
-                              image={webcamRef.current?.getScreenshot()}
-                              crop={crop}
-                              zoom={zoom}
-                              aspect={1}
-                              onCropChange={setCrop}
-                              onZoomChange={setZoom}
-                            />
-                          </div>
-                        </div>}
+                        </div>
                     </div>
                 </div>
                 <div className="formulaire-right">
