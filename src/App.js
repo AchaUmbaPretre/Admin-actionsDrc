@@ -69,6 +69,7 @@ import PaiementContrat from './pages/payement/paiementContrat/PaiementContrat';
 import PresentEdit from './pages/presence/presenceEdit/PresentEdit';
 import PresenceListView from './pages/presence/presenceListView/PresenceListView';
 import AffectationPdf from './pages/affectation/affectationPdf/AffectationPdf';
+import AffEdite2 from './pages/affectation/edite/AffEdite2';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -177,6 +178,10 @@ function App() {
         {
           path: '/affectationEdit/:id',
           element: <AffEdite />
+        },
+        {
+          path: '/affectationEdit2/:id',
+          element: <AffEdite2 />
         },
         {
           path: '/affectationPdf',

@@ -57,7 +57,6 @@ const Formulaire = ({handleModalClose}) => {
       const handlePhotoSubmit = async () => {
 
          handleModalClose()
-         handleCropComplete()
         if (!data.first_name || !data.last_name || !data.date_of_birth || !data.gender || !data.address || !data.etat_civil || !data.identification_type || !data.skills || !data.certifications || !data.employment_status) {
           Swal.fire({
             title: 'Error',
@@ -118,45 +117,6 @@ const Formulaire = ({handleModalClose}) => {
         } catch (error) {
           console.log(error);
         }
-      };
-
-
-      const handleCropChange = (newCrop) => {
-        setCrop(newCrop);
-      };
-    
-      const handleCropComplete = (cropResult) => {
-        if (photo) {
-          getCroppedImage(cropResult);
-        }
-      };
-    
-      const getCroppedImage = (cropResult) => {
-        const canvas = document.createElement('canvas');
-        const image = new Image();
-        image.src = photo;
-        image.onload = () => {
-          const scaleX = image.naturalWidth / image.width;
-          const scaleY = image.naturalHeight / image.height;
-          canvas.width = cropResult.width;
-          canvas.height = cropResult.height;
-          const ctx = canvas.getContext('2d');
-    
-          ctx.drawImage(
-            image,
-            cropResult.x * scaleX,
-            cropResult.y * scaleY,
-            cropResult.width * scaleX,
-            cropResult.height * scaleY,
-            0,
-            0,
-            cropResult.width,
-            cropResult.height
-          );
-    
-          const croppedImage = canvas.toDataURL('image/jpeg');
-          // Utilisez la variable croppedImage comme base64 ou envoyez-la au backend pour enregistrer l'image recadrée
-        };
       };
 
       // eslint-disable-next-line react-hooks/exhaustive-deps

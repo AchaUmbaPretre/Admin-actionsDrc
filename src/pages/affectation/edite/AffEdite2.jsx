@@ -7,7 +7,7 @@ import config from '../../../config';
 import Select from 'react-select';
 import './affEdite.scss'
 
-const AffEdite = ({handleModalClose}) => {
+const AffEdite2 = ({handleModalClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [data, setData] = useState({});
   const [selectData, setSelectData] = useState([]);
@@ -131,4 +131,4 @@ const AffEdite = ({handleModalClose}) => {
   );
 };
 
-export default AffEdite;
+export default AffEdite2;

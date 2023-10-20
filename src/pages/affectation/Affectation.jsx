@@ -24,6 +24,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Tag } from 'antd';
 import moment from 'moment';
+import Affectation2 from './Affectation2';
 
 const Affectation = () => {
 
@@ -151,118 +152,6 @@ const getColumnSearchProps = (dataIndex) => ({
     ),
 });
 
-/*   const columns = [
-    { field: 'client_nom', headerName: "Client", width: 120 },
-    { field: 'first_name', headerName: "Nom", width: 120 },
-    {
-      field: 'last_name',
-      headerName: "Post-nom",
-      width: 120
-    },
-    {
-      field: 'skills',
-      headerName: 'Competence',
-      width: 120 
-    },
-    {
-      field: 'salaire',
-      headerName: 'Salaire',
-      width: 110,renderCell: (params) => `${params.value} $`
-    },
-    {
-      field: 'prix',
-      headerName: 'Prix',
-      width: 110,renderCell: (params) => `${params.value} $`
-    },
-    {
-      field: 'end_date',
-      headerName: 'Date de la fin',
-      width: 120,
-      valueGetter: (params) =>
-      format(new Date(params.row.end_date), 'dd-MM-yyyy', { locale: fr }),
-    },
-    {field: 'action', HeaderName: 'Action', width: 140, renderCell: (params) =>{
-        return(
-          <>
-            <div className="table-icons-row">
-                <div className="userOvert0">
-                  <Link onClick={handleEdit}>
-                    <EditOutlined className="userListBtn" />
-                    <span className='userOvert'>Modifier</span>
-                  </Link>
-                </div>
-                <div className="userOvert1">
-                  <VisibilityOutlined className='userEye' onClick={() => navigate(`/affectations/${params.row.id}`)} />
-                  <span className='userOvert'>détail</span>
-                </div>
-                <div className="userOvert2">
-                  <DeleteOutline className="userListDelete" onClick={() => { handleDelete(params.row.id) }} />
-                  <span className='userOvert'>Supprimer</span>
-                </div>
-            </div>
-          </>
-
-        )
-    }},
-  ]; */
-
-/*   const columns2 = [
-    { field: 'company2', headerName: "Client", width: 130 },
-    { field: 'first2', headerName: "Nom", width: 130},
-    {
-      field: 'last2',
-      headerName: "Post-nom",
-      width: 130
-    },
-    {
-      field: 'skills2',
-      headerName: 'Competence',
-      width: 120
-    },
-    {
-      field: 'salaire2',
-      headerName: 'Salaire',
-      width: 100,renderCell: (params) => `${params.value} $`
-    },
-    {
-      field: 'prix2',
-      headerName: 'Prix',
-      width: 100,renderCell: (params) => `${params.value} $`
-    },
-    {
-      field: 'date2',
-      headerName: 'Date de la fin',
-      width: 100,
-      valueGetter: (params) =>
-      format(new Date(params.row.date2), 'dd-MM-yyyy', { locale: fr }),
-    },
-    {field: 'action', HeaderName: 'Action', width: 140, renderCell: (params) =>{
-        return(
-          <>
-            <div className="table-icons-row">
-                <div className="userOvert0">
-                  <Link onClick={handleEdit}>
-                    <EditOutlined className="userListBtn" />
-                    <span className='userOvert'>Modifier</span>
-                  </Link>
-                </div>
-                <div className="userOvert1">
-                    <VisibilityOutlined className='userEye' onClick={() => navigate(`/affectationView/${params.row.id}`)} />
-                    <span className='userOvert'>détail</span>
-                </div>
-                <div className="userOvert2">
-                  <DeleteOutline className="userListDelete" onClick={() => { handleDelete(params.row.id) }} />
-                  <span className='userOvert'>Supprimer</span>
-                </div>
-                
-            </div>
-          </>
-
-        )
-    }},
-  ];
- */
-
   useEffect(() => {
 
     const fetchDatas = async () => {
@@ -278,19 +167,6 @@ const getColumnSearchProps = (dataIndex) => ({
     fetchDatas()
   }, [])
   
-  useEffect(() => {
-
-    const fetchDatas = async () => {
-      try {
-        const res = await axios.get(`${DOMAIN}/api/admin/contratEmploie`);
-        setTap1(res?.data)
-        setLoading(false);
-      } catch (error) {
-        console.log(error)
-      };
-    }
-    fetchDatas()
-  }, [])
 
   const columns = [
     {
@@ -405,121 +281,6 @@ const getColumnSearchProps = (dataIndex) => ({
 
   ];
 
-  const columns2 = [
-    {
-      title: 'Code',
-      dataIndex: 'contrat_ID',
-      key: 'contrat_ID',
-      width: '5%',
-    },
-    {
-      title: 'Nom',
-      dataIndex: 'first2',
-      key: 'first2',
-      width: '13%',
-      ...getColumnSearchProps('first2'),
-    },
-    {
-      title: 'Client',
-      dataIndex: 'company2',
-      key: 'company2',
-      width: '13%',
-      ...getColumnSearchProps('company2'),
-    },
-    {
-      title: 'Type du contrat',
-      dataIndex: 'contract_type',
-      key: 'contract_type',
-      width: '14%',
-      render: (text) => {
-        let color = '';
-        let icon = null;
-  
-        if (text === 'Journalier') {
-          color = 'green';
-        } else if (text === 'Interim') {
-          color = 'blue';
-        } else if (text === 'Resilié') {
-          color = 'red';
-        }
-  
-        return (
-          <Space>
-            <Tag color={color}>{text}</Tag>
-          </Space>
-        );
-      },
-    },
-    {
-      title: 'Domaine',
-      dataIndex: 'skills2',
-      key: 'skills2',
-      width: '10%',
-      ...getColumnSearchProps('skills2'),
-    },
-    {
-      title: 'Prix',
-      dataIndex: 'prix2',
-      key: 'prix2',
-      width: '13%',
-      ...getColumnSearchProps('prix2'),
-      sorter: (a, b) => a.prix - b.prix,
-      sortDirections: ['descend', 'ascend'],
-      render: (text) => `${text} $`,
-    },
-    {
-      title: "Date d'affectation",
-      dataIndex: 'created_at',
-      key: 'created_at',
-      width: '20%',
-      ...getColumnSearchProps('created_at'),
-      sorter: (a, b) => moment(a.created_at) - moment(b.created_at),
-      sortDirections: ['descend', 'ascend'],
-      render: (text) => moment(text).locale('fr').format('DD-MM-YYYY')
-    },
-    {
-      title: 'Action',
-      dataIndex: 'action',
-      render: (text, record) => {
-        const handleEdit = () => {
-          Swal.fire({
-            title: 'Confirmation',
-            text: 'Voulez-vous vraiment modifier ?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Oui',
-            cancelButtonText: 'Non',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              navigate(`/affectationEdit/${record.id}`);
-            }
-          });
-        };
-    
-        return (
-          <>
-            <div className="table-icons-row">
-              <EditOutlined className="userListBtn" onClick={handleEdit} />
-              <VisibilityOutlined
-                className="userEye"
-                onClick={() => navigate(`/affectationView/${record.id}`)}
-              />
-              <DeleteOutline
-                className="userListDelete"
-                onClick={() => {
-                  handleDelete(record.id);
-                }}
-              />
-            </div>
-          </>
-        );
-      },
-    },
-
-  ];
-
   const handleDelete = async (id) => {
   try {
     const result = await Swal.fire({
@@ -601,7 +362,7 @@ const exportToExcel = () => {
                 <Table columns={columns} dataSource={data} scroll={scroll} pagination={{ pageSize: 5}}/>
               </TabPanel>
               <TabPanel value="2" sx={{background:'white' }}>
-                <Table columns={columns2} dataSource={tap1} scroll={scroll} pagination={{ pageSize: 5}}/>
+                <Affectation2/>
               </TabPanel>
             </TabContext>
           </Box>

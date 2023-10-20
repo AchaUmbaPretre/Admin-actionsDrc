@@ -28,8 +28,6 @@ const handleChange = (name, value) => {
   }
 };
 
-console.log(data)
-
   useEffect(() => {
     const fetchData = async () => {
       try {
