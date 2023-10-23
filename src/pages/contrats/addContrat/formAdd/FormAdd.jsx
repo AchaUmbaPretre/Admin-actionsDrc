@@ -90,7 +90,7 @@ const handleClick = async (e) => {
     });
 
     window.location.reload();
-    navigate('/fonction');
+    navigate('/affectation');
   } catch (err) {
     Swal.fire({
       title: 'Error',
@@ -113,7 +113,7 @@ const handleClick = async (e) => {
           <form action="" className="form-center">
             <div className="form-rows">
               <div className="form-row">
-                <label htmlFor="" className="label-form">Competence<span>*</span></label>
+                <label htmlFor="" className="label-form">Domaine<span>*</span></label>
                 <Select
                   name="skills"
                   onChange={(selectedOption) => handleChange(selectedOption.value, "skills")}

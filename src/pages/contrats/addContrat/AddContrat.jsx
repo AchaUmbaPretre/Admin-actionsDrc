@@ -438,7 +438,7 @@ const columns = [
         </div>
         <div className="add-rows">
           <div className="add-row1">
-            <Table columns={columns} dataSource={data}  pagination={{ pageSize: 6}}/>
+            <Table columns={columns} dataSource={data}  pagination={{ pageSize: 5}}/>
           </div>
           <Modal
                     aria-labelledby="transition-modal-title"

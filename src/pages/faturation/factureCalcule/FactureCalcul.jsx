@@ -247,12 +247,10 @@ const FactureCalcul = () => {
   }, []);
 
   useEffect(()=>{
-    
     const fetchData = async ()=> {
       try{
           const res = await axios.get(`${DOMAIN}/api/admin/statusFacture`);
           setOptionsStatus(res.data)
-  
         }catch(error){
           console.log(error)
         };
@@ -264,9 +262,7 @@ const FactureCalcul = () => {
     const fetchAgentsAffectes = async () => {
       try {
         const contratId = searchParams.get('contrat_id');
-  
         const response = await axios.get(`${DOMAIN}/api/admin/factureCalculTotal/${contratId}`);
-  
         setTotal(response.data);
       } catch (error) {
         console.log(error);
@@ -279,7 +275,6 @@ const FactureCalcul = () => {
     const factureCount = async () => {
       try {
         const contratId = searchParams.get('contrat_id');
-  
         const {data} = await axios.get(`${DOMAIN}/api/admin/factureContratCount/${contratId}`);
         setFactureContratCount(data[0]);
       } catch (error) {
@@ -291,14 +286,12 @@ const FactureCalcul = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.post(`${DOMAIN}/api/admin/factures`, {
         status : data.status,
         client_id: clientId,
         total_amount: montantTotal,
       });
-
       const invoiceId = response.data.invoice_id;
       navigate('/facturation')
       Swal.fire({

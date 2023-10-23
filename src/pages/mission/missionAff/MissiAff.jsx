@@ -1,7 +1,4 @@
-import { DataGrid } from '@mui/x-data-grid'
 import { useNavigate } from 'react-router-dom';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { useEffect, useState } from 'react';
 import './../../horaire/horaireAll.scss'
@@ -17,7 +14,6 @@ import ToggleOnIcon from '@mui/icons-material/ToggleOn';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table } from 'antd';
-import moment from 'moment'
 import * as React from 'react';
 
 
@@ -452,15 +448,12 @@ const MissiAff = () => {
     const fetchAgentsAffectes = async () => {
       try {
         const contratId = searchParams.get('contrat_id');
-  
         const response = await axios.get(`${DOMAIN}/api/admin/contrats/${contratId}/agents`);
-  
         setAgentsAffectes(response.data);
       } catch (error) {
         console.log(error);
       }
     };
-  
     fetchAgentsAffectes();
   }, []);
 

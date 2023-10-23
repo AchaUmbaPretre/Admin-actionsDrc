@@ -4,7 +4,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config';
-import Select from 'react-select';
+
 
 const ContratFonctionEdit = ({handleModalClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -96,6 +96,8 @@ const handleClick = async (e) => {
   }
 };
 
+console.log(data)
+
   return (
     <>
       <div className="ediitForm">
@@ -105,30 +107,23 @@ const handleClick = async (e) => {
             <div className="form-rows">
                 <div className="form-row">
                     <label htmlFor="" className="label-form">Contrat<span>*</span></label>
-                    <Select
-                      value={contrat_id}
-                        options={selectData.map((select) => ({
-                            value: select.id,
-                            label: select.company_name
-                        }))}
-                        onChange={(selectedOption) =>
-                            handleChange(selectedOption.value, "contrat_id")
-                        }
-                    />
+                    <select name="contrat_id" value={contrat_id} onChange={(e) => handleChange(e.target.value, "contrat_id")} className="input-form">
+                      <option value="" disabled>Selectionnez un domaine</option>
+                      {selectData.map((item)=> (
+                      <option value={item.id}>{item.company_name}</option>
+                      ))}
+                    </select>
                 </div>
             </div>
             <div className="form-rows">
               <div className="form-row">
-                <label htmlFor="" className="label-form">Competence<span>*</span></label>
-                <Select
-                  name="skills"
-                  value={skills}
-                  onChange={(selectedOption) => handleChange(selectedOption.value, "skills")}
-                  options={competenceOption.map((item) => ({
-                    value: item.id,
-                    label: item.nom
-                    }))}
-                />
+                <label htmlFor="" className="label-form">Domaine<span>*</span></label>
+                <select name="skills" value={skills} onChange={(e) => handleChange(e.target.value, "skills")} className="input-form">
+                  <option value="" disabled>Selectionnez un domaine</option>
+                  {competenceOption.map((item)=> (
+                  <option value={item.id}>{item.nom}</option>
+                  ))}
+                </select>
               </div>
               <div className="form-row">
                 <label htmlFor="" className="label-form">Avantages<span>*</span></label>

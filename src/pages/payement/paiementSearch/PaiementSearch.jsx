@@ -51,8 +51,16 @@ const PaiementSearch = ({handleModalClose}) => {
   const handleClick = async (e) => {
     e.preventDefault();
     handleModalClose()
+    if (!data.client_id) {
+      Swal.fire({
+        title: 'Erreur',
+        text: 'Veuillez sélectionner un client',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
     try {
-
       const params = new URLSearchParams();
       Object.entries(data).forEach(([key, value]) => {
         params.append(key, value);

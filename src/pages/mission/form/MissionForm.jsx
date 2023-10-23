@@ -54,6 +54,15 @@ const MissionForm = ({handleModalClose}) => {
   const handleClick = async (e) => {
     e.preventDefault();
     handleModalClose()
+    if (!data.client_id) {
+      Swal.fire({
+        title: 'Erreur',
+        text: 'Veuillez sélectionner un client',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
     try {
 
       const params = new URLSearchParams();

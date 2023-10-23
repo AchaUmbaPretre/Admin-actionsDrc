@@ -28,8 +28,6 @@ const AffEdite = ({handleModalClose}) => {
     setData((prev) => ({ ...prev, [name]: formattedValue }));
   };
 
-  console.log(data)
-
   useEffect(()=>{
     const fetchData = async ()=> {
         try{
@@ -45,16 +43,15 @@ const AffEdite = ({handleModalClose}) => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(()=>{
-
-            const fetchData = async ()=> {
-                try{
-                    const {data} = await axios.get(`${DOMAIN}/api/admin/contrat`);
-                    setSelectData(data)
-                    setLoading(false);
-                  }catch(error){
-                    console.log(error)
-                  };
-            }
+    const fetchData = async ()=> {
+        try{
+            const {data} = await axios.get(`${DOMAIN}/api/admin/contrat`);
+            setSelectData(data)
+            setLoading(false);
+        }catch(error){
+            console.log(error)
+          };
+    }
             fetchData()
     }, [])
 

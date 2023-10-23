@@ -246,13 +246,14 @@ const PresenceList = () => {
       try {
         const contratId = searchParams.get('contrat_id');
   
-        const response = await axios.get(`${DOMAIN}/api/admin/factureCalcul/${contratId}`);
+        const response = await axios.get(`${DOMAIN}/api/admin/contrats/${contratId}/agents`);
   
         setAgentsAffectes(response.data);
       } catch (error) {
         console.log(error);
       }
     };
+  
     fetchAgentsAffectes();
   }, []);
 
