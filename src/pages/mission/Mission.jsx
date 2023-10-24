@@ -43,6 +43,17 @@ const Mission = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const joursSemaineOrdre = [
+      "Lundi",
+      "Mardi",
+      "Mercredi",
+      "Jeudi",
+      "Vendredi",
+      "Samedi",
+      "Dimanche"
+    ];
+    
+
     const navigate = useNavigate();
 
      useEffect(()=>{
@@ -97,8 +108,7 @@ const Mission = () => {
         }
     };
 
-    const MyTable = ({ data }) => {
-      
+    const MyTable = ({ data }) => { 
         const groupedData = data.reduce((acc, row) => {
           const { agent_id, ...rest } = row;
           if (!acc[agent_id]) {
@@ -138,7 +148,7 @@ const Mission = () => {
       
     const CollapsibleRow = ({ group }) => {
         const [open, setOpen] = React.useState(false);
-      
+
         return (
           <>
             <TableRow>
@@ -168,39 +178,42 @@ const Mission = () => {
               </TableCell>
             </TableRow>
             {open && (
-              <TableRow>
-                <TableCell colSpan={7}>
-                  <TableContainer>
-                    <Table>
-                      <TableHead>
-                        <TableRow style={{ background: "#253053"}}>
-                          <TableCell style={{color: "white"}}>Jour du travail</TableCell>
-                          <TableCell style={{color: "white"}}>Heure de début</TableCell>
-                          <TableCell style={{color: "white"}}>Heure fin</TableCell>
-                          <TableCell style={{color: "white"}}>Action</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {group.rows.map((row) => (
-                          <TableRow key={row.id}>
-                            <TableCell>{row.days}</TableCell>
-                            <TableCell style={{ background: row.heureEntrant.substring(0, 5) === "Fermé" ? "#eeeeee" : "transparent", color: row.heureEntrant.substring(0, 5) === "Fermé" ? "black" : "black" }}>
-                              {row.heureEntrant.substring(0, 5)}
-                            </TableCell>
-                            <TableCell style={{ background: row.heureSortant.substring(0, 5) === "Fermé" ? "#eeeeee" : "transparent", color: row.heureSortant.substring(0, 5) === "Fermé" ? "black" : "black" }}>
-                              {row.heureSortant.substring(0, 5)}
-                            </TableCell>
-                            <TableCell>
-                              <DriveFileRenameOutlineOutlinedIcon className='mission-icon' onClick={() => { handleEdit(row.mission_id) }} />
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </TableCell>
-              </TableRow>
-            )}
+  <TableRow>
+    <TableCell colSpan={7}>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow style={{ background: "#253053"}}>
+              <TableCell style={{color: "white"}}>Jour du travail</TableCell>
+              <TableCell style={{color: "white"}}>Heure de début</TableCell>
+              <TableCell style={{color: "white"}}>Heure fin</TableCell>
+              <TableCell style={{color: "white"}}>Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {group.rows
+              // Trier les données en utilisant l'ordre personnalisé des jours de la semaine
+              .sort((a, b) => joursSemaineOrdre.indexOf(a.days) - joursSemaineOrdre.indexOf(b.days))
+              .map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.days}</TableCell>
+                  <TableCell style={{ background: row.heureEntrant.substring(0, 5) === "Fermé" ? "#eeeeee" : "transparent", color: row.heureEntrant.substring(0, 5) === "Fermé" ? "black" : "black" }}>
+                    {row.heureEntrant.substring(0, 5)}
+                  </TableCell>
+                  <TableCell style={{ background: row.heureSortant.substring(0, 5) === "Fermé" ? "#eeeeee" : "transparent", color: row.heureSortant.substring(0, 5) === "Fermé" ? "black" : "black" }}>
+                    {row.heureSortant.substring(0, 5)}
+                  </TableCell>
+                  <TableCell>
+                    <DriveFileRenameOutlineOutlinedIcon className='mission-icon' onClick={() => { handleEdit(row.mission_id) }} />
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </TableCell>
+  </TableRow>
+)}
           </>
         );
       };

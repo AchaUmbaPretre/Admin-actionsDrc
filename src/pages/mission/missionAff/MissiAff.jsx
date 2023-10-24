@@ -35,13 +35,13 @@ const MissiAff = () => {
   const [heureFin, setHeureFin] = useState('');
   const [missionWeek, setMissionWeek] = useState([])
   const [horaireTables, setHoraireTables] = useState([
-    { id: 2, start_time: '00:00', end_time: '00:00' },
-    { id: 3, start_time: '00:00', end_time: '00:00' },
-    { id: 4, start_time: '00:00', end_time: '00:00' },
-    { id: 5, start_time: '00:00', end_time: '00:00' },
-    { id: 6, start_time: '00:00', end_time: '00:00' },
-    { id: 7, start_time: '00:00', end_time: '00:00' },
-    { id: 8, start_time: '00:00', end_time: '00:00' },
+    { id: 2, days: 'Lundi', start_time: '00:00', end_time: '00:00' },
+    { id: 3, days: 'Mardi', start_time: '00:00', end_time: '00:00' },
+    { id: 4, days: 'Mercredi', start_time: '00:00', end_time: '00:00' },
+    { id: 5, days: 'Jeudi', start_time: '00:00', end_time: '00:00' },
+    { id: 6, days: 'Vendredi', start_time: '00:00', end_time: '00:00' },
+    { id: 7, days: 'Samedi', start_time: '00:00', end_time: '00:00' },
+    { id: 8, days: 'Dimanche', start_time: '00:00', end_time: '00:00' },
   ])
   const [title, setTitle] = useState({});
   const clientId = searchParams.get('client_id');
@@ -167,6 +167,8 @@ const MissiAff = () => {
       )
     );
   };
+
+  console.log(horaireTables)
   
   
   const handleCheckboxChange = (id) => {
@@ -177,12 +179,9 @@ const MissiAff = () => {
     }
   };
 
-
-
   const handleCheckboxChange1 = (id) => {
     if (selectedIds1.includes(id)) {
       setSelectedIds1(selectedIds1.filter((selectedId1) => selectedId1 !== id));
-      
     } else {
       setSelectedIds1([...selectedIds1, id]);
     }
@@ -192,38 +191,6 @@ const MissiAff = () => {
   const handleChange = (e) => {
     setDatas((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-
-
-/*   const columns = [
-    { field: 'first_name', headerName: "Employé(e)", width: 125 },
-    { field: 'last_name', headerName: 'Prenom', width: 125 },
-    {
-      field: 'checkbox',
-      headerName: 'Sélectionner',
-      width: 80,
-      renderCell: (params) => {
-        const isChecked = selectedIds.includes(params.row.id);
-    
-        return (
-          <>
-            {isChecked ? (
-              <ToggleOnIcon
-                color="primary"
-                style={{ fontSize: '40px', cursor: 'pointer' }}
-                onClick={() => handleCheckboxChange(params.row.id)}
-              />
-            ) : (
-              <ToggleOffIcon
-                color="disabled"
-                style={{ fontSize: '40px', cursor: 'pointer' }}
-                onClick={() => handleCheckboxChange(params.row.id)}
-              />
-            )}
-          </>
-        );
-      },
-    },
-  ]; */
 
   const columns = [
     {
@@ -274,71 +241,10 @@ const MissiAff = () => {
 
   ];
 
- 
-/*   const horaireTable = [
-    { field: 'days', headerName: 'Jour de la semaine', width: 100 },
-    {
-      field: 'start_time',
-      headerName: 'Heure début',
-      width: 150,
-      renderCell: (params) => {
-        return (
-          <input
-            type="time"
-            className='input-time'
-            value={params.row.start_time}
-            onChange={(e) => handleTimeChange(params.row.id, 'start_time', e.target.value)}
-          />
-        );
-      },
-    },
-    {
-      field: 'end_time',
-      headerName: 'Heure fin',
-      width: 150,
-      renderCell: (params) => {
-        return (
-          <input
-            type="time"
-            className='input-time'
-            value={params.row.end_time}
-            onChange={(e) => handleTimeChange(params.row.id, 'end_time', e.target.value)}
-          />
-        );
-      },
-    },
-    {
-      field: 'checkbox',
-      headerName: 'Sélectionner',
-      width: 100,
-      renderCell: (params) => {
-        const isChecked = selectedIds1.includes(params.row.id);
-        return (
-          <>
-            {isChecked ? (
-              <ToggleOnIcon
-                color="primary"
-                style={{ fontSize: '40px', cursor: 'pointer' }}
-                onClick={() => handleCheckboxChange1(params.row.id)}
-              />
-            ) : (
-              <ToggleOffIcon
-                color="disabled"
-                style={{ fontSize: '40px', cursor: 'pointer' }}
-                onClick={() => handleCheckboxChange1(params.row.id)}
-              />
-            )}
-          </>
-        );
-      },
-    },
-  ]; */
-
   const horaireTable = [
     {
       title: 'Jour',
       dataIndex: 'days',
-      key: 'id',
       width: '25%',
     },
     {
@@ -416,7 +322,6 @@ const MissiAff = () => {
   }, [clientId])
 
   useEffect(()=>{
-    
     const fetchData = async ()=> {
       try{
           const res = await axios.get(`${DOMAIN}/api/admin/missionWeek`);
@@ -464,30 +369,26 @@ const MissiAff = () => {
   
     try {
       const requestDataArray = [];
-  
       for (let i = 0; i < sortedHoraireTables.length; i++){
         const table = sortedHoraireTables[i];
+        selectedIds.map((item)=>{
         const requestData = {
-          agent_id: selectedIds,
+          agent_id: item,
           client_id: clientId,
           jour: table.id,
           site: datas.site,
           heureEntrant: table.start_time,
           heureSortant: table.end_time,
         };
-  
         requestDataArray.push(requestData);
-      }
-  
+      })}
       await Promise.all(requestDataArray.map(requestData => axios.post(`${DOMAIN}/api/admin/missions`, requestData)));
-  
       Swal.fire({
         title: 'Success',
         text: 'Missions créées avec succès!',
         icon: 'success',
         confirmButtonText: 'OK'
       });
-
       navigate('/mission');
     } catch (err) {
       Swal.fire({
@@ -537,7 +438,7 @@ const MissiAff = () => {
                   <div className="personnel-date">
                     <h2 className='personnel-bottom-title'>Jour de la semaine<span>*</span></h2>
                     <div className="person-scroll-tab">
-                      <Table columns={horaireTable} dataSource={missionWeek} className="presenceTable" scroll={scrollY} pagination={{ pageSize: 7}}/>
+                      <Table columns={horaireTable} dataSource={horaireTables} className="presenceTable" scroll={scrollY} pagination={{ pageSize: 7}}/>
                     </div>
                   </div>
                   <button className="person-btn" onClick={handleClick} >Envoyer</button>
