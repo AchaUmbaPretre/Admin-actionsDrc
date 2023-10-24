@@ -46,13 +46,17 @@ const FactureCalcul = () => {
   const [status, setStatus] = useState([]);
   const [optionsStatus, setOptionsStatus] = useState([]);
   const montantTotals = total[0]?.montant_total;
-  const [montantTotal, setMontantTotal] = useState('')
+  const [montantTotal, setMontantTotal] = useState(0);
   const contratId = searchParams.get('contrat_id');
   const [factureContratCount, setFactureContratCount] = useState ([]);
 
-  useEffect(() => {
-    setMontantTotal(montantTotals);
+useEffect(() => {
+  setMontantTotal(montantTotals);
   }, [montantTotals]);
+
+  const handleOnchange = (e) => {
+      setMontantTotal(e.target.value);
+  }
 
  const handleSearch = (selectedKeys, confirm, dataIndex) => {
    confirm();
@@ -223,7 +227,6 @@ const FactureCalcul = () => {
             const clientId = searchParams.get('client_id');
             const {data} = await axios.get(`${DOMAIN}/api/admin/missionContratTitle/${clientId}`);
             setTitle(data[0])
-            
           }catch(error){
             console.log(error)
           };
@@ -235,9 +238,7 @@ const FactureCalcul = () => {
     const fetchAgentsAffectes = async () => {
       try {
         const contratId = searchParams.get('contrat_id');
-  
         const response = await axios.get(`${DOMAIN}/api/admin/factureCalcul/${contratId}`);
-  
         setAgentsAffectes(response.data);
       } catch (error) {
         console.log(error);
@@ -342,7 +343,7 @@ const FactureCalcul = () => {
                 <span className="ligne"></span>
                 <h2 className="personnel-total-title"><span>Nombre d'agents : </span><span className='facture-color'>{factureContratCount.total} Agent(s)</span></h2>
                 <span className="ligne"></span>
-                <h2 className="personnel-total-title"><span>Prix total : </span><span><input type="text" name='total_amount	' value={montantTotal} onChange={(e)=>setMontantTotal(e.target.value)} className="form-input-montant"/>$</span></h2>
+                <h2 className="personnel-total-title"><span>Prix total : </span><span><input type="text" name='total_amount' value={montantTotal} onChange={handleOnchange} className="form-input-montant"/>$</span></h2>
             </div>
             <div className="personnel-row-input">
                 <div className="form-row">

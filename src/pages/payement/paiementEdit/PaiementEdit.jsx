@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import Select from 'react-select';
+import './paiementEdit.scss';
 import config from '../../../config'
 import moment from 'moment';
 
@@ -69,7 +69,7 @@ const PaiementEdit = ({handleModalClose}) => {
 
   return (
     <>
-        <div className="clientForm">
+        <div className="paiementEdit">
             <div className="clientForm-wrapper">
               <form action="" className="form-center">
                 <h2>Modifier le paiement</h2>

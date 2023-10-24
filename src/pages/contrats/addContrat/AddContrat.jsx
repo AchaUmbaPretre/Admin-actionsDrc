@@ -1,4 +1,3 @@
-import { DataGrid } from '@mui/x-data-grid'
 import { useParams } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import Backdrop from '@mui/material/Backdrop';

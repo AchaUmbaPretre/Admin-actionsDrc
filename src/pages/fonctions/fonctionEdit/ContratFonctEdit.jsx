@@ -8,9 +8,6 @@ import config from '../../../config';
 
 const ContratFonctionEdit = ({handleModalClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-  const [clientEtat, setClientEtat] = useState([]);
-  const [checkInTime, setCheckInTime] = useState('');
-  const [checkOutTime, setCheckOutTime] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
   const id = location.pathname.split("/")[2];
@@ -95,8 +92,6 @@ const handleClick = async (e) => {
     console.log(err);
   }
 };
-
-console.log(data)
 
   return (
     <>

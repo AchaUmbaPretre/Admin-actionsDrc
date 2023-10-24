@@ -54,29 +54,24 @@ const Payement = () => {
   
      const columns = [
         { field: 'id', headerName: 'N°', width: 50},
-        { field: 'first_name', headerName: 'Employe(é)', width: 175,
-          renderCell: (params) =>{
-            return <div>
-                      {params.row.first_name}  {params.row.last_name}
-                  </div>
-          }
-       },
+        { field: 'first_name', headerName: 'Nom', width: 120},
+        { field: 'last_name', headerName: 'Prenom', width: 120},
         {
           field: 'payment_date',
           headerName: 'Date de paiement',
-          width: 180,
+          width: 170,
           valueGetter: (params) =>
           moment(params.row.payment_date).format('DD-MM-yyyy'),
         },
         {
             field: 'amount',
             headerName: 'Montant',
-            width: 180,renderCell: (params) => `${params.value} $`
+            width: 165,renderCell: (params) => `${params.value} $`
         },
         {
           field: 'methode_paiement',
           headerName: "Methode de payement",
-          width: 180,       renderCell: (params) => {
+          width: 165,       renderCell: (params) => {
             const status = params.value || 'Non spécifié';
             let cellClassName = '';
         
@@ -88,7 +83,7 @@ const Payement = () => {
             return <div className={cellClassName}>{status}</div>;
           },
       },
-      {field: 'action', HeaderName: 'Action', width: 200, renderCell: (params) =>{
+      {field: 'action', HeaderName: 'Action', width: 175, renderCell: (params) =>{
           return(
               <>
                 <div className="table-icons-row">
@@ -185,7 +180,6 @@ const Payement = () => {
                 </div>
                 <div className="personPdf">
                   <Link className="personnel-btn" onClick={handleOpen}><PersonSearchIcon/>Selectionnez un client</Link>
-{/*                   <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</Link> */}
                   <Link className="personnel-btn-pdf" onClick={() => navigate('/payementPdf')}><PictureAsPdfIcon/>Pdf</Link>
                   <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
                 </div>

@@ -15,6 +15,7 @@ import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import config from '../../config'
+import { FileOutlined, UserOutlined, BankOutlined, SolutionOutlined } from '@ant-design/icons';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
@@ -102,15 +103,25 @@ const Facturation = () => {
       headerName: 'Statut de la facture',
       width: 160,
       renderCell: (params) => {
-        const status = params.value || 'Non spécifié';
-        let cellClassName = '';
-    
-        if (status === 'Payée') {
-          cellClassName = 'cell-paid';
-        } else {
-          cellClassName = 'cell-not-paid';
+        let color, icon, backgroundColor;
+        switch (params.value) {
+          case 'Payée':
+            backgroundColor = 'blue'; // Vert
+            break;
+          case 'En attente':
+            backgroundColor = '#4caf50'; // Orange
+            
+            break;
+          default:
+            return null;
         }
-        return <div className={cellClassName}>{status}</div>;
+    
+        return (
+          <span style={{ backgroundColor: backgroundColor, color: 'white', border: `1px solid ${backgroundColor}`, padding: '3px 10px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '12px' }}>
+            {icon}
+            {params.value}
+          </span>
+        );
       },
     },
     {field: 'action', HeaderName: 'Action', width: 160, renderCell: (params) =>{
