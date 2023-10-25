@@ -8,6 +8,7 @@
     -webkit-box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
         box-shadow: 0px 0px 15px -10px rgba(0,0,0,0.75);
     overflow: hidden;
+    border: 1px solid rgba(6, 102, 247, 0.144);
     height: 100%;
 /*     .title-h2{
         font-size: .9rem;
@@ -38,9 +39,10 @@
         margin-bottom: 20px;
     }
     hr{
-        height: 1px;
         border: none;
-        background: #5555553f;
+        height: 1px;
+        width: 100%;
+        background: #e7e7e7;
     }
     .feated-container{
         border-radius: 10px;

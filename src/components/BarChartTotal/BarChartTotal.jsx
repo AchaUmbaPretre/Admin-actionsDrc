@@ -52,6 +52,7 @@ const BarChartTotal = ({ employeeData }) => {
       <UserOutlined className="icon-title" />
       Total des employé(e)s
       </h2>
+      <hr />
       <Bar data={data} options={{
     scales: {
       y: {

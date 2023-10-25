@@ -69,6 +69,7 @@ const FeatedList = () => {
           <UserOutlined className="icon-title" />
           Employé(e)s
         </h2>
+        <hr />
         <div className="feated-container">
           {loading ? (
             <div className="spinner-container">

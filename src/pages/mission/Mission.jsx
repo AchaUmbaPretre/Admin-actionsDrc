@@ -319,7 +319,11 @@ const Mission = () => {
                   ]}
                 />
                 <div className="bread-search">
-                  <input type="search" name="" id="" className='input-search' value={searchValue}
+                  <span className="breader-search">Recherche :</span>
+                  <input type="search"
+                    name="" 
+                    className='input-search'
+                    value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' />
                 </div>
               </div>

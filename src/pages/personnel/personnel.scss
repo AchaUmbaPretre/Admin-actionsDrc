@@ -203,12 +203,20 @@
       }
       .bread{
         background: #fff;
-        padding: 10px;
+        padding: 10px 20px;
         margin-bottom: 10px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         .bread-search{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            .breader-search{
+                font-size: 1rem;
+                color: #555;
+                color : royalblue
+            }
             .input-search{
                 border: 1px solid #e0e0e0;
                 padding: 8px 10px;
