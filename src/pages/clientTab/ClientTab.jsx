@@ -20,7 +20,7 @@ import config from '../../config'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
-import BarReturn from '../mission/barReturn/BarReturn';
+import BarReturn from '../../components/barReturn/BarReturn';
 
 const style = {
   position: 'absolute',

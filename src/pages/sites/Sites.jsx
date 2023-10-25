@@ -14,7 +14,7 @@ import config from './../../config'
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import SitesForm from './form/SitesForm';
-import BarReturn from '../mission/barReturn/BarReturn';
+import BarReturn from '../../components/barReturn/BarReturn';
 
 const style = {
     position: 'absolute',

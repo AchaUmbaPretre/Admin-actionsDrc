@@ -21,7 +21,7 @@ import * as XLSX from 'xlsx';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import FactureSearch from './factureSearch/FactureSearch';
 import moment from 'moment';
-import BarReturn from '../mission/barReturn/BarReturn';
+import BarReturn from '../../components/barReturn/BarReturn';
 
 const style = {
   position: 'absolute',

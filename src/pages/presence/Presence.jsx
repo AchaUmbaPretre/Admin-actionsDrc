@@ -23,7 +23,7 @@ import * as XLSX from 'xlsx';
 import Swal from 'sweetalert2';
 import PresenceSearch from './presenceSearch/PresenceSearch';
 import moment from 'moment';
-import BarReturn from '../mission/barReturn/BarReturn';
+import BarReturn from '../../components/barReturn/BarReturn';
 
 const style = {
   position: 'absolute',

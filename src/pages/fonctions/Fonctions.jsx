@@ -14,7 +14,7 @@ import config from './../../config'
 import axios from 'axios';
 import ContratFonction from './contratFonction/ContratFonction';
 import Swal from 'sweetalert2';
-import BarReturn from '../mission/barReturn/BarReturn';
+import BarReturn from '../../components/barReturn/BarReturn';
 
 const style = {
     position: 'absolute',
