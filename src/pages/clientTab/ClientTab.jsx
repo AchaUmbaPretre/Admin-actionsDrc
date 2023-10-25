@@ -20,6 +20,7 @@ import config from '../../config'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
+import BarReturn from '../mission/barReturn/BarReturn';
 
 const style = {
   position: 'absolute',
@@ -217,8 +218,8 @@ const ClientTab = () => {
               </Box>
             </Fade>
             </Modal>
-
           </div>
+          <BarReturn/>
           {loading ? (
           <div className="spinner-container">
               <FadeLoader color={'#36D7B7'} loading={loading} />

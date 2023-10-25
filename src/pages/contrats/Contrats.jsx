@@ -48,7 +48,6 @@ const Contrats = () => {
     const handleSelectionChange = (newSelection) => {
       setSelected(newSelection.selectionModel);
     };
-    
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -274,7 +273,7 @@ const Contrats = () => {
 
   return (
     <>
-              <div className="contrats">
+          <div className="contrats">
             <div className="contrats-wrapper">
                 <div className="contrats-top">
                     <FlakyIcon className='contrats-icon'/>
