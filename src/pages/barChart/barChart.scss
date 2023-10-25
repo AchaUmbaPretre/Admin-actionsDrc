@@ -1,0 +1,10 @@
+.barChart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    .barChart-h2{
+        font-size: 1.6rem;
+        font-weight: 300;
+    }
+}

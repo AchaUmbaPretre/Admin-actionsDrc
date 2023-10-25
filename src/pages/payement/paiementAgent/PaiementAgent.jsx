@@ -19,6 +19,7 @@ import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalance
 import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
 import InsertChartOutlinedIcon from '@mui/icons-material/InsertChartOutlined';
 import Select from 'react-select';
+import BarChart from '../../barChart/BarChart';
 
 
 const PaiementAgent = () => {
@@ -320,7 +321,6 @@ const PaiementAgent = () => {
         const requests = selectedIds.map(async (id) => {
           const { data } = await axios.get(`${DOMAIN}/api/admin/payementTotalSelect/${id}/${selectedMonth}`);
           return data;
-
         });
         Promise.all(requests)
           .then((results) => {
@@ -519,18 +519,7 @@ const PaiementAgent = () => {
                 ))}
             </div>
           : <div className="personnel-row2">
-              <div className="personnel-money">
-                <AccountBalanceWalletOutlinedIcon className='personnel-icons'/>
-                <span className="personnel-title-icon">Agent</span>
-              </div>
-              <div className="personnel-money" onClick={() => navigate(`/personnel`)}>
-                <BadgeOutlinedIcon  className='personnel-icons'/>
-                <span className="personnel-title-icon">Agents</span>
-              </div>
-              <div className="personnel-money">
-                <InsertChartOutlinedIcon className='personnel-icons'/>
-                <span className="personnel-title-icon">Chart</span>
-              </div>
+            <BarChart datas = {agentsAffectes}/>
           </div> }
           </div>
         </div>

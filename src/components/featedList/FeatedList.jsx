@@ -1,99 +1,102 @@
-import './featedList.scss'
-import { DataGrid } from '@mui/x-data-grid';
-import { useEffect, useState } from 'react'
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import { List, Modal, Spin } from 'antd';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import { EyeOutlined, LoadingOutlined, UserOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import axios from 'axios';
-import { FadeLoader } from 'react-spinners';
 import { format } from 'date-fns';
-import config from '../../config'
+import config from '../../config';
+import userImg from './../../assets/user.png';
+import "./featedList.scss"
 
 const FeatedList = () => {
-    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [showSpinner, setShowSpinner] = useState(true);
-    const spinnerDuration = 2000;
-    const navigate = useNavigate();
+  const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showSpinner, setShowSpinner] = useState(true);
+  const spinnerDuration = 2000;
+  const navigate = useNavigate();
 
-    const columns = [
-        { field: 'first_name', headerName: 'Nom', width: 110 },
-        { field: 'last_name', headerName: 'Prenom', width: 110 },
-        {
-          field: 'phone_number',
-          headerName: 'Telephone',
-          width: 100,
-        },
-        {
-            field: 'email',
-            headerName: 'Email',
-            width: 120,
-          },
-        {
-            field: 'date_of_birth',
-            headerName: 'Date de naissance',
-            width: 110,
-            valueGetter: (params) =>
-            format(new Date(params.row.date_of_birth), 'dd-MM-yyyy'),
-        },
-        { field: 'gender', headerName: 'Genre', width: 50 },
-        { field: 'phone_number', headerName: 'Telephone', width: 120 },
-        {
-          field: 'skills',
-          headerName: 'Competence',
-          width: 120,
-        },
-        {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
-            return(
-              <>
-                <div className="table-icons-row">
-                    <VisibilityIcon className='userEye' onClick={() => navigate(`/views/${params.row.id}`)} />
-                </div>
-              </>
-    
-            )
-        }},
-      ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${DOMAIN}/api/admin`);
+        setData(res.data);
+        setLoading(false);
+        setTimeout(() => {
+          setShowSpinner(false);
+        }, spinnerDuration);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
 
-    useEffect(()=>{
+  const handleEdit = (id) => {
+    Modal.confirm({
+      title: 'Confirmation',
+      content: 'Voulez-vous vraiment modifier ?',
+      okText: 'Oui',
+      cancelText: 'Non',
+      onOk: () => {
+        navigate(`/edit/${id}`);
+      },
+    });
+  };
 
-        const fetchData = async ()=> {
-            try{
-                const res = await axios.get(`${DOMAIN}/api/admin`);
-                setData(res.data)
-                setLoading(false);
-                setTimeout(() => {
-                  setShowSpinner(false);
-                }, spinnerDuration);
-        
-              }catch(error){
-                console.log(error)
-              };
-        }
-        fetchData()
-     }, [])
+  const handleDelete = (id) => {
+    Modal.confirm({
+      title: 'Confirmation',
+      content: 'Voulez-vous vraiment supprimer ?',
+      okText: 'Oui',
+      cancelText: 'Non',
+      onOk: () => {
+        // Logique de suppression à implémenter ici en utilisant l'ID
+      },
+    });
+  };
+
   return (
     <>
-        <div className="featedList">
-            <h2 className="title-h2" onClick={() => navigate(`/personnel`)}><PersonOutlineIcon className='icon-title'/>Employé(e)</h2>
-            <div className="feated-container">
-                {loading ? (
-                <div className="spinner-container">
-                    <FadeLoader color={'#36D7B7'} loading={loading} />
-                </div>
-                ) : (
-                    <DataGrid rows={data} columns={columns} initialState={{
-                      pagination: {
-                        paginationModel: { page: 0, pageSize: 5 },
-                        },
-                      }} checkboxSelection className="userTable" 
-                    />
-                )}
+      <div className="featedList">
+        <h2 className="titles-h2" onClick={() => navigate('/personnel')}>
+          <UserOutlined className="icon-title" />
+          Employé(e)
+        </h2>
+        <div className="feated-container">
+          {loading ? (
+            <div className="spinner-container">
+              <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />} />
             </div>
+          ) : (
+            <List
+              dataSource={data}
+              renderItem={(item) => (
+                <List.Item>
+                  <List.Item.Meta
+                    avatar={
+                      <img
+                        src={item.source ? `../upload/${item.source}` : userImg}
+                        alt="User Image"
+                        style={{ borderRadius: '50%', height: 40, width: 40, objectFit:'cover' }}
+                      />
+                    }
+                    title={item.first_name}
+                    description={item.skills}
+                  />
+                  <div className="table-icons-row">
+                    <EyeOutlined className="userEye" onClick={() => navigate(`/views/${item.id}`)} />
+                    <EditOutlined className="userListBtn" onClick={() => handleEdit(item.id)} />
+                    <DeleteOutlined className="userListDelete" onClick={() => handleDelete(item.id)} />
+                  </div>
+                </List.Item>
+              )}
+            />
+          )}
         </div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default FeatedList
+export default FeatedList;
