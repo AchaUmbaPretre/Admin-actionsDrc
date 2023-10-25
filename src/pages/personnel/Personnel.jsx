@@ -242,7 +242,6 @@ const exportToExcel = () => {
           </div>
         ) : (
           <DataGrid rows={data} columns={columns} pageSize={6} checkboxSelection className="userTable" />
-          
         )}
         </div>
     </>

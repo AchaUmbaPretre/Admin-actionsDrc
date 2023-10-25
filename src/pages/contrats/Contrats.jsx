@@ -23,6 +23,7 @@ import PendingIcon from '@mui/icons-material/Pending';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
+import BarReturn from '../mission/barReturn/BarReturn';
 
 const style = {
     position: 'absolute',
@@ -36,7 +37,6 @@ const style = {
     p: 3,
     borderRadius: 2,
   }
-
 
 const Contrats = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -310,13 +310,14 @@ const Contrats = () => {
                     </Fade>
                 </Modal>
             </div>
+            <BarReturn/>
           {loading ? (
           <div className="spinner-container">
             <FadeLoader color={'#36D7B7'} loading={loading} />
           </div>
             ) : (
             <div className="contrats-left">
-            <YourComponent data={data} /> 
+              <YourComponent data={data} /> 
             </div>
             )}
         </div>

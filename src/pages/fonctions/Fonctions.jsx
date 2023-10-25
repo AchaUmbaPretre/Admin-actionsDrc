@@ -14,6 +14,7 @@ import config from './../../config'
 import axios from 'axios';
 import ContratFonction from './contratFonction/ContratFonction';
 import Swal from 'sweetalert2';
+import BarReturn from '../mission/barReturn/BarReturn';
 
 const style = {
     position: 'absolute',
@@ -173,6 +174,7 @@ const Fonctions = () => {
             </Fade>
           </Modal>
         </div>
+        <BarReturn/>
         <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
       </div>
     </>

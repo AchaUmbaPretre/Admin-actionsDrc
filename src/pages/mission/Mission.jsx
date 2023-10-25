@@ -21,6 +21,8 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import IconButton from '@mui/material/IconButton';
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { Breadcrumb } from 'antd';
+import { HomeOutlined, UserOutlined } from '@ant-design/icons';
 
 const style = {
   position: 'absolute',
@@ -178,41 +180,41 @@ const Mission = () => {
               </TableCell>
             </TableRow>
             {open && (
-  <TableRow>
-    <TableCell colSpan={7}>
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow style={{ background: "#253053"}}>
-              <TableCell style={{color: "white"}}>Jour du travail</TableCell>
-              <TableCell style={{color: "white"}}>Heure de début</TableCell>
-              <TableCell style={{color: "white"}}>Heure fin</TableCell>
-              <TableCell style={{color: "white"}}>Action</TableCell>
+            <TableRow>
+              <TableCell colSpan={7}>
+                <TableContainer>
+                  <Table>
+                    <TableHead>
+                      <TableRow style={{ background: "#253053"}}>
+                        <TableCell style={{color: "white"}}>Jour du travail</TableCell>
+                        <TableCell style={{color: "white"}}>Heure de début</TableCell>
+                        <TableCell style={{color: "white"}}>Heure fin</TableCell>
+                        <TableCell style={{color: "white"}}>Action</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {group.rows
+                        // Trier les données en utilisant l'ordre personnalisé des jours de la semaine
+                        .sort((a, b) => joursSemaineOrdre.indexOf(a.days) - joursSemaineOrdre.indexOf(b.days))
+                        .map((row) => (
+                          <TableRow key={row.id}>
+                            <TableCell>{row.days}</TableCell>
+                            <TableCell style={{ background: row.heureEntrant.substring(0, 5) === "Fermé" ? "#eeeeee" : "transparent", color: row.heureEntrant.substring(0, 5) === "Fermé" ? "black" : "black" }}>
+                              {row.heureEntrant.substring(0, 5)}
+                            </TableCell>
+                            <TableCell style={{ background: row.heureSortant.substring(0, 5) === "Fermé" ? "#eeeeee" : "transparent", color: row.heureSortant.substring(0, 5) === "Fermé" ? "black" : "black" }}>
+                              {row.heureSortant.substring(0, 5)}
+                            </TableCell>
+                            <TableCell>
+                              <DriveFileRenameOutlineOutlinedIcon className='mission-icon' onClick={() => { handleEdit(row.mission_id) }} />
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {group.rows
-              // Trier les données en utilisant l'ordre personnalisé des jours de la semaine
-              .sort((a, b) => joursSemaineOrdre.indexOf(a.days) - joursSemaineOrdre.indexOf(b.days))
-              .map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.days}</TableCell>
-                  <TableCell style={{ background: row.heureEntrant.substring(0, 5) === "Fermé" ? "#eeeeee" : "transparent", color: row.heureEntrant.substring(0, 5) === "Fermé" ? "black" : "black" }}>
-                    {row.heureEntrant.substring(0, 5)}
-                  </TableCell>
-                  <TableCell style={{ background: row.heureSortant.substring(0, 5) === "Fermé" ? "#eeeeee" : "transparent", color: row.heureSortant.substring(0, 5) === "Fermé" ? "black" : "black" }}>
-                    {row.heureSortant.substring(0, 5)}
-                  </TableCell>
-                  <TableCell>
-                    <DriveFileRenameOutlineOutlinedIcon className='mission-icon' onClick={() => { handleEdit(row.mission_id) }} />
-                  </TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </TableCell>
-  </TableRow>
 )}
           </>
         );
@@ -288,6 +290,33 @@ const Mission = () => {
           </div>
           ) : (
             <div>
+              <div className="bread">
+                <Breadcrumb
+                  items={[
+                    {
+                      href: '/',
+                      title: (
+                        <>
+                          <HomeOutlined />
+                          <span>Accueil</span>
+                        </>
+                      ),
+                    },
+                    {
+                      href: '/personnel',
+                      title: (
+                        <>
+                          <UserOutlined />
+                          <span>Liste des employés</span>
+                        </>
+                      ),
+                    },
+                  ]}
+                />
+                <div className="bread-search">
+                  <input type="search" name="" id="" className='input-search' placeholder='Recherche...' />
+                </div>
+              </div>
               <MyTable data={data} />
             </div>
             )}

@@ -201,6 +201,25 @@
         align-items: center;
         height: 300px;
       }
+      .bread{
+        background: #fff;
+        padding: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .bread-search{
+            .input-search{
+                border: 1px solid #e0e0e0;
+                padding: 8px 10px;
+                border-radius: 5px;
+                outline: none;
+                &:focus{
+                    border: 1px solid rgb(115, 149, 248);
+                }
+            }
+        }
+      }
     .userTable{
         background: #fff;
         padding: 10px;
