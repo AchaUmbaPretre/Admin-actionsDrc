@@ -19,7 +19,6 @@ const FeatedInfo = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=>{
-
         const fetchData = async ()=> {
             try{
                 const res = await axios.get(`${DOMAIN}/api/admin/count`);
@@ -33,7 +32,6 @@ const FeatedInfo = () => {
 
      // eslint-disable-next-line react-hooks/exhaustive-deps
      useEffect(()=>{
-
         const fetchData = async ()=> {
             try{
                 const res = await axios.get(`${DOMAIN}/api/admin/affectationCount`);
@@ -47,7 +45,6 @@ const FeatedInfo = () => {
 
      // eslint-disable-next-line react-hooks/exhaustive-deps
      useEffect(()=>{
-
         const fetchData = async ()=> {
             try{
                 const res = await axios.get(`${DOMAIN}/api/admin/clientCount`);
@@ -61,7 +58,6 @@ const FeatedInfo = () => {
 
      // eslint-disable-next-line react-hooks/exhaustive-deps
      useEffect(()=>{
-
         const fetchData = async ()=> {
             try{
                 const res = await axios.get(`${DOMAIN}/api/admin/contratCount`);
