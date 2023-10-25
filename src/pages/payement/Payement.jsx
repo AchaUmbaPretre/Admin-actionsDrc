@@ -22,7 +22,7 @@ import * as XLSX from 'xlsx';
 import './payement.scss'
 import moment from 'moment';
 import PaiementSearch from './paiementSearch/PaiementSearch';
-import BarReturn from '../mission/barReturn/BarReturn';
+import BarReturn from '../../components/barReturn/BarReturn';
 
 const style = {
     position: 'absolute',
