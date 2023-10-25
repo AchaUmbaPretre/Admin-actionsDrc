@@ -23,6 +23,7 @@ import * as XLSX from 'xlsx';
 import Swal from 'sweetalert2';
 import PresenceSearch from './presenceSearch/PresenceSearch';
 import moment from 'moment';
+import BarReturn from '../mission/barReturn/BarReturn';
 
 const style = {
   position: 'absolute',
@@ -266,6 +267,7 @@ const handleDelete = async (id) => {
                     </Fade>
           </Modal>
         </div>
+        <BarReturn/>
         {loading ? (
         <div className="spinner-container">
             <FadeLoader color={'#36D7B7'} loading={loading} />
@@ -274,7 +276,6 @@ const handleDelete = async (id) => {
         <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
         )}
       </div>
-
     </>
   )
 }
