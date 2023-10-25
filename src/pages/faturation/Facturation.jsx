@@ -21,6 +21,7 @@ import * as XLSX from 'xlsx';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import FactureSearch from './factureSearch/FactureSearch';
 import moment from 'moment';
+import BarReturn from '../mission/barReturn/BarReturn';
 
 const style = {
   position: 'absolute',
@@ -230,6 +231,7 @@ const Facturation = () => {
                     </Fade>
             </Modal>
         </div>
+        <BarReturn/>
         {loading ? (
         <div className="spinner-container">
             <FadeLoader color={'#36D7B7'} loading={loading} />
