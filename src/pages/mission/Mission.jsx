@@ -44,6 +44,7 @@ const Mission = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [searchValue, setSearchValue] = useState('');
 
     const joursSemaineOrdre = [
       "Lundi",
@@ -72,6 +73,10 @@ const Mission = () => {
       fetchData()
     }, [])
 
+    const filteredData = data.filter((item) =>
+      item.first_name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    
     const handleEdit = (id) => {
     Swal.fire({
       title: 'Confirmation',
@@ -215,7 +220,7 @@ const Mission = () => {
                 </TableContainer>
               </TableCell>
             </TableRow>
-)}
+            )}
           </>
         );
       };
@@ -314,10 +319,11 @@ const Mission = () => {
                   ]}
                 />
                 <div className="bread-search">
-                  <input type="search" name="" id="" className='input-search' placeholder='Recherche...' />
+                  <input type="search" name="" id="" className='input-search' value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)} placeholder='Recherche...' />
                 </div>
               </div>
-              <MyTable data={data} />
+              <MyTable data={filteredData} />
             </div>
             )}
         </div>
