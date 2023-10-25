@@ -50,12 +50,12 @@ const BarChartTotal = ({ employeeData }) => {
     <div className="employeeChart">
       <h2 className='employeeH2'>
       <UserOutlined className="icon-title" />
-      Total des employés
+      Total des employé(e)s
       </h2>
       <Bar data={data} options={{
     scales: {
       y: {
-        type: 'linear', // Utilisez 'linear' pour une échelle linéaire
+        type: 'linear',
       },
     },
   }}/>

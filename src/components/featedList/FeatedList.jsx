@@ -67,7 +67,7 @@ const FeatedList = () => {
       <div className="featedList">
         <h2 className="titles-h2" onClick={() => navigate('/personnel')}>
           <UserOutlined className="icon-title" />
-          Employé(e)
+          Employé(e)s
         </h2>
         <div className="feated-container">
           {loading ? (
