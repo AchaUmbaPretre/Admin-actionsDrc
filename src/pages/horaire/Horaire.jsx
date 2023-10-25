@@ -6,28 +6,8 @@ import {
   Select,
   MenuItem,
   Button,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
 } from '@mui/material';
 import { Schedule as ScheduleIcon } from '@mui/icons-material';
-
-/* const useStyles = makeStyles(() => ({
-  container: {
-    height: 400,
-    width: '100%',
-  },
-  formControl: {
-    marginRight: '16px',
-    marginBottom: '16px',
-  },
-  addButton: {
-    marginTop: '16px',
-  },
-  scheduleIcon: {
-    marginRight: '8px',
-  },
-})); */
 
 const Horaire = () => {
   const classes = ('');

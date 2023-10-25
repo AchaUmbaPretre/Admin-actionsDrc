@@ -25,6 +25,7 @@ import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table, Tag } from 'antd';
 import moment from 'moment';
 import Affectation2 from './Affectation2';
+import {FileExcelOutlined} from '@ant-design/icons';
 
 const Affectation = () => {
 
@@ -342,7 +343,7 @@ const exportToExcel = () => {
           </div>
           <div className="personPdf">
             <Link className="personnel-btn-pdf" onClick={() => navigate('/affectationPdf')}><PictureAsPdfIcon/>Pdf</Link>
-            <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
+            <Link className="personnel-btn-excel" onClick={exportToExcel}><FileExcelOutlined />Export Excel</Link>
           </div>
         </div>
           {loading ? (

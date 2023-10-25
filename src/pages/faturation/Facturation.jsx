@@ -12,16 +12,14 @@ import axios from 'axios';
 import { FadeLoader } from 'react-spinners';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
-import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
-import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import config from '../../config'
-import { FileOutlined, UserOutlined, BankOutlined, SolutionOutlined } from '@ant-design/icons';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import FactureSearch from './factureSearch/FactureSearch';
 import moment from 'moment';
 import BarReturn from '../../components/barReturn/BarReturn';
+import {FileExcelOutlined} from '@ant-design/icons';
 
 const style = {
   position: 'absolute',
@@ -207,7 +205,7 @@ const Facturation = () => {
           <div className="personPdf">
             <Link className="personnel-btn" onClick={handleOpen}><PersonSearchIcon/>Selectionnez un client</Link>
             <Link className="personnel-btn-pdf" onClick={() => navigate('/facturationPdf')}><PictureAsPdfIcon/>Pdf</Link>
-            <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
+            <Link className="personnel-btn-excel" onClick={exportToExcel}><FileExcelOutlined />Export Excel</Link>
           </div>
             <Modal
                     aria-labelledby="transition-modal-title"

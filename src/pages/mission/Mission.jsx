@@ -22,7 +22,7 @@ import IconButton from '@mui/material/IconButton';
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { Breadcrumb } from 'antd';
-import { HomeOutlined, UserOutlined } from '@ant-design/icons';
+import { HomeOutlined, UserOutlined, FileExcelOutlined} from '@ant-design/icons';
 
 const style = {
   position: 'absolute',
@@ -265,7 +265,7 @@ const Mission = () => {
                 <div className="personPdf">
                   <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Rechercher le client</Link>
                   <Link className="personnel-btn-pdf" onClick={() => navigate('/missionsPdf')}><PictureAsPdfIcon/>Pdf</Link>
-                  <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
+                  <Link className="personnel-btn-excel" onClick={exportToExcel}><FileExcelOutlined />Export Excel</Link>
                 </div>
                 <Modal
                     aria-labelledby="transition-modal-title"

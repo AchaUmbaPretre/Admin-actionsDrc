@@ -24,6 +24,7 @@ import Swal from 'sweetalert2';
 import PresenceSearch from './presenceSearch/PresenceSearch';
 import moment from 'moment';
 import BarReturn from '../../components/barReturn/BarReturn';
+import {FileExcelOutlined} from '@ant-design/icons';
 
 const style = {
   position: 'absolute',
@@ -243,7 +244,7 @@ const handleDelete = async (id) => {
           <div className="personPdf">
             <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Nouveau</Link>
             <Link className="personnel-btn-pdf" onClick={() => navigate('/presencePdf')}><PictureAsPdfIcon/>Pdf</Link>
-            <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
+            <Link className="personnel-btn-excel" onClick={exportToExcel}><FileExcelOutlined />Export Excel</Link>
           </div>
           <Modal
                     aria-labelledby="transition-modal-title"

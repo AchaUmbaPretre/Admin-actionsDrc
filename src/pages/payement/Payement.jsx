@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { DataGrid } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
@@ -10,10 +9,10 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { DeleteOutline, EditOutlined, VisibilityOutlined } from '@mui/icons-material';
+import {FileExcelOutlined} from '@ant-design/icons';
 import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
-import PayeForm from './form/PayeForm';
 import config from '../../config'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
@@ -182,7 +181,7 @@ const Payement = () => {
                 <div className="personPdf">
                   <Link className="personnel-btn" onClick={handleOpen}><PersonSearchIcon/>Selectionnez un client</Link>
                   <Link className="personnel-btn-pdf" onClick={() => navigate('/payementPdf')}><PictureAsPdfIcon/>Pdf</Link>
-                  <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
+                  <Link className="personnel-btn-excel" onClick={exportToExcel}><FileExcelOutlined />Export Excel</Link>
                 </div>
                 <Modal
                     aria-labelledby="transition-modal-title"

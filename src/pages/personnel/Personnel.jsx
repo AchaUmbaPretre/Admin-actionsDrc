@@ -18,6 +18,7 @@ import config from '../../config'
 import { Box, Fade, Modal } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import Formulaire from './formulaire/Formulaire';
+import {FileExcelOutlined} from '@ant-design/icons';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 
@@ -211,7 +212,7 @@ const exportToExcel = () => {
                 <div className="personPdf">
                   <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Nouveau</Link>
                   <Link className="personnel-btn-pdf" onClick={() => navigate('/personpdfTable')}><PictureAsPdfIcon/>Pdf</Link>
-                  <Link className="personnel-btn-excel" onClick={exportToExcel}>Export Excel</Link>
+                  <Link className="personnel-btn-excel" onClick={exportToExcel}><FileExcelOutlined />Export Excel</Link>
                 </div>
                 
                 <Modal
