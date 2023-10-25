@@ -3,6 +3,7 @@ import './barChartTotal.scss'
 import axios from 'axios';
 import config from '../../config';
 import { Chart as ChartJS, BarElement, Tooltip, Legend, CategoryScale, LinearScale } from 'chart.js';
+import { UserOutlined } from '@ant-design/icons';
 import { Bar } from 'react-chartjs-2';
 ChartJS.register(BarElement, Tooltip, Legend, CategoryScale, LinearScale);
 
@@ -47,7 +48,10 @@ const BarChartTotal = ({ employeeData }) => {
 
   return (
     <div className="employeeChart">
-      <h2 className='employeeH2'>Total des employés</h2>
+      <h2 className='employeeH2'>
+      <UserOutlined className="icon-title" />
+      Total des employés
+      </h2>
       <Bar data={data} options={{
     scales: {
       y: {
