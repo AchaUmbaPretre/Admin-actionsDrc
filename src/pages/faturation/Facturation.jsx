@@ -21,6 +21,7 @@ import moment from 'moment';
 import BarReturn from '../../components/barReturn/BarReturn';
 import {FileExcelOutlined} from '@ant-design/icons';
 import { DollarOutlined, HourglassOutlined } from '@ant-design/icons';
+import { MinusOutlined } from '@ant-design/icons';
 
 const style = {
   position: 'absolute',
@@ -97,7 +98,35 @@ const Facturation = () => {
       field: 'total_amount',
       headerName: 'Montant total',
       width: 160,
-      renderCell: (params) => `${params.value} $`,
+      renderCell: (params) => {
+        const amount = params.value || 0;
+        let backgroundColor = 'gray'; // Couleur neutre pour les montants nuls
+        let icon = null;
+    
+        if (amount > 0) {
+          backgroundColor = 'green'; // Couleur verte pour les montants positifs
+          icon = <DollarOutlined style={{ marginRight: '5px' }} />;
+        } else if (amount < 0) {
+          backgroundColor = 'red'; // Couleur rouge pour les montants négatifs
+          icon = <MinusOutlined style={{ marginRight: '5px' }} />;
+        }
+    
+        return (
+          <div
+            style={{
+              backgroundColor: backgroundColor,
+              padding: '5px',
+              borderRadius: '5px',
+              display: 'flex',
+              alignItems: 'center',
+              color : '#fff'
+            }}
+          >
+            {icon}
+            {`${amount} $`}
+          </div>
+        );
+      },
     },
     {
       field: 'status',
