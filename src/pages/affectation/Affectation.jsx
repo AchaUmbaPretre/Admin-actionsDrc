@@ -1,12 +1,9 @@
 import './affectation.scss'
-import { DataGrid } from '@mui/x-data-grid'
 import { DeleteOutline, EditOutlined, VisibilityOutlined} from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import Swal from 'sweetalert2'
 import axios from 'axios';
-import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
 import { FadeLoader } from 'react-spinners';
 import config from '../../config';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
@@ -271,7 +268,7 @@ const getColumnSearchProps = (dataIndex) => ({
               <DeleteOutline
                 className="userListDelete"
                 onClick={() => {
-                  handleDelete(record.id);
+                  handleDelete(record.id, record.userId);
                 }}
               />
             </div>
@@ -282,26 +279,27 @@ const getColumnSearchProps = (dataIndex) => ({
 
   ];
 
-  const handleDelete = async (id) => {
-  try {
-    const result = await Swal.fire({
-      title: 'Es-tu sûr?',
-      text: "Vous ne pourrez pas revenir en arrière !",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui, supprimez-le!'
-    });
-
-    if (result.isConfirmed) {
-      await axios.delete(`${DOMAIN}/api/admin/deleteAff/${id}`);
-      window.location.reload();
+  const handleDelete = async (id, userId) => {
+    try {
+      const result = await Swal.fire({
+        title: 'Es-tu sûr?',
+        text: "Vous ne pourrez pas revenir en arrière !",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui, supprimez-le!'
+      });
+  
+      if (result.isConfirmed) {
+        window.location.reload();
+        await axios.delete(`${DOMAIN}/api/admin/deleteAff/${id}`);
+        await axios.put(`${DOMAIN}/api/admin/affectationPutAgent/${userId}`);
+      }
+    } catch (err) {
+      console.log(err);
     }
-  } catch (err) {
-    console.log(err);
-  }
-};
+  };
 
 const exportToExcel = () => {
         

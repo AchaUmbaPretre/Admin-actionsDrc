@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import './addContrat.scss'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { Checkbox } from '@mui/material';
+import { Checkbox, Switch } from '@mui/material';
 import Swal from 'sweetalert2';
 import config from '../../../config'
 import FormAdd from './formAdd/FormAdd';
@@ -39,97 +39,16 @@ const AddContrat = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [selects, setSelects] = useState()
   const [selected, setSelected] = useState([]);
   const [selectedx, setSelectedx] = useState([]);
   const [selectedFunctionDetails, setSelectedFunctionDetails] = useState(null);
   const { id } = useParams();
-  const [selectedFunction,setSelectedFunction] = useState([]);
   const [informationsSelectionnees,setInformationsSelectionnees] = useState([]);
-  const [nouvelleInformation,setNouvelleInformation] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
   const [title, setTitle] = useState({});
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
-
-
-/*   const handleChange = (e) => {
-    setSelectedFunction(e.target.value);
-  }; */
-
-/*   const columns = [
-    {
-      field: 'id',
-      headerName: 'ID',
-      width: 70,
-    },
-    { field: 'first_name', headerName: 'Nom', width: 110 },
-    { field: 'last_name', headerName: 'Prénom', width: 110 },
-    {
-      field: 'skills',
-      headerName: 'Compétence',
-      width: 110,
-    },
-    {
-      field: 'availability',
-      headerName: 'Disponibilité',
-      width: 80,
-      renderCell: (params) => (
-        params.row.contrat_id ? <DoDisturbOutlinedIcon style={{ color: 'red' }} /> : <CheckCircleOutlinedIcon style={{ color: 'green' }} />
-      ),
-    },
-    {
-      field: '',
-      headerName: 'Sélectionnez',
-      width: 100,
-      renderCell: (params) => (
-        <Checkbox
-          checked={selected.includes(params.row.id)}
-          onChange={(event) => handleSelectionChange(event, params.row.id)}
-          inputProps={{ 'aria-label': 'controlled' }}
-        />
-      ),
-    },
-  ]; */
-
-/*   const columns = [
-    {
-      dataIndex: 'id',
-      title: 'Code',
-      width: 70,
-    },
-    { dataIndex: 'first_name', title: 'Nom', width: 110 },
-    { dataIndex: 'last_name', title: 'Prénom', width: 110 },
-    {
-      dataIndex: 'skills',
-      title: 'Compétence',
-      width: 110,
-    },
-    {
-      dataIndex: 'availability',
-      title: 'Disponibilité',
-      width: 80,
-      render: (text, record) =>
-        record.contrat_id ? (
-          <DoDisturbOutlinedIcon style={{ color: 'red' }} />
-        ) : (
-          <CheckCircleOutlinedIcon style={{ color: 'green' }} />
-        ),
-    },
-    {
-      dataIndex: '',
-      title: 'Sélectionnez',
-      width: 100,
-      render: (_, record) => (
-        <Checkbox
-            checked={selected.includes(record.id)}
-            onChange={(event) => handleSelectionChange(event, record.id)}
-            inputProps={{ 'aria-label': 'controlled' }}
-          />
-      ),
-    },
-  ]; */
 
   const handleSelectionChange = (event, id) => {
     if (event.target.checked) {
@@ -245,7 +164,6 @@ const AddContrat = () => {
   });
 
 useEffect(() => {
-
     const fetchData = async () => {
       try {
         const res = await axios.get(`${DOMAIN}/api/admin`);
@@ -260,16 +178,15 @@ useEffect(() => {
 
 useEffect(()=>{
     const fetchDatas = async ()=> {
-        try{
-            const {data} = await axios.get(`${DOMAIN}/api/admin/ContratInfo/${id}`);
-            setSelectData(data)
-    
-          }catch(error){
-            console.log(error)
-          };
+      try{
+        const {data} = await axios.get(`${DOMAIN}/api/admin/ContratInfo/${id}`);
+        setSelectData(data)    
+      }catch(error){
+        console.log(error)
+      };
     }
     fetchDatas()
- }, [id])
+},[id])
 
  useEffect(()=>{
   const fetchDatas = async ()=> {
@@ -397,7 +314,7 @@ const columns = [
   {
     dataIndex: 'availability',
     title: 'Disponibilité',
-    width: 150,
+    width: '20%',
     render: (text, record) =>
       record.contrat_id ? (
         <div className="indisponible">Indisponible
@@ -412,15 +329,15 @@ const columns = [
   {
     dataIndex: '',
     title: 'Sélectionnez',
-    width: 100,
+    width: '15%',
     render: (_, record) => (
-      <Checkbox
-          checked={selected.includes(record.id)}
-          onChange={(event) => handleSelectionChange(event, record.id)}
-          inputProps={{ 'aria-label': 'controlled' }}
-        />
+      <Switch
+        checked={selected.includes(record.id)}
+        onChange={(event) => handleSelectionChange(event, record.id)}
+        inputProps={{ 'aria-label': 'controlled' }}
+      />
     ),
-  },
+  }
 ];
 
   return (
@@ -440,25 +357,25 @@ const columns = [
             <Table columns={columns} dataSource={data}  pagination={{ pageSize: 5}}/>
           </div>
           <Modal
-                    aria-labelledby="transition-modal-title"
-                    aria-describedby="transition-modal-description"
-                    open={open}
-                    onClose={handleClose}
-                    closeAfterTransition
-                    slots={{ backdrop: Backdrop }}
-                    slotProps={{
-                    backdrop: {
-                        timeout: 500,
-                    },
-                    }} 
-                >
-                    <Fade in={open}>
-                        <Box sx={style}>
-                            <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
-                              <FormAdd handleClose={handleClose} contratId={id} employeesId={selected} fonction={informationsSelectionnees} />
-                            </Box>
-                        </Box>
-                    </Fade>
+              aria-labelledby="transition-modal-title"
+              aria-describedby="transition-modal-description"
+              open={open}
+              onClose={handleClose}
+              closeAfterTransition
+              slots={{ backdrop: Backdrop }}
+              slotProps={{
+                backdrop: {
+                timeout: 500,
+                },
+              }} 
+            >
+              <Fade in={open}>
+                <Box sx={style}>
+                  <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
+                    <FormAdd handleClose={handleClose} contratId={id} employeesId={selected} fonction={informationsSelectionnees} />
+                  </Box>
+                </Box>
+              </Fade>
           </Modal>
           <div className="add-row2">
             <div className="add-container-rows">

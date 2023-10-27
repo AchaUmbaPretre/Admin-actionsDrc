@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { DeleteOutline, EditOutlined, VisibilityOutlined } from '@mui/icons-material';
 import {FileExcelOutlined} from '@ant-design/icons';
+import { DollarCircleOutlined, BankOutlined, CreditCardOutlined } from '@ant-design/icons';
 import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
@@ -70,19 +71,48 @@ const Payement = () => {
         },
         {
           field: 'methode_paiement',
-          headerName: "Methode de payement",
-          width: 165,       renderCell: (params) => {
+          headerName: 'Méthode de paiement',
+          width: 165,
+          renderCell: (params) => {
             const status = params.value || 'Non spécifié';
-            let cellClassName = '';
-        
-            if (status === 'Virement') {
-              cellClassName = 'cell-paid';
-            } else {
-              cellClassName = 'cell-not-paid';
+            let icon, backgroundColor;
+      
+            switch (status) {
+              case 'Virement':
+                backgroundColor = 'blue';
+                icon = <BankOutlined style={{ marginRight: '5px' }} />;
+                break;
+              case 'Espèces':
+                backgroundColor = '#4caf50';
+                icon = <DollarCircleOutlined style={{ marginRight: '5px' }} />;
+                break;
+              case 'Chèque':
+                backgroundColor = '#ff9800';
+                icon = <CreditCardOutlined style={{ marginRight: '5px' }} />;
+                break;
+              default:
+                return null;
             }
-            return <div className={cellClassName}>{status}</div>;
+      
+            return (
+              <div
+                className="payment-method-cell"
+                style={{
+                  backgroundColor: backgroundColor,
+                  color: 'white',
+                  border: `1px solid ${backgroundColor}`,
+                  padding: '3px 10px',
+                  borderRadius: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                {icon}
+                {status}
+              </div>
+            );
           },
-      },
+        },
       {field: 'action', HeaderName: 'Action', width: 175, renderCell: (params) =>{
           return(
               <>

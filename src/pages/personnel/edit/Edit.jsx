@@ -187,13 +187,13 @@ const handleClick = async (e) => {
   };
 
 
-
+console.log(source)
   return (
     <>
         <div className="edit-person">
         <div className="formulaire-wrapper">
                 <div className="formulaire-left">
-                    {source ? <img src={`../upload/${source}`} className="form-img2"/> : <img src={userImg} alt="" className="form-img" /> }
+                    {source ? <img src={`../upload/${source}`} className="form-img2"  /> : <img src={userImg} alt="" className="form-img" /> }
                     <div className="form-img-rows">
                         <div className="form-img-row">
                             <input type="radio" name="source" value="import" checked={source === 'import'} onChange={handleSourceChange} className='radio-img' />

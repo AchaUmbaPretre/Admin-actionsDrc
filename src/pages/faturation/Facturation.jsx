@@ -20,6 +20,7 @@ import FactureSearch from './factureSearch/FactureSearch';
 import moment from 'moment';
 import BarReturn from '../../components/barReturn/BarReturn';
 import {FileExcelOutlined} from '@ant-design/icons';
+import { DollarOutlined, HourglassOutlined } from '@ant-design/icons';
 
 const style = {
   position: 'absolute',
@@ -84,18 +85,19 @@ const Facturation = () => {
 
   const columns = [
     { field: 'id', headerName: 'N° de facture', width: 130 },
-    { field: 'company_name', headerName: "client", width: 160 },
+    { field: 'company_name', headerName: 'Client', width: 160 },
     {
       field: 'created_at',
       headerName: 'Date de la facture',
       width: 160,
       valueGetter: (params) =>
-      moment(params.row.created_at).format('DD-MM-yyyy'),
+        moment(params.row.created_at).format('DD-MM-yyyy'),
     },
     {
-        field: 'total_amount',
-        headerName: "Montant total",
-        width: 160,renderCell: (params) => `${params.value} $`
+      field: 'total_amount',
+      headerName: 'Montant total',
+      width: 160,
+      renderCell: (params) => `${params.value} $`,
     },
     {
       field: 'status',
@@ -105,63 +107,88 @@ const Facturation = () => {
         let color, icon, backgroundColor;
         switch (params.value) {
           case 'Payée':
-            backgroundColor = 'blue'; // Vert
+            backgroundColor = 'blue';
+            icon = <DollarOutlined style={{ marginRight: '5px' }} />;
             break;
           case 'En attente':
-            backgroundColor = '#4caf50'; // Orange
-            
+            backgroundColor = '#4caf50';
+            icon = <HourglassOutlined style={{ marginRight: '5px' }} />;
             break;
           default:
             return null;
         }
-    
+  
         return (
-          <span style={{ backgroundColor: backgroundColor, color: 'white', border: `1px solid ${backgroundColor}`, padding: '3px 10px', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '12px' }}>
+          <span
+            style={{
+              backgroundColor: backgroundColor,
+              color: 'white',
+              border: `1px solid ${backgroundColor}`,
+              padding: '3px 10px',
+              borderRadius: '10px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              fontSize: '12px',
+            }}
+          >
             {icon}
             {params.value}
           </span>
         );
       },
     },
-    {field: 'action', HeaderName: 'Action', width: 160, renderCell: (params) =>{
-      const handleEdit = () => {
-        Swal.fire({
-          title: 'Confirmation',
-          text: 'Voulez-vous vraiment modifier ?',
-          icon: 'question',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Oui',
-          cancelButtonText: 'Non',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            navigate(`/facturationPut/${params.row.id}`);
-          }
-        });
-      }
-        return(
+    {
+      field: 'action',
+      HeaderName: 'Action',
+      width: 160,
+      renderCell: (params) => {
+        const handleEdit = () => {
+          Swal.fire({
+            title: 'Confirmation',
+            text: 'Voulez-vous vraiment modifier ?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui',
+            cancelButtonText: 'Non',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate(`/facturationPut/${params.row.id}`);
+            }
+          });
+        };
+        return (
           <>
             <div className="table-icons-row">
-            <div className="userOvert0">
-                     <Link>
-                      <EditOutlined className="userListBtn" onClick={handleEdit} />
-                      <span className='userOvert'>Modifier</span>
-                    </Link>
-                  </div>
-                  <div className="userOvert1">
-                    <VisibilityOutlined className='userEye' onClick={() => navigate(`/facturationView/${params.row.id}`)} />
-                    <span className='userOvert'>détail</span>
-                  </div>
-                  <div className="userOvert2">
-                    <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
-                    <span className='userOvert'>Supprimer</span>
-                  </div>
+              <div className="userOvert0">
+                <Link>
+                  <EditOutlined className="userListBtn" onClick={handleEdit} />
+                  <span className="userOvert">Modifier</span>
+                </Link>
+              </div>
+              <div className="userOvert1">
+                <VisibilityOutlined
+                  className="userEye"
+                  onClick={() => navigate(`/facturationView/${params.row.id}`)}
+                />
+                <span className="userOvert">Détail</span>
+              </div>
+              <div className="userOvert2">
+                <DeleteOutline
+                  className="userListDelete"
+                  onClick={() => {
+                    handleDelete(params.row.id);
+                  }}
+                />
+                <span className="userOvert">Supprimer</span>
+              </div>
             </div>
           </>
-
-        )
-    }},
+        );
+      },
+    },
   ];
 
   const exportToExcel = () => {

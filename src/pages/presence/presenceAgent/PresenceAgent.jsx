@@ -330,7 +330,6 @@ const PresenceAgent = ({}) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-
     if (selectedIds.length === 0) {
       Swal.fire({
         title: 'Aucun agent n\'est sélectionné',
@@ -356,7 +355,6 @@ const PresenceAgent = ({}) => {
         contrat_id: selectedAgentIds,
         client_id: clientId
       });
-  
       navigate(`/presenceList?${params.toString()}`);
     } catch (err) {
       Swal.fire({
