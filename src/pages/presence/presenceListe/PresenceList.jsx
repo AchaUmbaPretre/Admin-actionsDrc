@@ -253,7 +253,6 @@ const PresenceList = () => {
         console.log(error);
       }
     };
-  
     fetchAgentsAffectes();
   }, []);
 
@@ -275,7 +274,6 @@ const PresenceList = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-  
     try {
 
       await Promise.all(

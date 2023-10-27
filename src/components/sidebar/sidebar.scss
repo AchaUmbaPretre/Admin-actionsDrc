@@ -1,7 +1,10 @@
 .sidebar{
     flex: 2;
     height: calc(100vh - 0px);
-    background: #253053;
+    background: linear-gradient(#253053e8,#253053),url('./../../assets/970\ X\ 250\ bannière\ 1.png') no-repeat;
+    background-position: center;
+    background-size: cover;
+/*     background: #253053; */
     top: 0;
     bottom: 0;
     position: sticky;

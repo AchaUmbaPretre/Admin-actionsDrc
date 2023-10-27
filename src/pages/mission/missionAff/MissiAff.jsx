@@ -390,14 +390,14 @@ const MissiAff = () => {
         confirmButtonText: 'OK'
       });
       navigate('/mission');
-    } catch (err) {
+    } catch (error) {
       Swal.fire({
         title: 'Error',
-        text: err.message,
+        text: error.response.data,
         icon: 'error',
         confirmButtonText: 'OK'
       });
-      console.log(err);
+      console.log(error);
     }
   };
 
