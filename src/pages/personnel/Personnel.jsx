@@ -18,7 +18,8 @@ import config from '../../config'
 import { Box, Fade, Modal } from '@mui/material';
 import Backdrop from '@mui/material/Backdrop';
 import Formulaire from './formulaire/Formulaire';
-import {FileExcelOutlined} from '@ant-design/icons';
+import { Breadcrumb } from 'antd';
+import { HomeOutlined, UserOutlined, FileExcelOutlined} from '@ant-design/icons';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 
@@ -210,33 +211,26 @@ const exportToExcel = () => {
                     </div>
                 </div>
                 <div className="personPdf">
-                  <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Nouveau</Link>
+                  <Link className="personnel-btn" onClick={() => navigate('/formulaire')}><PersonAddAlt1Icon/>Nouveau</Link>
                   <Link className="personnel-btn-pdf" onClick={() => navigate('/personpdfTable')}><PictureAsPdfIcon/>Pdf</Link>
                   <Link className="personnel-btn-excel" onClick={exportToExcel}><FileExcelOutlined />Export Excel</Link>
                 </div>
-                
-                <Modal
-                    aria-labelledby="transition-modal-title"
-                    aria-describedby="transition-modal-description"
-                    open={open}
-                    onClose={handleClose}
-                    closeAfterTransition
-                    slots={{ backdrop: Backdrop }}
-                    slotProps={{
-                    backdrop: {
-                        timeout: 500,
-                    },
-                    }} 
-                >
-                    <Fade in={open}>
-                        <Box sx={style}>
-                            <Box component="form" sx={{'& > :not(style)': { m: 1, }, display:'flex', flexWrap:'wrap'}} noValidate autoComplete="off">
-                              <Formulaire handleModalClose={handleClose} />
-                            </Box>
-                        </Box>
-                    </Fade>
-                </Modal>
             </div>
+            <div className="bread">
+                <Breadcrumb
+                  items={[
+                    {
+                      href: '/',
+                      title: (
+                        <>
+                          <HomeOutlined />
+                          <span>Accueil</span>
+                        </>
+                      ),
+                    }
+                  ]}
+                />
+              </div>
                 {loading ? (
           <div className="spinner-container">
             <FadeLoader color={'#36D7B7'} loading={loading} />

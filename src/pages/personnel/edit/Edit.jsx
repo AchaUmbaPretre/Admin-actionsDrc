@@ -35,8 +35,8 @@ const handleFileChange = (event) => {
 };
 
 const handleSourceChange = (event) => {
-    setSources(event.target.value);
-  };
+  setSources(event.target.value);
+};
 
 const handleChange = (e) => {
     const fieldName = e.target.name;
@@ -117,7 +117,8 @@ const handleChange = (e) => {
             };
             fetchData();
           }, []);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
           useEffect(() => {
             const fetchData = async () => {
               try {
@@ -130,40 +131,21 @@ const handleChange = (e) => {
             fetchData();
           }, []);
 
-  useEffect(()=>{
-    const fetchData = async ()=> {
-        try{
-            const res = await axios.get(`${DOMAIN}/api/admin/views/${id}`);
-            setData(res.data[0])
-    
-          }catch(error){
-            console.log(error)
-          };
-    }
-    fetchData()
-}, [id]);
+          useEffect(()=>{
+            const fetchData = async ()=> {
+                try{
+                    const res = await axios.get(`${DOMAIN}/api/admin/views/${id}`);
+                    setData(res.data[0])
+            
+                  }catch(error){
+                    console.log(error)
+                  };
+            }
+            fetchData()
+        }, [id]);
 
 const handleClick = async (e) => {
     e.preventDefault();
-
-/*     try {
-      await axios.put(`${DOMAIN}/api/admin/employe/${id}`, data);
-      Swal.fire({
-        title: 'Success',
-        text: 'Employé mis à jour avec succès!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
-      navigate('/personnel');
-    } catch (err) {
-      Swal.fire({
-        title: 'Error',
-        text: err.message,
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
-      console.log(err);
-    } */
 
     try {
         let photoSrc;
@@ -188,7 +170,6 @@ const handleClick = async (e) => {
           icon: 'error',
           confirmButtonText: 'OK'
         });
-      
         console.log(error);
       }
   }
