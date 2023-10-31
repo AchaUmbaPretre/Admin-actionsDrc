@@ -53,8 +53,8 @@ const PayeForm = ({handleModalClose}) => {
       });
     }
   };
+  
   useEffect(()=>{
-    
     const fetchData = async ()=> {
       try{
           const res = await axios.get(`${DOMAIN}/api/admin/paiementMethode`);

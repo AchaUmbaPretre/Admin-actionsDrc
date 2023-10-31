@@ -15,8 +15,8 @@ moment.locale('fr');
 
 
 const Formulaire = ({handleModalClose}) => {
-    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
 
+    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const navigate = useNavigate();
     const [data, setData] = useState({});
     const [source, setSource] = useState('import');
@@ -33,26 +33,27 @@ const Formulaire = ({handleModalClose}) => {
       setPhoto(event.target.files[0]);
     };
     const handleSourceChange = (event) => {
-        setSource(event.target.value);
-      };
-      const handleSelectChange = (selectedOption, fieldName) => {
-        setData((prev) => ({ ...prev, [fieldName]: selectedOption.value }));
-      };
+      setSource(event.target.value);
+    };
+    const handleSelectChange = (selectedOption, fieldName) => {
+      setData((prev) => ({ ...prev, [fieldName]: selectedOption.value }));
+    };
       
-      const handleChange = (e) => {
-        const fieldName = e.target.name;
-        const fieldValue = e.target.value;
+    const handleChange = (e) => {
+      const fieldName = e.target.name;
+      const fieldValue = e.target.value;
       
-        if (fieldName === "email") {
-          const lowercaseValue = fieldValue.charAt(0).toLowerCase() + fieldValue.slice(1);
-          setData((prev) => ({ ...prev, [fieldName]: lowercaseValue }));
-        } else if (Number.isNaN(Number(fieldValue))) {
-          const capitalizedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
-          setData((prev) => ({ ...prev, [fieldName]: capitalizedValue }));
-        } else {
+      if (fieldName === "email") {
+        const lowercaseValue = fieldValue.charAt(0).toLowerCase() + fieldValue.slice(1);
+        setData((prev) => ({ ...prev, [fieldName]: lowercaseValue }));
+      } else if (Number.isNaN(Number(fieldValue))) {
+        const capitalizedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
+        setData((prev) => ({ ...prev, [fieldName]: capitalizedValue }));
+      } else {
           setData((prev) => ({ ...prev, [fieldName]: fieldValue }));
-        }
       }
+
+    }
 
       const handlePhotoSubmit = async () => {
         if (!data.first_name || !data.last_name || !data.date_of_birth || !data.gender || !data.address || !data.etat_civil || !data.identification_type || !data.skills || !data.certifications || !data.employment_status) {
@@ -74,14 +75,16 @@ const Formulaire = ({handleModalClose}) => {
           }
           
           await axios.post(`${DOMAIN}/api/admin/employe`, { ...data, source: photoSrc});
-        
+          
+          navigate('/personnel')
+          window.location.reload();
+
           await Swal.fire({
             title: 'Success',
             text: 'Employé créé avec succès!',
             icon: 'success',
             confirmButtonText: 'OK'
           });
-          window.location.reload();
          
         } catch (error) {
           await Swal.fire({
