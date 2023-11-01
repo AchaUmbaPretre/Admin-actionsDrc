@@ -4,7 +4,6 @@ import axios from 'axios';
 import Select from 'react-select';
 import './missionForm.scss';
 import Swal from 'sweetalert2';
-import moment from 'moment';
 import config from '../../../config'
 
 const MissionForm = ({handleModalClose}) => {
@@ -24,8 +23,6 @@ const MissionForm = ({handleModalClose}) => {
       setData((prev) => ({ ...prev, [name]: selectedOption.value }));
     }
   };
-
-  console.log(data)
 
   useEffect(() => {
     const fetchData = async () => {

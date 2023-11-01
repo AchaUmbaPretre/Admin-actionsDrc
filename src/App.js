@@ -320,7 +320,7 @@ function App() {
           element: <Formulaire />
         },
         {
-          path: '/payement',
+          path: '/paiement',
           element: <Payement />
         },
         {

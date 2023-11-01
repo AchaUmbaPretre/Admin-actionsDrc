@@ -393,7 +393,7 @@ const MissiAff = () => {
     } catch (error) {
       Swal.fire({
         title: 'Error',
-        text: error.response.data,
+        text: error.response.data.message,
         icon: 'error',
         confirmButtonText: 'OK'
       });

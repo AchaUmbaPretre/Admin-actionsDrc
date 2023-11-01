@@ -17,12 +17,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-bottom: 20px;
+            flex-direction: column;
+            padding-bottom: 15px;
             .sidenav-img{
                width: 30%;
                border-radius: 50% 50% 10% 10%;
+               margin-bottom: 10px;
+            }
+            .sidebar-h2{
+                font-size: 1.2rem;
             }
         }
+        .ant-menu-submenu-custom {
+            background-color: #253053;
+          }
         .sidebar-ul{
             display: flex;
             flex-direction: column;
