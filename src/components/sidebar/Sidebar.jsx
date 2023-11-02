@@ -70,7 +70,7 @@ const Sidebar = () => {
               <Link to="/presence">Presence</Link>
             </Menu.Item>
             <Menu.Item key="/rapport" title="Rapport" icon={<FileSearchOutlined />} style={{ fontSize: '16px' }}>
-              <Link to="/rapport">Rapport des presences</Link>
+              <Link to="/rapportPresence">Rapport des presences</Link>
             </Menu.Item>
           </SubMenu>
           <Menu.Item key="/facturation" icon={<FileSearchOutlined />} title="Facturation" style={{ fontSize: '16px' }}>

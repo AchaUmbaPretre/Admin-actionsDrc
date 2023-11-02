@@ -70,6 +70,7 @@ import PresentEdit from './pages/presence/presenceEdit/PresentEdit';
 import PresenceListView from './pages/presence/presenceListView/PresenceListView';
 import AffectationPdf from './pages/affectation/affectationPdf/AffectationPdf';
 import AffEdite2 from './pages/affectation/edite/AffEdite2';
+import RapportPresence from './pages/rapportPresence/RapportPresence';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -222,6 +223,10 @@ function App() {
         {
           path: '/presenceList',
           element: <PresenceList />
+        },
+        {
+          path: '/rapportPresence',
+          element: <RapportPresence />
         },
         {
           path: '/facturation',
