@@ -55,12 +55,6 @@ const RapportRow = ({setDataTable, setLoading}) => {
           const {data} = await axios.get(`${DOMAIN}/api/admin/rapportPresence?startDate=${date.startDate}&endDate=${date.endDate}&employee_id=${date.employee_id}`);
           setDataTable(data)
           setLoading(false)
-          Swal.fire({
-            title: 'Success',
-            text: 'Rapport succès!',
-            icon: 'success',
-            confirmButtonText: 'OK',
-          });
           navigate('/rapportPresence');
         } catch (err) {
           Swal.fire({

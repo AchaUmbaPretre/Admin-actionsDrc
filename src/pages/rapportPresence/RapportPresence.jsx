@@ -18,12 +18,14 @@ import moment from 'moment';
 import BarReturn from '../../components/barReturn/BarReturn';
 import {FileExcelOutlined} from '@ant-design/icons';
 import RapportRow from './rapportRow/RapportRow';
+import { Table, Button, Space, Popconfirm } from 'antd';
+import { DeleteOutlined, EyeOutlined, CheckCircleOutlined, ClearOutlined} from '@ant-design/icons';
 
 const RapportPresence = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const [dataTable, setDataTable] = useState({})
+  const [dataTable, setDataTable] = useState([])
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -31,134 +33,45 @@ const RapportPresence = () => {
 
 const handleDelete = async (id) => {
   try {
-    const result = await Swal.fire({
-      title: 'Es-tu sûr?',
-      text: "Vous ne pourrez pas revenir en arrière !",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui, supprimez-le!'
-    });
-
-    if (result.isConfirmed) {
-      await axios.delete(`${DOMAIN}/api/admin/presence/${id}`);
+    await axios.delete(`${DOMAIN}/api/admin/presence/${id}`);
       window.location.reload();
-    }
   } catch (err) {
     console.log(err);
   }
 };
 
-console.log(dataTable)
-
-  const columns = [
-    { field: 'first_name', headerName: 'Nom', width: 90 },
-    { field: 'last_name', headerName: 'Post-nom', width: 90 },
-    {
-      field: 'company_name',
-      headerName: 'Client',
-      width: 90 
-    },
-    {
-        field: 'date',
-        headerName: 'Date de la présence',
-        width: 90,
-        valueGetter: (params) =>
-        moment(params.row.date).format('DD-MM-yyyy'),
-    },
-    {
-      field: 'month_name',
-      headerName: 'Mois',
-      width: 90,
-    },
-    {
-      field: 'check_in_time',
-      headerName: "Heure d'arrivée",
-      width: 100,
-      valueGetter: (params) => params.row.check_in_time.substring(0, 5)
-    },
-    {
-      field: 'check_out_time',
-      headerName: 'Heure de sortie',
-      width: 100,
-      valueGetter: (params) => params.row.check_out_time.substring(0, 5)
-    },
-    {
-      field: 'presence_status',
-      headerName: 'Statut',
-      width: 90,
-      renderCell: (params) => {
-        let backgroundColor, color, icon;
-    
-        if (params.value === 'Présent') {
-          backgroundColor = '#4caf50'; // Vert
-          color = 'white';
-          icon = <CheckCircleOutlinedIcon style={{ fontSize: '16px' }} />;
-        } else {
-          backgroundColor = '#f44336'; // Rouge
-          color = 'white';
-          icon = <ClearOutlinedIcon style={{ fontSize: '16px' }} />;
-        }
-    
-        return (
-          <span
-            style={{
-              backgroundColor: backgroundColor,
-              color: color,
-              borderRadius: '50px',
-              padding: '4px 8px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '12px',
-            }}
-          >
-            {icon}
-            <span style={{ marginLeft: '4px' }}>{params.value}</span>
-          </span>
-        );
-      }
-    },
-    {
-      field: 'total_presence',
-      headerName: 'Nombre de présence',
-      width: 80,
-      valueFormatter: (params) => {
-        const totalPresence = params.value;
-        if (totalPresence === 1) {
-          return '1 jour';
-        } else {
-          return `${totalPresence} jours`;
-        }
-      }
-    },
-    {field: 'action', HeaderName: 'Action', width: 140, renderCell: (params) =>{
-        return(
-          <>
-              <>
-                <div className="table-icons-row">
-                  <div className="userOvert0">
-                    <Link onClick={''}>
-                      <EditOutlined className="userListBtn" onClick={() => navigate(`/presenceEdit/${params.row.id}`)} />
-                      <span className='userOvert'>Modifier</span>
-                    </Link>
-                  </div>
-                  <div className="userOvert1">
-                    <VisibilityOutlined className='userEye' onClick={() => navigate(`/presenceListView/${params.row.emp1_id}`)} />
-                    <span className='userOvert'>détail</span>
-                  </div>
-                  <div className="userOvert2">
-                    <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
-                    <span className='userOvert'>Supprimer</span>
-                  </div>
-                </div>
-              </>
-          </>
-
-        )
-    }},
-  ];
+const columns = [
+  { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
+  { title: 'Nom', dataIndex: 'first_name', key: 'first_name' },
+  { title: 'Post-nom', dataIndex: 'last_name', key: 'last_name' },
+  { title: 'Client', dataIndex: 'company_name', key: 'company_name' },
+  { title: 'Date de la présence', dataIndex: 'date', key: 'date', render: (text) => moment(text).format('DD-MM-yyyy') },
+  { title: 'Mois', dataIndex: 'month_name', key: 'month_name' },
+  { title: "Heure d'arrivée", dataIndex: 'check_in_time', key: 'check_in_time', render: (text) => text.substring(0, 5) },
+  { title: 'Heure de sortie', dataIndex: 'check_out_time', key: 'check_out_time', render: (text) => text.substring(0, 5) },
+  {
+    title: 'Action',
+    key: 'action',
+    render: (text, record) => (
+      <Space size="middle">
+        <Link to={`/presenceEdit/${record.id}`}>
+          <Button icon={<EditOutlined />} style={{ color: 'green' }} />
+        </Link>
+        <Link to={`/presenceListView/${record.emp1_id}`}>
+          <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
+        </Link>
+        <Popconfirm
+          title="Êtes-vous sûr de vouloir supprimer?"
+          onConfirm={() => handleDelete(record.id)}
+          okText="Oui"
+          cancelText="Non"
+        >
+          <Button icon={<DeleteOutlined />} style={{ color: 'red' }} />
+        </Popconfirm>
+      </Space>
+    ),
+  },
+];
 
   return (
     <>
@@ -178,15 +91,14 @@ console.log(dataTable)
         </div>
         <BarReturn/>
         <RapportRow setDataTable={setDataTable} setLoading={setLoading}/>
-        {loading ? (
-        <div className="spinner-container">
-            <FadeLoader color={'#36D7B7'} loading={loading} />
-        </div>
-        ) : (
-            <>
-              <DataGrid rows={dataTable} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
-            </>
-        )}
+          <>
+          <Table
+            columns={columns}
+            dataSource={dataTable}
+            className="presenceTable"
+            loading={loading} 
+          />
+          </>
       </div>
     </>
   )
