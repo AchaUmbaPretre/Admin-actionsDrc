@@ -1,19 +1,10 @@
 import { DataGrid } from '@mui/x-data-grid'
 import { Link, useNavigate } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
-import { DeleteOutline, EditOutlined, VisibilityOutlined} from '@mui/icons-material';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import { EditOutlined } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
-import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
-import { format } from 'date-fns';
-import { FadeLoader } from 'react-spinners';
 import config from '../../config'
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
-import { saveAs } from 'file-saver';
-import * as XLSX from 'xlsx';
-import Swal from 'sweetalert2';
 import moment from 'moment';
 import BarReturn from '../../components/barReturn/BarReturn';
 import {FileExcelOutlined} from '@ant-design/icons';
@@ -85,8 +76,7 @@ const columns = [
               </div>
           </div>
           <div className="personPdf">
-            <Link className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Nouveau</Link>
-            <Link className="personnel-btn-pdf" onClick={() => navigate('/presencePdf')}><PictureAsPdfIcon/>Pdf</Link>
+            
           </div>
         </div>
         <BarReturn/>

@@ -22,6 +22,7 @@ import { Breadcrumb } from 'antd';
 import { HomeOutlined, UserOutlined, FileExcelOutlined} from '@ant-design/icons';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
+import { Table, Button, Space, Popconfirm } from 'antd';
 
 
 const style = {
@@ -69,20 +70,9 @@ const Personnel = () => {
 
 const handleDelete = async (id) => {
   try {
-    const result = await Swal.fire({
-      title: 'Es-tu sûr?',
-      text: "Vous ne pourrez pas revenir en arrière !",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui, supprimez-le!'
-    });
 
-    if (result.isConfirmed) {
       await axios.put(`${DOMAIN}/api/admin/employes/${id}`);
       window.location.reload();
-    }
   } catch (err) {
     console.log(err);
   }
@@ -125,27 +115,22 @@ const columns = [
           width: 110,
         },
         {field: 'action', HeaderName: 'Action', width: 130, renderCell: (params) =>{
+          
           const handleEdit = () => {
-            Swal.fire({
-              title: 'Confirmation',
-              text: 'Voulez-vous vraiment modifier ?',
-              icon: 'question',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Oui',
-              cancelButtonText: 'Non',
-            }).then((result) => {
-              if (result.isConfirmed) {
-                navigate(`/edit/${params.row.id}`);
-              }
-            });
+            navigate(`/edit/${params.row.id}`);
           }
             return(
               <>
                 <div className="table-icons-row">
                     <div className="userOvert0">
-                      <Link onClick={handleEdit}><EditOutlined className='userListBtn'/></Link>
+                      <Popconfirm
+                      title="Êtes-vous sûr de vouloir modifier?"
+                      onConfirm={handleEdit}
+                      okText="Oui"
+                      cancelText="Non"
+                    >
+                      <Link><EditOutlined className='userListBtn'/></Link>
+                    </Popconfirm>
                       <span className='userOvert'>Modifier</span>
                     </div>
                     <div className="userOvert1">
@@ -153,7 +138,14 @@ const columns = [
                       <span className='userOvert'>détail</span>
                     </div>
                     <div className="userOvert2">
-                      <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
+                    <Popconfirm
+                      title="Êtes-vous sûr de vouloir supprimer?"
+                      onConfirm={()=>{handleDelete(params.row.id)}}
+                      okText="Oui"
+                      cancelText="Non"
+                    >
+                      <DeleteOutline className="userListDelete" />
+                    </Popconfirm>
                       <span className='userOvert'>Supprimer</span>
                     </div>
                 </div>

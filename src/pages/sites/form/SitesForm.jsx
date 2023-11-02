@@ -124,6 +124,10 @@ const SitesForm = ({ handleModalClose }) => {
           <form action="" className="formulaire-edit">
             <div className="edit-rows">
               <div className="edit-row">
+                <label htmlFor="" className="label-edit">Nom du site <span>*</span></label>
+                <input type="text" name='description' className="input-form" onChange={(e) =>handleChange(e.target.value, 'description')} placeholder='Entrez la description' />
+              </div>  
+              <div className="edit-row">
                 <label htmlFor="" className="label-edit">
                   Client(e) <span>*</span>
                 </label>
@@ -138,10 +142,6 @@ const SitesForm = ({ handleModalClose }) => {
                   placeholder="Sélectionnez un client"
                 />
               </div>
-              <div className="edit-row">
-                <label htmlFor="" className="label-edit">Nom du site <span>*</span></label>
-                <input type="text" name='description' className="input-form" onChange={(e) =>handleChange(e.target.value, 'description')} placeholder='Entrez la description' />
-              </div>  
             </div>
             <div className="edit-rows">
               <div className="edit-row">
@@ -158,7 +158,7 @@ const SitesForm = ({ handleModalClose }) => {
                 <label htmlFor="number" className="label-edit">N° <span>*</span></label>
                 <input type="text" name='numero' className="input-form" onChange={(e) =>
                     handleChange(e.target.value, 'numero')
-                  } placeholder='Entrez le N° du parcelle' />
+                  } placeholder='Entrez le N° de parcelle' />
               </div>
               <div className="edit-row">
                 <label htmlFor="" className="label-edit">Commune <span>*</span></label>
