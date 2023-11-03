@@ -41,3 +41,20 @@ li{
     color: rgb(5, 97, 5);
     cursor: pointer;
   }
+
+  .App {
+    font-family: sans-serif;
+    padding: 16px;
+  }
+  
+  .Crop-Controls {
+    margin-bottom: 10px;
+  }
+  .Crop-Controls > * {
+    margin-bottom: 3px;
+  }
+  
+  img {
+    max-width: 100%;
+  }
+  

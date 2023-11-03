@@ -16,7 +16,6 @@ import { FadeLoader } from 'react-spinners';
 import userImg from './../../../src/assets/user.png'
 import config from '../../config'
 import { Box, Fade, Modal } from '@mui/material';
-import Backdrop from '@mui/material/Backdrop';
 import Formulaire from './formulaire/Formulaire';
 import { Breadcrumb } from 'antd';
 import { HomeOutlined, UserOutlined, FileExcelOutlined} from '@ant-design/icons';
@@ -124,13 +123,13 @@ const columns = [
                 <div className="table-icons-row">
                     <div className="userOvert0">
                       <Popconfirm
-                      title="Êtes-vous sûr de vouloir modifier?"
-                      onConfirm={handleEdit}
-                      okText="Oui"
-                      cancelText="Non"
-                    >
+                        title="Êtes-vous sûr de vouloir modifier?"
+                        onConfirm={handleEdit}
+                        okText="Oui"
+                        cancelText="Non"
+                      >
                       <Link><EditOutlined className='userListBtn'/></Link>
-                    </Popconfirm>
+                      </Popconfirm>
                       <span className='userOvert'>Modifier</span>
                     </div>
                     <div className="userOvert1">

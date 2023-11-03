@@ -25,6 +25,7 @@ import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import BarReturn from '../../components/barReturn/BarReturn';
 import {FileExcelOutlined} from '@ant-design/icons';
+import { Popconfirm } from 'antd';
 
 const style = {
     position: 'absolute',
@@ -150,37 +151,36 @@ const Contrats = () => {
         width: 150,
         renderCell: (params) => {
           const handleEdit = () => {
-            Swal.fire({
-              title: 'Confirmation',
-              text: 'Voulez-vous vraiment modifier ?',
-              icon: 'question',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Oui',
-              cancelButtonText: 'Non',
-            }).then((result) => {
-              if (result.isConfirmed) {
-                navigate(`/editContrat/${params.row.id}`);
-              }
-            });
+            navigate(`/editContrat/${params.row.id}`);
           }
           return (
             <>
               <div className="table-icons-row">
               
                 <div className="userOvert0">
-                  <Link onClick={handleEdit}>
-                    <EditOutlined className="userListBtn" />
+                    <Popconfirm
+                        title="Êtes-vous sûr de vouloir modifier?"
+                        onConfirm={handleEdit}
+                        okText="Oui"
+                        cancelText="Non"
+                      >
+                        <EditOutlined className='userListBtn'/>
+                      </Popconfirm>
                     <span className='userOvert'>Modifier</span>
-                  </Link>
                 </div>
                 <div className="userOvert1">
                   <VisibilityOutlined className='userEye' onClick={() => navigate(`/contratsView/${params.row.id}`)} />
                   <span className='userOvert'>détail</span>
                 </div>
                 <div className="userOvert2">
-                  <DeleteOutline className="userListDelete" onClick={() => { handleDelete(params.row.id) }} />
+                  <Popconfirm
+                    title="Êtes-vous sûr de vouloir supprimer?"
+                    onConfirm={() => { handleDelete(params.row.id)}}
+                    okText="Oui"
+                    cancelText="Non"
+                  >
+                    <DeleteOutline className="userListDelete" />
+                  </Popconfirm>
                   <span className='userOvert'>Supprimer</span>
                 </div>
                 <div className="userOvert3">
