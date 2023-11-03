@@ -72,6 +72,7 @@ import AffectationPdf from './pages/affectation/affectationPdf/AffectationPdf';
 import AffEdite2 from './pages/affectation/edite/AffEdite2';
 import RapportPresence from './pages/rapportPresence/RapportPresence';
 import Departement from './pages/departement/Departement';
+import DepartementEdit from './pages/departement/formEdite/DepartementEdit';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -132,6 +133,10 @@ function App() {
         {
           path: '/departement',
           element: <Departement />
+        },
+        {
+          path: '/departementEdite/:id',
+          element: <DepartementEdit />
         },
         {
           path: '/contrats',

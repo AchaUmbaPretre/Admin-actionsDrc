@@ -58,28 +58,15 @@ const Departement = () => {
       cancelButtonText: 'Non',
     }).then((result) => {
       if (result.isConfirmed) {
-        navigate(`/clientUpdate/${id}`);
+        navigate(`/departementEdite/${id}`);
       }
     });
   };
-  
-  const handleDelete = (id) => {
-    confirm({
-      title: 'Confirmation',
-      content: 'Voulez-vous vraiment supprimer ?',
-      okText: 'Oui',
-      okType: 'danger',
-      cancelText: 'Non',
-      onOk() {
-        // Logique de suppression ici
-      },
-    });
-  };
 
-  const actionColumnStyle = { display: 'flex', justifyContent: 'space-between', alignItems: 'center' };
+  const actionColumnStyle = { display: 'flex', alignItems: 'center' };
   const renderActionColumn = (_, record) => (
     <Space size="middle" style={actionColumnStyle}>
-      <Link to={`/clientUpdate/${record.id}`}>
+      <Link to={`/departementEdite/${record.id}`}>
         <Button type="primary" icon={<EditOutlined />} onClick={() => handleEdit(record.id)}>
           Modifier
         </Button>
@@ -91,13 +78,11 @@ const Departement = () => {
   );
 
   useEffect(()=>{
-    
     const fetchData = async ()=> {
       try{
           const {data} = await axios.get(`${DOMAIN}/api/admin/departement`);
           setData(data)
           setLoading(false);
-  
         }catch(error){
           console.log(error)
         };
@@ -106,14 +91,13 @@ const Departement = () => {
   }, [])
   
   const columns = [
-    { title: '#', dataIndex: 'index', key: 'index', width: 80, render: (_, __, index) => index + 1 },
-    { title: 'Code de département', dataIndex: 'id', key: 'id', width: 200 },
-    { title: 'Nom de département', dataIndex: 'nom', key: 'nom', width: 400 },
-    { title: 'Action', key: 'action', width: 200, render: renderActionColumn },
+    { title: '#', dataIndex: 'index', key: 'index', width: 50, render: (_, __, index) => index + 1 },
+    { title: 'Nom de département', dataIndex: 'nom_departement', key: 'nom', width: 500 },
+    { title: 'Action', key: 'action', width: 80, render: renderActionColumn },
   ];
 
 
-/*   const handleDelete = async (id) => {
+    const handleDelete = async (id) => {
     try {
       const result = await Swal.fire({
         title: 'Es-tu sûr?',
@@ -126,13 +110,13 @@ const Departement = () => {
       });
   
       if (result.isConfirmed) {
-        await axios.delete(`${DOMAIN}/api/admin/client/${id}`);
+        await axios.delete(`${DOMAIN}/api/admin/departement/${id}`);
         window.location.reload();
       }
     } catch (err) {
       console.log(err);
     }
-  }; */
+  };
 
   const exportToExcel = () => {
         

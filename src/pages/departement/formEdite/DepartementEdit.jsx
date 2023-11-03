@@ -1,13 +1,17 @@
 import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
 import { useState } from 'react';
-import './departementForm.scss'
+import { useLocation, useNavigate } from 'react-router-dom';
 import config from '../../../config'
 import Swal from 'sweetalert2';
 
-const DepartementForm = ({handleModalClose}) => {
+const  DepartementEdit = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
+  const location = useLocation();
+  const navigate = useNavigate();
   const [data, setData] = useState('');
+  const id = location.pathname.split("/")[2];
+  const { nom_departement } = data;
 
 
   const handleInputChange = (e) => {
@@ -18,7 +22,6 @@ const DepartementForm = ({handleModalClose}) => {
 
 const handleClick = async (e) => {
   e.preventDefault();
-  handleModalClose()
 
   if(!data){
     Swal.fire({
@@ -68,4 +71,4 @@ const handleClick = async (e) => {
   )
 }
 
-export default DepartementForm
+export default DepartementEdit
