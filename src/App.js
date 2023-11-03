@@ -71,6 +71,7 @@ import PresenceListView from './pages/presence/presenceListView/PresenceListView
 import AffectationPdf from './pages/affectation/affectationPdf/AffectationPdf';
 import AffEdite2 from './pages/affectation/edite/AffEdite2';
 import RapportPresence from './pages/rapportPresence/RapportPresence';
+import Departement from './pages/departement/Departement';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -127,6 +128,10 @@ function App() {
         {
           path: '/formulaire',
           element: <Formulaire />
+        },
+        {
+          path: '/departement',
+          element: <Departement />
         },
         {
           path: '/contrats',

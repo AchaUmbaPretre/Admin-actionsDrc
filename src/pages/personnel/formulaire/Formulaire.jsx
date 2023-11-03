@@ -75,16 +75,13 @@ const Formulaire = ({handleModalClose}) => {
           }
           
           await axios.post(`${DOMAIN}/api/admin/employe`, { ...data, source: photoSrc});
-          
-          navigate('/personnel')
-          window.location.reload();
-
           await Swal.fire({
             title: 'Success',
             text: 'Employé créé avec succès!',
             icon: 'success',
             confirmButtonText: 'OK'
           });
+          navigate('/personnel')
          
         } catch (error) {
           await Swal.fire({
@@ -272,12 +269,12 @@ const Formulaire = ({handleModalClose}) => {
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Genre <span>*</span></label>
                                 <div className="form-radio">
-                                    <input type="radio" id="Choice1" onChange={handleChange} checked={data.gender === 'Homme'} name="gender" value="homme" />
-                                    <label for="Choice1">Homme</label>
-                                    <input type="radio" id="Choice2" onChange={handleChange} checked={data.gender === 'Femme'} name="gender" value="femme" />
-                                    <label for="Choice2">Femme</label>
-                                    <input type="radio" id="Choice3" onChange={handleChange} checked={data.gender === 'Autres'} name="gender" value="autres" />
-                                    <label for="Choice3">autres</label>
+                                  <input type="radio" id="Choice1" onChange={handleChange} checked={data.gender === 'Homme'} name="gender" value="homme" />
+                                  <label for="Choice1">Homme</label>
+                                  <input type="radio" id="Choice2" onChange={handleChange} checked={data.gender === 'Femme'} name="gender" value="femme" />
+                                  <label for="Choice2">Femme</label>
+                                  <input type="radio" id="Choice3" onChange={handleChange} checked={data.gender === 'Autres'} name="gender" value="autres" />
+                                  <label for="Choice3">autres</label>
                                 </div>
                             </div>
                         </div>

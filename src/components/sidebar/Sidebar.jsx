@@ -15,8 +15,10 @@ import {
   MoneyCollectOutlined,
   PlusOutlined,
   FileSearchOutlined,
+  DepartmentOutlined 
 } from '@ant-design/icons';
 import actions from './../../assets/actionssarl.PNG';
+import { ApartmentOutlined, LocalFireDepartmentOutlined } from '@mui/icons-material';
 
 const { SubMenu } = Menu;
 
@@ -44,6 +46,9 @@ const Sidebar = () => {
           </Menu.Item>
           <Menu.Item key="/personnel" icon={<UserOutlined />} title="Personnel" style={{ fontSize: '16px' }}>
             <Link to="/personnel">Personnel</Link>
+          </Menu.Item>
+          <Menu.Item key="/departement" icon={<ApartmentOutlined />} title="Département" style={{ fontSize: '16px' }}>
+            <Link to="/departement">Département</Link>
           </Menu.Item>
           <Menu.Item key="/contrats" icon={<CheckCircleOutlined />} title="Contrats" style={{ fontSize: '16px' }}>
             <Link to="/contrats">Contrats</Link>
