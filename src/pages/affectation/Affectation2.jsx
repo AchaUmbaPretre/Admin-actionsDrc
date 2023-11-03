@@ -14,15 +14,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import AdsClickIcon from '@mui/icons-material/AdsClick';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Tag } from 'antd';
+import { Button, Input, Popconfirm, Space, Table, Tag } from 'antd';
 import moment from 'moment';
 
 const Affectation2 = () => {
@@ -256,17 +250,26 @@ const Affectation2 = () => {
             return (
               <>
                 <div className="table-icons-row">
-                  <EditOutlined className="userListBtn" onClick={handleEdit} />
+                  <Popconfirm
+                    title="Êtes-vous sûr de vouloir modifier?"
+                    onConfirm={handleEdit}
+                    okText="Oui"
+                    cancelText="Non"
+                  >
+                    <EditOutlined className='userListBtn'/>
+                  </Popconfirm>
                   <VisibilityOutlined
                     className="userEye"
                     onClick={() => navigate(`/affectationView/${record.id}`)}
                   />
-                  <DeleteOutline
-                    className="userListDelete"
-                    onClick={() => {
-                      handleDelete(record.id);
-                    }}
-                  />
+                  <Popconfirm
+                    title="Êtes-vous sûr de vouloir supprimer?"
+                    onConfirm={()=>{handleDelete(record.id)}}
+                    okText="Oui"
+                    cancelText="Non"
+                  >
+                    <DeleteOutline className="userListDelete"/>
+                  </Popconfirm>
                 </div>
               </>
             );

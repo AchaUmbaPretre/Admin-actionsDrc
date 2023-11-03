@@ -19,7 +19,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import AdsClickIcon from '@mui/icons-material/AdsClick';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Space, Table, Tag } from 'antd';
+import { Button, Input, Popconfirm, Space, Table, Tag } from 'antd';
 import moment from 'moment';
 import Affectation2 from './Affectation2';
 import {FileExcelOutlined} from '@ant-design/icons';
@@ -241,36 +241,34 @@ const getColumnSearchProps = (dataIndex) => ({
       dataIndex: 'action',
       render: (text, record) => {
         const handleEdit = () => {
-          Swal.fire({
-            title: 'Confirmation',
-            text: 'Voulez-vous vraiment modifier ?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Oui',
-            cancelButtonText: 'Non',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              navigate(`/affectationEdit/${record.id}`);
-            }
-          });
+            navigate(`/affectationEdit/${record.id}`);
         };
     
         return (
           <>
             <div className="table-icons-row">
-              <EditOutlined className="userListBtn" onClick={handleEdit} />
+                <div className="userOvert0">
+                  <Popconfirm
+                      title="Êtes-vous sûr de vouloir modifier?"
+                      onConfirm={handleEdit}
+                      okText="Oui"
+                      cancelText="Non"
+                    >
+                      <EditOutlined className='userListBtn'/>
+                    </Popconfirm>
+                </div>
               <VisibilityOutlined
                 className="userEye"
                 onClick={() => navigate(`/affectations/${record.id}`)}
               />
-              <DeleteOutline
-                className="userListDelete"
-                onClick={() => {
-                  handleDelete(record.id, record.userId);
-                }}
-              />
+              <Popconfirm
+                title="Êtes-vous sûr de vouloir supprimer?"
+                onConfirm={()=>{handleDelete(record.id, record.userId)}}
+                okText="Oui"
+                cancelText="Non"
+              >
+                <DeleteOutline className="userListDelete"/>
+              </Popconfirm>
             </div>
           </>
         );
@@ -281,21 +279,9 @@ const getColumnSearchProps = (dataIndex) => ({
 
   const handleDelete = async (id, userId) => {
     try {
-      const result = await Swal.fire({
-        title: 'Es-tu sûr?',
-        text: "Vous ne pourrez pas revenir en arrière !",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Oui, supprimez-le!'
-      });
-  
-      if (result.isConfirmed) {
         window.location.reload();
         await axios.delete(`${DOMAIN}/api/admin/deleteAff/${id}`);
         await axios.put(`${DOMAIN}/api/admin/affectationPutAgent/${userId}`);
-      }
     } catch (err) {
       console.log(err);
     }
