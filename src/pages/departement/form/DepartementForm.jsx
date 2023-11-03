@@ -57,7 +57,7 @@ const handleClick = async (e) => {
                 <div className="form-rows">
                     <div className="form-row">
                       <label htmlFor="" className="label-form">Nom de département <span>*</span></label>
-                      <input type="text" placeholder='Saisir le nom de département....' className="input-form" onChange={handleInputChange} />
+                      <input type="text" name='nom_departement' placeholder='Saisir le nom de département....' className="input-form" onChange={handleInputChange} />
                     </div>
                 </div>  
                 <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>
