@@ -21,7 +21,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import IconButton from '@mui/material/IconButton';
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import { Breadcrumb } from 'antd';
+import { Breadcrumb, Popconfirm } from 'antd';
 import { HomeOutlined, UserOutlined, FileExcelOutlined} from '@ant-design/icons';
 
 const style = {
@@ -78,38 +78,13 @@ const Mission = () => {
     );
     
     const handleEdit = (id) => {
-    Swal.fire({
-      title: 'Confirmation',
-      text: 'Voulez-vous vraiment modifier ?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui',
-      cancelButtonText: 'Non',
-    }).then((result) => {
-      if (result.isConfirmed) {
         navigate(`/missionEdite/${id}`);
-      }
-    });
     }
 
     const handleDelete = async (id) => {
         try {
-          const result = await Swal.fire({
-            title: 'Es-tu sûr?',
-            text: "Vous ne pourrez pas revenir en arrière !",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Oui, supprimez-le!'
-          });
-      
-          if (result.isConfirmed) {
-            await axios.delete(`${DOMAIN}/api/admin/mission/${id}`);
-            window.location.reload();
-          }
+          await axios.delete(`${DOMAIN}/api/admin/mission/${id}`);
+          window.location.reload();
         } catch (err) {
           console.log(err);
         }
@@ -178,7 +153,14 @@ const Mission = () => {
               <TableCell>
                 <div className="table-icons-row">
                   <div className="userOvert2">
-                    <DeleteOutline className="userListDelete" onClick={() => { handleDelete(group.agent_id) }} />
+                    <Popconfirm
+                      title="Êtes-vous sûr de vouloir supprimer?"
+                      onConfirm={() => { handleDelete(group.agent_id) }}
+                      okText="Oui"
+                      cancelText="Non"
+                    >
+                      <DeleteOutline className="userListDelete"/>
+                    </Popconfirm>
                     <span className='userOvert'>Supprimer</span>
                   </div>
                 </div>
@@ -211,7 +193,14 @@ const Mission = () => {
                               {row.heureSortant.substring(0, 5)}
                             </TableCell>
                             <TableCell>
-                              <DriveFileRenameOutlineOutlinedIcon className='mission-icon' onClick={() => { handleEdit(row.mission_id) }} />
+                              <Popconfirm
+                                title="Êtes-vous sûr de vouloir modifier?"
+                                onConfirm={() => { handleEdit(row.mission_id) }}
+                                okText="Oui"
+                                cancelText="Non"
+                              >
+                                <DriveFileRenameOutlineOutlinedIcon className='mission-icon' />
+                              </Popconfirm>
                             </TableCell>
                           </TableRow>
                         ))}
