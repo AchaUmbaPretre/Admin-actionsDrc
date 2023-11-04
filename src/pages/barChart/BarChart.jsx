@@ -13,8 +13,8 @@ const BarChart = ({ datas }) => {
   }, [datas]);
 
   const formatData = (datas) => {
-    const labels = datas.map(item => item.prix);
-    const votes = datas.map(item => item.salaire);
+    const votes = datas.map(item => item.prix);
+    const labels = datas.map(item => item.salaire);
 
     return {
       labels: labels,
