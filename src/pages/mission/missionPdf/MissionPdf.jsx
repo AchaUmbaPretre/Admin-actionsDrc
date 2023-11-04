@@ -95,12 +95,12 @@ const MissionPdf = () => {
                     <Image style={styles.img} src={logo} />
                     <Text style={styles.subTitle}>Le {moment().format('DD/MM/YYYY')}</Text>
                   </View>
-                    <Text style={styles.title}>Liste des missions</Text>
+                    <Text style={styles.title}>Liste des horaires</Text>
                     <View style={styles.table}>
                         <View style={[styles.tableRow, styles.tableHeader]}>
                             <Text style={styles.tableCells}>N°</Text>
                             <Text style={styles.tableCell}>Client</Text>
-                            <Text style={styles.tableCell}>Type de contrat</Text>
+                            <Text style={styles.tableCell}>Nom</Text>
                             <Text style={styles.tableCell}>Jour</Text>
                             <Text style={styles.tableCell}>Heure de debut</Text>
                             <Text style={styles.tableCell}>Heure de la fin</Text>

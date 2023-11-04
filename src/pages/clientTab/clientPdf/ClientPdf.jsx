@@ -29,12 +29,12 @@ const ClientPdf = () => {
         width: '9%',
       },
       subTitle: {
-        fontSize: 12,
+        fontSize: 11,
         marginBottom: 10,
         textAlign: 'right',
       },
       title: {
-        fontSize: 17,
+        fontSize: 16,
         marginBottom: 20,
         textAlign: 'center',
         fontWeight: 'bold',
@@ -47,8 +47,8 @@ const ClientPdf = () => {
       },
       tableHeader: {
         backgroundColor: '#f2f2f2',
-        fontSize: 12,
-        padding: 5,
+        fontSize: 11,
+        padding: 3,
         fontWeight: 'bold',
       },
       tableRow: {
@@ -60,15 +60,15 @@ const ClientPdf = () => {
       tableCell: {
         padding: 10,
         flex: 1,
-        fontSize: 11,
+        fontSize: 9,
         textAlign: 'center'
       },
       tableCells: {
-        padding: 10,
-        fontSize: 11,
+        padding: 8,
+        fontSize: 10,
       },
       textTitle: {
-        fontSize: 16,
+        fontSize: 10,
         fontWeight: 'bold',
         textAlign: 'right',
         fontStyle: 'italic',

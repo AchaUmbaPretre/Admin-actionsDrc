@@ -23,6 +23,7 @@ import './payement.scss'
 import moment from 'moment';
 import PaiementSearch from './paiementSearch/PaiementSearch';
 import BarReturn from '../../components/barReturn/BarReturn';
+import { Popconfirm } from 'antd';
 
 const style = {
     position: 'absolute',
@@ -114,21 +115,36 @@ const Payement = () => {
           },
         },
       {field: 'action', HeaderName: 'Action', width: 175, renderCell: (params) =>{
+        const handleEdit = () => {
+          navigate(`/payementEdit/${params.row.id}`);
+        };
           return(
               <>
                 <div className="table-icons-row">
                   <div className="userOvert0">
-                    <Link onClick={''}>
-                      <EditOutlined className="userListBtn" onClick={() => navigate(`/payementEdit/${params.row.id}`)} />
+                    <Popconfirm
+                      title="Êtes-vous sûr de vouloir modifier?"
+                      onConfirm={handleEdit}
+                      okText="Oui"
+                      cancelText="Non"
+                    >
+                      <EditOutlined className='userListBtn'/>
+                    </Popconfirm>
                       <span className='userOvert'>Modifier</span>
-                    </Link>
                   </div>
                   <div className="userOvert1">
                     <VisibilityOutlined className='userEye' onClick={() => navigate(`/payementView/${params.row.id}`)} />
                     <span className='userOvert'>détail</span>
                   </div>
                   <div className="userOvert2">
-                    <DeleteOutline className="userListDelete" onClick={() => { handleDelete(params.row.id) }} />
+                    <Popconfirm
+                    title="Êtes-vous sûr de vouloir supprimer?"
+                    onConfirm={()=>{handleDelete(params.row.id)}}
+                    okText="Oui"
+                    cancelText="Non"
+                    >
+                      <DeleteOutline className="userListDelete"/>
+                    </Popconfirm>
                     <span className='userOvert'>Supprimer</span>
                   </div>
                 </div>
