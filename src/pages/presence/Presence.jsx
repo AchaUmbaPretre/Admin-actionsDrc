@@ -25,6 +25,7 @@ import PresenceSearch from './presenceSearch/PresenceSearch';
 import moment from 'moment';
 import BarReturn from '../../components/barReturn/BarReturn';
 import {FileExcelOutlined} from '@ant-design/icons';
+import { Popconfirm } from 'antd';
 
 const style = {
   position: 'absolute',
@@ -68,20 +69,8 @@ const Presence = () => {
 
 const handleDelete = async (id) => {
   try {
-    const result = await Swal.fire({
-      title: 'Es-tu sûr?',
-      text: "Vous ne pourrez pas revenir en arrière !",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui, supprimez-le!'
-    });
-
-    if (result.isConfirmed) {
       await axios.delete(`${DOMAIN}/api/admin/presence/${id}`);
       window.location.reload();
-    }
   } catch (err) {
     console.log(err);
   }
@@ -174,21 +163,29 @@ const handleDelete = async (id) => {
               <>
                 <div className="table-icons-row">
                   <div className="userOvert0">
-                    <Link onClick={''}>
-                      <EditOutlined className="userListBtn" onClick={() => navigate(`/presenceEdit/${params.row.id}`)} />
-                      <span className='userOvert'>Modifier</span>
-                    </Link>
+                    <Popconfirm
+                        title="Êtes-vous sûr de vouloir modifier?"
+                        onConfirm={() => navigate(`/presenceEdit/${params.row.id}`)}
+                        okText="Oui"
+                        cancelText="Non"
+                    >
+                        <EditOutlined className='userListBtn'/>
+                    </Popconfirm>
+                    <span className='userOvert'>Modifier</span>
                   </div>
-{/*                   <div className="userOvert1">
-                    <VisibilityOutlined className='userEye' onClick={() => navigate(`/presenceView/${params.row.emp1_id}/${params.row.id}`)} />
-                    <span className='userOvert'>détail</span>
-                  </div> */}
                   <div className="userOvert1">
                     <VisibilityOutlined className='userEye' onClick={() => navigate(`/presenceListView/${params.row.emp1_id}`)} />
                     <span className='userOvert'>détail</span>
                   </div>
                   <div className="userOvert2">
-                    <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
+                    <Popconfirm
+                  title="Êtes-vous sûr de vouloir supprimer?"
+                  onConfirm={()=>{handleDelete(params.row.id)}}
+                  okText="Oui"
+                  cancelText="Non"
+                  >
+                    <DeleteOutline className="userListDelete"/>
+                  </Popconfirm>
                     <span className='userOvert'>Supprimer</span>
                   </div>
                 </div>

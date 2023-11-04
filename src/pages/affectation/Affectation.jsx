@@ -253,9 +253,9 @@ const getColumnSearchProps = (dataIndex) => ({
                       onConfirm={handleEdit}
                       okText="Oui"
                       cancelText="Non"
-                    >
+                  >
                       <EditOutlined className='userListBtn'/>
-                    </Popconfirm>
+                  </Popconfirm>
                 </div>
               <VisibilityOutlined
                 className="userEye"
