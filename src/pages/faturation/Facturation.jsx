@@ -22,6 +22,7 @@ import BarReturn from '../../components/barReturn/BarReturn';
 import {FileExcelOutlined} from '@ant-design/icons';
 import { DollarOutlined, HourglassOutlined } from '@ant-design/icons';
 import { MinusOutlined } from '@ant-design/icons';
+import { Popconfirm } from 'antd';
 
 const style = {
   position: 'absolute',
@@ -65,20 +66,9 @@ const Facturation = () => {
 
   const handleDelete = async (id) => {
     try {
-      const result = await Swal.fire({
-        title: 'Es-tu sûr?',
-        text: "Vous ne pourrez pas revenir en arrière !",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Oui, supprimez-le!'
-      });
-  
-      if (result.isConfirmed) {
+    
         await axios.delete(`${DOMAIN}/api/admin/facture/${id}`);
         window.location.reload();
-      }
     } catch (err) {
       console.log(err);
     }
@@ -115,8 +105,8 @@ const Facturation = () => {
           <div
             style={{
               backgroundColor: backgroundColor,
-              padding: '5px',
-              borderRadius: '5px',
+              padding: '5px 10px',
+              borderRadius: '50px',
               display: 'flex',
               alignItems: 'center',
               color : '#fff'
@@ -172,29 +162,21 @@ const Facturation = () => {
       width: 160,
       renderCell: (params) => {
         const handleEdit = () => {
-          Swal.fire({
-            title: 'Confirmation',
-            text: 'Voulez-vous vraiment modifier ?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Oui',
-            cancelButtonText: 'Non',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              navigate(`/facturationPut/${params.row.id}`);
-            }
-          });
+          navigate(`/facturationPut/${params.row.id}`);
         };
         return (
           <>
             <div className="table-icons-row">
               <div className="userOvert0">
-                <Link>
-                  <EditOutlined className="userListBtn" onClick={handleEdit} />
+                  <Popconfirm
+                    title="Êtes-vous sûr de vouloir modifier?"
+                    onConfirm={handleEdit}
+                    okText="Oui"
+                    cancelText="Non"
+                  >
+                    <EditOutlined className='userListBtn'/>
+                  </Popconfirm>
                   <span className="userOvert">Modifier</span>
-                </Link>
               </div>
               <div className="userOvert1">
                 <VisibilityOutlined
@@ -204,12 +186,14 @@ const Facturation = () => {
                 <span className="userOvert">Détail</span>
               </div>
               <div className="userOvert2">
-                <DeleteOutline
-                  className="userListDelete"
-                  onClick={() => {
-                    handleDelete(params.row.id);
-                  }}
-                />
+                <Popconfirm
+                  title="Êtes-vous sûr de vouloir supprimer?"
+                  onConfirm={()=>{handleDelete(params.row.id)}}
+                  okText="Oui"
+                  cancelText="Non"
+                >
+                  <DeleteOutline className="userListDelete"/>
+                </Popconfirm>
                 <span className="userOvert">Supprimer</span>
               </div>
             </div>
