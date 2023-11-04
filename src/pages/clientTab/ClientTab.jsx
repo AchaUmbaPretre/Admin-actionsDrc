@@ -97,7 +97,14 @@ const ClientTab = () => {
                   <span className='userOvert'>détail</span>
                 </div>
                 <div className="userOvert2">
-                  <DeleteOutline className="userListDelete" onClick={()=>{handleDelete(params.row.id)}} />
+                  <Popconfirm
+                        title="Êtes-vous sûr de vouloir supprimer ?"
+                        onConfirm={()=>{handleDelete(params.row.id)}}
+                        okText="Oui"
+                        cancelText="Non"
+                  >
+                    <DeleteOutline className="userListDelete" />
+                  </Popconfirm>
                   <span className='userOvert'>Supprimer</span>
                 </div>
             </div>
