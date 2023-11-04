@@ -15,6 +15,7 @@ import axios from 'axios';
 import ContratFonction from './contratFonction/ContratFonction';
 import Swal from 'sweetalert2';
 import BarReturn from '../../components/barReturn/BarReturn';
+import { Popconfirm } from 'antd';
 
 const style = {
     position: 'absolute',
@@ -67,36 +68,35 @@ const Fonctions = () => {
     },
     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
       const handleEdit = () => {
-        Swal.fire({
-          title: 'Confirmation',
-          text: 'Voulez-vous vraiment modifier ?',
-          icon: 'question',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Oui',
-          cancelButtonText: 'Non',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            navigate(`/contratFonctionEdit/${params.row.id}`);
-          }
-        });
+        navigate(`/contratFonctionEdit/${params.row.id}`);
       }
         return(
           <>
             <div className="table-icons-row">
                 <div className="userOvert0">
-                  <Link onClick={handleEdit}>
+                  <Popconfirm
+                        title="Êtes-vous sûr de vouloir modifier?"
+                        onConfirm={handleEdit}
+                        okText="Oui"
+                        cancelText="Non"
+                  >
                     <ModeEditOutlineIcon className='userListBtn'/>
+                  </Popconfirm>
                     <span className='userOvert'>Modifier</span>
-                  </Link>
                 </div>
                 <div className="userOvert1">
                   <VisibilityOutlined className='userEye' onClick={() => navigate(`/fonctionView/${params.row.id}`)} />
                   <span className='userOvert'>détail</span>
                 </div>
                 <div className="userOvert2">
-                  <DeleteOutline className="userListDelete" onClick={() => { handleDelete(params.row.id) }} />
+                  <Popconfirm
+                        title="Êtes-vous sûr de vouloir supprimer?"
+                        onConfirm={() => { handleDelete(params.row.id) }}
+                        okText="Oui"
+                        cancelText="Non"
+                  >
+                    <DeleteOutline className="userListDelete" />
+                  </Popconfirm>
                   <span className='userOvert'>Supprimer</span>
                 </div>
             </div>
@@ -121,20 +121,8 @@ const Fonctions = () => {
 
  const handleDelete = async (id) => {
   try {
-    const result = await Swal.fire({
-      title: 'Es-tu sûr?',
-      text: "Vous ne pourrez pas revenir en arrière !",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui, supprimez-le!'
-    });
-
-    if (result.isConfirmed) {
       await axios.delete(`${DOMAIN}/api/admin/contratInfo/${id}`);
       window.location.reload();
-    }
   } catch (err) {
     console.log(err);
   }
