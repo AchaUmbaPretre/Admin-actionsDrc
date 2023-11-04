@@ -422,7 +422,7 @@ const PaiementAgent = () => {
         Swal.close(); 
       });
 
-      navigate('/payement')  }));
+      navigate('/paiement') }));
     } catch (error) {
       console.error('Erreur lors de la création du payement :', error);
       Swal.fire({
