@@ -22,6 +22,10 @@ const RapportPresence = () => {
   const handleOpen = () => setOpen(true);
 
 
+  const handleEdit = (id) => {
+    navigate(`/presenceEdit/${id}`);
+};
+
 const handleDelete = async (id) => {
   try {
     await axios.delete(`${DOMAIN}/api/admin/presence/${id}`);
@@ -44,10 +48,16 @@ const columns = [
     title: 'Action',
     key: 'action',
     render: (text, record) => (
+        
       <Space size="middle">
-        <Link to={`/presenceEdit/${record.id}`}>
+        <Popconfirm
+          title="Êtes-vous sûr de vouloir modifier?"
+          onConfirm={()=> handleEdit(record.id)}
+          okText="Oui"
+          cancelText="Non"
+        >
           <Button icon={<EditOutlined />} style={{ color: 'green' }} />
-        </Link>
+        </Popconfirm>
         <Link to={`/presenceListView/${record.emp1_id}`}>
           <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
         </Link>

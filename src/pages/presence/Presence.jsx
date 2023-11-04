@@ -190,10 +190,6 @@ const handleDelete = async (id) => {
                   </div>
                 </div>
               </>
-           {/*  <div className="table-icons-row">
-                <VisibilityIcon className='userEye' onClick={() => navigate(`/presenceView/${params.row.emp1_id}/${params.row.id}`)} />
-                <DeleteOutline className="userListDelete"  />
-            </div> */}
           </>
 
         )
