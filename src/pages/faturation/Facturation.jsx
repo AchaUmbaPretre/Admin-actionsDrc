@@ -122,7 +122,6 @@ const Facturation = () => {
               color : '#fff'
             }}
           >
-            {icon}
             {`${amount} $`}
           </div>
         );
