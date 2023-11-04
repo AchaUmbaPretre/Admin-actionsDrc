@@ -4,7 +4,6 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { DataGrid } from '@mui/x-data-grid'
 import { Link } from 'react-router-dom';
 import { DeleteOutline, EditOutlined, AddCircleOutline, VisibilityOutlined } from '@mui/icons-material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import { useEffect, useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
@@ -22,6 +21,7 @@ import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import BarReturn from '../../components/barReturn/BarReturn';
 import {FileExcelOutlined} from '@ant-design/icons';
+import { Popconfirm } from 'antd';
 
 const style = {
   position: 'absolute',
@@ -76,29 +76,21 @@ const ClientTab = () => {
     },
     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
       const handleEdit = () => {
-        Swal.fire({
-          title: 'Confirmation',
-          text: 'Voulez-vous vraiment modifier ?',
-          icon: 'question',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Oui',
-          cancelButtonText: 'Non',
-        }).then((result) => {
-          if (result.isConfirmed) {
             navigate(`/clientUpdate/${params.row.id}`);
-          }
-        });
       }
         return(
           <>
             <div className="table-icons-row">
                 <div className="userOvert0">
-                  <Link onClick={handleEdit}>
-                    <ModeEditOutlineIcon className='userListBtn'/>
+                  <Popconfirm
+                        title="Êtes-vous sûr de vouloir modifier?"
+                        onConfirm={handleEdit}
+                        okText="Oui"
+                        cancelText="Non"
+                  >
+                    <EditOutlined className='userListBtn'/>
+                  </Popconfirm>
                     <span className='userOvert'>Modifier</span>
-                  </Link>
                 </div>
                 <div className="userOvert1">
                   <VisibilityOutlined className='userEye' onClick={() => navigate(`/viewsClient/${params.row.id}`)} />

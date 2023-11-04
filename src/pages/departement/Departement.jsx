@@ -19,7 +19,7 @@ import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import BarReturn from '../../components/barReturn/BarReturn';
 import {FileExcelOutlined} from '@ant-design/icons';
-import { Table, Space, Button} from 'antd';
+import { Table, Space, Button, Popconfirm} from 'antd';
 import { EditOutlined, EyeOutlined, DeleteOutlined } from '@ant-design/icons';
 import DepartementForm from './form/DepartementForm';
 
@@ -47,33 +47,32 @@ const Departement = () => {
 
 
   const handleEdit = (id) => {
-    Swal.fire({
-      title: 'Confirmation',
-      text: 'Voulez-vous vraiment modifier ?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui',
-      cancelButtonText: 'Non',
-    }).then((result) => {
-      if (result.isConfirmed) {
         navigate(`/departementEdite/${id}`);
-      }
-    });
   };
 
   const actionColumnStyle = { display: 'flex', alignItems: 'center' };
   const renderActionColumn = (_, record) => (
     <Space size="middle" style={actionColumnStyle}>
-      <Link to={`/departementEdite/${record.id}`}>
-        <Button type="primary" icon={<EditOutlined />} onClick={() => handleEdit(record.id)}>
+      <Popconfirm
+        title="Êtes-vous sûr de vouloir modifier?"
+        onConfirm={() => handleEdit(record.id)}
+        okText="Oui"
+        cancelText="Non"
+      >
+        <Button type="primary" icon={<EditOutlined />}>
           Modifier
         </Button>
-      </Link>
-      <Button type="danger" icon={<DeleteOutlined />} onClick={() => handleDelete(record.id)} style={{"background" : "red", "color" : "#fff"}}>
-        Supprimer
-      </Button>
+      </Popconfirm>
+      <Popconfirm
+        title="Êtes-vous sûr de vouloir supprimer?"
+        onConfirm={() => handleDelete(record.id)}
+        okText="Oui"
+        cancelText="Non"
+      >
+        <Button type="danger" icon={<DeleteOutlined />}  style={{"background" : "red", "color" : "#fff"}}>
+          Supprimer
+        </Button>
+      </Popconfirm>
     </Space>
   );
 
