@@ -53,16 +53,9 @@ const Departement = () => {
   const actionColumnStyle = { display: 'flex', alignItems: 'center' };
   const renderActionColumn = (_, record) => (
     <Space size="middle" style={actionColumnStyle}>
-      <Popconfirm
-        title="Êtes-vous sûr de vouloir modifier?"
-        onConfirm={() => handleEdit(record.id)}
-        okText="Oui"
-        cancelText="Non"
-      >
-        <Button type="primary" icon={<EditOutlined />}>
+        <Button type="primary" icon={<EditOutlined />} onClick={()=> handleEdit(record.id)}>
           Modifier
         </Button>
-      </Popconfirm>
       <Popconfirm
         title="Êtes-vous sûr de vouloir supprimer?"
         onConfirm={() => handleDelete(record.id)}

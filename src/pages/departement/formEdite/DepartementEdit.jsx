@@ -34,6 +34,7 @@ const  DepartementEdit = () => {
     };
     fetchData();
   }, [DOMAIN, id]);
+  
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -54,7 +55,7 @@ const  DepartementEdit = () => {
           Swal.fire({
             icon: 'info',
             title: 'Aucune modification',
-            text: 'Aucune donnée n\'a été modifiée.',
+            text: 'Vous aviez rien modifié.',
           });
         }
       }

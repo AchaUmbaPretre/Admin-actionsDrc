@@ -63,10 +63,26 @@ useEffect(() => {
   };
   fetchData();
 }, []);
+
+const handleClick = async (e) => {
+  e.preventDefault();
+
+  Swal.fire({
+    title: 'Confirmation',
+    text: 'Voulez-vous vraiment modifier ?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Oui',
+    cancelButtonText: 'Non',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      handleClick2();
+    }
+  });
+};
     
 
-  const handleClick = async (e) => {
-    e.preventDefault();
+  const handleClick2 = async (e) => {
 
     try {
       await axios.put(`${DOMAIN}/api/admin/contrat/${id}`, data);
