@@ -45,7 +45,7 @@ const PresentEdit = () => {
         fetchData()
     }, [id]);
 
-    const handleClick = async (e) => {
+/*     const handleClick = async (e) => {
         e.preventDefault();
     
         try {
@@ -67,8 +67,47 @@ const PresentEdit = () => {
     
           console.log(err);
         }
-      }
+      } */
 
+      const handleClick = async (e) => {
+        e.preventDefault();
+      
+        // Afficher la boîte de dialogue de confirmation
+        Swal.fire({
+          title: 'Confirmation',
+          text: 'Voulez-vous vraiment modifier la présence ?',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonText: 'Oui',
+          cancelButtonText: 'Non',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // L'utilisateur a cliqué sur "Oui", effectuez la modification
+            updatePresence();
+          }
+        });
+      };
+
+      const updatePresence = async () => {
+        try {
+          await axios.put(`${DOMAIN}/api/admin/presencePut/${id}`, data);
+          navigate('/presence');
+          Swal.fire({
+            title: 'Succès',
+            text: 'La présence a été modifiée avec succès !',
+            icon: 'success',
+            confirmButtonText: 'OK',
+          });
+        } catch (err) {
+          Swal.fire({
+            title: 'Erreur',
+            text: err.message,
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
+          console.log(err);
+        }
+      };
 
   return (
     <>
