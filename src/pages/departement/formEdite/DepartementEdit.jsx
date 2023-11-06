@@ -10,6 +10,7 @@ const  DepartementEdit = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const location = useLocation();
   const navigate = useNavigate();
+  const [initialData, setInitialData] = useState({});
   const [data, setData] = useState({});
   const id = location.pathname.split("/")[2];
   const { nom_departement } = data;
@@ -21,22 +22,51 @@ const  DepartementEdit = () => {
     setData(capitalizedData);
   };
 
-  useEffect(()=>{
-    const fetchData = async ()=> {
-        try{
-            const res = await axios.get(`${DOMAIN}/api/admin/departement/${id}`);
-            setData(res.data[0])
-    
-          }catch(error){
-            console.log(error)
-          };
-    }
-    fetchData()
-}, [id]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${DOMAIN}/api/admin/departement/${id}`);
+        setData(res.data[0]);
+        setInitialData(res.data[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [DOMAIN, id]);
 
-
-const handleClick = async (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
+
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Voulez-vous vraiment modifier ?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Oui',
+      cancelButtonText: 'Non',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const hasChanged = hasDataChanged();
+        if (hasChanged) {
+          handleClick2();
+        } else {
+          Swal.fire({
+            icon: 'info',
+            title: 'Aucune modification',
+            text: 'Aucune donnée n\'a été modifiée.',
+          });
+        }
+      }
+    });
+  };
+
+  const hasDataChanged = () => {
+    return data.nom_departement !== initialData.nom_departement;
+  };
+
+
+const handleClick2 = async (e) => {
   
     try {
       await axios.put(`${DOMAIN}/api/admin/departement/${id}`, {nom_departement: data});
@@ -61,7 +91,7 @@ const handleClick = async (e) => {
                 <div className="form-rows">
                     <div className="form-row">
                       <label htmlFor="" className="label-form">Nom de département <span>*</span></label>
-                      <input type="text" value={nom_departement}  placeholder='Saisir le nom de département....' className="input-form" onChange={handleInputChange} />
+                      <input type="text" name='nom_departement' value={nom_departement}  placeholder='Saisir le nom de département....' className="input-form" onChange={handleInputChange} />
                     </div>
                 </div>  
                 <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>

@@ -5,7 +5,6 @@ import SendIcon from '@mui/icons-material/Send';
 import userImg from '../../../assets/user.png'
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import Webcam from 'react-webcam';
 import config from '../../../config';
 import Select from 'react-select';
 import Cropper from 'react-easy-crop';
@@ -13,8 +12,8 @@ import moment from 'moment';
 
 
 const Edit = () => {
-    const DOMAIN = config.REACT_APP_SERVER_DOMAIN
 
+const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
 const [data, setData] = useState({});
 const {first_name, last_name,date_of_birth,etat_civil, gender, address, phone_number, email, number_inpp, number_cnss, nombre_enfant, identification_number,identification_type,skills,certifications,employment_status,source} = data;
 const location = useLocation();
@@ -202,8 +201,6 @@ const handleClick2 = async (e) => {
     setZoom(1);
   };
 
-
-console.log(source)
   return (
     <>
         <div className="edit-person">
