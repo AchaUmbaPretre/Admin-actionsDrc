@@ -278,6 +278,8 @@ const getColumnSearchProps = (dataIndex) => ({
   ];
 
   const handleDelete = async (id, userId) => {
+
+    console.log(userId)
     try {
         window.location.reload();
         await axios.delete(`${DOMAIN}/api/admin/deleteAff/${id}`);

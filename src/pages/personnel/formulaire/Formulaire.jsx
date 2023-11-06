@@ -75,13 +75,14 @@ const Formulaire = ({handleModalClose}) => {
           }
           
           await axios.post(`${DOMAIN}/api/admin/employe`, { ...data, source: photoSrc});
+          navigate('/personnel')
+          window.location.reload();
           await Swal.fire({
             title: 'Success',
             text: 'Employé créé avec succès!',
             icon: 'success',
             confirmButtonText: 'OK'
           });
-          navigate('/personnel')
          
         } catch (error) {
           await Swal.fire({

@@ -46,6 +46,12 @@ li{
     font-family: sans-serif;
     padding: 16px;
   }
+
+  @media print {
+    .print-button {
+      display: none;
+    }
+  }
   
   .Crop-Controls {
     margin-bottom: 10px;

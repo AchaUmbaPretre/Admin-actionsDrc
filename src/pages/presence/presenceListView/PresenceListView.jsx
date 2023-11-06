@@ -121,6 +121,7 @@ const handleDelete = async (id) => {
   const columns = [
     { field: 'first_name', headerName: 'Nom', width: 110 },
     { field: 'last_name', headerName: 'Post-nom', width: 110 },
+    { field: 'dayOfWeek', headerName: 'Jour', width: 100 },
     {
         field: 'date',
         headerName: 'Date de la présence',
@@ -131,19 +132,19 @@ const handleDelete = async (id) => {
     {
         field: 'check_in_time',
         headerName: "Heure d'arrivée",
-        width: 150,
+        width: 120,
         valueGetter: (params) => params.row.check_in_time.substring(0, 5)
     },
     {
       field: 'check_out_time',
       headerName: 'Heure de départ',
-      width: 150,
+      width: 120,
       valueGetter: (params) => params.row.check_out_time.substring(0, 5)
     },
     {
       field: 'presence_status',
       headerName: 'Status',
-      width: 140,
+      width: 120,
       renderCell: (params) => {
         let backgroundColor, color, icon;
     
@@ -176,7 +177,7 @@ const handleDelete = async (id) => {
         );
       }
     },
-    {field: 'action', HeaderName: 'Action', width: 160, renderCell: (params) =>{
+    {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
       return(
         <>
 
