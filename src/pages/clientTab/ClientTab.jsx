@@ -82,15 +82,8 @@ const ClientTab = () => {
           <>
             <div className="table-icons-row">
                 <div className="userOvert0">
-                  <Popconfirm
-                        title="Êtes-vous sûr de vouloir modifier?"
-                        onConfirm={handleEdit}
-                        okText="Oui"
-                        cancelText="Non"
-                  >
-                    <EditOutlined className='userListBtn'/>
-                  </Popconfirm>
-                    <span className='userOvert'>Modifier</span>
+                  <EditOutlined className='userListBtn' onClick={handleEdit}/>
+                  <span className='userOvert'>Modifier</span>
                 </div>
                 <div className="userOvert1">
                   <VisibilityOutlined className='userEye' onClick={() => navigate(`/viewsClient/${params.row.id}`)} />
