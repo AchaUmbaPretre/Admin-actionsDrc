@@ -69,7 +69,6 @@ const Personnel = () => {
 
 const handleDelete = async (id) => {
   try {
-
       await axios.put(`${DOMAIN}/api/admin/employes/${id}`);
       window.location.reload();
   } catch (err) {
@@ -80,10 +79,16 @@ const handleDelete = async (id) => {
 const columns = [
         { field: 'first_name', headerName: 'Nom', width: 120, renderCell: (params) =>{
           return <div className="userList">
-                    <img src={params.row.source ? `../upload/${params.row.source}`: userImg} alt="" className="userImg" />
+                    <img src={params.row.source} alt="" className="userImg" />
+                    {console.log(params.row.source)}
                     {params.row.first_name}
                  </div>
         }},
+        {
+          field: 'last_name',
+          headerName: 'Prenom',
+          width: 110,
+        },        
         {
           field: 'last_name',
           headerName: 'Prenom',
@@ -202,7 +207,7 @@ const exportToExcel = () => {
                     </div>
                 </div>
                 <div className="personPdf">
-                  <Link className="personnel-btn" onClick={() => navigate('/formulaire')}><PersonAddAlt1Icon/>Nouveau</Link>
+                  <Link className="personnel-btn" onClick={() => navigate('/formulaire2')}><PersonAddAlt1Icon/>Nouveau</Link>
                   <Link className="personnel-btn-pdf" onClick={() => navigate('/personpdfTable')}><PictureAsPdfIcon/>Pdf</Link>
                   <Link className="personnel-btn-excel" onClick={exportToExcel}><FileExcelOutlined />Export Excel</Link>
                 </div>

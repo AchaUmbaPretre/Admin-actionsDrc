@@ -73,6 +73,8 @@ import AffEdite2 from './pages/affectation/edite/AffEdite2';
 import RapportPresence from './pages/rapportPresence/RapportPresence';
 import Departement from './pages/departement/Departement';
 import DepartementEdit from './pages/departement/formEdite/DepartementEdit';
+import Formulaire2 from './pages/personnel/formulaire2/Formulaire2';
+import Photo from './pages/personnel/formulaire2/Photo';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -129,6 +131,14 @@ function App() {
         {
           path: '/formulaire',
           element: <Formulaire />
+        },
+        {
+          path: '/formulaire2',
+          element: <Formulaire2 />
+        },
+        {
+          path: '/photo',
+          element: <Photo/>
         },
         {
           path: '/departement',
@@ -329,10 +339,6 @@ function App() {
         {
           path: '/horairesView/:id',
           element: <HoraireView />
-        },
-        {
-          path: '/formulaire',
-          element: <Formulaire />
         },
         {
           path: '/paiement',
