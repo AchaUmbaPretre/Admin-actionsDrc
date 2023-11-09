@@ -31,7 +31,6 @@ const style = {
 
 const Fonctions = () => {
 
-
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -42,9 +41,9 @@ const Fonctions = () => {
 
   const columns = [
     {
-      field: 'nom_client',
-      headerName: 'Client',
-      width: 160 
+        field: 'nom_client',
+        headerName: 'Client',
+        width: 160 
     },
     {
         field: 'nom',
@@ -52,9 +51,9 @@ const Fonctions = () => {
         width: 160 
     },
     {
-      field: 'avantages',
-      headerName: 'Avantages',
-      width: 160 
+        field: 'avantages',
+        headerName: 'Avantages',
+        width: 160 
     },
     {
         field: 'prix',
@@ -66,10 +65,10 @@ const Fonctions = () => {
         headerName: "Salaire",
         width: 160, renderCell: (params) => `${params.value} $`
     },
-    {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
-      const handleEdit = () => {
-        navigate(`/contratFonctionEdit/${params.row.id}`);
-      }
+    {   field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
+        const handleEdit = () => {
+          navigate(`/contratFonctionEdit/${params.row.id}`);
+        }
         return(
           <>
             <div className="table-icons-row">
@@ -83,10 +82,10 @@ const Fonctions = () => {
                 </div>
                 <div className="userOvert2">
                   <Popconfirm
-                        title="Êtes-vous sûr de vouloir supprimer?"
-                        onConfirm={() => { handleDelete(params.row.id) }}
-                        okText="Oui"
-                        cancelText="Non"
+                      title="Êtes-vous sûr de vouloir supprimer?"
+                      onConfirm={() => { handleDelete(params.row.id) }}
+                      okText="Oui"
+                      cancelText="Non"
                   >
                     <DeleteOutline className="userListDelete" />
                   </Popconfirm>
