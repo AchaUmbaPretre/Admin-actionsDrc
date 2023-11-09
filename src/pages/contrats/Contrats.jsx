@@ -172,7 +172,7 @@ const Contrats = () => {
                     okText="Oui"
                     cancelText="Non"
                   >
-                    <DeleteOutline className="userListDelete" onClick={() => { handleDelete(params.row.id)}} />
+                    <DeleteOutline className="userListDelete"/>
                   </Popconfirm>
                   <span className='userOvert'>Supprimer</span>
                 </div>
@@ -232,20 +232,8 @@ const Contrats = () => {
 
   const handleDelete = async (id) => {
     try {
-      const result = await Swal.fire({
-        title: 'Es-tu sûr?',
-        text: "Vous ne pourrez pas revenir en arrière !",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Oui, supprimez-le!'
-      });
-  
-      if (result.isConfirmed) {
-        await axios.delete(`${DOMAIN}/api/admin/contrat/${id}`);
+        await axios.put(`${DOMAIN}/api/admin/contrats/${id}`);
         window.location.reload();
-      }
     } catch (err) {
       console.log(err);
     }
