@@ -281,7 +281,7 @@ const getColumnSearchProps = (dataIndex) => ({
     try {
       window.location.reload();
       await Promise.all([
-        axios.delete(`${DOMAIN}/api/admin/deleteAff/${id}`),
+        axios.put(`${DOMAIN}/api/admin/deleteAff/${id}`),
         axios.put(`${DOMAIN}/api/admin/affectationPutAgent/${userId}`)
       ]);
     } catch (err) {
