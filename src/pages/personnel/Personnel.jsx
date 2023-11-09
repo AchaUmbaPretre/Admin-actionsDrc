@@ -79,8 +79,7 @@ const handleDelete = async (id) => {
 const columns = [
         { field: 'first_name', headerName: 'Nom', width: 120, renderCell: (params) =>{
           return <div className="userList">
-                    <img src={params.row.source} alt="" className="userImg" />
-                    {console.log(params.row.source)}
+                    <img src={params.row.source ? `${params.row.source}` : userImg } alt="" className="userImg" />
                     {params.row.first_name}
                  </div>
         }},
@@ -88,12 +87,7 @@ const columns = [
           field: 'last_name',
           headerName: 'Prenom',
           width: 110,
-        },        
-        {
-          field: 'last_name',
-          headerName: 'Prenom',
-          width: 110,
-        },        
+        },               
         {
           field: 'phone_number',
           headerName: 'Telephone',

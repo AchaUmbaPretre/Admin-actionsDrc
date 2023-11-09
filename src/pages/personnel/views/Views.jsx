@@ -107,7 +107,7 @@ const Views = () => {
                                     </div>
                                 </div>
                             </div>
-                            <img src={data.source ? `../upload/${data.source}` : userImg } alt="" className="views-photo" />
+                            <img src={data.source ? `${data.source}` : userImg } alt="" className="views-photo" />
                         </div>
 
                         <h2 className="view-h2"><span>*</span> Detail Professionel :</h2>
