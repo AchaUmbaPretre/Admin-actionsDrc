@@ -84,12 +84,12 @@ const FeatedList = () => {
                     <List.Item.Meta
                       avatar={
                         <img
-                          src={item.source ? `../upload/${item.source}` : userImg}
+                          src={item.source ? item.source : userImg}
                           alt="User Image"
                           style={{ borderRadius: '50%', height: 40, width: 40, objectFit:'cover' }}
                         />
                       }
-                      title={item.first_name}
+                      title={`${item.first_name} ${item.last_name}`}
                       description={item.skills}
                     />
                     <div className="table-icons-row">

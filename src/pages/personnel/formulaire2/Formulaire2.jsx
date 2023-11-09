@@ -194,6 +194,7 @@ const Formulaire2 = ({handleModalClose}) => {
         <div className="formulaire-person2">
             <div className="formulaire-wrapper">
                 <div className="formulaire-left">
+                  <h2 className="form-h2">PHOTO</h2>
                     {!photo && <img src={userImg} alt="" className="form-img"/> }
                     <div className="form-img-rows">
                         <div className="form-img-row">
@@ -205,10 +206,11 @@ const Formulaire2 = ({handleModalClose}) => {
                             <span className="form-title-img">Prendre une photo avec la webcam</span>
                         </div>
                         {source === 'import' && <div>
-                          <input type="file" name="photo" onChange={handleFileChange}  lable="Image"
+                          <input type="file" name="photo" onChange={handleFileChange} lable="Profil"
                             id='file-upload'
                             accept='.jpeg, .png, .jpg'
-                        />
+                            className="form-img2"
+                          />
                           {photo && (
                             <div className="crop-container">
                               <Cropper
@@ -220,7 +222,6 @@ const Formulaire2 = ({handleModalClose}) => {
                                 onZoomChange={setZoom}
                                 minCropWidth={300}
                                 minCropHeight={400}
-                                className="form-img"
                               />
                             </div>
                           )}
@@ -237,7 +238,6 @@ const Formulaire2 = ({handleModalClose}) => {
                               onZoomChange={setZoom}
                             />
                           </div>
-                          
                         </div>
                         }
                     </div>
