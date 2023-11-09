@@ -194,20 +194,8 @@ const Payement = () => {
 
   const handleDelete = async (id) => {
     try {
-      const result = await Swal.fire({
-        title: 'Es-tu sûr?',
-        text: "Vous ne pourrez pas revenir en arrière !",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Oui, supprimez-le!'
-      });
-  
-      if (result.isConfirmed) {
         await axios.delete(`${DOMAIN}/api/admin/payement/${id}`);
         window.location.reload();
-      }
     } catch (err) {
       console.log(err);
     }
