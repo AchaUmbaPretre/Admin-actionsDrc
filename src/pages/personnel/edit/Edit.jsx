@@ -9,6 +9,7 @@ import config from '../../../config';
 import Select from 'react-select';
 import Cropper from 'react-easy-crop';
 import moment from 'moment';
+import { set } from 'date-fns';
 
 
 const Edit = () => {
@@ -32,7 +33,6 @@ const [zoom, setZoom] = useState(1);
 const handleFileChange = (event) => {
   setPhoto(event.target.files[0]);
 };
-
 const handleSourceChange = (event) => {
   setSources(event.target.value);
 };
@@ -56,27 +56,6 @@ const handleChange = (e) => {
     setData((prev) => ({ ...prev, [fieldName]: selectedOption.value }));
   };
   
-  const upload = async () => {
-    try {
-      if (source === 'webcam') {
-        const screenshot = webcamRef.current.getScreenshot();
-        const base64Data = screenshot.replace('data:image/webp;base64,', ''); // Enlever le préfixe du type de contenu
-        const res = await axios.post(`${DOMAIN}/api/upload`, { source: base64Data });
-        return res.data;
-      } else {
-        const formData = new FormData();
-        formData.append('file', photo);
-        const res = await axios.post(`${DOMAIN}/api/upload`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-        return res.data;
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
         useEffect(() => {
@@ -163,14 +142,7 @@ const handleChange = (e) => {
 const handleClick2 = async (e) => {
 
     try {
-        let photoSrc;
-        if (source === 'import') {
-          photoSrc = await upload();
-        } else if (source === 'webcam') {
-          photoSrc = webcamRef.current.getScreenshot();
-        }
-        await axios.put(`${DOMAIN}/api/admin/employe/${id}`,{ ...data, source: photoSrc });
-      
+        await axios.put(`${DOMAIN}/api/admin/employe/${id}`,{ ...data, source: photo });
         await Swal.fire({
           title: 'Success',
           text: 'Employé mis à jour avec succès!',
@@ -190,23 +162,39 @@ const handleClick2 = async (e) => {
   }
 
   useEffect(() => {
-    if (photo) {
-      updateCropper();
-    }
-  }, [photo]);
+    const upload = async () => {
+      try {
+          const formData = new FormData();
+          formData.append('file', photo);
+          const base64File = await convertToBase64(photo);
+          setPhoto(base64File); // Convertir le fichier en base64
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    upload();
+  }, [source, photo]);
 
-  const updateCropper = () => {
-    // Réinitialiser le recadrage et le zoom
-    setCrop({ aspectRatio: 1 });
-    setZoom(1);
-  };
+  function convertToBase64(file){
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        resolve(fileReader.result)
+      };
+      fileReader.onerror = (error) => {
+        reject(error)
+      }
+    })
+  }
 
   return (
     <>
         <div className="edit-person">
-        <div className="formulaire-wrapper">
+            <div className="formulaire-wrapper">
                 <div className="formulaire-left">
-                    {source ? <img src={`../upload/${source}`} className="form-img2"  /> : <img src={userImg} alt="" className="form-img" /> }
+                    {source ? <img src={source} className="form-img2"  /> : <img src={userImg} alt="" className="form-img" /> }
                     <div className="form-img-rows">
                         <div className="form-img-row">
                             <input type="radio" name="source" value="import" checked={source === 'import'} onChange={handleSourceChange} className='radio-img' />
@@ -217,7 +205,7 @@ const handleClick2 = async (e) => {
                           {photo && (
                             <div className="crop-container">
                               <Cropper
-                                image={URL.createObjectURL(photo)}
+                                image={photo}
                                 crop={crop}
                                 zoom={zoom}
                                 aspect={1}
