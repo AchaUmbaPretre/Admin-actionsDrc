@@ -66,8 +66,7 @@ const Facturation = () => {
 
   const handleDelete = async (id) => {
     try {
-    
-        await axios.delete(`${DOMAIN}/api/admin/facture/${id}`);
+        await axios.put(`${DOMAIN}/api/admin/factures/${id}`);
         window.location.reload();
     } catch (err) {
       console.log(err);
