@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 import Select from 'react-select';
 import config from '../../../config'
 import Cropper from 'react-easy-crop';
-import { ContentPasteGoTwoTone } from '@mui/icons-material';
+import { CloudUploadOutlined, ContentPasteGoTwoTone } from '@mui/icons-material';
 moment.locale('fr');
 
 
@@ -193,55 +193,63 @@ const Formulaire2 = ({handleModalClose}) => {
     <>
         <div className="formulaire-person2">
             <div className="formulaire-wrapper">
-                <div className="formulaire-left">
-                  <h2 className="form-h2">PHOTO</h2>
-                    {!photo && <img src={userImg} alt="" className="form-img"/> }
-                    <div className="form-img-rows">
-                        <div className="form-img-row">
-                            <input type="radio" name="source" value="import" checked={source === 'import'} onChange={handleSourceChange} className='radio-img' />
-                            <span className="form-title-img">Importer une photo</span>
-                        </div>
-                        <div className="form-img-row">
-                            <input type="radio" name="source" value="webcam" checked={source === 'webcam'} onChange={handleSourceChange} className='radio-img' />
-                            <span className="form-title-img">Prendre une photo avec la webcam</span>
-                        </div>
-                        {source === 'import' && <div>
-                          <input type="file" name="photo" onChange={handleFileChange} lable="Profil"
-                            id='file-upload'
-                            accept='.jpeg, .png, .jpg'
-                            className="form-img2"
-                          />
-                          {photo && (
-                            <div className="crop-container">
-                              <Cropper
-                                image={photo}
-                                crop={crop}
-                                zoom={zoom}
-                                aspect={1}
-                                onCropChange={setCrop}
-                                onZoomChange={setZoom}
-                                minCropWidth={300}
-                                minCropHeight={400}
-                              />
-                            </div>
-                          )}
-                        </div>  }
-                        {source === 'webcam' &&  <div>
-                          <Webcam audio={false} ref={webcamRef} className="pop-img" />
-                          <div className="crop-container">
-                            <Cropper
-                              image={webcamRef.current?.getScreenshot()}
-                              crop={crop}
-                              zoom={zoom}
-                              aspect={1}
-                              onCropChange={setCrop}
-                              onZoomChange={setZoom}
-                            />
-                          </div>
-                        </div>
-                        }
-                    </div>
-                </div>
+            <div className="formulaire-left">
+  <h2 className="form-h2">PHOTO</h2>
+  {!photo && <img src={userImg} alt="" className="form-img" />}
+  <div className="form-img-rows">
+    <div className="form-img-row">
+      <input type="radio" name="source" value="import" checked={source === 'import'} onChange={handleSourceChange} className='radio-img' />
+      <span className="form-title-img">Importer une photo</span>
+    </div>
+    <div className="form-img-row">
+      <input type="radio" name="source" value="webcam" checked={source === 'webcam'} onChange={handleSourceChange} className='radio-img' />
+      <span className="form-title-img">Prendre une photo avec la webcam</span>
+    </div>
+    {source === 'import' && (
+      <div>
+        <input
+          type="file"
+          name="photo"
+          onChange={handleFileChange}
+          lable="Profil"
+          id='file-upload'
+          accept='.jpeg, .png, .jpg'
+          className="form-img2"
+        />
+        <CloudUploadOutlined onClick={() => document.getElementById('file-upload').click()} className='form-icon'/>
+        {photo && (
+          <div className="crop-container">
+            <Cropper
+              image={photo}
+              crop={crop}
+              zoom={zoom}
+              aspect={1}
+              onCropChange={setCrop}
+              onZoomChange={setZoom}
+              minCropWidth={300}
+              minCropHeight={400}
+            />
+          </div>
+        )}
+      </div>
+    )}
+    {source === 'webcam' && (
+      <div>
+        <Webcam audio={false} ref={webcamRef} className="pop-img" />
+        <div className="crop-container">
+          <Cropper
+            image={webcamRef.current?.getScreenshot()}
+            crop={crop}
+            zoom={zoom}
+            aspect={1}
+            onCropChange={setCrop}
+            onZoomChange={setZoom}
+          />
+        </div>
+      </div>
+    )}
+  </div>
+</div>
                 <div className="formulaire-right">
                     <form action="" className="form-center">
                         <h2 className="form-h2"><span>*</span> Detail Personnel :</h2>

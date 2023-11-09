@@ -35,8 +35,14 @@
                 object-fit: cover;
             }
             .form-img2{
+                display: none;
                 max-width: 100%;
                 max-height: 300px;
+            }
+            .form-icon{
+                font-size: 29px;
+                color: #1890ff;
+                cursor: pointer;
             }
             .form-img-rows{
                 padding-left: 20px;
