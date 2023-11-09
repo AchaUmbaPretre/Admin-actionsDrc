@@ -127,7 +127,7 @@ const Sites = () => {
 
  const handleDelete = async (id) => {
   try {
-      await axios.delete(`${DOMAIN}/api/admin/siteDelete/${id}`);
+      await axios.put(`${DOMAIN}/api/admin/siteDelete/${id}`);
       window.location.reload();
   } catch (err) {
     console.log(err);
