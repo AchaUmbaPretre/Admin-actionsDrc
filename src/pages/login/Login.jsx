@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Login = () => {
   const [inputs, setInputs] = useState({});
   const navigate = useNavigate();
-  const { Login } = useContext(AuthContext);
+  const { Login, errorMessage } = useContext(AuthContext);
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
@@ -22,15 +22,14 @@ const Login = () => {
 
     try {
       await Login(inputs);
-
       toast.success('Connecté avec succès!', {
-        position: "top-right"
+        position: 'top-right',
       });
-
       navigate('/');
     } catch (error) {
-      console.log(error)
-
+      toast.error('Mot de passe incorrect', {
+        position: 'top-right',
+      });
       setError(error.response.data);
     }
   };
