@@ -84,7 +84,6 @@ useEffect(() => {
         await axios.post(`${DOMAIN}/api/admin/ContratInfo`,{
             ...data
           });
-
       Swal.fire({
         title: 'Success',
         text: 'Contrat créé avec succès!',
@@ -103,7 +102,6 @@ useEffect(() => {
 
       console.log(err);
     }
-   
   };
 
   return (

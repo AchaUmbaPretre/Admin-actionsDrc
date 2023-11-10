@@ -89,7 +89,6 @@ const PresenceListView = () => {
           setData(data);
           setName(data[0].first_name)
           setLoading(false);
-  
         }catch(error){
           console.log(error)
         };
@@ -180,7 +179,6 @@ const handleDelete = async (id) => {
     {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
       return(
         <>
-
 <>
               <div className="table-icons-row">
                 <div className="userOvert0">
