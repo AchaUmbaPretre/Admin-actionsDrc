@@ -8,13 +8,11 @@ import Select from 'react-select';
 
 const ContratFonction = ({handleModalClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-  const [clientEtat, setClientEtat] = useState([]);
-  const [checkInTime, setCheckInTime] = useState('');
-  const [checkOutTime, setCheckOutTime] = useState('');
   const [data, setData] = useState(null);
   const [selectData, setSelectData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [competenceOption, setCompetenceOption] = useState([]);
+  const [departement, setDepartement] = useState([]);
 
   const navigate = useNavigate();
 
@@ -45,15 +43,27 @@ const ContratFonction = ({handleModalClose}) => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
  useEffect(() => {
-          const fetchData = async () => {
-            try {
-              const res = await axios.get(`${DOMAIN}/api/admin/competence`);
-              setCompetenceOption(res.data);
-            } catch (error) {
-              console.log(error);
-            }
-          };
-          fetchData();
+    const fetchData = async () => {
+      try {
+      const res = await axios.get(`${DOMAIN}/api/admin/competence`);
+      setCompetenceOption(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+}, []);
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const {data} = await axios.get(`${DOMAIN}/api/admin/departement`);
+      setDepartement(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  fetchData();
 }, []);
 
   const handleClick = async (e) => {
@@ -118,14 +128,14 @@ const ContratFonction = ({handleModalClose}) => {
             </div>
             <div className="form-rows">
               <div className="form-row">
-                <label htmlFor="" className="label-form">Competence<span>*</span></label>
+                <label htmlFor="" className="label-form">Domaine<span>*</span></label>
                 <Select
                   name="skills"
                   onChange={(selectedOption) => handleChange(selectedOption.value, "skills")}
-                  options={competenceOption.map((item) => ({
-                    value: item.id,
-                    label: item.nom
-                    }))}
+                  options={departement.map((item) => ({
+                  value: item.id,
+                  label: item.nom_departement
+                  }))}
                 />
               </div>
               <div className="form-row">

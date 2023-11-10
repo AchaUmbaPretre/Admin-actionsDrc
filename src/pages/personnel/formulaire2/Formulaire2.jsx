@@ -355,7 +355,7 @@ const Formulaire2 = ({handleModalClose}) => {
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Domaine <span>*</span></label>
                                 <Select
-                                    name="departement"
+                                    name="skills"
                                     onChange={(selectedOption) => handleSelectChange(selectedOption, "skills")}
                                     options={departement.map((item) => ({
                                         value: item.id,
