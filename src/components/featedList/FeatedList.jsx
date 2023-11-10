@@ -90,7 +90,7 @@ const FeatedList = () => {
                         />
                       }
                       title={`${item.first_name} ${item.last_name}`}
-                      description={item.skills}
+                      description={item.nom_departement}
                     />
                     <div className="table-icons-row">
                       <EyeOutlined className="userEye" onClick={() => navigate(`/views/${item.id}`)} />

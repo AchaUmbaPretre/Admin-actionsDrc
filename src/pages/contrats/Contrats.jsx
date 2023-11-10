@@ -11,7 +11,6 @@ import Fade from '@mui/material/Fade';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import ContratForm from './formContrat/ContratForm';
-import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import config from '../../config'

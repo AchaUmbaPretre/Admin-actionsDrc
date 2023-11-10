@@ -108,7 +108,7 @@ const columns = [
         { field: 'gender', headerName: 'Genre', width: 50 },
         { field: 'address', headerName: 'Adresse', width: 110 },
         {
-          field: 'skills',
+          field: 'nom_departement',
           headerName: 'Domaine',
           width: 110,
         },

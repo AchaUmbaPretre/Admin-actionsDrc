@@ -17,6 +17,7 @@ import DoDisturbOutlinedIcon from '@mui/icons-material/DoDisturbOutlined';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Space, Table } from 'antd';
+import { FadeLoader } from 'react-spinners';
 
 const style = {
   position: 'absolute',
@@ -49,6 +50,7 @@ const AddContrat = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
+  const [loading, setLoading] = useState(true);
 
   const handleSelectionChange = (event, id) => {
     if (event.target.checked) {
@@ -168,6 +170,7 @@ useEffect(() => {
       try {
         const res = await axios.get(`${DOMAIN}/api/admin`);
         setData(res.data)
+        setLoading(false);
 
       } catch (error) {
         console.log(error)
@@ -306,7 +309,7 @@ const columns = [
   },
   {
     title: 'Compétence',
-    dataIndex: 'skills',
+    dataIndex: 'nom_departement',
     key: 'skills',
     width: '20%',
     ...getColumnSearchProps('skills'),
@@ -377,8 +380,14 @@ const columns = [
                 </Box>
               </Fade>
           </Modal>
+          {loading ? (
+          <div className="spinner-container">
+            <FadeLoader color={'#36D7B7'} loading={loading} />
+          </div>
+            ) : (
           <div className="add-row2">
             <div className="add-container-rows">
+              
               <div className="add-row-top">
                 <h2>Sélectionnez les informations qui vous intéressent</h2>
                 {selectData?.map((information) => (
@@ -413,7 +422,7 @@ const columns = [
                 </div>
                 </div>
             </div>
-          </div>
+          </div>) }
         </div>
       </div>
     </>
