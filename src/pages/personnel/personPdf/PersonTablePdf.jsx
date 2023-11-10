@@ -81,9 +81,6 @@ const PersonTablePdf = () => {
         const res = await axios.get(`${DOMAIN}/api/admin`);
         setData(res.data);
         setLoading(false);
-        setTimeout(() => {
-          setShowSpinner(false);
-        }, spinnerDuration);
       } catch (error) {
         console.log(error);
       }
@@ -109,7 +106,6 @@ const PersonTablePdf = () => {
               <Text style={styles.tableCell}>Téléphone</Text>
               <Text style={styles.tableCell}>Email</Text>
               <Text style={styles.tableCell}>Compétence</Text>
-              <Text style={styles.tableCell}>Affectation</Text>
               <Text style={styles.tableCell}>Status</Text>
             </View>
             {Array.isArray(data) &&
@@ -122,7 +118,6 @@ const PersonTablePdf = () => {
                   <Text style={styles.tableCell}>{row.phone_number}</Text>
                   <Text style={styles.tableCell}>{row.email}</Text>
                   <Text style={styles.tableCell}>{row.nom_departement}</Text>
-                  <Text style={styles.tableCell}>{row.nom_client}</Text>
                   <Text style={styles.tableCell}>{row.employment_status}</Text>
                 </View>
               ))}
