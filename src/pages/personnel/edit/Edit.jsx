@@ -14,7 +14,7 @@ const Edit = () => {
 
 const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
 const [data, setData] = useState({});
-const {first_name, last_name,date_of_birth,etat_civil, gender, address, phone_number, email, number_inpp, number_cnss, nombre_enfant, identification_number,identification_type,skills,certifications,employment_status,source} = data;
+const {first_name, last_name,date_of_birth,etat_civil, gender, address, phone_number, email, number_inpp, number_cnss, nombre_enfant, identification_number,identification_type,nom_departement,certifications,employment_status,source} = data;
 const location = useLocation();
 const navigate = useNavigate();
 const id = location.pathname.split("/")[2];
@@ -322,7 +322,7 @@ const handleClick2 = async (e) => {
                               <select
                                 className="input-form"
                                 name="skills"
-                                value={skills}
+                                value={nom_departement}
                                 onChange={handleChange}
                               >
                                 <option disabled value="">Selectionnez un domaine</option>

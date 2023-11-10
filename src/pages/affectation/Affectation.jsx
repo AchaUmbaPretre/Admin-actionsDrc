@@ -151,7 +151,6 @@ const getColumnSearchProps = (dataIndex) => ({
 });
 
   useEffect(() => {
-
     const fetchDatas = async () => {
       try {
         const res = await axios.get(`${DOMAIN}/api/admin/allaffectation`);
@@ -211,7 +210,7 @@ const getColumnSearchProps = (dataIndex) => ({
     },
     {
       title: 'Domaine',
-      dataIndex: 'skills',
+      dataIndex: 'nom_departement',
       key: 'skills',
       width: '10%',
       ...getColumnSearchProps('skills'),

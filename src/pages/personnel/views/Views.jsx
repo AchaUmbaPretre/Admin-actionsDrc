@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './views.scss'
 import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios';
@@ -18,12 +18,15 @@ import config from '../../../config'
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import BabyChangingStationOutlinedIcon from '@mui/icons-material/BabyChangingStationOutlined';
+import ReactToPrint from 'react-to-print';
+import { PrinterOutlined } from '@ant-design/icons';
 
 const Views = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const [data, setData] = useState({});
     const {pathname} = useLocation();
     const id = pathname.split('/')[2]
+    const componentRef = useRef(null);
 
     useEffect(()=>{
         const fetchData = async ()=> {
@@ -42,7 +45,16 @@ const Views = () => {
 
   return (
     <>
-        <div className="views">
+    <ReactToPrint
+          trigger={() => {
+                return <button style={{padding: "5px 8px", background :'#fff', border: 'none', marginBottom: '10px', cursor : 'pointer'}}><PrinterOutlined /> Imprimer</button>;
+            }}
+          documentTitle='carte'
+          pageStyle={'print'}
+          onAfterPrint={()=>{console.log("document printer ")}}
+          content={() => componentRef.current}
+        />
+        <div className="views" ref={componentRef}>
             <div className="views-wrapper">
                 <div className="views-title">
                     <h1 className='h1-views'>INFORMATION DE L'EMPLOYE</h1>
@@ -129,7 +141,7 @@ const Views = () => {
                         <div className="views-rows">
                             <div className="views-right">
                                 <span className="view-label"><EngineeringIcon className="icon-person"/>Compétence : </span>
-                                <span className="view-result">{data.skills}</span>
+                                <span className="view-result">{data.nom_departement}</span>
                             </div>
                             <div className="views-left">
                                 <span className="view-label"><WysiwygIcon  className="icon-person"/>Certificat : </span>
