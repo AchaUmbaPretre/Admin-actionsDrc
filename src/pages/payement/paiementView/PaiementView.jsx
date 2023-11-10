@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import './paiementView.scss'
 import action from './../../../assets/actionssarl.PNG'
 import config from '../../../config'
 import axios from 'axios';
 import moment from 'moment';
+import ReactToPrint from 'react-to-print';
+import { PrinterOutlined } from '@ant-design/icons';
 
 const PaiementView = () => {
 
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const [data, setData] = useState({});
     const {pathname} = useLocation();
-    const id = pathname.split('/')[2]
+    const id = pathname.split('/')[2];
+    const componentRef = useRef(null);
 
     useEffect(()=>{
       const fetchData = async ()=> {
@@ -30,7 +33,16 @@ const PaiementView = () => {
 
   return (
     <>
-        <div className="paiement">
+      <ReactToPrint
+          trigger={() => {
+                return <button style={{padding: "5px 8px", background :'#fff', border: 'none', marginBottom: '10px', cursor : 'pointer'}}><PrinterOutlined /> Imprimer</button>;
+            }}
+          documentTitle='Paiement'
+          pageStyle={'print'}
+          onAfterPrint={()=>{console.log("document printer ")}}
+          content={() => componentRef.current}
+        />
+        <div className="paiement" ref={componentRef}>
           <div className="paiement-wrapper">
             <div className="paiement-tete">
               <img src={action} alt="" className="paiement-logo" />
