@@ -29,6 +29,7 @@ const Formulaire2 = ({handleModalClose}) => {
     const webcamRef = useRef(null);
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
+    const [departement, setDepartement] = useState([]);
   
     const handleFileChange = (event) => {
       setPhoto(event.target.files[0]);
@@ -53,7 +54,6 @@ const Formulaire2 = ({handleModalClose}) => {
       } else {
           setData((prev) => ({ ...prev, [fieldName]: fieldValue }));
       }
-
     }
 
       const handlePhotoSubmit = async () => {
@@ -189,68 +189,80 @@ const Formulaire2 = ({handleModalClose}) => {
         fetchData();
       }, []);
 
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const {data} = await axios.get(`${DOMAIN}/api/admin/departement`);
+            setDepartement(data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchData();
+      }, []);
+
   return (
     <>
-        <div className="formulaire-person2">
-            <div className="formulaire-wrapper">
-            <div className="formulaire-left">
-  <h2 className="form-h2">PHOTO</h2>
-  {!photo && <img src={userImg} alt="" className="form-img" />}
-  <div className="form-img-rows">
-    <div className="form-img-row">
-      <input type="radio" name="source" value="import" checked={source === 'import'} onChange={handleSourceChange} className='radio-img' />
-      <span className="form-title-img">Importer une photo</span>
-    </div>
-    <div className="form-img-row">
-      <input type="radio" name="source" value="webcam" checked={source === 'webcam'} onChange={handleSourceChange} className='radio-img' />
-      <span className="form-title-img">Prendre une photo avec la webcam</span>
-    </div>
-    {source === 'import' && (
-      <div>
-        <input
-          type="file"
-          name="photo"
-          onChange={handleFileChange}
-          lable="Profil"
-          id='file-upload'
-          accept='.jpeg, .png, .jpg'
-          className="form-img2"
-        />
-        <CloudUploadOutlined onClick={() => document.getElementById('file-upload').click()} className='form-icon'/>
-        {photo && (
-          <div className="crop-container">
-            <Cropper
-              image={photo}
-              crop={crop}
-              zoom={zoom}
-              aspect={1}
-              onCropChange={setCrop}
-              onZoomChange={setZoom}
-              minCropWidth={300}
-              minCropHeight={400}
-            />
-          </div>
-        )}
-      </div>
-    )}
-    {source === 'webcam' && (
-      <div>
-        <Webcam audio={false} ref={webcamRef} className="pop-img" />
-        <div className="crop-container">
-          <Cropper
-            image={webcamRef.current?.getScreenshot()}
-            crop={crop}
-            zoom={zoom}
-            aspect={1}
-            onCropChange={setCrop}
-            onZoomChange={setZoom}
-          />
-        </div>
-      </div>
-    )}
-  </div>
-</div>
-                <div className="formulaire-right">
+      <div className="formulaire-person2">
+        <div className="formulaire-wrapper">
+          <div className="formulaire-left">
+            <h2 className="form-h2">PHOTO</h2>
+            {!photo && <img src={userImg} alt="" className="form-img" />}
+            <div className="form-img-rows">
+              <div className="form-img-row">
+                <input type="radio" name="source" value="import" checked={source === 'import'} onChange={handleSourceChange} className='radio-img' />
+                <span className="form-title-img">Importer une photo</span>
+              </div>
+              <div className="form-img-row">
+                <input type="radio" name="source" value="webcam" checked={source === 'webcam'} onChange={handleSourceChange} className='radio-img' />
+                <span className="form-title-img">Prendre une photo avec la webcam</span>
+              </div>
+              {source === 'import' && (
+                <div>
+                  <input
+                    type="file"
+                    name="photo"
+                    onChange={handleFileChange}
+                    lable="Profil"
+                    id='file-upload'
+                    accept='.jpeg, .png, .jpg'
+                    className="form-img2"
+                  />
+                  <CloudUploadOutlined onClick={() => document.getElementById('file-upload').click()} className='form-icon'/>
+                  {photo && (
+                    <div className="crop-container">
+                      <Cropper
+                        image={photo}
+                        crop={crop}
+                        zoom={zoom}
+                        aspect={1}
+                        onCropChange={setCrop}
+                        onZoomChange={setZoom}
+                        minCropWidth={300}
+                        minCropHeight={400}
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+              {source === 'webcam' && (
+                <div>
+                  <Webcam audio={false} ref={webcamRef} className="pop-img" />
+                  <div className="crop-container">
+                    <Cropper
+                      image={webcamRef.current?.getScreenshot()}
+                      crop={crop}
+                      zoom={zoom}
+                      aspect={1}
+                      onCropChange={setCrop}
+                      onZoomChange={setZoom}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+            </div>
+            <div className="formulaire-right">
                     <form action="" className="form-center">
                         <h2 className="form-h2"><span>*</span> Detail Personnel :</h2>
                         <div className="form-rows">
@@ -293,7 +305,7 @@ const Formulaire2 = ({handleModalClose}) => {
 
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Nombre d'enfant <span>*</span></label>
-                                <input type="number"  name='nombre_enfant' className="input-form" onChange={handleChange} placeholder="Entrez votre nombre d'enfant.." />
+                                <input type="number" name='nombre_enfant' className="input-form" onChange={handleChange} placeholder="Entrez votre nombre d'enfant.." />
                             </div>
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Telephone <span>*</span></label>
@@ -313,7 +325,6 @@ const Formulaire2 = ({handleModalClose}) => {
                             </div>
                         </div>
                         <h2 className="form-h2"><span>*</span> Detail Professionel :</h2>
-                        
                         <div className="form-rows">
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">N° INPP <span>*</span></label>
@@ -344,11 +355,11 @@ const Formulaire2 = ({handleModalClose}) => {
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Domaine <span>*</span></label>
                                 <Select
-                                    name="skills"
+                                    name="departement"
                                     onChange={(selectedOption) => handleSelectChange(selectedOption, "skills")}
-                                    options={competenceOption.map((item) => ({
-                                        value: item.nom,
-                                        label: item.nom
+                                    options={departement.map((item) => ({
+                                        value: item.id,
+                                        label: item.nom_departement
                                     }))}
                                 />
                             </div>
@@ -377,9 +388,9 @@ const Formulaire2 = ({handleModalClose}) => {
                         </div>
                         <button className="form-btn" onClick={handlePhotoSubmit}>Envoyer <SendIcon className='form-icon' /></button>
                     </form>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
     </>
   )
 }

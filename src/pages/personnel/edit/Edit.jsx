@@ -9,8 +9,6 @@ import config from '../../../config';
 import Select from 'react-select';
 import Cropper from 'react-easy-crop';
 import moment from 'moment';
-import { set } from 'date-fns';
-
 
 const Edit = () => {
 
