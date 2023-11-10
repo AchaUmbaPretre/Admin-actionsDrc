@@ -105,9 +105,11 @@ const PersonTablePdf = () => {
               <Text style={styles.tableCells}>N°</Text>
               <Text style={styles.tableCell}>Nom</Text>
               <Text style={styles.tableCell}>Postnom</Text>
+              <Text style={styles.tableCell}>Genre</Text>
               <Text style={styles.tableCell}>Téléphone</Text>
               <Text style={styles.tableCell}>Email</Text>
               <Text style={styles.tableCell}>Compétence</Text>
+              <Text style={styles.tableCell}>Affectation</Text>
               <Text style={styles.tableCell}>Status</Text>
             </View>
             {Array.isArray(data) &&
@@ -116,9 +118,11 @@ const PersonTablePdf = () => {
                   <Text style={styles.tableCells}>{index + 1}</Text>
                   <Text style={styles.tableCell}>{row.first_name}</Text>
                   <Text style={styles.tableCell}>{row.last_name}</Text>
+                  <Text style={styles.tableCell}>{row.gender}</Text>
                   <Text style={styles.tableCell}>{row.phone_number}</Text>
                   <Text style={styles.tableCell}>{row.email}</Text>
-                  <Text style={styles.tableCell}>{row.skills}</Text>
+                  <Text style={styles.tableCell}>{row.nom_departement}</Text>
+                  <Text style={styles.tableCell}>{row.nom_client}</Text>
                   <Text style={styles.tableCell}>{row.employment_status}</Text>
                 </View>
               ))}
