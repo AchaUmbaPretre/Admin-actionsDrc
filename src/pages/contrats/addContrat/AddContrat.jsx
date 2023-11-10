@@ -165,6 +165,64 @@ const AddContrat = () => {
       ),
   });
 
+
+  const columns = [
+    {
+      title: 'Code',
+      dataIndex: 'id',
+      key: 'id',
+      width: '10%',
+    },
+    {
+      title: 'Nom',
+      dataIndex: 'first_name',
+      key: 'first_name',
+      width: '10%',
+      ...getColumnSearchProps('first_name'),
+    },
+    {
+      title: 'Prénom',
+      dataIndex: 'last_name',
+      key: 'last_name',
+      width: '15%',
+      ...getColumnSearchProps('last_name'),
+    },
+    {
+      title: 'Compétence',
+      dataIndex: 'nom_departement',
+      key: 'skills',
+      width: '20%',
+      ...getColumnSearchProps('skills'),
+    },
+    {
+      dataIndex: 'availability',
+      title: 'Disponibilité',
+      width: '20%',
+      render: (text, record) =>
+        record.contrat_id ? (
+          <div className="indisponible">Indisponible
+          <DoDisturbOutlinedIcon style={{ color: 'red' }} />
+          </div>
+        ) : (
+          <div className="disponible">Disponible
+          <CheckCircleOutlinedIcon style={{ color: 'green' }} />
+          </div>
+        ),
+    },
+    {
+      dataIndex: '',
+      title: 'Sélectionnez',
+      width: '15%',
+      render: (_, record) => (
+        <Switch
+          checked={selected.includes(record.id)}
+          onChange={(event) => handleSelectionChange(event, record.id)}
+          inputProps={{ 'aria-label': 'controlled' }}
+        />
+      ),
+    }
+  ];
+
 useEffect(() => {
     const fetchData = async () => {
       try {
@@ -196,7 +254,6 @@ useEffect(()=>{
       try{
           const {data} = await axios.get(`${DOMAIN}/api/admin/contratTitle/${id}`);
           setTitle(data[0])
-          
         }catch(error){
           console.log(error)
         };
@@ -205,12 +262,12 @@ useEffect(()=>{
 }, [id])
 
 
-    const filteredEmployees = data.filter((employee) => {
+/*     const filteredEmployees = data.filter((employee) => {
       if (selectedFunctionDetails) {
         return employee.skills === selectedFunctionDetails[0]?.nom;
       }
       return true;
-    });
+    }); */
 
 
  const handleSelectionInformation = (informationId) => {
@@ -247,7 +304,6 @@ const handleSubmit = async (e) => {
   }
 
   const selectedItems = data.filter((item) => selected.includes(item.id));
-  const selectedIds = selectedItems.map((item) => item.id);
   const newSelectedx = selectedItems.map((item) => ({
     agent: item.id,
     fonction: informationsSelectionnees,
@@ -285,63 +341,6 @@ const handleSubmit = async (e) => {
       });
   });
 };
-
-const columns = [
-  {
-    title: 'Code',
-    dataIndex: 'id',
-    key: 'id',
-    width: '10%',
-  },
-  {
-    title: 'Nom',
-    dataIndex: 'first_name',
-    key: 'first_name',
-    width: '10%',
-    ...getColumnSearchProps('first_name'),
-  },
-  {
-    title: 'Prénom',
-    dataIndex: 'last_name',
-    key: 'last_name',
-    width: '15%',
-    ...getColumnSearchProps('last_name'),
-  },
-  {
-    title: 'Compétence',
-    dataIndex: 'nom_departement',
-    key: 'skills',
-    width: '20%',
-    ...getColumnSearchProps('skills'),
-  },
-  {
-    dataIndex: 'availability',
-    title: 'Disponibilité',
-    width: '20%',
-    render: (text, record) =>
-      record.contrat_id ? (
-        <div className="indisponible">Indisponible
-        <DoDisturbOutlinedIcon style={{ color: 'red' }} />
-        </div>
-      ) : (
-        <div className="disponible">Disponible
-        <CheckCircleOutlinedIcon style={{ color: 'green' }} />
-        </div>
-      ),
-  },
-  {
-    dataIndex: '',
-    title: 'Sélectionnez',
-    width: '15%',
-    render: (_, record) => (
-      <Switch
-        checked={selected.includes(record.id)}
-        onChange={(event) => handleSelectionChange(event, record.id)}
-        inputProps={{ 'aria-label': 'controlled' }}
-      />
-    ),
-  }
-];
 
   return (
     <>
