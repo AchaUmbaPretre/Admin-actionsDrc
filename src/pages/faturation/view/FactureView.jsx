@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../../clientTab/clientView/clientView.scss'
 import { CalendarMonth, Person2Outlined} from '@mui/icons-material';
@@ -9,12 +9,15 @@ import config from '../../../config'
 import moment from 'moment';
 import "./../view/factureView.scss"
 import actions from '../../../assets/actionssarl.PNG'
+import ReactToPrint from 'react-to-print';
+import { PrinterOutlined } from '@ant-design/icons';
 
 const FactureView = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
     const [data, setData] = useState({});
     const {pathname} = useLocation();
-    const id = pathname.split('/')[2]
+    const id = pathname.split('/')[2];
+    const componentRef = useRef(null);
 
     useEffect(()=>{
         const fetchData = async ()=> {
@@ -31,8 +34,17 @@ const FactureView = () => {
     const formattedDateVoice = moment(data?.created_at).format('DD/MM/YYYY');
 
   return (
-    <>
-        <div className="facture-View">
+    <>  
+        <ReactToPrint
+          trigger={() => {
+                return <button style={{padding: "5px 8px", background :'#fff', border: 'none', marginBottom: '10px', cursor : 'pointer'}}><PrinterOutlined /> Imprimer</button>;
+            }}
+          documentTitle='Facture'
+          pageStyle={'print'}
+          onAfterPrint={()=>{console.log("document printer ")}}
+          content={() => componentRef.current}
+        />
+        <div className="facture-View" ref={componentRef}>
             <div className="facture-wrapper">
                 <div className="facture-title">
                     <h1 className="facture-title-h1">Facture N° {data.id}</h1>
