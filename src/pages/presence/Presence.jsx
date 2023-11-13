@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import './presence.scss'
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import { DeleteOutline, EditOutlined, VisibilityOutlined} from '@mui/icons-material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useEffect, useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
@@ -13,14 +12,12 @@ import Fade from '@mui/material/Fade';
 import axios from 'axios';
 import CheckCircleOutlinedIcon from '@mui/icons-material/CheckCircleOutlined';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
-import PresenceForm from './form/PresenceForm';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import config from '../../config'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
-import Swal from 'sweetalert2';
 import PresenceSearch from './presenceSearch/PresenceSearch';
 import moment from 'moment';
 import BarReturn from '../../components/barReturn/BarReturn';

@@ -34,7 +34,6 @@ import MissionEdit from './pages/mission/edite/MissionEdit';
 import FatureEdit from './pages/faturation/edit/FatureEdit';
 import Payement from './pages/payement/Payement';
 import ContratView from './pages/contrats/view/ContratView';
-import { MissedVideoCallTwoTone } from '@mui/icons-material';
 import MissiAff from './pages/mission/missionAff/MissiAff';
 import MissionContrat from './pages/mission/missionContrat/MissionContrat';
 import PersonTablePdf from './pages/personnel/personPdf/PersonTablePdf';
@@ -49,7 +48,6 @@ import FormAdd from './pages/contrats/addContrat/formAdd/FormAdd';
 import Fonctions from './pages/fonctions/Fonctions';
 import AffView2 from './pages/affectation/affView.jsx/AffView2';
 import Page404 from './pages/page404/Page404';
-import ContratFonction from './pages/fonctions/contratFonction/ContratFonction';
 import ContratFonctionEdit from './pages/fonctions/fonctionEdit/ContratFonctEdit';
 import FonctionView from './pages/fonctions/fonctionView/FonctionView';
 import PaiementView from './pages/payement/paiementView/PaiementView';
@@ -75,6 +73,7 @@ import Departement from './pages/departement/Departement';
 import DepartementEdit from './pages/departement/formEdite/DepartementEdit';
 import Formulaire2 from './pages/personnel/formulaire2/Formulaire2';
 import Photo from './pages/personnel/formulaire2/Photo';
+import TypeConge from './pages/listeConge/typeDemande/TypeConge';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -135,10 +134,6 @@ function App() {
         {
           path: '/formulaire2',
           element: <Formulaire2 />
-        },
-        {
-          path: '/photo',
-          element: <Photo/>
         },
         {
           path: '/departement',
@@ -275,6 +270,10 @@ function App() {
         {
           path: '/listeConge',
           element: <ListeConge />
+        },
+        {
+          path: '/typeCongé',
+          element: <TypeConge />
         },
         {
           path: '/editContrat/:id',

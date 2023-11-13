@@ -7,7 +7,25 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { useState } from 'react';
-/* import {listeData} from './../../data' */
+import { Box } from '@mui/material';
+import Fade from '@mui/material/Fade';
+import Backdrop from '@mui/material/Backdrop';
+import Modal from '@mui/material/Modal';
+import FormConge from './formConge/FormConge';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 800,
+  bgcolor: 'background.paper',
+  border: '1px solid #FFF',
+  boxShadow: 24,
+  p: 4,
+  borderRadius: 2,
+  outline: 'none'
+}
 
 const ListeConge = () => {
 
@@ -45,7 +63,7 @@ const ListeConge = () => {
       headerName: 'Statut de la demande',
       width: 140 
     },
-    {field: 'action', HeaderName: 'Action', width: 150, renderCell: (params) =>{
+    {field: 'actions', HeaderName: 'Action', width: 160, renderCell: (params) =>{
         return(
           <>
             <div className="table-icons-row">
@@ -71,9 +89,30 @@ const ListeConge = () => {
                   <span className="contrats-span">Liste des congés</span>
               </div>
           </div>
-          <button className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Ajouter</button>
+          <button className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Nouveau</button>
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            slots={{ backdrop: Backdrop }}
+              slotProps={{
+                backdrop: {
+                timeout: 500,
+                },
+              }} 
+          >
+            <Fade in={open}>
+              <Box sx={style}>
+                <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
+                  <FormConge handleClose={handleClose}/>
+                </Box>
+              </Box>
+            </Fade>
+          </Modal>
         </div>
-        <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
+        <DataGrid rows={''} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
       </div>
     </>
   )
