@@ -18,7 +18,7 @@ import {
   DepartmentOutlined 
 } from '@ant-design/icons';
 import actions from './../../assets/actionssarl.PNG';
-import { ApartmentOutlined, LocalFireDepartmentOutlined } from '@mui/icons-material';
+import { ApartmentOutlined, FileCopyOutlined, LocalFireDepartmentOutlined } from '@mui/icons-material';
 
 const { SubMenu } = Menu;
 
@@ -76,6 +76,14 @@ const Sidebar = () => {
             </Menu.Item>
             <Menu.Item key="/rapport" title="Rapport" icon={<FileSearchOutlined />} style={{ fontSize: '16px' }}>
               <Link to="/rapportPresence">Rapport des presences</Link>
+            </Menu.Item>
+          </SubMenu>
+          <SubMenu key="sub3" icon={<FileCopyOutlined />} title="Gestion de congé" style={{ fontSize: '16px' }}>
+            <Menu.Item key="/presence" title="Gestion de congé" icon={<CheckCircleOutlined />} style={{ fontSize: '16px' }}>
+              <Link to="/presence">Gestion de congé</Link>
+            </Menu.Item>
+            <Menu.Item key="/rapport" title="Rapport" icon={<FileCopyOutlined />} style={{ fontSize: '16px' }}>
+              <Link to="/rapportPresence">Type de congé</Link>
             </Menu.Item>
           </SubMenu>
           <Menu.Item key="/facturation" icon={<FileSearchOutlined />} title="Facturation" style={{ fontSize: '16px' }}>
