@@ -95,7 +95,7 @@ const columns = [
           <div className="contrats-top">
               <ChecklistRtlIcon className='contrats-icon'/>
               <div className="contrats-info">
-                  <h2 className="contrats-title">Type des presences</h2>
+                  <h2 className="contrats-title">Type des congés</h2>
                   <span className="contrats-span">Liste des types presences</span>
               </div>
           </div>

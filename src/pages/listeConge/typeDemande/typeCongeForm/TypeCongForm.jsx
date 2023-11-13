@@ -9,7 +9,7 @@ import config from '../../../../config';
 const TypeCongForm = ({handleClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [employeeId, setEmployeeId] = useState('');
-  const [clientEtat, setClientEtat] = useState([]);
+  const [data, setData] = useState([]);
   const [clientId, setClientId] = useState([]);
   const [checkInTime, setCheckInTime] = useState('');
   const [checkOutTime, setCheckOutTime] = useState('');
@@ -30,28 +30,30 @@ const TypeCongForm = ({handleClose}) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`${DOMAIN}/api/admin/client`);
-        setClientEtat(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
+  const handleChange = (e) => {
+    const fieldName = e.target.name;
+    const fieldValue = e.target.value;
+    
+    if (fieldName === "email") {
+      const lowercaseValue = fieldValue.charAt(0).toLowerCase() + fieldValue.slice(1);
+      setData((prev) => ({ ...prev, [fieldName]: lowercaseValue }));
+    } else if (Number.isNaN(Number(fieldValue))) {
+      const capitalizedValue = fieldValue.charAt(0).toUpperCase() + fieldValue.slice(1);
+      setData((prev) => ({ ...prev, [fieldName]: capitalizedValue }));
+    } else {
+        setData((prev) => ({ ...prev, [fieldName]: fieldValue }));
+    }
+
+  }
+
+  console.log(data)
 
   const handleClick = async (e) => {
     e.preventDefault();
     handleClose()
     try {
       await axios.post(`${DOMAIN}/api/admin/presences`, {
-        employee_id: employeeId,
-        client_id: clientId,
-        date: date,
-        check_in_time: { day: 7, time: checkInTime },
-        check_out_time: { day: 7, time: checkOutTime },
+       
       });
 
       Swal.fire({
@@ -82,12 +84,12 @@ const TypeCongForm = ({handleClose}) => {
             <div className="form-rows">
               <div className="form-row">
                 <label htmlFor="" className="label-form">Nom de type<span>*</span></label>
-                <input type="text" className="input-form" required placeholder='Ecrire....' />
+                <input type="text" name='nom_type' className="input-form" onChange={handleChange} required placeholder='Ecrire....' />
               </div>
 
               <div className="form-row">
                 <label htmlFor="" className="label-form">Nombre de jour<span>*</span></label>
-                <input type="number" className="input-form" required onChange={(e) => setCheckOutTime(e.target.value)} />
+                <input type="number" name='nombre_jour' className="input-form" onChange={handleChange} required />
               </div>
             </div>
 
