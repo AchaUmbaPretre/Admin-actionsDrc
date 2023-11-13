@@ -36,6 +36,7 @@ const TypeConge = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [dataTable, setDataTable] = useState([]);
+  const [type, setType] = useState([]);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -44,6 +45,19 @@ const TypeConge = () => {
   const handleEdit = (id) => {
     navigate(`/presenceEdit/${id}`);
 };
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const res = await axios.get(`${DOMAIN}/api/leave/typeConge`);
+      setType(res.data);
+      setLoading(false)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  fetchData();
+}, []);
 
 const handleDelete = async (id) => {
   try {
@@ -128,7 +142,7 @@ const columns = [
           <>
           <Table
             columns={columns}
-            dataSource={dataTable}
+            dataSource={type}
             className="presenceTable"
             loading={loading} 
           />
