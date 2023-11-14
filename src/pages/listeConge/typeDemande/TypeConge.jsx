@@ -43,7 +43,7 @@ const TypeConge = () => {
 
 
   const handleEdit = (id) => {
-    navigate(`/presenceEdit/${id}`);
+    navigate(`/editConge/${id}`);
 };
 
 useEffect(() => {
@@ -107,7 +107,7 @@ const columns = [
               <ChecklistRtlIcon className='contrats-icon'/>
               <div className="contrats-info">
                   <h2 className="contrats-title">Type des congés</h2>
-                  <span className="contrats-span">Liste des types presences</span>
+                  <span className="contrats-span">Liste des types congés</span>
               </div>
           </div>
           <div className="personPdf">

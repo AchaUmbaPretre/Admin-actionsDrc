@@ -41,57 +41,6 @@ const MissionEdit = () => {
     fetchData()
 }, [id]);
 
-/*   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(`${DOMAIN}/api/admin`);
-        setOptions(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []); */
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-/*   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const {data} = await axios.get(`${DOMAIN}/api/admin/client`);
-        setOptionsClient(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []); */
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-/*   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(`${DOMAIN}/api/admin/duration`);
-        setDuration(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []); */
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-/*   useEffect(() => {
-    const fetchDatas = async () => {
-      try {
-        const {data} = await axios.get(`${DOMAIN}/api/admin/salaireMission`);
-        setSalaires(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchDatas();
-  }, []); */
-
   const handleClick = async (e) => {
     e.preventDefault();
 

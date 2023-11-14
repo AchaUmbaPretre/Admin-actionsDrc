@@ -74,6 +74,7 @@ import DepartementEdit from './pages/departement/formEdite/DepartementEdit';
 import Formulaire2 from './pages/personnel/formulaire2/Formulaire2';
 import Photo from './pages/personnel/formulaire2/Photo';
 import TypeConge from './pages/listeConge/typeDemande/TypeConge';
+import EditConge from './pages/listeConge/typeDemande/editConge/EditConge';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -274,6 +275,10 @@ function App() {
         {
           path: '/typeCongé',
           element: <TypeConge />
+        },
+        {
+          path: '/editConge/:id',
+          element: <EditConge />
         },
         {
           path: '/editContrat/:id',

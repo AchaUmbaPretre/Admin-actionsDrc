@@ -6,11 +6,10 @@ import axios from 'axios';
 import Select from 'react-select';
 import config from '../../../../config';
 
-const TypeCongForm = ({handleClose}) => {
+const EditConge = ({handleClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [data, setData] = useState([]);
   const [selected, setSelected] = useState([]);
-
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -26,37 +25,36 @@ const TypeCongForm = ({handleClose}) => {
     } else {
         setData((prev) => ({ ...prev, [fieldName]: fieldValue }));
     }
-
   }
-
-  console.log(data)
 
   const handleClick = async (e) => {
     e.preventDefault();
-    handleClose()
+
     try {
-      await axios.post(`${DOMAIN}/api/leave/typeConge`, data);
+      await axios.put(`${DOMAIN}/api/leave/${id}`, data);
+      navigate("/listeConge");
       Swal.fire({
         title: 'Success',
-        text: 'Le type de congé a été enregistrée avec succès !',
+        text: 'Mission a été modifiée avec succès!',
         icon: 'success',
         confirmButtonText: 'OK'
       });
-      navigate('/typeCongé');
-    } catch (error) {
-      Swal.fire({
-        title: 'Error',
-        text: error,
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
+    } catch (err) {
+        Swal.fire({
+            title: 'Error',
+            text: err.message,
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+
+      console.log(err);
     }
-  };
+  }
 
   return (
     <>
       <div className="clientForm">
-        <h2 className="client-h2">Formulaire de type de presence</h2>
+        <h2 className="client-h2">Modifier le type</h2>
         <div className="clientForm-wrapper">
           <form action="" className="form-center">
 
@@ -80,4 +78,4 @@ const TypeCongForm = ({handleClose}) => {
   );
 };
 
-export default TypeCongForm;
+export default EditConge;
