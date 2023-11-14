@@ -12,6 +12,7 @@ const FormConge = ({handleClose}) => {
   const [loading, setLoading] = useState(true);
   const [clientId, setClientId] = useState([]);
   const [leave, setLeave] = useState('');
+  const [status, setStatus] = useState('');
   const [data, setData] = useState({});
   const [selected, setSelected] = useState([]);
   const [type, setType] = useState([]);
@@ -26,7 +27,6 @@ const FormConge = ({handleClose}) => {
     setData((prev)=> ({...prev, [e.target.name]:e.target.value}))
   }
 
-  console.log(data)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,7 +59,8 @@ const FormConge = ({handleClose}) => {
     try {
       await axios.post(`${DOMAIN}/api/leave/demandeConge`, { ...data,
         employee_id: employeeId,
-        client_id: clientId,
+        leave_type: leave,
+        status : status
       });
 
       Swal.fire({
@@ -135,7 +136,7 @@ const FormConge = ({handleClose}) => {
                   name="status"
                   id="status"
                   options={options}
-                  onChange={handleChange}
+                  onChange={(selectedOption) => setStatus(selectedOption.value)}
                   placeholder="Sélectionnez un statut..."
                 />
               </div>
