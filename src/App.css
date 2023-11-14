@@ -63,7 +63,7 @@ li{
   img {
     max-width: 100%;
   }
- ::-webkit-scrollbar{
+::-webkit-scrollbar{
     width: .60rem;
     background: rgba(91, 91, 202, 0.842);
     border-radius: .5rem;

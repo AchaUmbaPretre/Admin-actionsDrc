@@ -60,21 +60,21 @@ const ListeConge = () => {
   }, []);
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'employee_id', headerName: 'employees', width: 120 },
+    { field: 'first_name', headerName: 'Nom', width: 95 },
+    { field: 'last_name', headerName: 'Post-nom', width: 95 },
     {
       field: 'start_date',
       headerName: 'Date de début',
-      width: 150,
+      width: 120,
       valueGetter: (params) => format(new Date(params.row.start_date), 'dd-MM-yyyy'),
     },
     {
       field: 'end_date',
       headerName: 'Date de fin',
-      width: 150,
+      width: 120,
       valueGetter: (params) => format(new Date(params.row.end_date), 'dd-MM-yyyy'),
     },
-    { field: 'leave_type', headerName: "Type de congé", width: 140 },
+    { field: 'nom_type', headerName: "Type de congé", width: 140 },
     {
       field: 'status',
       headerName: 'Statut de la demande',
@@ -85,11 +85,11 @@ const ListeConge = () => {
         let icon = null;
   
         if (status === 'approuvée') {
-          color = 'green'; // Couleur pour le statut "approuvée"
-          icon = <DoneOutlineIcon style={{ fontSize: 14 }}/>; // Icône pour le statut "approuvée"
+          color = 'green';
+          icon = <DoneOutlineIcon style={{ fontSize: 14 }}/>;
         } else if (status === 'refusé') {
-          color = 'red'; // Couleur pour le statut "refusée"
-          icon = <ClearIcon style={{ fontSize: 14 }}/>; // Icône pour le statut "refusée"
+          color = 'red';
+          icon = <ClearIcon style={{ fontSize: 14 }}/>;
         }
   
         return (
