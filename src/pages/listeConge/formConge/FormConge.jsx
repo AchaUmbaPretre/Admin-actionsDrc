@@ -73,20 +73,14 @@ const FormConge = ({handleClose}) => {
       navigate('/listeConge');
       window.location.reload();
     } catch (error) {
-      let errorMessage = 'Une erreur s\'est produite lors de la communication avec le serveur';
-
-      if (error.response && error.response.data && error.response.data.error) {
-        errorMessage = error.response.data.error;
-      }
 
       Swal.fire({
         title: 'Error',
-        text: errorMessage,
+        text: error,
         icon: 'error',
         confirmButtonText: 'OK'
       });
-
-      console.log(errorMessage);
+      console.log(error);
     }
   };
 

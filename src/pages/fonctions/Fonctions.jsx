@@ -81,7 +81,7 @@ const Fonctions = () => {
                 </div>
                 <div className="userOvert2">
                   <Popconfirm
-                      title="Êtes-vous sûr de vouloir supprimer?"
+                    title="Êtes-vous sûr de vouloir supprimer?"
                       onConfirm={() => { handleDelete(params.row.id) }}
                       okText="Oui"
                       cancelText="Non"

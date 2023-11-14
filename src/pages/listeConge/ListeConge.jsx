@@ -13,6 +13,7 @@ import FormConge from './formConge/FormConge';
 import config from '../../config';
 import { format } from 'date-fns';
 import axios from 'axios';
+import { Popconfirm } from 'antd';
 
 const style = {
   position: 'absolute',
@@ -60,8 +61,8 @@ const ListeConge = () => {
   }, []);
 
   const columns = [
-    { field: 'first_name', headerName: 'Nom', width: 95 },
-    { field: 'last_name', headerName: 'Post-nom', width: 95 },
+    { field: 'first_name', headerName: 'Nom', width: 125 },
+    { field: 'last_name', headerName: 'Post-nom', width: 125 },
     {
       field: 'start_date',
       headerName: 'Date de début',
@@ -71,7 +72,7 @@ const ListeConge = () => {
     {
       field: 'end_date',
       headerName: 'Date de fin',
-      width: 120,
+      width: 130,
       valueGetter: (params) => format(new Date(params.row.end_date), 'dd-MM-yyyy'),
     },
     { field: 'nom_type', headerName: "Type de congé", width: 140 },
@@ -111,12 +112,14 @@ const ListeConge = () => {
               <ModeEditOutline className="userListBtn" />
             </Link>
             <VisibilityIcon className="userEye" />
-            <DeleteOutline
-              className="userListDelete"
-              onClick={() => {
-                handleDelete(params.id);
-              }}
-            />
+            <Popconfirm
+              title="Êtes-vous sûr de vouloir supprimer?"
+              onConfirm={() => { handleDelete(params.row.id) }}
+              okText="Oui"
+              cancelText="Non"
+            >
+              <DeleteOutline className="userListDelete" />
+            </Popconfirm>
           </div>
         );
       },
