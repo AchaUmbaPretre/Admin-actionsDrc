@@ -1,9 +1,9 @@
 import './listeConge.scss';
 import { DataGrid } from '@mui/x-data-grid';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
-import { DeleteOutline, ModeEditOutline } from '@mui/icons-material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import { DeleteOutline, ModeEditOutline, VisibilityOutlined } from '@mui/icons-material';
+import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -37,6 +37,7 @@ const ListeConge = () => {
   const [loading, setLoading] = useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
 
   const handleDelete = async (id) => {
     try {
@@ -106,20 +107,30 @@ const ListeConge = () => {
       headerName: 'Action',
       width: 160,
       renderCell: (params) => {
+        const handleEdit = () => {
+          navigate(`/contratFonctionEdit/${params.row.id}`);
+        }
         return (
           <div className="table-icons-row">
-            <Link to={`/users/${params.value}`}>
-              <ModeEditOutline className="userListBtn" />
-            </Link>
-            <VisibilityIcon className="userEye" />
-            <Popconfirm
-              title="Êtes-vous sûr de vouloir supprimer?"
-              onConfirm={() => { handleDelete(params.row.id) }}
-              okText="Oui"
-              cancelText="Non"
-            >
-              <DeleteOutline className="userListDelete" />
-            </Popconfirm>
+            <div className="userOvert0">
+              <ModeEditOutlineIcon className='userListBtn' onClick={handleEdit} />
+              <span className='userOvert'>Modifier</span>
+            </div>
+            <div className="userOvert1">
+              <VisibilityOutlined className='userEye' />
+              <span className='userOvert'>détail</span>
+            </div>
+            <div className="userOvert2">
+              <Popconfirm
+                title="Êtes-vous sûr de vouloir supprimer?"
+                onConfirm={() => { handleDelete(params.row.id) }}
+                okText="Oui"
+                cancelText="Non"
+              >
+                <DeleteOutline className="userListDelete" />
+              </Popconfirm>
+              <span className='userOvert'>Supprimer</span>
+            </div>
           </div>
         );
       },
