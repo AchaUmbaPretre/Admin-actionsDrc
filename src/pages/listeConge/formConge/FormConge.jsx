@@ -71,6 +71,7 @@ const FormConge = ({handleClose}) => {
       });
 
       navigate('/listeConge');
+      window.location.reload();
     } catch (error) {
       let errorMessage = 'Une erreur s\'est produite lors de la communication avec le serveur';
 

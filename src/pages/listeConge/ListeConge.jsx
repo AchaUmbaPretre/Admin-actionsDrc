@@ -5,10 +5,13 @@ import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import { DeleteOutline, ModeEditOutline } from '@mui/icons-material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
+import ClearIcon from '@mui/icons-material/Clear';
 import { useEffect, useState } from 'react';
 import { Box, Fade, Backdrop, Modal } from '@mui/material';
 import FormConge from './formConge/FormConge';
 import config from '../../config';
+import { format } from 'date-fns';
 import axios from 'axios';
 
 const style = {
@@ -26,10 +29,6 @@ const style = {
 };
 
 const ListeConge = () => {
-  const HandleDelete = (id) => {
-    const dataFilter = data.filter((item) => item.id !== id);
-    setData(dataFilter);
-  };
 
   const [data, setData] = useState([]);
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
@@ -37,6 +36,15 @@ const ListeConge = () => {
   const [loading, setLoading] = useState(true);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${DOMAIN}/api/leave/demandeConge/${id}`);
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+};
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,29 +62,66 @@ const ListeConge = () => {
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'employee_id', headerName: 'employees', width: 120 },
-    { field: 'start_date', headerName: 'Date de début', width: 130 },
-    { field: 'end_date', headerName: 'Date de fin', width: 150 },
+    {
+      field: 'start_date',
+      headerName: 'Date de début',
+      width: 150,
+      valueGetter: (params) => format(new Date(params.row.start_date), 'dd-MM-yyyy'),
+    },
+    {
+      field: 'end_date',
+      headerName: 'Date de fin',
+      width: 150,
+      valueGetter: (params) => format(new Date(params.row.end_date), 'dd-MM-yyyy'),
+    },
     { field: 'leave_type', headerName: "Type de congé", width: 140 },
-    { field: 'status', headerName: 'Statut de la demande', width: 140 },
+    {
+      field: 'status',
+      headerName: 'Statut de la demande',
+      width: 140,
+      renderCell: (params) => {
+        const status = params.value;
+        let color = '';
+        let icon = null;
+  
+        if (status === 'approuvée') {
+          color = 'green'; // Couleur pour le statut "approuvée"
+          icon = <DoneOutlineIcon style={{ fontSize: 14 }}/>; // Icône pour le statut "approuvée"
+        } else if (status === 'refusé') {
+          color = 'red'; // Couleur pour le statut "refusée"
+          icon = <ClearIcon style={{ fontSize: 14 }}/>; // Icône pour le statut "refusée"
+        }
+  
+        return (
+          <div style={{ color, display: 'flex', alignItems: 'center', gap: "5px" }}>
+            {icon}
+            {status}
+          </div>
+        );
+      },
+    },
     {
       field: 'actions',
       headerName: 'Action',
       width: 160,
       renderCell: (params) => {
         return (
-          <>
-            <div className="table-icons-row">
-              <Link to={`/users/${params.value}`}>
-                <ModeEditOutline className='userListBtn' />
-              </Link>
-                <VisibilityIcon className='userEye' />
-                <DeleteOutline className="userListDelete" onClick={() => { HandleDelete(params.value) }} />
-              </div>
-          </>
-          )
-        },
+          <div className="table-icons-row">
+            <Link to={`/users/${params.value}`}>
+              <ModeEditOutline className="userListBtn" />
+            </Link>
+            <VisibilityIcon className="userEye" />
+            <DeleteOutline
+              className="userListDelete"
+              onClick={() => {
+                handleDelete(params.id);
+              }}
+            />
+          </div>
+        );
       },
-    ];
+    },
+  ];
 
     return (
       <>
