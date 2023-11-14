@@ -112,14 +112,6 @@ const ListeConge = () => {
         }
         return (
           <div className="table-icons-row">
-            <div className="userOvert0">
-              <ModeEditOutlineIcon className='userListBtn' onClick={handleEdit} />
-              <span className='userOvert'>Modifier</span>
-            </div>
-            <div className="userOvert1">
-              <VisibilityOutlined className='userEye' />
-              <span className='userOvert'>détail</span>
-            </div>
             <div className="userOvert2">
               <Popconfirm
                 title="Êtes-vous sûr de vouloir supprimer?"
