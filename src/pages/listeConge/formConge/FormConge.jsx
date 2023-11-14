@@ -9,14 +9,24 @@ import config from '../../../config';
 const FormConge = ({handleClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [employeeId, setEmployeeId] = useState('');
-  const [clientEtat, setClientEtat] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [clientId, setClientId] = useState([]);
-  const [checkInTime, setCheckInTime] = useState('');
-  const [checkOutTime, setCheckOutTime] = useState('');
-  const [date, setDate] = useState(null);
+  const [leave, setLeave] = useState('');
+  const [data, setData] = useState({});
   const [selected, setSelected] = useState([]);
+  const [type, setType] = useState([]);
+  const options = [
+    { value: 'approuvée', label: 'Approuvée' },
+    { value: 'refusé', label: 'Refusé' }
+  ];
 
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setData((prev)=> ({...prev, [e.target.name]:e.target.value}))
+  }
+
+  console.log(data)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,8 +43,9 @@ const FormConge = ({handleClose}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${DOMAIN}/api/admin/client`);
-        setClientEtat(data);
+        const res = await axios.get(`${DOMAIN}/api/leave/typeConge`);
+        setType(res.data);
+        setLoading(false)
       } catch (error) {
         console.log(error);
       }
@@ -46,12 +57,9 @@ const FormConge = ({handleClose}) => {
     e.preventDefault();
     handleClose()
     try {
-      await axios.post(`${DOMAIN}/api/admin/presences`, {
+      await axios.post(`${DOMAIN}/api/leave/demandeConge`, { ...data,
         employee_id: employeeId,
         client_id: clientId,
-        date: date,
-        check_in_time: { day: 7, time: checkInTime },
-        check_out_time: { day: 7, time: checkOutTime },
       });
 
       Swal.fire({
@@ -99,21 +107,21 @@ const FormConge = ({handleClose}) => {
               </div>
               <div className="form-row">
                 <label htmlFor="" className="label-form">Date de début<span>*</span></label>
-                <input type="date" name='date' className="input-form" required onChange={(e) => setDate(e.target.value)} />
+                <input type="date" name='start_date' className="input-form" required onChange={handleChange} />
               </div>
             </div>
 
             <div className="form-rows">
               <div className="form-row">
                 <label htmlFor="" className="label-form">Date de fin<span>*</span></label>
-                <input type="date" name='date' className="input-form" required onChange={(e) => setDate(e.target.value)} />
+                <input type="date" name='end_date' className="input-form" required onChange={handleChange} />
               </div>
               <div className="form-row">
                 <label htmlFor="" className="label-form">Type de congé <span>*</span></label>
                 <Select
-                  options={selected.map(item => ({ value: item.id, label: item.first_name }))}
+                  options={type.map(item => ({ value: item.id, label: item.nom_type }))}
                   onChange={(selectedOption) => setEmployeeId(selectedOption.value)}
-                  placeholder="Sélectionnez l'employé(e)"
+                  placeholder="Sélectionnez un type de congé"
                   isSearchable
                   required
                 />
@@ -123,11 +131,13 @@ const FormConge = ({handleClose}) => {
             <div className="form-rows">
               <div className="form-row">
                 <label htmlFor="" className="label-form">Statut de la demande<span>*</span></label>
-                <select name="" id="" className="input-form">
-                    <option disabled >Selectionnez un statut....</option>
-                    <option value="approuvée">Approuvée</option>
-                    <option value="refusé">Refusé</option>
-                </select>
+                <Select
+                  name="status"
+                  id="status"
+                  options={options}
+                  onChange={handleChange}
+                  placeholder="Sélectionnez un statut..."
+                />
               </div>
             </div>
 

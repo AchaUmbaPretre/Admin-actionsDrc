@@ -70,8 +70,8 @@ const handleDelete = async (id) => {
 
 const columns = [
   { title: '#', dataIndex: 'id', key: 'id', render: (text, record, index) => index + 1 },
-  { title: 'Nom de type', dataIndex: 'first_name', key: 'first_name' },
-  { title: 'Nombre de jour', dataIndex: 'last_name', key: 'last_name' },
+  { title: 'Nom de type', dataIndex: 'nom_type', key: 'nom_type' },
+  { title: 'Nombre de jour', dataIndex: 'nombre_jour', key: 'nombre_jour' },
   {
     title: 'Action',
     key: 'action',
@@ -86,9 +86,6 @@ const columns = [
         >
           <Button icon={<EditOutlined />} style={{ color: 'green' }} />
         </Popconfirm>
-        <Link to={`/presenceListView/${record.emp1_id}`}>
-          <Button icon={<EyeOutlined />} style={{ color: 'blue' }} />
-        </Link>
         <Popconfirm
           title="Êtes-vous sûr de vouloir supprimer?"
           onConfirm={() => handleDelete(record.id)}

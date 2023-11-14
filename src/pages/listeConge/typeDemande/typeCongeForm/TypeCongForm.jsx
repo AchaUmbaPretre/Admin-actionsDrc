@@ -8,27 +8,10 @@ import config from '../../../../config';
 
 const TypeCongForm = ({handleClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-  const [employeeId, setEmployeeId] = useState('');
   const [data, setData] = useState([]);
-  const [clientId, setClientId] = useState([]);
-  const [checkInTime, setCheckInTime] = useState('');
-  const [checkOutTime, setCheckOutTime] = useState('');
-  const [date, setDate] = useState(null);
   const [selected, setSelected] = useState([]);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(`${DOMAIN}/api/admin`);
-        setSelected(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
 
   const handleChange = (e) => {
     const fieldName = e.target.name;
@@ -52,18 +35,14 @@ const TypeCongForm = ({handleClose}) => {
     e.preventDefault();
     handleClose()
     try {
-      await axios.post(`${DOMAIN}/api/admin/presences`, {
-       
-      });
-
+      await axios.post(`${DOMAIN}/api/leave/typeConge`, data);
       Swal.fire({
         title: 'Success',
-        text: 'La présence a été enregistrée avec succès !',
+        text: 'Le type de congé a été enregistrée avec succès !',
         icon: 'success',
         confirmButtonText: 'OK'
       });
-
-      navigate('/presence');
+      navigate('/typeCongé');
     } catch (error) {
       Swal.fire({
         title: 'Error',
