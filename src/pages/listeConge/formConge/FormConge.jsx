@@ -65,12 +65,12 @@ const FormConge = ({handleClose}) => {
 
       Swal.fire({
         title: 'Success',
-        text: 'La présence a été enregistrée avec succès !',
+        text: 'Le congé a été enregistré avec succès !',
         icon: 'success',
         confirmButtonText: 'OK'
       });
 
-      navigate('/presence');
+      navigate('/listeConge');
     } catch (error) {
       let errorMessage = 'Une erreur s\'est produite lors de la communication avec le serveur';
 
@@ -121,7 +121,7 @@ const FormConge = ({handleClose}) => {
                 <label htmlFor="" className="label-form">Type de congé <span>*</span></label>
                 <Select
                   options={type.map(item => ({ value: item.id, label: item.nom_type }))}
-                  onChange={(selectedOption) => setEmployeeId(selectedOption.value)}
+                  onChange={(selectedOption) => setLeave(selectedOption.value)}
                   placeholder="Sélectionnez un type de congé"
                   isSearchable
                   required
