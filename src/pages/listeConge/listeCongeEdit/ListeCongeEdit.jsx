@@ -3,17 +3,13 @@ import Swal from 'sweetalert2';
 import SendIcon from '@mui/icons-material/Send';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Select from 'react-select';
 import config from '../../../config';
-import { emphasize } from '@mui/material';
 import moment from 'moment';
 
-const ListeCongeEdit = ({handleClose}) => {
+
+const ListeCongeEdit = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-  const [employeeId, setEmployeeId] = useState('');
   const [loading, setLoading] = useState(true);
-  const [leave, setLeave] = useState('');
-  const [statusData, setStatusData] = useState('');
   const [data, setData] = useState({});
   const [selected, setSelected] = useState([]);
   const [type, setType] = useState([]);
@@ -29,6 +25,11 @@ const ListeCongeEdit = ({handleClose}) => {
   const handleChange = (e) => {
     setData((prev)=> ({...prev, [e.target.name]:e.target.value}))
   }
+  console.log(data)
+
+  useEffect(()=>{
+
+  },[])
 
   useEffect(()=>{
     const fetchData = async ()=> {
@@ -87,11 +88,7 @@ const ListeCongeEdit = ({handleClose}) => {
   const handleClick2 = async (e) => {
 
       try {
-        await axios.put(`${DOMAIN}/api/leave/demandeConge/${id}`, {...data,
-            employee_id : employeeId,
-            leave_type: leave,
-            status: status
-        });
+        await axios.put(`${DOMAIN}/api/leave/demandeConge/${id}`, data);
         navigate("/listeConge");
         Swal.fire({
           title: 'Success',
@@ -113,23 +110,31 @@ const ListeCongeEdit = ({handleClose}) => {
 
   return (
     <>
-      <div className="clientForm">
+      <div className="ediitForm">
         <h2 className="client-h2">Modifier le demande de congé</h2>
         <div className="clientForm-wrapper">
           <form action="" className="form-center">
             <div className="form-rows">
-              <div className="form-row">
-                <label htmlFor="" className="label-form">Employé(e) <span>*</span></label>
-                <Select
-                  options={selected.map(item => ({ value: item.id, label: item.first_name }))}
-                  onChange={(selectedOption) => setEmployeeId(selectedOption.value)}
-                  placeholder="Sélectionnez l'employé(e)"
-                  isSearchable
-                  required
-                  value={employee_id}
-                />
-              </div>
-              <div className="form-row">
+            <div className="form-row">
+                <label htmlFor="" className="label-form">
+                    Employé(e) <span>*</span>
+                </label>
+                <select
+                    name='employee_id'
+                    value={employee_id}
+                    onChange={handleChange}
+                    required
+                    className="input-form"
+                >
+                    <option value="">Sélectionnez l'employé(e)</option>
+                    {selected.map((item) => (
+                    <option key={item.id} value={item.id}>
+                        {item.first_name}
+                    </option>
+                    ))}
+                </select>
+             </div>
+            <div className="form-row">
                 <label htmlFor="" className="label-form">Date de début<span>*</span></label>
                 <input type="date" value={moment(start_date).format('YYYY-MM-DD') || ''} name='start_date' className="input-form" onChange={handleChange} />
               </div>
@@ -142,28 +147,41 @@ const ListeCongeEdit = ({handleClose}) => {
               </div>
               <div className="form-row">
                 <label htmlFor="" className="label-form">Type de congé <span>*</span></label>
-                <Select
-                  options={type.map(item => ({ value: item.id, label: item.nom_type }))}
-                  onChange={(selectedOption) => setLeave(selectedOption.value)}
-                  placeholder="Sélectionnez un type de congé"
-                  isSearchable
-                  required
-                  value={leave_type}
-                />
+                <select
+                    name='leave_type'
+                    value={leave_type}
+                    onChange={handleChange}
+                    required
+                    className="input-form"
+                >
+                    <option value="">Sélectionnez un type de congé</option>
+                    {type.map((item) => (
+                    <option key={item.id} value={item.id}>
+                        {item.nom_type}
+                    </option>
+                    ))}
+                </select>
               </div>
             </div>
 
             <div className="form-rows">
               <div className="form-row">
                 <label htmlFor="" className="label-form">Statut de la demande<span>*</span></label>
-                <Select
-                  name="status"
-                  id="status"
-                  options={options}
-                  onChange={(selectedOption) => setStatusData(selectedOption.value)}
-                  placeholder="Sélectionnez un statut..."
-                  value={status}
-                />
+                <select
+                    name="status"
+                    id="status"
+                    value={status}
+                    onChange={handleChange}
+                    required
+                    className="input-form"
+                >
+                    <option value="">Sélectionnez un statut...</option>
+                    {options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                        {option.label}
+                    </option>
+                    ))}
+                </select>
               </div>
             </div>
 

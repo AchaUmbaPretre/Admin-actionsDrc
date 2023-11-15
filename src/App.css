@@ -65,16 +65,13 @@ li{
   }
 ::-webkit-scrollbar{
     width: .60rem;
-    background: rgba(91, 91, 202, 0.842);
-    border-radius: .5rem;
+    background: linear-gradient(#253053,#253053d7),url('./assets/970\ X\ 250\ bannière\ 1.png') no-repeat;
     z-index: -22;
-    display: none;
 }
 ::-webkit-scrollbar-thumb{
-    background:  rgba(21, 21, 100, 0.822);
-    border-radius: .5rem;
+  background: linear-gradient(#253053,#253053d7),url('./assets/970\ X\ 250\ bannière\ 1.png') no-repeat;
 
 }
 ::-webkit-scrollbar-thumb:hover{
-    background:  rgba(21, 21, 100);
+  background: linear-gradient(#253053,#253053d7),url('./assets/970\ X\ 250\ bannière\ 1.png') no-repeat;
 }

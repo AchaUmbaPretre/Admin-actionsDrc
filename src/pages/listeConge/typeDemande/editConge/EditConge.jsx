@@ -83,7 +83,7 @@ const handleClick2 = async (e) => {
 
   return (
     <>
-      <div className="clientForm">
+      <div className="ediitForm">
         <h2 className="client-h2">Modifier le type</h2>
         <div className="clientForm-wrapper">
           <form action="" className="form-center">
