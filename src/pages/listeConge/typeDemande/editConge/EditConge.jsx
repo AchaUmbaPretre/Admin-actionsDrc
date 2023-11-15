@@ -59,7 +59,7 @@ const handleClick = async (e) => {
   });
 };
 
-  const handleClick2 = async (e) => {
+const handleClick2 = async (e) => {
 
     try {
       await axios.put(`${DOMAIN}/api/leave/typeConge/${id}`, data);
@@ -79,7 +79,7 @@ const handleClick = async (e) => {
           });
       console.log(err);
     }
-  }
+}
 
   return (
     <>

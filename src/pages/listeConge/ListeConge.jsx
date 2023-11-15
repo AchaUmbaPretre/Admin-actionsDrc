@@ -108,17 +108,13 @@ const ListeConge = () => {
       width: 160,
       renderCell: (params) => {
         const handleEdit = () => {
-          navigate(`/contratFonctionEdit/${params.row.id}`);
+          navigate(`/listeCongeEdit/${params.row.id}`);
         }
         return (
           <div className="table-icons-row">
             <div className="userOvert0">
               <EditOutlined className='userListBtn' onClick={handleEdit}/>
               <span className='userOvert'>Modifier</span>
-            </div>
-            <div className="userOvert1">
-              <VisibilityOutlined className='userEye' onClick={() => navigate(`/contratsView/${params.row.id}`)} />
-              <span className='userOvert'>détail</span>
             </div>
             <div className="userOvert2">
               <Popconfirm
