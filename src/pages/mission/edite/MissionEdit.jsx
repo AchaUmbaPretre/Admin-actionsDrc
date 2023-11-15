@@ -40,7 +40,6 @@ const MissionEdit = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-
     try {
       await axios.put(`${DOMAIN}/api/admin/updateMission/${id}`, data);
       navigate("/mission");
@@ -57,7 +56,6 @@ const MissionEdit = () => {
             icon: 'error',
             confirmButtonText: 'OK'
           });
-
       console.log(err);
     }
   }

@@ -137,7 +137,7 @@ const handleChange = (e) => {
           });
         };
 
-const handleClick2 = async (e) => {
+  const handleClick2 = async (e) => {
 
     try {
         await axios.put(`${DOMAIN}/api/admin/employe/${id}`,{ ...data, source: photo });
