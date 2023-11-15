@@ -264,7 +264,7 @@ const Affectation2 = () => {
                   />
                   <Popconfirm
                     title="Êtes-vous sûr de vouloir supprimer?"
-                    onConfirm={()=>{handleDelete(record.id)}}
+                    onConfirm={()=>{handleDelete(record.id,record.userId)}}
                     okText="Oui"
                     cancelText="Non"
                   >
@@ -278,22 +278,14 @@ const Affectation2 = () => {
     
     ];
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (id,userId) => {
         try {
-          const result = await Swal.fire({
-            title: 'Es-tu sûr?',
-            text: "Vous ne pourrez pas revenir en arrière !",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Oui, supprimez-le!'
-          });
-      
-          if (result.isConfirmed) {
-            await axios.delete(`${DOMAIN}/api/admin/deleteAff/${id}`);
+   
+            await Promise.all([
+              axios.put(`${DOMAIN}/api/admin/deleteAff/${id}`),
+              axios.put(`${DOMAIN}/api/admin/affectationPutAgent/${userId}`)
+            ]);
             window.location.reload();
-          }
         } catch (err) {
           console.log(err);
         }

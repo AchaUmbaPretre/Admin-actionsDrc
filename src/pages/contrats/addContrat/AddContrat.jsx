@@ -311,7 +311,8 @@ const handleSubmit = async (e) => {
   }));
   setSelectedx(selectedx.concat(newSelectedx));
   setSelectedData([...selectedData, ...selectedItems]);
-
+  
+  await Promise.all(
   selectedx.map((dd) => {
      axios
       .post(`${DOMAIN}/api/admin/affectations`, {
@@ -322,6 +323,7 @@ const handleSubmit = async (e) => {
       axios.put(`${DOMAIN}/api/admin/employeFonctionPut/${dd.agent}`,{
           contrat_id : dd.contrat
       })
+      
       .then((response) => {
         Swal.fire({
           title: 'Success',
@@ -339,7 +341,7 @@ const handleSubmit = async (e) => {
           confirmButtonText: 'OK'
         });
       });
-  });
+  }));
 };
 
   return (
