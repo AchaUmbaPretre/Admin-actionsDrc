@@ -2,7 +2,7 @@ import './listeConge.scss';
 import { DataGrid } from '@mui/x-data-grid';
 import { Link, useNavigate } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
-import { DeleteOutline, ModeEditOutline, VisibilityOutlined } from '@mui/icons-material';
+import { DeleteOutline, EditOutlined, ModeEditOutline, VisibilityOutlined } from '@mui/icons-material';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
@@ -67,20 +67,20 @@ const ListeConge = () => {
     {
       field: 'start_date',
       headerName: 'Date de début',
-      width: 120,
+      width: 135,
       valueGetter: (params) => format(new Date(params.row.start_date), 'dd-MM-yyyy'),
     },
     {
       field: 'end_date',
       headerName: 'Date de fin',
-      width: 130,
+      width: 135,
       valueGetter: (params) => format(new Date(params.row.end_date), 'dd-MM-yyyy'),
     },
     { field: 'nom_type', headerName: "Type de congé", width: 140 },
     {
       field: 'status',
       headerName: 'Statut de la demande',
-      width: 140,
+      width: 150,
       renderCell: (params) => {
         const status = params.value;
         let color = '';
@@ -112,6 +112,14 @@ const ListeConge = () => {
         }
         return (
           <div className="table-icons-row">
+            <div className="userOvert0">
+              <EditOutlined className='userListBtn' onClick={handleEdit}/>
+              <span className='userOvert'>Modifier</span>
+            </div>
+            <div className="userOvert1">
+              <VisibilityOutlined className='userEye' onClick={() => navigate(`/contratsView/${params.row.id}`)} />
+              <span className='userOvert'>détail</span>
+            </div>
             <div className="userOvert2">
               <Popconfirm
                 title="Êtes-vous sûr de vouloir supprimer?"
