@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import SendIcon from '@mui/icons-material/Send';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Select from 'react-select';
 import config from '../../../../config';
@@ -10,7 +10,10 @@ const EditConge = ({handleClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [data, setData] = useState([]);
   const [selected, setSelected] = useState([]);
+  const { nom_type, nombre_jour } = data;
   const navigate = useNavigate();
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
 
   const handleChange = (e) => {
     const fieldName = e.target.name;
@@ -27,15 +30,27 @@ const EditConge = ({handleClose}) => {
     }
   }
 
+  useEffect(()=>{
+    const fetchData = async ()=> {
+        try{
+            const res = await axios.get(`${DOMAIN}/api/leave/typeConge/${id}`);
+            setData(res.data[0])
+          }catch(error){
+            console.log(error)
+          };
+    }
+    fetchData()
+}, [id]);
+
   const handleClick = async (e) => {
     e.preventDefault();
 
     try {
-      await axios.put(`${DOMAIN}/api/leave/${id}`, data);
-      navigate("/listeConge");
+      await axios.put(`${DOMAIN}/api/leave/typeConge/${id}`, data);
+      navigate("/typeCongé");
       Swal.fire({
         title: 'Success',
-        text: 'Mission a été modifiée avec succès!',
+        text: 'le type a été modifié avec succès!',
         icon: 'success',
         confirmButtonText: 'OK'
       });
@@ -46,7 +61,6 @@ const EditConge = ({handleClose}) => {
             icon: 'error',
             confirmButtonText: 'OK'
           });
-
       console.log(err);
     }
   }
@@ -61,12 +75,12 @@ const EditConge = ({handleClose}) => {
             <div className="form-rows">
               <div className="form-row">
                 <label htmlFor="" className="label-form">Nom de type<span>*</span></label>
-                <input type="text" name='nom_type' className="input-form" onChange={handleChange} required placeholder='Ecrire....' />
+                <input type="text" name='nom_type' value={nom_type} className="input-form" onChange={handleChange} required placeholder='Ecrire....' />
               </div>
 
               <div className="form-row">
                 <label htmlFor="" className="label-form">Nombre de jour<span>*</span></label>
-                <input type="number" name='nombre_jour' className="input-form" onChange={handleChange} required />
+                <input type="number" name='nombre_jour' value={nombre_jour} className="input-form" onChange={handleChange} required />
               </div>
             </div>
 

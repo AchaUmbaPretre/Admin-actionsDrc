@@ -13,8 +13,6 @@ const MissionEdit = () => {
   const navigate = useNavigate();
   const [options, setOptions] = useState([]);
   const [optionsClient, setOptionsClient] = useState([]);
-  const [duration, setDuration] = useState([]);
-  const [salaires, setSalaires] = useState([]);
   const location = useLocation();
   const id = location.pathname.split("/")[2];
 
@@ -27,7 +25,6 @@ const MissionEdit = () => {
     const formattedDate = moment(selectedDate).format('YYYY-MM-DD');
     setData((prev) => ({ ...prev, [name]: formattedDate }));
   };
-
 
   useEffect(()=>{
     const fetchData = async ()=> {

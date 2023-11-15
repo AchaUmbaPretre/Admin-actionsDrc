@@ -29,8 +29,6 @@ const TypeCongForm = ({handleClose}) => {
 
   }
 
-  console.log(data)
-
   const handleClick = async (e) => {
     e.preventDefault();
     handleClose()
@@ -56,7 +54,7 @@ const TypeCongForm = ({handleClose}) => {
   return (
     <>
       <div className="clientForm">
-        <h2 className="client-h2">Formulaire de type de presence</h2>
+        <h2 className="client-h2">Formulaire du type de presence</h2>
         <div className="clientForm-wrapper">
           <form action="" className="form-center">
 

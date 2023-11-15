@@ -78,14 +78,7 @@ const columns = [
     render: (text, record) => (
         
       <Space size="middle">
-        <Popconfirm
-          title="Êtes-vous sûr de vouloir modifier?"
-          onConfirm={()=> handleEdit(record.id)}
-          okText="Oui"
-          cancelText="Non"
-        >
-          <Button icon={<EditOutlined />} style={{ color: 'green' }} />
-        </Popconfirm>
+        <Button icon={<EditOutlined />} style={{ color: 'green' }} onClick={()=> handleEdit(record.id)} />
         <Popconfirm
           title="Êtes-vous sûr de vouloir supprimer?"
           onConfirm={() => handleDelete(record.id)}
