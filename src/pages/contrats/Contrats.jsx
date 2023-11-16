@@ -214,15 +214,15 @@ const Contrats = () => {
     };
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
-       useEffect(()=>{
-        const fetchData = async ()=> {
-            try{
-                const {data} = await axios.get(`${DOMAIN}/api/admin/contrat`);
-                setData(data)
-                setLoading(false);
-              }catch(error){
-                console.log(error)
-              };
+    useEffect(()=>{
+      const fetchData = async ()=> {
+        try{
+          const {data} = await axios.get(`${DOMAIN}/api/admin/contrat`);
+          setData(data)
+          setLoading(false);
+          }catch(error){
+            console.log(error)
+          };
         }
         fetchData()
      }, [])

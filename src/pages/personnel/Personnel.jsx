@@ -50,7 +50,7 @@ const Personnel = () => {
     const handleClose = () => setOpen(false);
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(()=>{
+useEffect(()=>{
         const fetchData = async ()=> {
             try{
                 const res = await axios.get(`${DOMAIN}/api/admin`);
@@ -65,7 +65,7 @@ const Personnel = () => {
               };
         }
         fetchData()
-     }, [])
+}, [])
 
 const handleDelete = async (id) => {
   try {
@@ -172,18 +172,13 @@ const exportToExcel = () => {
           "CNSS": row.number_cnss,
           "INPP": row.number_inpp,
         }));
-      
-
         const workbook = XLSX.utils.book_new();
         const worksheet = XLSX.utils.json_to_sheet(excelData);
-      
-   
+    
         XLSX.utils.book_append_sheet(workbook, worksheet, 'Feuille 1');
       
-  
         const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
         const excelBlob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-        
 
         const excelFilename = 'tableau.xlsx';
         saveAs(excelBlob, excelFilename);

@@ -29,8 +29,6 @@ const Affectation = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
 
   const [data, setData] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [tap1, setTap1] = useState([]);
   const navigate = useNavigate();
  const [loading, setLoading] = useState(true);
  const [value, setValue] = React.useState('1');
