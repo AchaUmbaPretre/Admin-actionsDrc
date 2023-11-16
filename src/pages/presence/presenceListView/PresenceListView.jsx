@@ -182,7 +182,7 @@ const handleDelete = async (id) => {
           <>
               <div className="table-icons-row">
                 <div className="userOvert0">
-                  <Link onClick={''}>
+                  <Link>
                     <EditOutlined className="userListBtn" onClick={() => navigate(`/presenceEdit/${params.row.id}`)} />
                     <span className='userOvert'>Modifier</span>
                   </Link>
