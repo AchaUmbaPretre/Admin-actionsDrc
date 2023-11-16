@@ -311,7 +311,7 @@ const handleSubmit = async (e) => {
   }));
   setSelectedx(selectedx.concat(newSelectedx));
   setSelectedData([...selectedData, ...selectedItems]);
-  
+
   await Promise.all(
   selectedx.map((dd) => {
      axios
@@ -323,7 +323,6 @@ const handleSubmit = async (e) => {
       axios.put(`${DOMAIN}/api/admin/employeFonctionPut/${dd.agent}`,{
           contrat_id : dd.contrat
       })
-      
       .then((response) => {
         Swal.fire({
           title: 'Success',
