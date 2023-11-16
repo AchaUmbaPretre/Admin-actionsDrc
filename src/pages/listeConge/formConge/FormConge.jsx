@@ -10,7 +10,6 @@ const FormConge = ({handleClose}) => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
   const [employeeId, setEmployeeId] = useState('');
   const [loading, setLoading] = useState(true);
-  const [clientId, setClientId] = useState([]);
   const [leave, setLeave] = useState('');
   const [status, setStatus] = useState('');
   const [data, setData] = useState({});
@@ -102,17 +101,6 @@ const FormConge = ({handleClose}) => {
                 />
               </div>
               <div className="form-row">
-                <label htmlFor="" className="label-form">Date de début<span>*</span></label>
-                <input type="date" name='start_date' className="input-form" required onChange={handleChange} />
-              </div>
-            </div>
-
-            <div className="form-rows">
-              <div className="form-row">
-                <label htmlFor="" className="label-form">Date de fin<span>*</span></label>
-                <input type="date" name='end_date' className="input-form" required onChange={handleChange} />
-              </div>
-              <div className="form-row">
                 <label htmlFor="" className="label-form">Type de congé <span>*</span></label>
                 <Select
                   options={type.map(item => ({ value: item.id, label: item.nom_type }))}
@@ -121,6 +109,17 @@ const FormConge = ({handleClose}) => {
                   isSearchable
                   required
                 />
+              </div>
+            </div>
+
+            <div className="form-rows">
+              <div className="form-row">
+                <label htmlFor="" className="label-form">Date de début<span>*</span></label>
+                <input type="date" name='start_date' className="input-form" required onChange={handleChange} />
+              </div>
+              <div className="form-row">
+                <label htmlFor="" className="label-form">Date de fin<span>*</span></label>
+                <input type="date" name='end_date' className="input-form" required onChange={handleChange} />
               </div>
             </div>
 

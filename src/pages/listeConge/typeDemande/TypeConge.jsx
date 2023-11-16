@@ -1,16 +1,13 @@
-import { DataGrid } from '@mui/x-data-grid'
 import { Link, useNavigate } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import { EditOutlined } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import moment from 'moment';
 import { Table, Button, Space, Popconfirm } from 'antd';
 import { DeleteOutlined, EyeOutlined } from '@ant-design/icons';
 import BarReturn from '../../../components/barReturn/BarReturn';
 import config from '../../../config';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { Box } from '@mui/material';
 import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
@@ -35,7 +32,6 @@ const TypeConge = () => {
   const DOMAIN = config.REACT_APP_SERVER_DOMAIN
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const [dataTable, setDataTable] = useState([]);
   const [type, setType] = useState([]);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);

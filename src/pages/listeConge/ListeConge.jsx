@@ -1,9 +1,8 @@
 import './listeConge.scss';
 import { DataGrid } from '@mui/x-data-grid';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
-import { DeleteOutline, EditOutlined, ModeEditOutline, VisibilityOutlined } from '@mui/icons-material';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import { DeleteOutline, EditOutlined } from '@mui/icons-material';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -63,7 +62,7 @@ const ListeConge = () => {
 
   const columns = [
     { field: 'first_name', headerName: 'Nom', width: 125 },
-    { field: 'last_name', headerName: 'Post-nom', width: 125 },
+    { field: 'last_name', headerName: 'Prenom', width: 125 },
     {
       field: 'start_date',
       headerName: 'Date de début',
