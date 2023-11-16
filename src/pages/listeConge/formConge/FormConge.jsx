@@ -122,7 +122,6 @@ const FormConge = ({handleClose}) => {
                 <input type="date" name='end_date' className="input-form" required onChange={handleChange} />
               </div>
             </div>
-
             <div className="form-rows">
               <div className="form-row">
                 <label htmlFor="" className="label-form">Statut de la demande<span>*</span></label>
@@ -135,7 +134,6 @@ const FormConge = ({handleClose}) => {
                 />
               </div>
             </div>
-
             <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>
           </form>
         </div>
