@@ -12,6 +12,9 @@
         padding: 50px;
         width: 100%;
         .paiement-tete{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             .paiement-logo{
                 width: 130px;
                 height: 130px;

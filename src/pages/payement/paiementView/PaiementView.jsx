@@ -46,6 +46,7 @@ const PaiementView = () => {
           <div className="paiement-wrapper">
             <div className="paiement-tete">
               <img src={action} alt="" className="paiement-logo" />
+              <span className="paiement_date">Le {moment().format('DD/MM/YYYY')}</span>
             </div>
             <div className="paiement-row-title">
               <span className="span-paiement-color"></span>
@@ -79,7 +80,6 @@ const PaiementView = () => {
             </div>
           </div>
         </div>
-
     </>
   )
 }

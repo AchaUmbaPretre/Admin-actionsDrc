@@ -39,10 +39,6 @@ const FactureCalcul = () => {
   const searchInput = React.useRef(null);
   const scroll = { x: 400 };
   const scrollY = { y: 200 };
-
-  const [invoiceDate, setInvoiceDate] = useState('');
-  const [dueDate, setDueDate] = useState('');
-  const [totalAmount, setTotalAmount] = useState('');
   const [status, setStatus] = useState([]);
   const [optionsStatus, setOptionsStatus] = useState([]);
   const montantTotals = total[0]?.montant_total;
@@ -183,8 +179,7 @@ useEffect(() => {
   
     if (typeof value === 'string' && value.length > 0) {
       formattedValue = value.charAt(0).toUpperCase() + value.slice(1);
-    }
-  
+    }  
     setData((prev) => ({ ...prev, [name]: formattedValue }));
   };
 
@@ -197,19 +192,12 @@ useEffect(() => {
       width: '2%',
     },
     {
-      title: 'Nom',
-      dataIndex: 'first_name',
+      title: 'Client',
+      dataIndex: 'nom_client',
       key: 'first_name',
       width: '20%',
-      ...getColumnSearchProps('start_date'),
+      ...getColumnSearchProps('nom_client'),
     },
-    {
-        title: 'Prenom',
-        dataIndex: 'last_name',
-        key: 'last_name',
-        width: '20%',
-        ...getColumnSearchProps('last_name'),
-      },
     {
         title: 'Prix',
         dataIndex: 'prix',
