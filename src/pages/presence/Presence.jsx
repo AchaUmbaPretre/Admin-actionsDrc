@@ -160,14 +160,7 @@ const handleDelete = async (id) => {
               <>
                 <div className="table-icons-row">
                   <div className="userOvert0">
-                    <Popconfirm
-                        title="Êtes-vous sûr de vouloir modifier?"
-                        onConfirm={() => navigate(`/presenceEdit/${params.row.id}`)}
-                        okText="Oui"
-                        cancelText="Non"
-                    >
-                        <EditOutlined className='userListBtn'/>
-                    </Popconfirm>
+                    <EditOutlined className='userListBtn' onClick={() => navigate(`/presenceEdit/${params.row.id}`)}/>
                     <span className='userOvert'>Modifier</span>
                   </div>
                   <div className="userOvert1">

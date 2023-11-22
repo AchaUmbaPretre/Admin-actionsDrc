@@ -44,32 +44,24 @@ const PresentEdit = () => {
         }
         fetchData()
     }, [id]);
-
-/*     const handleClick = async (e) => {
-        e.preventDefault();
+    const handleClick = async (e) => {
+      e.preventDefault();
     
-        try {
-          await axios.put(`${DOMAIN}/api/admin/presencePut/${id}`, data);
-          navigate("/presence");
-          Swal.fire({
-            title: 'Success',
-            text: 'Presence a été modifiée avec succès!',
-            icon: 'success',
-            confirmButtonText: 'OK'
-          });
-        } catch (err) {
-            Swal.fire({
-                title: 'Error',
-                text: err.message,
-                icon: 'error',
-                confirmButtonText: 'OK'
-              });
-    
-          console.log(err);
+      Swal.fire({
+        title: 'Confirmation',
+        text: 'Voulez-vous vraiment modifier ?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Oui',
+        cancelButtonText: 'Non',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          handleClick2();
         }
-      } */
+      });
+    };
 
-      const handleClick = async (e) => {
+      const handleClick2 = async (e) => {
         e.preventDefault();
       
         // Afficher la boîte de dialogue de confirmation
