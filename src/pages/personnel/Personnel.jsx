@@ -121,14 +121,7 @@ const columns = [
               <>
                 <div className="table-icons-row">
                     <div className="userOvert0">
-                      <Popconfirm
-                        title="Êtes-vous sûr de vouloir modifier?"
-                        onConfirm={handleEdit}
-                        okText="Oui"
-                        cancelText="Non"
-                      >
-                      <Link><EditOutlined className='userListBtn'/></Link>
-                      </Popconfirm>
+                      <Link><EditOutlined className='userListBtn' onClick={handleEdit}/></Link>
                       <span className='userOvert'>Modifier</span>
                     </div>
                     <div className="userOvert1">

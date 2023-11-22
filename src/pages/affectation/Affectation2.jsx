@@ -231,33 +231,13 @@ const Affectation2 = () => {
           dataIndex: 'action',
           render: (text, record) => {
             const handleEdit = () => {
-              Swal.fire({
-                title: 'Confirmation',
-                text: 'Voulez-vous vraiment modifier ?',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Oui',
-                cancelButtonText: 'Non',
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  navigate(`/affectationEdit2/${record.id}`);
-                }
-              });
-            };
+              navigate(`/affectationEdit2/${record.id}`);
+            }
         
             return (
               <>
                 <div className="table-icons-row">
-                  <Popconfirm
-                    title="Êtes-vous sûr de vouloir modifier?"
-                    onConfirm={handleEdit}
-                    okText="Oui"
-                    cancelText="Non"
-                  >
-                    <EditOutlined className='userListBtn'/>
-                  </Popconfirm>
+                    <EditOutlined className='userListBtn' onClick={handleEdit}/>
                   <VisibilityOutlined
                     className="userEye"
                     onClick={() => navigate(`/affectationView/${record.id}`)}

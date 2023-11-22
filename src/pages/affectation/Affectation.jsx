@@ -245,14 +245,7 @@ const getColumnSearchProps = (dataIndex) => ({
           <>
             <div className="table-icons-row">
                 <div className="userOvert0">
-                  <Popconfirm
-                      title="Êtes-vous sûr de vouloir modifier?"
-                      onConfirm={handleEdit}
-                      okText="Oui"
-                      cancelText="Non"
-                  >
-                      <EditOutlined className='userListBtn'/>
-                  </Popconfirm>
+                  <EditOutlined className='userListBtn' onClick={handleEdit}/>
                 </div>
               <VisibilityOutlined
                 className="userEye"

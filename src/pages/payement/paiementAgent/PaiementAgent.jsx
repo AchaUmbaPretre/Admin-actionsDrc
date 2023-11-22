@@ -388,7 +388,6 @@ const PaiementAgent = () => {
   fetchData()
   }, [])
 
-
   const handleClick = async (e) => {
     e.preventDefault();
 
