@@ -99,7 +99,6 @@ useEffect(() => {
         icon: 'error',
         confirmButtonText: 'OK'
       });
-
       console.log(err);
     }
   };
@@ -119,7 +118,7 @@ useEffect(() => {
                             label: select.company_name + ' / '+ select.contract_type +" / N° du contrat : "+select.id
                         }))}
                         onChange={(selectedOption) =>
-                            handleChange(selectedOption.value, "contrat_id")
+                          handleChange(selectedOption.value, "contrat_id")
                         }
                     />
                 </div>

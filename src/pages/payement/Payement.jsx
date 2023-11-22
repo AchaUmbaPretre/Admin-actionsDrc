@@ -194,7 +194,7 @@ const Payement = () => {
 
   const handleDelete = async (id) => {
     try {
-        await axios.delete(`${DOMAIN}/api/admin/payement/${id}`);
+        await axios.put(`${DOMAIN}/api/admin/payement/${id}`);
         window.location.reload();
     } catch (err) {
       console.log(err);

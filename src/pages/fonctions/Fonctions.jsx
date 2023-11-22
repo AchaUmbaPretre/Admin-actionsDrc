@@ -45,7 +45,7 @@ const Fonctions = () => {
         width: 160 
     },
     {
-        field: 'nom',
+        field: 'nom_departement',
         headerName: "Competence",
         width: 160 
     },

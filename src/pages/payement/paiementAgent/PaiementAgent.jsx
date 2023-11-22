@@ -277,9 +277,7 @@ const PaiementAgent = () => {
     const fetchAgentsAffectes = async () => {
       try {
         const contratId = searchParams.get('contrat_id');
-  
         const response = await axios.get(`${DOMAIN}/api/admin/factureCalcul/${contratId}`);
-  
         setAgentsAffectes(response.data);
       } catch (error) {
         console.log(error);
@@ -293,7 +291,6 @@ const PaiementAgent = () => {
       try{
           const res = await axios.get(`${DOMAIN}/api/admin/statusFacture`);
           setOptionsStatus(res.data)
-  
         }catch(error){
           console.log(error)
         };
@@ -305,7 +302,6 @@ const PaiementAgent = () => {
     const factureCount = async () => {
       try {
         const contratId = searchParams.get('contrat_id');
-  
         const {data} = await axios.get(`${DOMAIN}/api/admin/factureContratCount/${contratId}`);
         setFactureContratCount(data[0]);
       } catch (error) {
@@ -475,8 +471,8 @@ const PaiementAgent = () => {
                 <React.Fragment key={index}>
                     {innerArray.map(data => (
                     <React.Fragment key={data.year + data.month}>
-                                <h2 className="personnel-total-title"><CardTravelIcon/> PAIEMENT</h2>
-                                <hr />
+                        <h2 className="personnel-total-title"><CardTravelIcon/> PAIEMENT</h2>
+                          <hr />
                         <div className="personnel-paiement-row">
                             <span className="paiement-name">Nom :</span>
                             <span className="paiement-name1">{data.first_name} {data.last_name}</span>
