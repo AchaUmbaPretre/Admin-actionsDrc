@@ -14,8 +14,8 @@ import moment from 'moment';
 const Edit = () => {
 
 const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
-const [data, setData] = useState({});
-const {first_name, last_name,date_of_birth,etat_civil, gender, address, phone_number, email, number_inpp, number_cnss, nombre_enfant, identification_number,identification_type, skills,certifications,employment_status,source} = data;
+const [data, setData] = useState([]);
+const {first_name, last_name,date_of_birth,etat_civil, gender, address, phone_number, email, number_inpp, number_cnss, nombre_enfant, identification_number, identification_type, skills, certifications, employment_status, source} = data;
 const location = useLocation();
 const navigate = useNavigate();
 const id = location.pathname.split("/")[2];
@@ -36,7 +36,6 @@ const handleFileChange = (event) => {
 const handleSourceChange = (event) => {
   setSources(event.target.value);
 };
-
 const handleChange = (e) => {
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
@@ -134,6 +133,8 @@ const handleChange = (e) => {
     fetchData();
   }, []);
 
+  const photoValue = photo === null ? source : photo;
+
   const handleClick = async (e) => {
           e.preventDefault();
         
@@ -154,7 +155,7 @@ const handleChange = (e) => {
   const handleClick2 = async (e) => {
 
     try {
-        await axios.put(`${DOMAIN}/api/admin/employe/${id}`,{ ...data, source: photo });
+        await axios.put(`${DOMAIN}/api/admin/employe/${id}`,{ ...data, source: photoValue });
         await Swal.fire({
           title: 'Success',
           text: 'Employé mis à jour avec succès!',
@@ -212,7 +213,7 @@ const handleChange = (e) => {
                             <span className="form-title-img">Importer une photo</span>
                         </div>
                         <div>
-                          <input type="file" name="photo" onChange={handleFileChange} />
+                          <input type="file" name="source" onChange={handleFileChange} />
                           {photo && (
                             <div className="crop-container">
                               <Cropper
@@ -284,9 +285,9 @@ const handleChange = (e) => {
                             <div className="form-row">
                                 <label htmlFor="" className="label-form">Genre <span>*</span></label>
                                 <div className="form-radio">
-                                    <input type="radio" id="Choice1" onChange={handleChange} checked={gender === 'H'} name="gender" value="homme" />
+                                    <input type="radio" id="Choice1" onChange={handleChange} checked={gender === 'Homme'} name="gender" value="homme" />
                                     <label for="Choice1">Homme</label>
-                                    <input type="radio" id="Choice2" onChange={handleChange} checked={gender === 'F'} name="gender" value="femme" />
+                                    <input type="radio" id="Choice2" onChange={handleChange} checked={gender === 'Femme'} name="gender" value="femme" />
                                     <label for="Choice2">Femme</label>
                                     <input type="radio" id="Choice3" onChange={handleChange} checked={gender === 'Autres'} name="gender" value="autres" />
                                     <label for="Choice3">autres</label>
