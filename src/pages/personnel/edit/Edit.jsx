@@ -10,11 +10,12 @@ import Select from 'react-select';
 import Cropper from 'react-easy-crop';
 import moment from 'moment';
 
+
 const Edit = () => {
 
 const DOMAIN = config.REACT_APP_SERVER_DOMAIN;
 const [data, setData] = useState({});
-const {first_name, last_name,date_of_birth,etat_civil, gender, address, phone_number, email, number_inpp, number_cnss, nombre_enfant, identification_number,identification_type,nom_departement,certifications,employment_status,source} = data;
+const {first_name, last_name,date_of_birth,etat_civil, gender, address, phone_number, email, number_inpp, number_cnss, nombre_enfant, identification_number,identification_type, skills,certifications,employment_status,source} = data;
 const location = useLocation();
 const navigate = useNavigate();
 const id = location.pathname.split("/")[2];
@@ -27,6 +28,7 @@ const [statusE, setStatusE] = useState([]);
 const webcamRef = useRef(null);
 const [crop, setCrop] = useState({ x: 0, y: 0 });
 const [zoom, setZoom] = useState(1);
+const [departement, setDepartement] = useState([]);
   
 const handleFileChange = (event) => {
   setPhoto(event.target.files[0]);
@@ -56,58 +58,58 @@ const handleChange = (e) => {
   
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        useEffect(() => {
-            const fetchData = async () => {
-              try {
-                const res = await axios.get(`${DOMAIN}/api/admin/competence`);
-                setCompetenceOption(res.data);
-              } catch (error) {
-                console.log(error);
-              }
-            };
-            fetchData();
-          }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+          const res = await axios.get(`${DOMAIN}/api/admin/competence`);
+            setCompetenceOption(res.data);
+      } catch (error) {
+          console.log(error);
+      }
+      };
+      fetchData();
+}, []);
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`${DOMAIN}/api/admin/niveau`);
+          setNiveau(res.data);
+      } catch (error) {
+            console.log(error);
+        }
+    };
+    fetchData();
+  }, []);
     
           // eslint-disable-next-line react-hooks/exhaustive-deps
-          useEffect(() => {
-            const fetchData = async () => {
-              try {
-                const res = await axios.get(`${DOMAIN}/api/admin/niveau`);
-                setNiveau(res.data);
-              } catch (error) {
-                console.log(error);
-              }
-            };
-            fetchData();
-          }, []);
-    
-          // eslint-disable-next-line react-hooks/exhaustive-deps
-          useEffect(() => {
-            const fetchData = async () => {
-              try {
-                const res = await axios.get(`${DOMAIN}/api/admin/typepiece`);
-                setType(res.data);
-              } catch (error) {
-                console.log(error);
-              }
-            };
-            fetchData();
-          }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+          const res = await axios.get(`${DOMAIN}/api/admin/typepiece`);
+          setType(res.data);
+      } catch (error) {
+          console.log(error);
+        }
+    };
+    fetchData();
+  }, []);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-          useEffect(() => {
-            const fetchData = async () => {
-              try {
-                const {data} = await axios.get(`${DOMAIN}/api/admin/status`);
-                setStatusE(data);
-              } catch (error) {
-                console.log(error);
-              }
-            };
-            fetchData();
-          }, []);
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+            const {data} = await axios.get(`${DOMAIN}/api/admin/status`);
+            setStatusE(data);
+        } catch (error) {
+            console.log(error);
+        }
+      };
+      fetchData();
+    }, []);
 
-          useEffect(()=>{
+  useEffect(()=>{
             const fetchData = async ()=> {
                 try{
                     const res = await axios.get(`${DOMAIN}/api/admin/views/${id}`);
@@ -118,9 +120,21 @@ const handleChange = (e) => {
                   };
             }
             fetchData()
-        }, [id]);
+  }, [id]);
 
-        const handleClick = async (e) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const {data} = await axios.get(`${DOMAIN}/api/admin/departement`);
+        setDepartement(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const handleClick = async (e) => {
           e.preventDefault();
         
           Swal.fire({
@@ -135,7 +149,7 @@ const handleChange = (e) => {
               handleClick2();
             }
           });
-        };
+  };
 
   const handleClick2 = async (e) => {
 
@@ -170,7 +184,6 @@ const handleChange = (e) => {
         console.log(error);
       }
     };
-  
     upload();
   }, [source, photo]);
 
@@ -322,13 +335,13 @@ const handleChange = (e) => {
                               <select
                                 className="input-form"
                                 name="skills"
-                                value={nom_departement}
+                                value={skills}
                                 onChange={handleChange}
                               >
                                 <option disabled value="">Selectionnez un domaine</option>
-                                {competenceOption.map((item) => (
-                                  <option key={item.nom} value={item.nom}>
-                                    {item.nom}
+                                {departement.map((item) => (
+                                  <option key={item.nom_departement} value={item.id}>
+                                    {item.nom_departement}
                                   </option>
                                 ))}
                               </select>

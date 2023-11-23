@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 import Select from 'react-select';
 import config from '../../../config'
 import Cropper from 'react-easy-crop';
-import { CloudUploadOutlined, ContentPasteGoTwoTone } from '@mui/icons-material';
+import { CloudUploadOutlined } from '@mui/icons-material';
 moment.locale('fr');
 
 
@@ -96,13 +96,6 @@ const Formulaire2 = ({handleModalClose}) => {
           console.log(error);
         }
       };
-
-      const capturePhoto = () => {
-        const screenshot = webcamRef.current.getScreenshot();
-        const base64Data = screenshot.replace('data:image/webp;base64,', ''); // Enlever le préfixe du type de contenu
-        setPhoto(base64Data);
-      };
-
 
       useEffect(() => {
         const upload = async () => {

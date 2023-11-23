@@ -400,7 +400,7 @@ const handleSubmit = async (e) => {
                           checked={informationsSelectionnees.includes(information.id)}
                           onChange={() => handleSelectionInformation(information.id)}
                         />
-                          {information.nom}
+                          {information.nom_departement}
                       </div>
                         <div className="label-info">
                           <div>
