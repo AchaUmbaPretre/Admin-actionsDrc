@@ -46,14 +46,13 @@ const Contrats = () => {
     const [selected, setSelected] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const handleSelectionChange = (newSelection) => {
-      setSelected(newSelection.selectionModel);
-    };
-
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const handleSelectionChange = (newSelection) => {
+      setSelected(newSelection.selectionModel);
+    };
   
     const columns = [
       { field: 'id', headerName: 'N° du contrat', width: 80 },
@@ -280,13 +279,13 @@ const Contrats = () => {
                     },
                     }} 
                 >
-                    <Fade in={open}>
-                        <Box sx={style}>
-                            <Box component="form" sx={{'& > :not(style)': { m: 1, width: '300ch' }, display:'flex', flexWrap:'wrap'}} noValidate autoComplete="off">
-                              <ContratForm handleClose={handleClose} />
-                            </Box>
-                        </Box>
-                    </Fade>
+                  <Fade in={open}>
+                    <Box sx={style}>
+                      <Box component="form" sx={{'& > :not(style)': { m: 1, width: '300ch' }, display:'flex', flexWrap:'wrap'}} noValidate autoComplete="off">
+                        <ContratForm handleClose={handleClose} />
+                      </Box>
+                    </Box>
+                  </Fade>
                 </Modal>
             </div>
             <BarReturn/>
@@ -300,7 +299,6 @@ const Contrats = () => {
             </div>
             )}
         </div>
-            
     </>
   )
 }
