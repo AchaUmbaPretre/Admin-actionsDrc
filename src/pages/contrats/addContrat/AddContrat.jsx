@@ -229,7 +229,6 @@ useEffect(() => {
         const res = await axios.get(`${DOMAIN}/api/admin`);
         setData(res.data)
         setLoading(false);
-
       } catch (error) {
         console.log(error)
       };
@@ -355,6 +354,11 @@ const handleSubmit = async (e) => {
             </div>
           </div>
         </div>
+        {loading ? (
+          <div className="spinner-container">
+            <FadeLoader color={'#36D7B7'} loading={loading} />
+          </div>
+            ) : (
         <div className="add-rows">
           <div className="add-row1">
             <Table columns={columns} dataSource={data}  pagination={{ pageSize: 5}}/>
@@ -380,14 +384,8 @@ const handleSubmit = async (e) => {
                 </Box>
               </Fade>
           </Modal>
-          {loading ? (
-          <div className="spinner-container">
-            <FadeLoader color={'#36D7B7'} loading={loading} />
-          </div>
-            ) : (
           <div className="add-row2">
             <div className="add-container-rows">
-              
               <div className="add-row-top">
                 <h2>Sélectionnez les informations qui vous intéressent</h2>
                 {selectData?.map((information) => (
@@ -422,8 +420,8 @@ const handleSubmit = async (e) => {
                 </div>
                 </div>
             </div>
-          </div>) }
-        </div>
+          </div>
+        </div>) }
       </div>
     </>
   )
