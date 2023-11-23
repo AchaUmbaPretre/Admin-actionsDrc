@@ -27,6 +27,26 @@
                 max-height: 280px;
                 object-fit: cover;
             }
+            .form-img3{
+                display: none;
+                max-width: 100%;
+                max-height: 300px;
+            }
+            .photo-modifier{
+                margin-top: 10px;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                .photoText{
+                    font-size: .9rem;
+                    color: #5a5959;
+                }
+            }
+            .form-icon{
+                font-size: 29px;
+                color: #1890ff;
+                cursor: pointer;
+            }
             .form-img-rows{
                 padding-left: 20px;
                 .radio-img{
@@ -98,7 +118,7 @@
                         .input-form,.form-select{
                             border: 1px solid #d1d0d0;
                             width: 100%;
-                            padding: 6px 10px;
+                            padding: 5px 10px;
                             width: 100%;
                             border-radius: 5px;
                             background: #f2f2f269;

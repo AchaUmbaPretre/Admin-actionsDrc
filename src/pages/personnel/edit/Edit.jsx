@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import './edit.scss'
 import { useLocation, useNavigate } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
+import { CloudUploadOutlined } from '@mui/icons-material';
 import userImg from '../../../assets/user.png'
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -29,6 +30,7 @@ const webcamRef = useRef(null);
 const [crop, setCrop] = useState({ x: 0, y: 0 });
 const [zoom, setZoom] = useState(1);
 const [departement, setDepartement] = useState([]);
+
   
 const handleFileChange = (event) => {
   setPhoto(event.target.files[0]);
@@ -208,12 +210,20 @@ const handleChange = (e) => {
                 <div className="formulaire-left">
                     {source ? <img src={source} className="form-img2"  /> : <img src={userImg} alt="" className="form-img" /> }
                     <div className="form-img-rows">
-                        <div className="form-img-row">
-                            <input type="radio" name="source" value="import" checked={source === 'import'} onChange={handleSourceChange} className='radio-img' />
-                            <span className="form-title-img">Importer une photo</span>
-                        </div>
                         <div>
-                          <input type="file" name="source" onChange={handleFileChange} />
+                          <input
+                            type="file"
+                            name="source"
+                            onChange={handleFileChange}
+                            lable="Profil"
+                            id='file-upload'
+                            accept='.jpeg, .png, .jpg'
+                            className="form-img3"
+                          />
+                          <div className="photo-modifier">
+                            <span className="photoText">Modifier la photo</span>
+                            <CloudUploadOutlined onClick={() => document.getElementById('file-upload').click()} className='form-icon'/>
+                          </div>
                           {photo && (
                             <div className="crop-container">
                               <Cropper
