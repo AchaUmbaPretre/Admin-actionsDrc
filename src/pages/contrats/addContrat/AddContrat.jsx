@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import './addContrat.scss'
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { Checkbox, Switch } from '@mui/material';
+import { Switch } from '@mui/material';
 import Swal from 'sweetalert2';
 import config from '../../../config'
 import FormAdd from './formAdd/FormAdd';
@@ -42,7 +42,6 @@ const AddContrat = () => {
   const handleClose = () => setOpen(false);
   const [selected, setSelected] = useState([]);
   const [selectedx, setSelectedx] = useState([]);
-  const [selectedFunctionDetails, setSelectedFunctionDetails] = useState(null);
   const { id } = useParams();
   const [informationsSelectionnees,setInformationsSelectionnees] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
