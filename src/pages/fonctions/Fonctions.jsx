@@ -9,6 +9,7 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
+import { FadeLoader } from 'react-spinners';
 import { useEffect, useState } from 'react';
 import config from './../../config'
 import axios from 'axios';
@@ -154,7 +155,13 @@ const Fonctions = () => {
           </Modal>
         </div>
         <BarReturn/>
+        {loading ? (
+        <div className="spinner-container">
+            <FadeLoader color={'#36D7B7'} loading={loading} />
+        </div>
+        ) : (
         <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
+        )}
       </div>
     </>
   )

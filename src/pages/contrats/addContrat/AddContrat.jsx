@@ -417,7 +417,7 @@ const handleSubmit = async (e) => {
                     <button onClick={handleSubmit}>Envoyer</button>
                     <button onClick={handleOpen} className='ajouter'>Ajouter tes info</button>
                 </div>
-                </div>
+              </div>
             </div>
           </div>
         </div>) }
