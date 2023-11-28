@@ -23,6 +23,8 @@ import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRen
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { Breadcrumb, Popconfirm } from 'antd';
 import { HomeOutlined, UserOutlined, FileExcelOutlined} from '@ant-design/icons';
+import { Collapse, Typography } from 'antd';
+import { DeleteOutlined, DriveFileRenameOutlined, UpOutlined, DownOutlined } from '@ant-design/icons';
 
 const style = {
   position: 'absolute',
@@ -45,6 +47,8 @@ const Mission = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [searchValue, setSearchValue] = useState('');
+    const { Panel } = Collapse;
+    const { Text } = Typography;
 
     const joursSemaineOrdre = [
       "Lundi",
