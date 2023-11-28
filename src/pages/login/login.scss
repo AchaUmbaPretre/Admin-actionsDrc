@@ -65,6 +65,12 @@
                     font-size: .9rem;
                     color: royalblue;
                 }
+                .spinner-container {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                  }
                 .btn-form{
                     border: none;
                     display: flex;

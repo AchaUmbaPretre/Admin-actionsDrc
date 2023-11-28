@@ -6,8 +6,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/authContext';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { css } from '@emotion/react';
+import { RingLoader } from 'react-spinners';
+
+const spinnerStyles = css`
+  display: block;
+  margin: 0 auto;
+`;
 
 const Login = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [inputs, setInputs] = useState({});
   const navigate = useNavigate();
   const { Login, errorMessage } = useContext(AuthContext);
@@ -19,7 +27,9 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    setIsLoading(true);
+  
     try {
       await Login(inputs);
       toast.success('Connecté avec succès!', {
@@ -32,6 +42,8 @@ const Login = () => {
       });
       setError(error.response.data);
     }
+  
+    setIsLoading(false);
   };
 
   return (
@@ -69,10 +81,16 @@ const Login = () => {
             </div>
             <div className="login-rows">
               <Link className="login-mssg">Mot de passe oublié ?</Link>
-              <button className="btn-form" onClick={handleSubmit}>
-                <LoginIcon className="form-icon" />
-                S'identifier
-              </button>
+              {isLoading ? (
+                <div className="spinner-container">
+                  <RingLoader css={spinnerStyles} size={60} color={'#123abc'} loading={isLoading} />
+                </div>
+              ) : (
+                <button className="btn-form" onClick={handleSubmit}>
+                  <LoginIcon className="form-icon" />
+                  S'identifier
+                </button>
+              )}
             </div>
           </form>
           <div className="form-bottom">
