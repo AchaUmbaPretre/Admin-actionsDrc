@@ -2,7 +2,6 @@ import './affectation.scss'
 import { DeleteOutline, EditOutlined, VisibilityOutlined} from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
-import Swal from 'sweetalert2'
 import axios from 'axios';
 import { FadeLoader } from 'react-spinners';
 import config from '../../config';
@@ -11,17 +10,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
-import AdsClickIcon from '@mui/icons-material/AdsClick';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import { Button, Input, Popconfirm, Space, Table, Tag } from 'antd';
 import moment from 'moment';
-import Affectation2 from './Affectation2';
 import {FileExcelOutlined} from '@ant-design/icons';
 
 const Affectation = () => {
