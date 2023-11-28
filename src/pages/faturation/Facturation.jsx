@@ -93,7 +93,7 @@ const Facturation = () => {
         let icon = null;
     
         if (amount > 0) {
-          backgroundColor = 'green'; // Couleur verte pour les montants positifs
+          backgroundColor = '#4caf50'; // Couleur verte pour les montants positifs
           icon = <DollarOutlined style={{ marginRight: '5px' }} />;
         } else if (amount < 0) {
           backgroundColor = 'red'; // Couleur rouge pour les montants négatifs

@@ -25,6 +25,7 @@ import * as XLSX from 'xlsx';
 import BarReturn from '../../components/barReturn/BarReturn';
 import {FileExcelOutlined} from '@ant-design/icons';
 import { Popconfirm } from 'antd';
+import { notification } from 'antd';
 
 const style = {
     position: 'absolute',
@@ -45,6 +46,7 @@ const Contrats = () => {
     const [data, setData] = useState({});
     const [selected, setSelected] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [endDate, setEndDate] = useState(null);
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -213,18 +215,27 @@ const Contrats = () => {
     };
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(()=>{
-      const fetchData = async ()=> {
-        try{
-          const {data} = await axios.get(`${DOMAIN}/api/admin/contrat`);
-          setData(data)
-          setLoading(false);
-          }catch(error){
-            console.log(error)
-          };
-        }
-        fetchData()
-     }, [])
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const { data } = await axios.get(`${DOMAIN}/api/admin/contrat`);
+            setData(data);
+            const finContrat = data.filter((d) => new Date(d.end_date) < new Date());
+            finContrat.forEach((contrat) => {
+              const { company_name, contract_type } = contrat;
+              notification.info({
+                message: 'Contrat arrivé à sa fin',
+                description: `Le contrat ${contract_type} de l'entreprise ${company_name} est terminé. Veuillez prendre les mesures nécessaires.`,
+              });
+            });
+            setLoading(false);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+    
+        fetchData();
+      }, []);
 
 
   const handleDelete = async (id) => {
