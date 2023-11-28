@@ -15,6 +15,7 @@ import Highlighter from 'react-highlight-words';
 import { Button, Input, Popconfirm, Space, Table, Tag } from 'antd';
 import moment from 'moment';
 import {FileExcelOutlined} from '@ant-design/icons';
+import BarReturn from '../../components/barReturn/BarReturn';
 
 const Affectation = () => {
 
@@ -324,6 +325,7 @@ const exportToExcel = () => {
             <Link className="personnel-btn-excel" onClick={exportToExcel}><FileExcelOutlined />Export Excel</Link>
           </div>
         </div>
+        <BarReturn/>
           {loading ? (
         <div className="spinner-container">
             <FadeLoader color={'#36D7B7'} loading={loading} />

@@ -13,7 +13,7 @@ const AffEdite = ({handleModalClose}) => {
   const [selectData, setSelectData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [competenceOption, setCompetenceOption] = useState([]);
-  const { avantages, contrat_id, skills, prix, salaire } = data;
+  const { contrat_id,emploie_id } = data;
   const navigate = useNavigate();
   const location = useLocation();
   const id = location.pathname.split("/")[2];
@@ -40,6 +40,8 @@ const AffEdite = ({handleModalClose}) => {
     }
     fetchData()
 }, [id]);
+
+console.log(data)
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(()=>{
@@ -88,28 +90,26 @@ const AffEdite = ({handleModalClose}) => {
   return (
     <>
       <div className="affEdite">
-        <h2 className="client-h2">Modifier l'affectation</h2>
         <div className="clientForm-wrapper">
           <form action="" className="form-center">
+          <h2 className="client-h2">Modifier l'affectation</h2>
             <div className="form-rows">
                 <div className="form-row">
                     <label htmlFor="" className="label-form">Contrat<span>*</span></label>
-                    <Select
-                        value={contrat_id}
-                        options={selectData.map((select) => ({
-                            value: select.id,
-                            label: select.company_name + ' / '+ select.contract_type +" / N° du contrat : "+select.id
-                        }))}
-                        onChange={(selectedOption) =>
-                            handleChange(selectedOption.value, "contrat_id")
-                        }
-                    />
+                    <select name="contrat_id" id="" value={contrat_id} className='input-form' onChange={(e)=> handleChange(e.target.value, "contrat_id")}>
+                      <option value="" disabled>Selectionnez...</option>
+                      {
+                        selectData.map((select)=>(
+                      <option value={select.id}>{select.company_name} {'/ type du contrat' + select.contract_type + " / N° du contrat : "+select.id}</option>
+                    ))
+                  }
+                    </select>
                 </div>
             </div>
             <div className="form-rows">
               <div className="form-row">
                 <label htmlFor="" className="label-form">Agent<span>*</span></label>
-                <select name="skills" value={skills} id="">
+                <select name="emploie_id" value={emploie_id} id="" className='input-form' onChange={(e)=> handleChange(e.target.value, "emploie_id")}>
                   <option value="" disabled>selectionnez....</option>
                   {
                     competenceOption.map((item)=>(
@@ -117,15 +117,6 @@ const AffEdite = ({handleModalClose}) => {
                     ))
                   }
                 </select>
-{/*                 <Select
-                    value={skills}
-                  name="skills"
-                  onChange={(selectedOption) => handleChange(selectedOption.value, "skills")}
-                  options={competenceOption.map((item) => ({
-                    value: item.id,
-                    label: item.first_name
-                    }))}
-                /> */}
               </div>
             </div>
             <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>
