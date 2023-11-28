@@ -18,11 +18,9 @@ const FormAdd = ({handleClose, contratId, employeesId,fonction}) => {
 
   const handleChange = (value, name) => {
     let formattedValue = value;
-  
     if (typeof value === 'string' && value.length > 0) {
       formattedValue = value.charAt(0).toUpperCase() + value.slice(1);
     }
-  
     setData((prev) => ({ ...prev, [name]: formattedValue }));
   };
 
@@ -39,9 +37,9 @@ const FormAdd = ({handleClose, contratId, employeesId,fonction}) => {
           };
     }
     fetchDatas()
- }, [])
+  }, [])
 
- useEffect(() => {
+  useEffect(() => {
   const fetchData = async () => {
     try {
       const res = await axios.get(`${DOMAIN}/api/admin/competence`);
@@ -51,7 +49,7 @@ const FormAdd = ({handleClose, contratId, employeesId,fonction}) => {
     }
   };
   fetchData();
-}, []);
+  }, []);
 
 const employeesArray = Array.from(employeesId)
 employeesArray.map((dd)=>{console.log(dd)})
@@ -65,7 +63,6 @@ const handleClick = async (e) => {
       ...data,
       contrat_id: contratId,
     });
-
     const contratEmploieId = contratEmploieResponse.data.contratEmploieId;
 
     await Promise.all(

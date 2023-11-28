@@ -58,7 +58,6 @@ const AddContrat = () => {
       setSelected(selected.filter((row) => row !== id))
     }
   };
-
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -68,7 +67,6 @@ const AddContrat = () => {
     clearFilters();
     setSearchText('');
   };
-
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
       <div
@@ -164,7 +162,6 @@ const AddContrat = () => {
       ),
   });
 
-
   const columns = [
     {
       title: 'Code',
@@ -222,7 +219,7 @@ const AddContrat = () => {
     }
   ];
 
-useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`${DOMAIN}/api/admin`);
@@ -235,29 +232,29 @@ useEffect(() => {
     fetchData()
   }, [])
 
-useEffect(()=>{
-    const fetchDatas = async ()=> {
-      try{
-        const {data} = await axios.get(`${DOMAIN}/api/admin/ContratInfo/${id}`);
-        setSelectData(data)    
-      }catch(error){
-        console.log(error)
-      };
-    }
-    fetchDatas()
-},[id])
-
- useEffect(()=>{
-  const fetchDatas = async ()=> {
-      try{
-          const {data} = await axios.get(`${DOMAIN}/api/admin/contratTitle/${id}`);
-          setTitle(data[0])
+  useEffect(()=>{
+      const fetchDatas = async ()=> {
+        try{
+          const {data} = await axios.get(`${DOMAIN}/api/admin/ContratInfo/${id}`);
+          setSelectData(data)    
         }catch(error){
           console.log(error)
         };
-  }
-  fetchDatas()
-}, [id])
+      }
+      fetchDatas()
+  },[id])
+
+  useEffect(()=>{
+    const fetchDatas = async ()=> {
+        try{
+            const {data} = await axios.get(`${DOMAIN}/api/admin/contratTitle/${id}`);
+            setTitle(data[0])
+          }catch(error){
+            console.log(error)
+          };
+    }
+    fetchDatas()
+  }, [id])
 
 
 /*     const filteredEmployees = data.filter((employee) => {
@@ -266,7 +263,6 @@ useEffect(()=>{
       }
       return true;
     }); */
-
 
  const handleSelectionInformation = (informationId) => {
   if (informationsSelectionnees.includes(informationId)) {
@@ -277,6 +273,47 @@ useEffect(()=>{
     setInformationsSelectionnees((prevSelections) => [...prevSelections, informationId]);
   }
 };
+
+const handleUpdateAvantage = (id, value) => {
+  const updatedData = selectData.map((information) => {
+    if (information.id === id) {
+      return {
+        ...information,
+        avantages: value
+      };
+    }
+    return information;
+  });
+  setSelectData(updatedData);
+};
+
+const handleUpdatePrix = (id, value) => {
+  const updatedData = selectData.map((information) => {
+    if (information.id === id) {
+      return {
+        ...information,
+        prix: value
+      };
+    }
+    return information;
+  });
+  setSelectData(updatedData);
+};
+
+const handleUpdateSalaire = (id, value) => {
+  const updatedData = selectData.map((information) => {
+    if (information.id === id) {
+      return {
+        ...information,
+        salaire: value
+      };
+    }
+    return information;
+  });
+  setSelectData(updatedData);
+};
+
+console.log(selectData)
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -290,7 +327,6 @@ const handleSubmit = async (e) => {
     });
     return;
   }
-
   if (informationsSelectionnees.length === 0) {
     Swal.fire({
       title: 'Aucune fonction n\'est sélectionnée',
@@ -301,44 +337,48 @@ const handleSubmit = async (e) => {
     return;
   }
 
-  const selectedItems = data.filter((item) => selected.includes(item.id));
-  const newSelectedx = selectedItems.map((item) => ({
-    agent: item.id,
-    fonction: informationsSelectionnees,
-    contrat: id
-  }));
-  setSelectedx(selectedx.concat(newSelectedx));
-  setSelectedData([...selectedData, ...selectedItems]);
+  try {
+    const contratEmploieResponse = await axios.post(`${DOMAIN}/api/admin/contratEmploie`, {
+      selectData // Utilisez directement le tableau selectData
+    });
+    const contratEmploieId = contratEmploieResponse.data.contratEmploieId;
+    const selectedItems = data.filter((item) => selected.includes(item.id));
+    const newSelectedx = selectedItems.map((item) => ({
+      agent: item.id,
+      fonction: contratEmploieId,
+      contrat: id
+    }));
+    setSelectedx(selectedx.concat(newSelectedx));
+    setSelectedData([...selectedData, ...selectedItems]);
 
-  await Promise.all(
-  selectedx.map((dd) => {
-     axios
-      .post(`${DOMAIN}/api/admin/affectations`, {
-        fonction_id: dd.fonction,
-        emploie_id: dd.agent,
-        contrat_id: dd.contrat
-      })
-      axios.put(`${DOMAIN}/api/admin/employeFonctionPut/${dd.agent}`,{
-          contrat_id : dd.contrat
-      })
-      .then((response) => {
-        Swal.fire({
-          title: 'Success',
-          text: 'Affectation réussie!',
-          icon: 'success',
-          confirmButtonText: 'OK'
+    await Promise.all(
+      newSelectedx.map(async (dd) => { // Utilisez newSelectedx au lieu de selectedx
+        await axios.post(`${DOMAIN}/api/admin/affectations`, {
+          fonction_id: dd.fonction,
+          emploie_id: dd.agent,
+          contrat_id: dd.contrat
         });
-        navigate('/affectation');
-      })
-      .catch((error) => {
-        Swal.fire({
-          title: 'Error',
-          text: error.message,
-          icon: 'error',
-          confirmButtonText: 'OK'
+        await axios.put(`${DOMAIN}/api/admin/employeFonctionPut/${dd.agent}`, {
+          contrat_id: dd.contrat
         });
-      });
-  }));
+      })
+    );
+
+    Swal.fire({
+      title: 'Success',
+      text: 'Affectation réussie!',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
+    navigate('/affectation');
+  } catch (error) {
+    Swal.fire({
+      title: 'Error',
+      text: error.message,
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+  }
 };
 
   return (
@@ -374,7 +414,7 @@ const handleSubmit = async (e) => {
                 timeout: 500,
                 },
               }} 
-            >
+          >
               <Fade in={open}>
                 <Box sx={style}>
                   <Box component="form" sx={{'& > :not(style)': { m: 1},}} noValidate autoComplete="off">
@@ -400,14 +440,32 @@ const handleSubmit = async (e) => {
                           {information.nom_departement}
                       </div>
                         <div className="label-info">
-                          <div>
-                            Avantage : {information.avantages}
+                          <div className='label-info-row'>
+                            Avantage : 
+                            <input
+                              className='salaire-input'
+                              type="text"
+                              value={information.avantages}
+                              onChange={(e) => handleUpdateAvantage(information.id, e.target.value)}
+                            />
                           </div>
-                          <div>
-                            Prix : {information.prix} $
+                          <div className='label-info-row'>
+                            Prix : 
+                            <input
+                              className='salaire-input'
+                              type="text"
+                              value={information.prix}
+                              onChange={(e) => handleUpdatePrix(information.id, e.target.value)}
+                            />
                           </div>
-                          <div>
-                            Salaire : {information.salaire} $
+                          <div className='label-info-row'>
+                            Salaire : 
+                            <input
+                              className='salaire-input'
+                              type="text"
+                              value={information.salaire}
+                              onChange={(e) => handleUpdateSalaire(information.id, e.target.value)}
+                            />
                           </div>
                         </div>
                     </label>
@@ -416,14 +474,14 @@ const handleSubmit = async (e) => {
                   <div className="rows-btn">
                     <button onClick={handleSubmit}>Envoyer</button>
                     <button onClick={handleOpen} className='ajouter'>Ajouter tes info</button>
-                </div>
+                  </div>
               </div>
             </div>
           </div>
         </div>) }
       </div>
     </>
-  )
-}
+  );
+};
 
 export default AddContrat

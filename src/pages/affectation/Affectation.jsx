@@ -174,14 +174,14 @@ const getColumnSearchProps = (dataIndex) => ({
       title: 'Nom',
       dataIndex: 'first_name',
       key: 'last_name',
-      width: '13%',
+      width: '11%',
       ...getColumnSearchProps('first_name'),
     },
     {
       title: 'Client',
       dataIndex: 'client_nom',
       key: 'client_nom',
-      width: '13%',
+      width: '12%',
       ...getColumnSearchProps('client_nom'),
     },
     {
@@ -224,10 +224,20 @@ const getColumnSearchProps = (dataIndex) => ({
       render: (text) => `${text} $`, 
     },
     {
+      title: 'Salaire',
+      dataIndex: 'salaire',
+      key: 'prix',
+      width: '10%',
+      ...getColumnSearchProps('prix'),
+      sorter: (a, b) => a.prix - b.prix,
+      sortDirections: ['descend', 'ascend'],
+      render: (text) => `${text} $`, 
+    },
+    {
       title: "Date d'affectation",
       dataIndex: 'created_at',
       key: 'created_at',
-      width: '20%',
+      width: '19%',
       ...getColumnSearchProps('created_at'),
       sorter: (a, b) => moment(a.created_at) - moment(b.created_at),
       sortDirections: ['descend', 'ascend'],
@@ -327,22 +337,7 @@ const exportToExcel = () => {
             <FadeLoader color={'#36D7B7'} loading={loading} />
         </div>
         ) : (
-          <Box sx={{ width: '100%', typography: 'body1' }}>
-            <TabContext value={value}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider', background:'white' }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example" sx={{ display: 'flex', gap: '10px' }}>
-                <Tab sx={{ display: 'flex', alignItems: 'center', fontSize: '12px' }} icon={<AdsClickIcon />} label="Liste des affectations" value="1" />
-                <Tab sx={{ display: 'flex', alignItems: 'center', fontSize: '12px' }} icon={<AdsClickIcon />} label="Liste des affectations personnalisées" value="2" />
-            </TabList>
-            </Box>
-              <TabPanel value="1" sx={{background:'white' }}>
-                <Table columns={columns} dataSource={data} scroll={scroll} pagination={{ pageSize: 5}}/>
-              </TabPanel>
-              <TabPanel value="2" sx={{background:'white' }}>
-                <Affectation2/>
-              </TabPanel>
-            </TabContext>
-          </Box>
+          <Table columns={columns} dataSource={data} scroll={scroll} pagination={{ pageSize: 5}}/>
         )}
       </div>
     </>
