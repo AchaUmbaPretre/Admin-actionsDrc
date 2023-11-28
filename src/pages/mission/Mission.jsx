@@ -74,8 +74,9 @@ const Mission = () => {
     }, [])
 
     const filteredData = data.filter((item) =>
-      item.first_name.toLowerCase().includes(searchValue.toLowerCase())
-    );
+    item.first_name.toLowerCase().includes(searchValue.toLowerCase()) ||
+    item.company_name.toLowerCase().includes(searchValue.toLowerCase())
+  );
     
     const handleEdit = (id) => {
         navigate(`/missionEdite/${id}`);
