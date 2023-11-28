@@ -109,7 +109,15 @@ const AffEdite = ({handleModalClose}) => {
             <div className="form-rows">
               <div className="form-row">
                 <label htmlFor="" className="label-form">Agent<span>*</span></label>
-                <Select
+                <select name="skills" value={skills} id="">
+                  <option value="" disabled>selectionnez....</option>
+                  {
+                    competenceOption.map((item)=>(
+                      <option value={item.id}>{item.first_name}</option>
+                    ))
+                  }
+                </select>
+{/*                 <Select
                     value={skills}
                   name="skills"
                   onChange={(selectedOption) => handleChange(selectedOption.value, "skills")}
@@ -117,7 +125,7 @@ const AffEdite = ({handleModalClose}) => {
                     value: item.id,
                     label: item.first_name
                     }))}
-                />
+                /> */}
               </div>
             </div>
             <button className="form-btn" onClick={handleClick}>Envoyer <SendIcon className='form-icon' /></button>

@@ -101,7 +101,6 @@ const AffectationPdf = () => {
                             <Text style={styles.tableCell}>Nom</Text>
                             <Text style={styles.tableCell}>Client</Text>
                             <Text style={styles.tableCell}>Type de contrat</Text>
-                            <Text style={styles.tableCell}>Compétence</Text>
                             <Text style={styles.tableCell}>Prix</Text>
                             <Text style={styles.tableCell}>Salaire</Text>
                             <Text style={styles.tableCell}>Date d'affectation</Text>
@@ -113,9 +112,8 @@ const AffectationPdf = () => {
                                 <Text style={styles.tableCell}>{row.first_name}</Text>
                                 <Text style={styles.tableCell}>{row.client_nom}</Text>
                                 <Text style={styles.tableCell}>{row.contract_type}</Text>
-                                <Text style={styles.tableCell}>{row.skills}</Text>
                                 <Text style={styles.tableCell}>{row.prix} $</Text>
-                                <Text style={styles.tableCell}>{row.salaire}</Text>
+                                <Text style={styles.tableCell}>{row.salaire}$</Text>
                                 <Text style={styles.tableCell}>{moment(row.created_at).format('DD-MM-YYYY')}</Text>
                             </View>
                         ))}
