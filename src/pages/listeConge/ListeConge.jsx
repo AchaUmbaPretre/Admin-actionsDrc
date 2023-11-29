@@ -13,6 +13,8 @@ import config from '../../config';
 import { format } from 'date-fns';
 import axios from 'axios';
 import { Popconfirm } from 'antd';
+import { FadeLoader } from 'react-spinners';
+import BarReturn from '../../components/barReturn/BarReturn';
 
 const style = {
   position: 'absolute',
@@ -164,7 +166,14 @@ const ListeConge = () => {
               </Fade>
             </Modal>
           </div>
+          <BarReturn/>
+          {loading ? (
+        <div className="spinner-container">
+            <FadeLoader color={'#36D7B7'} loading={loading} />
+        </div>
+        ) : (
           <DataGrid rows={data ?? []} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
+          )}
         </div>
       </>
     )

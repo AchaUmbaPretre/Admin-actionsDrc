@@ -13,6 +13,7 @@ import Fade from '@mui/material/Fade';
 import Backdrop from '@mui/material/Backdrop';
 import Modal from '@mui/material/Modal';
 import TypeCongForm from './typeCongeForm/TypeCongForm';
+import { FadeLoader } from 'react-spinners';
 
 const style = {
   position: 'absolute',
@@ -126,12 +127,16 @@ const columns = [
         </div>
         <BarReturn/>
           <>
+          {loading ? (
+          <div className="spinner-container">
+            <FadeLoader color={'#36D7B7'} loading={loading} />
+          </div>) :
           <Table
             columns={columns}
             dataSource={type}
             className="presenceTable"
             loading={loading} 
-          />
+          />}
           </>
       </div>
     </>
