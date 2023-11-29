@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 import SitesForm from './form/SitesForm';
 import BarReturn from '../../components/barReturn/BarReturn';
 import { Popconfirm } from 'antd';
+import { FadeLoader } from 'react-spinners';
 
 const style = {
     position: 'absolute',
@@ -162,8 +163,13 @@ const Sites = () => {
           </Modal>
         </div>
         <BarReturn/>
+        {loading ? (
+          <div className="spinner-container">
+            <FadeLoader color={'#36D7B7'} loading={loading} />
+          </div>) :
         <DataGrid rows={data} columns={columns} pageSize={10} checkboxSelection className="presenceTable" />
-      </div>
+        }
+      </div>  
     </>
   )
 }
