@@ -2,8 +2,7 @@ import './../../pages/listeConge/listeConge.scss'
 import { DataGrid } from '@mui/x-data-grid'
 import { useNavigate } from 'react-router-dom';
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
-import { DeleteOutline, VisibilityOutlined} from '@mui/icons-material';
-import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
+import { DeleteOutline, EditOutlined, VisibilityOutlined} from '@mui/icons-material';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
@@ -73,7 +72,7 @@ const Fonctions = () => {
           <>
             <div className="table-icons-row">
                 <div className="userOvert0">
-                    <ModeEditOutlineIcon className='userListBtn' onClick={handleEdit} />
+                    <EditOutlined className='userListBtn' onClick={handleEdit} />
                     <span className='userOvert'>Modifier</span>
                 </div>
                 <div className="userOvert1">
@@ -128,7 +127,7 @@ const Fonctions = () => {
               <ChecklistRtlIcon className='contrats-icon'/>
               <div className="contrats-info">
                   <h2 className="contrats-title">Fonctions</h2>
-                  <span className="contrats-span"></span>
+                  <span className="contrats-span">Liste des fonctions</span>
               </div>
           </div>
           <button className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Nouveau</button>

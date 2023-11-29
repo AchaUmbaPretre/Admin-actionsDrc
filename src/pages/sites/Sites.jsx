@@ -1,7 +1,7 @@
 import './../../pages/listeConge/listeConge.scss'
 import { DataGrid } from '@mui/x-data-grid'
 import { Link, useNavigate } from 'react-router-dom';
-import { DeleteOutline, VisibilityOutlined} from '@mui/icons-material';
+import { DeleteOutline, EditOutlined, VisibilityOutlined} from '@mui/icons-material';
 import AddHomeOutlinedIcon from '@mui/icons-material/AddHomeOutlined';
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
@@ -80,7 +80,7 @@ const Sites = () => {
           <>
             <div className="table-icons-row">
                 <div className="userOvert0">
-                  <ModeEditOutlineIcon className='userListBtn' onClick={handleEdit}/>
+                  <EditOutlined className='userListBtn' onClick={handleEdit}/>
                   <span className='userOvert'>Modifier</span>
                 </div>
                 <div className="userOvert1">
@@ -135,7 +135,7 @@ const Sites = () => {
               <AddHomeOutlinedIcon className='contrats-icon'/>
               <div className="contrats-info">
                   <h2 className="contrats-title">Lieu du travail</h2>
-                  <span className="contrats-span"></span>
+                  <span className="contrats-span">Liste des sites</span>
               </div>
           </div>
           <button className="personnel-btn" onClick={handleOpen}><PersonAddAlt1Icon/>Nouveau</button>
