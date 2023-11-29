@@ -313,8 +313,6 @@ const handleUpdateSalaire = (id, value) => {
   setSelectData(updatedData);
 };
 
-console.log(selectData)
-
 const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -363,7 +361,6 @@ const handleSubmit = async (e) => {
         });
       })
     );
-
     Swal.fire({
       title: 'Success',
       text: 'Affectation réussie!',
@@ -374,7 +371,7 @@ const handleSubmit = async (e) => {
   } catch (error) {
     Swal.fire({
       title: 'Error',
-      text: error.message,
+      text:  error.response.data,
       icon: 'error',
       confirmButtonText: 'OK'
     });

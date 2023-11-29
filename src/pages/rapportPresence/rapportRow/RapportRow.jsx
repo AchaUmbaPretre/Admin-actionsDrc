@@ -78,6 +78,7 @@ const RapportRow = ({setDataTable, setLoading}) => {
                     <input type="date" name="startDate" className='rapport-input' placeholder='date de debut' onChange={(e) =>
                     handleChange(e.target.name, e.target.value)
                   }/>
+                  de
                     <input type="date" name="endDate" className='rapport-input' placeholder='date de fin' onChange={(e) =>
                     handleChange(e.target.name, e.target.value)
                   } />

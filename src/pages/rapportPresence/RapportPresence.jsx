@@ -7,7 +7,6 @@ import axios from 'axios';
 import config from '../../config'
 import moment from 'moment';
 import BarReturn from '../../components/barReturn/BarReturn';
-import {FileExcelOutlined} from '@ant-design/icons';
 import RapportRow from './rapportRow/RapportRow';
 import { Table, Button, Space, Popconfirm } from 'antd';
 import { DeleteOutlined, EyeOutlined, CheckCircleOutlined, ClearOutlined} from '@ant-design/icons';
