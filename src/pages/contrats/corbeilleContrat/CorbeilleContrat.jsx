@@ -164,7 +164,7 @@ const CorbeilleContrat = () => {
 
   const handleDelete = async (id) => {
     try {
-        await axios.put(`${DOMAIN}/api/admin/contrats/${id}`);
+        await axios.delete(`${DOMAIN}/api/admin/contrat-corbeille/${id}`);
         window.location.reload();
     } catch (err) {
       console.log(err);
