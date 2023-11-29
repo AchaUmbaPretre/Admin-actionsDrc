@@ -83,7 +83,7 @@ const CorbeilleContrat = () => {
       {
         field: 'duree',
         headerName: 'Durée',
-        width: 100,
+        width: 110,
         valueGetter: (params) => `${params.value} mois`,
       },
       {
@@ -121,7 +121,7 @@ const CorbeilleContrat = () => {
       {
         field: 'action',
         headerName: 'Action',
-        width: 150,
+        width: 140,
         renderCell: (params) => {
           const handleEdit = () => {
             navigate(`/editContrat/${params.row.id}`);
