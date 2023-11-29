@@ -73,7 +73,7 @@ const Payement = () => {
         {
           field: 'methode_paiement',
           headerName: 'Méthode de paiement',
-          width: 165,
+          width: 170,
           renderCell: (params) => {
             const status = params.value || 'Non spécifié';
             let icon, backgroundColor;

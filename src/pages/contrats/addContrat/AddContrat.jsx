@@ -473,7 +473,6 @@ const handleSubmit = async (e) => {
                 ))}
                   <div className="rows-btn">
                     <button onClick={handleSubmit}>Envoyer</button>
-                    <button onClick={handleOpen} className='ajouter'>Ajouter tes info</button>
                   </div>
               </div>
             </div>
