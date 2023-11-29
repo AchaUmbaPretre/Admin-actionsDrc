@@ -57,17 +57,17 @@ const PaiementPdf = () => {
           borderBottomStyle: 'solid',
         },
         tableCell: {
-          padding: 10,
+          padding: 9,
           flex: 1,
-          fontSize: 10,
+          fontSize: 8,
           textAlign: 'center'
         },
         tableCells: {
           padding: 8,
-          fontSize: 10,
+          fontSize: 8,
         },
         textTitle: {
-          fontSize: 15,
+          fontSize: 13,
           fontWeight: 'bold',
           textAlign: 'right',
           fontStyle: 'italic',

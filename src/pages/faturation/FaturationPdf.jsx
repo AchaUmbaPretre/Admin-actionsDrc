@@ -35,7 +35,7 @@ const FaturationPdf = () => {
         textAlign: 'right',
       },
       title: {
-        fontSize: 16,
+        fontSize: 15,
         marginBottom: 20,
         textAlign: 'center',
         fontWeight: 'bold',
@@ -61,12 +61,12 @@ const FaturationPdf = () => {
       tableCell: {
         padding: 10,
         flex: 1,
-        fontSize: 10,
+        fontSize: 8,
         textAlign: 'center'
       },
       tableCells: {
         padding: 8,
-        fontSize: 10,
+        fontSize: 8,
       },
       textTitle: {
         fontSize: 15,
