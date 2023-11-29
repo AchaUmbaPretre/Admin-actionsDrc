@@ -177,25 +177,25 @@ const ClientTab = () => {
               <Link className="personnel-btn-excel" onClick={exportToExcel}><FileExcelOutlined />Export Excel</Link>
             </div>
             <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            open={open}
-            onClose={handleClose}
-            closeAfterTransition
-            slots={{ backdrop: Backdrop }}
-            slotProps={{
-              backdrop: {
-                timeout: 500,
-              },
-            }}
-          >
-            <Fade in={open}>
-              <Box sx={style}>
-                <Box component="form" sx={{ '& > :not(style)': { m: 1 } }}>
-                  <ClientForm handleModalClose={handleClose} />
+              aria-labelledby="transition-modal-title"
+              aria-describedby="transition-modal-description"
+              open={open}
+              onClose={handleClose}
+              closeAfterTransition
+              slots={{ backdrop: Backdrop }}
+              slotProps={{
+                backdrop: {
+                  timeout: 500,
+                },
+              }}
+            >
+              <Fade in={open}>
+                <Box sx={style}>
+                  <Box component="form" sx={{ '& > :not(style)': { m: 1 } }}>
+                    <ClientForm handleModalClose={handleClose} />
+                  </Box>
                 </Box>
-              </Box>
-            </Fade>
+              </Fade>
             </Modal>
           </div>
           <BarReturn/>
