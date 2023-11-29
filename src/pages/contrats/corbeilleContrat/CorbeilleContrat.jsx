@@ -123,9 +123,7 @@ const CorbeilleContrat = () => {
         headerName: 'Action',
         width: 140,
         renderCell: (params) => {
-          const handleEdit = () => {
-            navigate(`/editContrat/${params.row.id}`);
-          }
+    
           return (
             <>
               <div className="table-icons-row">
