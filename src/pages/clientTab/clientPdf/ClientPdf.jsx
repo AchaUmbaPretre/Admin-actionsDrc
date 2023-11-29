@@ -5,6 +5,9 @@ import axios from 'axios';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../../assets/actionssarl.PNG'
+import { styled } from '@mui/styles';
+import { Style } from '@mui/icons-material';
+import BarReturn from '../../../components/barReturn/BarReturn';
 
 const ClientPdf = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
@@ -25,8 +28,17 @@ const ClientPdf = () => {
         flexDirection: 'row',
         marginBottom: 20,
       },
+      imgRow :{
+        display : "flex",
+        flexDirection: "column",
+        gap: "5px"
+      },
       img: {
-        width: '9%',
+        width: '30%',
+      },
+      subTitleLogo: {
+        fontSize : 8,
+        fontWeight: "medium"
       },
       subTitle: {
         fontSize: 11,
@@ -60,7 +72,7 @@ const ClientPdf = () => {
       tableCell: {
         padding: 10,
         flex: 1,
-        fontSize: 9,
+        fontSize: 8,
         textAlign: 'center'
       },
       tableCells: {
@@ -94,11 +106,15 @@ const ClientPdf = () => {
 
   return (
     <>
-        <PDFViewer style={{ width: '100%', height: '100vh' }}>
+        <BarReturn/>
+        <PDFViewer style={{ width: '100%', height: '90vh' }}>
             <Document>
                 <Page style={styles.page}>
                 <View style={styles.imgFlex}>
-                  <Image style={styles.img} src={logo} />
+                  <View style={styles.imgRow}>
+                    <Image style={styles.img} src={logo} />
+                    <Text style={styles.subTitleLogo}>Republique Démocratique du Congo</Text>
+                  </View>
                   <Text style={styles.subTitle}>Le {moment().format('DD/MM/YYYY')}</Text>
                 </View>
                     <Text style={styles.title}>Liste des clients</Text>
