@@ -47,7 +47,9 @@ const PaiementAgent = () => {
   const [invoiceIds, setInvoiceIds] = useState('');
   const [paymentMethod, setPaymentMethod] = useState([]);
   const [employeeId, setEmployeeId] = useState([]);
-  const [selectedMonth, setSelectedMonth] = useState(1);
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth() + 1
+  const [selectedMonth, setSelectedMonth] = useState(currentMonth);
   const months = [
     { value: 1, label: 'Janvier' },
     { value: 2, label: 'Février' },
