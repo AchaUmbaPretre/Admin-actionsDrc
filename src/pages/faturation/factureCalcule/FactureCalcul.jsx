@@ -38,7 +38,6 @@ const FactureCalcul = () => {
   const [total, setTotal] = useState({});
   const searchInput = React.useRef(null);
   const scroll = { x: 400 };
-  const scrollY = { y: 200 };
   const [status, setStatus] = useState([]);
   const [optionsStatus, setOptionsStatus] = useState([]);
   const montantTotals = total[0]?.montant_total;
@@ -173,7 +172,6 @@ useEffect(() => {
     setStatus(selectedOptionClient.value);
   };
 
-
   const handleChange = (value, name) => {
     let formattedValue = value;
   
@@ -182,7 +180,6 @@ useEffect(() => {
     }  
     setData((prev) => ({ ...prev, [name]: formattedValue }));
   };
-
 
   const columns = [
     {
