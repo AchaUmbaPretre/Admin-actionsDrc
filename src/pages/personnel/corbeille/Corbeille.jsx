@@ -1,75 +1,52 @@
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
-import './personnel.scss'
+import './../personnel.scss'
 import PeopleIcon from '@mui/icons-material/People';
-import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { DeleteOutline, DeleteOutlined, EditOutlined, VisibilityOutlined } from '@mui/icons-material';
 import { useState } from 'react';
 import * as React from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
-import Swal from 'sweetalert2'
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
-import userImg from './../../../src/assets/user.png'
-import config from '../../config'
-import { Box, Fade, Modal } from '@mui/material';
-import Formulaire from './formulaire/Formulaire';
+import userImg from './../../../assets/user.png'
 import { Breadcrumb } from 'antd';
 import { HomeOutlined, UserOutlined, FileExcelOutlined} from '@ant-design/icons';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import { Table, Button, Space, Popconfirm } from 'antd';
+import config from '../../../config';
 
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 1200,
-  bgcolor: 'background.paper',
-  border: '1px solid #FFF',
-  boxShadow: 24,
-  p: 2,
-  borderRadius: 2,
-}
-
-const Personnel = () => {
+const Corbeille = () => {
     const DOMAIN = config.REACT_APP_SERVER_DOMAIN
 
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
     const [showSpinner, setShowSpinner] = useState(true);
     const spinnerDuration = 2000;
-    const [open, setOpen] = useState(false);
     const navigate = useNavigate();
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
 useEffect(()=>{
-        const fetchData = async ()=> {
-            try{
-                const res = await axios.get(`${DOMAIN}/api/admin`);
-                setData(res.data)
-                setLoading(false);
-                setTimeout(() => {
-                  setShowSpinner(false);
-                }, spinnerDuration);
-        
-              }catch(error){
-                console.log(error)
-              };
+    const fetchData = async ()=> {
+        try{
+            const res = await axios.get(`${DOMAIN}/api/admin/corbeille-employe`);
+            setData(res.data)
+            setLoading(false);
+            setTimeout(() => {
+                setShowSpinner(false);
+            }, spinnerDuration);
+        }catch(error){
+            console.log(error)
+        };
         }
-        fetchData()
+    fetchData()
 }, [])
 
 const handleDelete = async (id) => {
   try {
-      await axios.put(`${DOMAIN}/api/admin/employes/${id}`);
+      await axios.delete(`${DOMAIN}/api/admin/employes-corbeille/${id}`);
       window.location.reload();
   } catch (err) {
     console.log(err);
@@ -145,37 +122,6 @@ const columns = [
         }},
   ];
       
-const exportToExcel = () => {
-        
-        const excelData = data.map(row => ({
-          Nom: row.first_name,
-          Postnom: row.last_name,
-          Telephone: row.phone_number,
-          Email: row.email,
-          'Date de naissance': format(new Date(row.date_of_birth), 'dd-MM-yyyy'),
-          Genre: row.gender,
-          Adresse: row.address,
-          Competence: row.skills,
-          certifications : row.certifications,
-          Status: row.employment_status,
-          "Etat civil" : row.etat_civil,
-          Genre : row.gender,
-          "Type de l'identité" : row.identification_type,
-          "Nombre d'enfant": row.nombre_enfant,
-          "CNSS": row.number_cnss,
-          "INPP": row.number_inpp,
-        }));
-        const workbook = XLSX.utils.book_new();
-        const worksheet = XLSX.utils.json_to_sheet(excelData);
-    
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'Feuille 1');
-      
-        const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-        const excelBlob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-
-        const excelFilename = 'tableau.xlsx';
-        saveAs(excelBlob, excelFilename);
-  };
 
   return (
     <>
@@ -184,14 +130,11 @@ const exportToExcel = () => {
                 <div className="personnel-top">
                     <PeopleIcon className='personnel-icon'/>
                     <div className="personnel-info">
-                        <h2 className="personnel-title">Employé</h2>
-                        <span className="personnel-span">Liste des employés</span>
+                        <h2 className="personnel-title">Corbeille des Employés</h2>
+                        <span className="personnel-span">Liste de corbeille des employés</span>
                     </div>
                 </div>
                 <div className="personPdf">
-                  <Link className="personnel-btn" onClick={() => navigate('/formulaire2')}><PersonAddAlt1Icon/>Nouveau</Link>
-                  <Link className="personnel-btn-pdf" onClick={() => navigate('/personpdfTable')}><PictureAsPdfIcon/>Pdf</Link>
-                  <Link className="personnel-btn-excel" onClick={exportToExcel}><FileExcelOutlined />Export Excel</Link>
                 </div>
             </div>
             <div className="bread">
@@ -208,10 +151,6 @@ const exportToExcel = () => {
                     }
                   ]}
                 />
-                <div className="bread-corbeille" onClick={() => navigate('/corbeille-employe')}>
-                  <DeleteOutlined />
-                  <span className="title-corbeille">Corbeille</span>
-                </div>
               </div>
                 {loading ? (
           <div className="spinner-container">
@@ -225,4 +164,4 @@ const exportToExcel = () => {
   )
 }
 
-export default Personnel
+export default Corbeille

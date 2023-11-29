@@ -75,6 +75,7 @@ import Formulaire2 from './pages/personnel/formulaire2/Formulaire2';
 import TypeConge from './pages/listeConge/typeDemande/TypeConge';
 import EditConge from './pages/listeConge/typeDemande/editConge/EditConge';
 import ListeCongeEdit from './pages/listeConge/listeCongeEdit/ListeCongeEdit';
+import Corbeille from './pages/personnel/corbeille/Corbeille';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -129,12 +130,12 @@ function App() {
           element: <PersonTablePdf />
         },
         {
-          path: '/formulaire',
-          element: <Formulaire />
-        },
-        {
           path: '/formulaire2',
           element: <Formulaire2 />
+        },
+        {
+          path: '/corbeille-employe',
+          element: <Corbeille />
         },
         {
           path: '/departement',
