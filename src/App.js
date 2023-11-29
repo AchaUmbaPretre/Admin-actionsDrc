@@ -76,6 +76,7 @@ import TypeConge from './pages/listeConge/typeDemande/TypeConge';
 import EditConge from './pages/listeConge/typeDemande/editConge/EditConge';
 import ListeCongeEdit from './pages/listeConge/listeCongeEdit/ListeCongeEdit';
 import Corbeille from './pages/personnel/corbeille/Corbeille';
+import CorbeilleContrat from './pages/contrats/corbeilleContrat/CorbeilleContrat';
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -148,6 +149,10 @@ function App() {
         {
           path: '/contrats',
           element: <Contrats />
+        },
+        {
+          path: '/contrats-corbeille',
+          element: <CorbeilleContrat />
         },
         {
           path: '/contratsView/:id',

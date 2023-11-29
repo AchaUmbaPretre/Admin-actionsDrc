@@ -16,7 +16,7 @@ const BarReturn = () => {
                     <span>Accueil</span>
                     </>
                     ),
-                    },
+                },
                 {
                     href: '/personnel',
                     title: (
@@ -25,7 +25,7 @@ const BarReturn = () => {
                     <span>Liste des employés</span>
                     </>
                     ),
-                    },
+                },
                 ]}
             />
         </div>
