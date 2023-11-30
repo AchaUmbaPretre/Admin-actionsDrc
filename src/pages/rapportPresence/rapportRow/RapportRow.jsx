@@ -120,6 +120,7 @@ const RapportRow = ({setDataTable, setLoading}) => {
                 <h2 className="rapportRow-h2">Rapport des présences</h2>
                 <div className="rapport-container">
                   <Select
+                    className="rapport-input"
                     name="client_id"
                     onChange={(value) => handleChange('client_id', value)}
                     placeholder="Sélectionnez un client"
@@ -133,6 +134,7 @@ const RapportRow = ({setDataTable, setLoading}) => {
                     ))}
                   </Select>
                   <Select
+                    className="rapport-input"
                     name="contrat_id"
                     onChange={(value) => handleChange('contrat_id', value)}
                     placeholder="Sélectionnez un contrat"
@@ -146,6 +148,7 @@ const RapportRow = ({setDataTable, setLoading}) => {
                     ))}
                   </Select>
                   <Select
+                    className="rapport-input"
                     name="employee_id"
                     onChange={(value) => handleChange('employee_id', value)}
                     placeholder="Sélectionnez un employé"
@@ -164,7 +167,6 @@ const RapportRow = ({setDataTable, setLoading}) => {
                     placeholder="Date de début"
                     onChange={(value) => handleChange('startDate', value)}
                   />
-                  de
                   <DatePicker
                     className="rapport-input"
                     name="endDate"
