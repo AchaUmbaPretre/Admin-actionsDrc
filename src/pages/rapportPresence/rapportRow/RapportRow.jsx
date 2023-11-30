@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import Select from 'react-select'
 import './rapportRow.scss'
-import { DatePicker } from 'antd'
+import { Select,DatePicker } from 'antd';
 import config from '../../../config'
 import axios from 'axios'
 import moment from 'moment'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
+
+const { Option } = Select;
 
 const RapportRow = ({setDataTable, setLoading}) => {
     const [date, setDate] = useState({});
@@ -23,6 +24,10 @@ const RapportRow = ({setDataTable, setLoading}) => {
         } else {
           setDate((prev) => ({ ...prev, [name]: value }));
         }
+      };
+
+      const handleSearch = (input, option) => {
+        return option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0;
       };
 
     useEffect(() => {
@@ -68,6 +73,8 @@ const RapportRow = ({setDataTable, setLoading}) => {
         }
       }
 
+      console.log(date)
+
 
   return (
     <>
@@ -75,22 +82,48 @@ const RapportRow = ({setDataTable, setLoading}) => {
             <div className="rapportRow-wrapper">
                 <h2 className="rapportRow-h2">Rapport des présences</h2>
                 <div className="rapport-container">
-                    <input type="date" name="startDate" className='rapport-input' placeholder='date de debut' onChange={(e) =>
-                    handleChange(e.target.name, e.target.value)
-                  }/>
+                  <DatePicker
+                    className="rapport-input"
+                    name="startDate"
+                    placeholder="Date de début"
+                    onChange={(value) => handleChange('start_date', value)}
+                  />
                   de
-                    <input type="date" name="endDate" className='rapport-input' placeholder='date de fin' onChange={(e) =>
-                    handleChange(e.target.name, e.target.value)
-                  } />
-                    <Select className="rapport-select"
-                        name="employee_id"
-                        onChange={(selectedOption) => handleChange('employee_id',selectedOption.value)}
-                        options={data.map((item) => ({
-                            value: item.id,
-                            label: item.first_name + ' ' + item.last_name
-                        }))}
-                    />
-                    <button className="rapport-btn" onClick={handleClick}>Valider</button>
+                  <DatePicker
+                    className="rapport-input"
+                    name="endDate"
+                    placeholder="Date de fin"
+                    onChange={(value) => handleChange('end_date', value)}
+                  />
+                  <Select
+                    className="rapport-input"
+                    name="employee_id"
+                    onChange={(value) => handleChange('employee_id', value)}
+                    placeholder="Sélectionnez un contrat"
+                    showSearch
+                    filterOption={handleSearch}
+                  >
+                  {data.map((item) => (
+                    <Option key={item.id} value={item.id}>
+                      {`${item.first_name} ${item.last_name}`}
+                    </Option>
+                    ))}
+                  </Select>
+                  <Select
+                    className="rapport-input"
+                    name="employee_id"
+                    onChange={(value) => handleChange('employee_id', value)}
+                    placeholder="Sélectionnez un employé"
+                    showSearch
+                    filterOption={handleSearch}
+                  >
+                  {data.map((item) => (
+                    <Option key={item.id} value={item.id}>
+                      {`${item.first_name} ${item.last_name}`}
+                    </Option>
+                    ))}
+                  </Select>
+                  <button className="rapport-btn" onClick={handleClick}>Valider</button>
                 </div>
             </div>
         </div>
