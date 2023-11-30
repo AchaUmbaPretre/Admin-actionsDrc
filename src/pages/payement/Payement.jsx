@@ -11,7 +11,6 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { DeleteOutline, EditOutlined, VisibilityOutlined } from '@mui/icons-material';
 import {FileExcelOutlined} from '@ant-design/icons';
 import { DollarCircleOutlined, BankOutlined, CreditCardOutlined } from '@ant-design/icons';
-import Swal from 'sweetalert2';
 import { format } from 'date-fns';
 import { FadeLoader } from 'react-spinners';
 import config from '../../config'
