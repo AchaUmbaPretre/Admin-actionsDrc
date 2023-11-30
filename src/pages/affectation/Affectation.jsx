@@ -12,7 +12,7 @@ import * as XLSX from 'xlsx';
 import * as React from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
-import { Button, Input, Popconfirm, Space, Table, Tag } from 'antd';
+import { Button, Input, Popconfirm, Space, Table, Tag, Popover } from 'antd';
 import moment from 'moment';
 import {FileExcelOutlined} from '@ant-design/icons';
 import BarReturn from '../../components/barReturn/BarReturn';
@@ -248,20 +248,26 @@ const getColumnSearchProps = (dataIndex) => ({
           <>
             <div className="table-icons-row">
                 <div className="userOvert0">
-                  <EditOutlined className='userListBtn' onClick={handleEdit}/>
+                  <Popover title="Modifier" trigger="hover">
+                    <EditOutlined className='userListBtn' onClick={handleEdit}/>
+                  </Popover>
                 </div>
-              <VisibilityOutlined
-                className="userEye"
-                onClick={() => navigate(`/affectations/${record.id}`)}
-              />
-              <Popconfirm
-                title="Êtes-vous sûr de vouloir supprimer?"
-                onConfirm={()=>{handleDelete(record.id, record.userId)}}
-                okText="Oui"
-                cancelText="Non"
-              >
-                <DeleteOutline className="userListDelete"/>
-              </Popconfirm>
+                <Popover title="Detail" trigger="hover">
+                  <VisibilityOutlined
+                  className="userEye"
+                  onClick={() => navigate(`/affectations/${record.id}`)}
+                />
+                </Popover>
+              <Popover title="Supprimer" trigger="hover">
+                <Popconfirm
+                  title="Êtes-vous sûr de vouloir supprimer?"
+                  onConfirm={()=>{handleDelete(record.id, record.userId)}}
+                  okText="Oui"
+                  cancelText="Non"
+                >
+                  <DeleteOutline className="userListDelete"/>
+                </Popconfirm>
+              </Popover>
             </div>
           </>
         );

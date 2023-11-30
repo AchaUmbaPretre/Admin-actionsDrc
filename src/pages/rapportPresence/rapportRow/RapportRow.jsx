@@ -45,7 +45,6 @@ const RapportRow = ({setDataTable, setLoading}) => {
         }
         fetchData()
       }, [])
-console.log(date.employee_id)
     const handleClick = async (e) => {
         e.preventDefault();
     
