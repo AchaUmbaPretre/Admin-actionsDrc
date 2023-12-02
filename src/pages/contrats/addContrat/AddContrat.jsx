@@ -368,6 +368,7 @@ const handleSubmit = async (e) => {
       confirmButtonText: 'OK'
     });
     navigate('/affectation');
+    window.location.reload();
   } catch (error) {
     Swal.fire({
       title: 'Error',

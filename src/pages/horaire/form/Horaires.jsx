@@ -81,6 +81,7 @@ const Horaires = ({handleClose}) => {
           await axios.post(`${DOMAIN}/api/admin/horairesPost`,data);
 
           navigate('/horaireAll');
+          window.location.reload();
     
           Swal.fire({
             title: 'Success',

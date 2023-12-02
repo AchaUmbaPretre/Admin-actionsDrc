@@ -77,6 +77,7 @@ const Formulaire2 = ({handleModalClose}) => {
           }
           
           await axios.post(`${DOMAIN}/api/admin/employe`, { ...data, source: photoSrc});
+          window.location.reload();
           await Swal.fire({
             title: 'Success',
             text: 'Employé créé avec succès!',
