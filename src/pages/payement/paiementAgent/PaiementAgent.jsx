@@ -338,6 +338,7 @@ const PaiementAgent = () => {
     factureCount();
   }, [selectedMonth]);
 
+
   useEffect(() => {
     const fetchDatas = async () => {
       try {
@@ -377,6 +378,7 @@ const PaiementAgent = () => {
     fetchDatas();
   }, [selectedIds]);
 
+  console.log(employeeId)
   useEffect(()=>{
     const fetchData = async ()=> {
       try{
@@ -403,7 +405,7 @@ const PaiementAgent = () => {
       return;
     }
     try {
-      await Promise.all(employeeId.map(async (dd) => {
+      await Promise.all(selectedIds.map(async (dd) => {
         const response = await axios.post(`${DOMAIN}/api/admin/payementPost`, {
           employeId: dd,
           amount: total,
